@@ -66,7 +66,7 @@
               if(Cmode(:10).eq.'Post_ANOVA')then
                  ANL(i) = yhat
               else if(Cmode(:12).eq.'Post_HigherD')then
-                 if (fct.lt.10) call evalfunc(x,ndim,fct,0,0,f,df,d2f,v)
+                 if (fct.lt.20) call evalfunc(x,ndim,fct,0,0,f,df,d2f,v)
 
 !!                 print *,'x:',X,'Exact:',f,'PC:',yhat
                  fsum = fsum + (yhat-f)**2

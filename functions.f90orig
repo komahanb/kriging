@@ -8,7 +8,7 @@
 
     ! ifid      0: high fidelity  other:lower fidelity
 
-    if (fct.lt.10) then
+    if (fct.lt.20) then
 
        call calcf(x,DIM,fct,f)
        if (flag.ge.1) call calcdf(x,DIM,fct,df)

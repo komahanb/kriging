@@ -324,7 +324,7 @@
 !!$           if (id_proc.eq.0) then
 !!$              open(10,file='MCout.dat',form='formatted',status='unknown')
 !!$              do j=1,NMCS
-!!$                 if (fct.lt.10) call evalfunc(MNCx(:,j),ndim,fct,0,0,freal,df,d2f,v)
+!!$                 if (fct.lt.20) call evalfunc(MNCx(:,j),ndim,fct,0,0,freal,df,d2f,v)
 !!$                 write(10,*) (MNCx(k,j)*(DS(2,k)-DS(1,k))+DS(1,k),k=1,ndim),freal
 !!$              end do
 !!$              close(10)              
@@ -393,7 +393,7 @@
            do i=1,NMCS
 
               ! Real function evaluation
-              if (fct.lt.10) then
+              if (fct.lt.20) then
                  call evalfunc(MNCx(:,i),ndim,fct,0,0,freal,df,d2f,v)
                  Javg(1)=Javg(1)+freal
                  Jvar(1)=Jvar(1)+freal**2
@@ -434,7 +434,7 @@
            Javg(:)=Javg(:)/real(NMCS)      
            Jvar(:)=Jvar(:)/real(NMCS)-Javg(:)**2
 
-           if (fct.eq.10) then
+           if (fct.eq.20) then
               if (xstd(1).eq.0.01) then
                  Javg(1)= 0.25906E+00    
                  Jvar(1)= 0.31653E-01

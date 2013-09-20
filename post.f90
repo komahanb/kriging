@@ -12,7 +12,7 @@ subroutine Post_Process
   else if(Cmode(:7).eq.'Post_2D')then
      if(ndim.ne.2)stop'Post_2D, ndim != 2'
 
-     if (fct.eq.10) then
+     if (fct.eq.20) then
         ifac = 51 ! I have database of only  51*51 for CFD
      else
         ifac=101
@@ -149,7 +149,7 @@ subroutine Post_RMSE
            jmax=ifac
 
 
-           if (Fct.eq.10) then
+           if (fct.eq.20) then
               readfromdatabase=1 ! 0=call evalfunc, 1= read from tecex10.dat
            else
               readfromdatabase=0 ! 0=call evalfunc, 1= read from tecex10.dat
@@ -237,7 +237,7 @@ subroutine Post_RMSE
                              TEC1(i,2) = yhat
                              TEC1(i,3) = RMSE
                              TEC1(i,4) = EI
-                             if (fct.lt.10) then
+                             if (fct.lt.20) then
                                 call evalfunc(xin,ndim,fct,0,0,f,df,d2f,v)
                                 TEC1(i,5) = f
                                 diff = diff + (f-yhat)**2
@@ -330,7 +330,7 @@ subroutine Post_RMSE
                                    TEC1(i,2) = yhat
                                    TEC1(i,3) = RMSE
                                    TEC1(i,4) = EI
-                                   if (fct.lt.10) then
+                                   if (fct.lt.20) then
                                       call evalfunc(xin,ndim,fct,0,0,f,df,d2f,v)
                                       TEC1(i,5) = f
                                       diff = diff + (f-yhat)**2

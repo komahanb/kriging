@@ -392,7 +392,7 @@
 
 	         if (id_proc.eq.0) call Update
                  
-                 if (fct.lt.10 .and. ndim.eq.2) then
+                 if (fct.lt.20 .and. ndim.eq.2) then
                     Cmode='Post_2D'
                     call Post_Process
 		 else 

@@ -123,7 +123,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
                  if (Casemode.eq.1) then
                     if (readMcsamples.eq.1) then
 
-                       if (fct.eq.10) then
+                       if (fct.eq.20) then
                           open(10,file='MC.inp',form='formatted',status='unknown')
                           read(10,*) !(xavg(i),i=1,ndim)
                           read(10,*) !(xstd(i),i=1,ndim)     
@@ -466,7 +466,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
 
                           if (id_proc.eq.0) call Update
 
-                          if (fct.lt.10 .and. ndim.eq.2) then
+                          if (fct.lt.20 .and. ndim.eq.2) then
                              Cmode='Post_2D'
                              if (id_proc.eq.0) call TimerStart('Post process')
                              call Post_Process

@@ -132,7 +132,7 @@ NTOEX=(30-ndim)*NCP
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !                      CFD   
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-     if (fct.eq.10) then
+     if (fct.eq.20) then
         if (nhs.le.10)  then  
            NCP=nhs
            Taylororder=nhs!nhs!2!2!INT(NHS/4)

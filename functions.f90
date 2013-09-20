@@ -19,7 +19,7 @@
        xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
     end do
 
-    if (fct.lt.10) then
+    if (fct.lt.20) then
 
        call calcf(xtmp,ndimt,fct,f)
        if (flag.ge.1) call calcdf(xtmp,ndimt,fct,dftmp)   
@@ -31,7 +31,7 @@
           d2ftmp(:,:)=0.1*d2ftmp(:,:)
        end if
 
-    else if (fct.eq.10) then
+    else if (fct.eq.20) then
        CALL chdir('lowfid') ! Comment when using fine mesh
 
        call omp_set_num_threads(omp_get_max_threads())

@@ -99,7 +99,7 @@ subroutine MonteCarlo
 
      if (readMcsamples.eq.1) then
 
-        if (fct.lt.10) then
+        if (fct.lt.20) then
            open(10,file='MCsamp.dat',form='formatted',status='unknown')
            read(10,'(2i8)') NMCS,ndim
            read(10,*) (xavg(i),i=1,ndim)
@@ -371,7 +371,7 @@ subroutine MonteCarlo
 !!$           if (id_proc.eq.0) then
 !!$              open(10,file='MCout.dat',form='formatted',status='unknown')
 !!$              do j=1,NMCS
-!!$                 if (fct.lt.10) call evalfunc(MNCx(:,j),ndim,fct,0,0,freal,df,d2f,v)
+!!$                 if (fct.lt.20) call evalfunc(MNCx(:,j),ndim,fct,0,0,freal,df,d2f,v)
 !!$                 write(10,*) (MNCx(k,j)*(DS(2,k)-DS(1,k))+DS(1,k),k=1,ndim),freal
 !!$              end do
 !!$              close(10)              
@@ -430,12 +430,12 @@ subroutine MonteCarlo
            Javg(:)=0.0
            Jvar(:)=0.0
 
-           if (fct.lt.10) then
+           if (fct.lt.20) then
 
               open(10,file='MCvalues.dat',form='formatted',status='unknown')
 
 
-           else if (fct.eq.10)then
+           else if (fct.eq.20)then
 
               if (fctindx.eq.0) then
 
@@ -501,7 +501,7 @@ subroutine MonteCarlo
 
            Javg(:)=Javg(:)/real(NMCS)      
            Jvar(:)=Jvar(:)/real(NMCS)-Javg(:)**2
-!!$           if (fct.eq.10) then
+!!$           if (fct.eq.20) then
 !!$              if (xstd(1).eq.0.01) then
 !!$                 Javg(1)= 0.25906E+00    
 !!$                 Jvar(1)= 0.31653E-01
