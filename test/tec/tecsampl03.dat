@@ -1,0 +1,6 @@
+TITLE = " "
+VARIABLES = "x" "y" "f"
+ZONE T="lsample", I=    1, J=    1, K=    1, F=BLOCK
+     0.00000000
+     0.00000000
+     1.00000000

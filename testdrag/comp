@@ -1,0 +1,861 @@
+ >> Number of Processors =   1
+ >> Initial Sample Points by Latin Hypercube
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.725       100.00
+ ---------------------------------------------------------
+            Total Time =     5.725 seconds
+ ---------------------------------------------------------
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.457       100.00
+ ---------------------------------------------------------
+            Total Time =     5.457 seconds
+ ---------------------------------------------------------
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.366       100.00
+ ---------------------------------------------------------
+            Total Time =     5.366 seconds
+ ---------------------------------------------------------
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         13.288       100.00
+ ---------------------------------------------------------
+            Total Time =    13.288 seconds
+ ---------------------------------------------------------
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.614       100.00
+ ---------------------------------------------------------
+            Total Time =     5.614 seconds
+ ---------------------------------------------------------
+      >> Output to sample.dat    5
+ >> Reading KrigSet.inp
+      >> # of Optimizing Functions =    1
+      >> # of Constraint Functions =    0
+      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
+      >> # of Max Sample/G/H/Hv    =    0************
+      >> Ordinary Kriging
+      >> Use Wendland C4 SCF
+      >> Use All Hess for Direct Cokriging
+      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
+      >> Cross Correlation Relaxation Factor  =   0.9999000
+ >> Reading sample.dat
+      >> # of DV, Func, Samples =     2    2    5
+      >> # of Fidelity Levels   =     1
+      >> Fidelity Level :  1
+           >> # of Samples(F     )    =     5
+      >> Min. Dist. between Fidelity-1 Samples (  1,  5 ) =  0.14E+00
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Reduce Sample Points for Function  1
+           >> # of Modes in Fid-1 =   5   0   0   0   0   0   5
+           >> # of Modes (sum)    =   5   0   0   0   0   0
+ >> Size of Correlation Matrix =      5
+ *mdv   != ndv in paramGALN.inp                 
+ *mdat  != ndat in paramGALN.inp                 
+ *meva  != neva in paramGALN.inp                 
+ >> Reading Parameter from paramGALN.inp
+      >> # of Population       =    24
+      >> # of Generation       =    24
+      >> # of Design Variables =     2
+      >> # of Objectives       =     1
+      >> Set of Objectives     :   Max
+      >> Likelihood Maximization for Theta
+ >> Check Again the Parameters Setting
+      >> Use new sharing function (index-based)
+      >> Use old fitness function (1/rank)
+      >> Use blended crossover
+           >> Probability of directional crossover =    0.100   0.100
+           >> Probability of neighborhood cultivation =    0.500   0.500
+      >> Use old uniform mutation
+ >> Make Initial Population by LHS
+ >> Calling evaluation in GA
+ >> Starting Main Loop of GA  633
+      >>    1 Pareto Designs until   0 Gen.,  0.214E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.220E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.220E+02
+ >> Finishing Main Loop of GA
+ >> Output Results....
+      >> Best Design for  1 : (  24  16) :  0.2199E+02
+      >> # of Function Evaluations for New Ones  =      600
+      >> # of Function Evaluations for Gradient  =        0
+      >> # of Function Evaluations for 1D Search =        0
+      >> # of Function Evaluations in Total      =      600
+      >> Best Design =   21.989   0.000
+      >> Theta =    0.414   0.060
+ >> Theta      =    0.414   0.060
+ >> Deviation  =     0.30812E-02
+ >> Likelihood =     0.21989E+02 with Error =     0.50623E-12
+ >> Output to meta01.krg
+      >> RMSE on All Sample Points    =    0.96564E-13 among     5 pts
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Make "dak" Database for metamodel
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> MonteCarlo Simulation on Kriging Model
+      >> Target Function =   1
+      >> All Design Variables Fluctuated
+      >> # of Monte-Carlo Samples =     3000
+           >> [         1      3000 ] for Processor  0
+      >> Mean and Variance =     0.24113E-01    0.62702E-03
+      >> Meanprime =     0.23700E+01    0.69826E-01
+      >> Varprime =     0.77336E-01   -0.99555E-04
+      >> Range of X(min) =   -0.363  -0.355
+      >> Range of X(max) =    1.361   1.403
+      >> Ymax/min =     0.12358E+00   -0.67543E-02
+      >> Output Histogram  [   -0.67543E-02 :    0.12358E+00 ]
+ 
+ 
+      Real: Mean and Variance    0.22351E-01    0.59826E-03
+ 
+      Krig: Mean and Variance    0.24113E-01    0.62702E-03
+ 
+      Error: Mean and Variance    0.17619E-02    0.28761E-04
+ 
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates         500
+           >> [         1       500 ] for Processor  0
+ 
+ >>Loc diff is  7.460951139973573E-002  for candidate           1  at iteration
+           1
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.529       100.00
+ ---------------------------------------------------------
+            Total Time =     5.529 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  5.923686273603597E-002  for candidate           2  at iteration
+           1
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.676       100.00
+ ---------------------------------------------------------
+            Total Time =     5.676 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  3.708068145087778E-002  for candidate           3  at iteration
+           1
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.530       100.00
+ ---------------------------------------------------------
+            Total Time =     5.530 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  2.122567949000891E-002  for candidate           4  at iteration
+           1
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         13.440       100.00
+ ---------------------------------------------------------
+            Total Time =    13.440 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  1.195269756576504E-002  for candidate           5  at iteration
+           1
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         11.989       100.00
+ ---------------------------------------------------------
+            Total Time =    11.989 seconds
+ ---------------------------------------------------------
+ >> Reading KrigSet.inp
+      >> # of Optimizing Functions =    1
+      >> # of Constraint Functions =    0
+      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
+      >> # of Max Sample/G/H/Hv    =    0************
+      >> Ordinary Kriging
+      >> Use Wendland C4 SCF
+      >> Use All Hess for Direct Cokriging
+      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
+      >> Cross Correlation Relaxation Factor  =   0.9999000
+ >> Reading sample.dat
+      >> # of DV, Func, Samples =     2    2   10
+      >> # of Fidelity Levels   =     1
+      >> Fidelity Level :  1
+           >> # of Samples(F     )    =    10
+      >> Min. Dist. between Fidelity-1 Samples (  1,  5 ) =  0.14E+00
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Reduce Sample Points for Function  1
+           >> # of Modes in Fid-1 =  10   0   0   0   0   0  10
+           >> # of Modes (sum)    =  10   0   0   0   0   0
+ >> Size of Correlation Matrix =     10
+ *mdv   != ndv in paramGALN.inp                 
+ *mdat  != ndat in paramGALN.inp                 
+ *meva  != neva in paramGALN.inp                 
+ >> Reading Parameter from paramGALN.inp
+      >> # of Population       =    24
+      >> # of Generation       =    24
+      >> # of Design Variables =     2
+      >> # of Objectives       =     1
+      >> Set of Objectives     :   Max
+      >> Likelihood Maximization for Theta
+ >> Check Again the Parameters Setting
+      >> Use new sharing function (index-based)
+      >> Use old fitness function (1/rank)
+      >> Use blended crossover
+           >> Probability of directional crossover =    0.100   0.100
+           >> Probability of neighborhood cultivation =    0.500   0.500
+      >> Use old uniform mutation
+ >> Make Initial Population by LHS
+ >> Calling evaluation in GA
+ >> Starting Main Loop of GA  634
+      >>    1 Pareto Designs until   0 Gen.,  0.466E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.474E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.474E+02
+ >> Finishing Main Loop of GA
+ >> Output Results....
+      >> Best Design for  1 : (  24  10) :  0.4740E+02
+      >> # of Function Evaluations for New Ones  =      600
+      >> # of Function Evaluations for Gradient  =        0
+      >> # of Function Evaluations for 1D Search =        0
+      >> # of Function Evaluations in Total      =      600
+      >> Best Design =   47.399   0.000
+      >> Theta =    0.133   0.328
+ >> Theta      =    0.133   0.328
+ >> Deviation  =     0.38823E-02
+ >> Likelihood =     0.47399E+02 with Error =     0.96775E-11
+ >> Output to meta01.krg
+      >> RMSE on All Sample Points    =    0.13731E-12 among    10 pts
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Make "dak" Database for metamodel
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> MonteCarlo Simulation on Kriging Model
+      >> Target Function =   1
+      >> All Design Variables Fluctuated
+      >> # of Monte-Carlo Samples =     3000
+           >> [         1      3000 ] for Processor  0
+      >> Mean and Variance =     0.20874E-01    0.52716E-03
+      >> Meanprime =     0.83174E+00    0.38312E+00
+      >> Varprime =     0.24280E-01    0.10375E-01
+      >> Range of X(min) =   -0.363  -0.355
+      >> Range of X(max) =    1.361   1.403
+      >> Ymax/min =     0.15791E+00    0.81703E-06
+      >> Output Histogram  [    0.81703E-06 :    0.15791E+00 ]
+ 
+ 
+      Real: Mean and Variance    0.22351E-01    0.59826E-03
+ 
+      Krig: Mean and Variance    0.20874E-01    0.52716E-03
+ 
+      Error: Mean and Variance    0.14771E-02    0.71101E-04
+ 
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates         500
+           >> [         1       500 ] for Processor  0
+ 
+ >>Loc diff is  6.664623325935315E-003  for candidate           1  at iteration
+           2
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         13.360       100.00
+ ---------------------------------------------------------
+            Total Time =    13.360 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  5.569019536018585E-003  for candidate           2  at iteration
+           2
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         14.323       100.00
+ ---------------------------------------------------------
+            Total Time =    14.323 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  4.755795211431255E-003  for candidate           3  at iteration
+           2
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         14.020       100.00
+ ---------------------------------------------------------
+            Total Time =    14.020 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  4.289016492967992E-003  for candidate           4  at iteration
+           2
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         13.400       100.00
+ ---------------------------------------------------------
+            Total Time =    13.400 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  3.802932982243233E-003  for candidate           5  at iteration
+           2
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.546       100.00
+ ---------------------------------------------------------
+            Total Time =     5.546 seconds
+ ---------------------------------------------------------
+ >> Reading KrigSet.inp
+      >> # of Optimizing Functions =    1
+      >> # of Constraint Functions =    0
+      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
+      >> # of Max Sample/G/H/Hv    =    0************
+      >> Ordinary Kriging
+      >> Use Wendland C4 SCF
+      >> Use All Hess for Direct Cokriging
+      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
+      >> Cross Correlation Relaxation Factor  =   0.9999000
+ >> Reading sample.dat
+      >> # of DV, Func, Samples =     2    2   15
+      >> # of Fidelity Levels   =     1
+      >> Fidelity Level :  1
+           >> # of Samples(F     )    =    15
+      >> Min. Dist. between Fidelity-1 Samples (  1,  5 ) =  0.14E+00
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Reduce Sample Points for Function  1
+           >> # of Modes in Fid-1 =  15   0   0   0   0   0  15
+           >> # of Modes (sum)    =  15   0   0   0   0   0
+ >> Size of Correlation Matrix =     15
+ *mdv   != ndv in paramGALN.inp                 
+ *mdat  != ndat in paramGALN.inp                 
+ *meva  != neva in paramGALN.inp                 
+ >> Reading Parameter from paramGALN.inp
+      >> # of Population       =    24
+      >> # of Generation       =    24
+      >> # of Design Variables =     2
+      >> # of Objectives       =     1
+      >> Set of Objectives     :   Max
+      >> Likelihood Maximization for Theta
+ >> Check Again the Parameters Setting
+      >> Use new sharing function (index-based)
+      >> Use old fitness function (1/rank)
+      >> Use blended crossover
+           >> Probability of directional crossover =    0.100   0.100
+           >> Probability of neighborhood cultivation =    0.500   0.500
+      >> Use old uniform mutation
+ >> Make Initial Population by LHS
+ >> Calling evaluation in GA
+ >> Starting Main Loop of GA  635
+      >>    1 Pareto Designs until   0 Gen.,  0.683E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.759E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.759E+02
+ >> Finishing Main Loop of GA
+ >> Output Results....
+      >> Best Design for  1 : (  24  17) :  0.7592E+02
+      >> # of Function Evaluations for New Ones  =      600
+      >> # of Function Evaluations for Gradient  =        0
+      >> # of Function Evaluations for 1D Search =        0
+      >> # of Function Evaluations in Total      =      600
+      >> Best Design =   75.923   0.000
+      >> Theta =    0.151   0.555
+ >> Theta      =    0.151   0.555
+ >> Deviation  =     0.18803E-02
+ >> Likelihood =     0.75923E+02 with Error =     0.19708E-10
+ >> Output to meta01.krg
+      >> RMSE on All Sample Points    =    0.85958E-13 among    15 pts
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Make "dak" Database for metamodel
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> MonteCarlo Simulation on Kriging Model
+      >> Target Function =   1
+      >> All Design Variables Fluctuated
+      >> # of Monte-Carlo Samples =     3000
+           >> [         1      3000 ] for Processor  0
+      >> Mean and Variance =     0.20751E-01    0.52186E-03
+      >> Meanprime =     0.81726E+00    0.38018E+00
+      >> Varprime =     0.21893E-01    0.10101E-01
+      >> Range of X(min) =   -0.363  -0.355
+      >> Range of X(max) =    1.361   1.403
+      >> Ymax/min =     0.11781E+00    0.82084E-04
+      >> Output Histogram  [    0.82084E-04 :    0.11781E+00 ]
+ 
+ 
+      Real: Mean and Variance    0.22351E-01    0.59826E-03
+ 
+      Krig: Mean and Variance    0.20751E-01    0.52186E-03
+ 
+      Error: Mean and Variance    0.16005E-02    0.76406E-04
+ 
+ 
+ >> Best design: Sample point   2 Fct value   0.0004455
+    with X value   0.4205218   0.0765864
+ 
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates         500
+           >> [         1       500 ] for Processor  0
+ 
+ >>Loc diff is  6.027899177860720E-003  for candidate           1  at iteration
+           3
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.402       100.00
+ ---------------------------------------------------------
+            Total Time =     5.402 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  4.383514080360238E-003  for candidate           2  at iteration
+           3
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.408       100.00
+ ---------------------------------------------------------
+            Total Time =     5.408 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  4.320209646585374E-003  for candidate           3  at iteration
+           3
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         15.764       100.00
+ ---------------------------------------------------------
+            Total Time =    15.764 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  3.924010163219971E-003  for candidate           4  at iteration
+           3
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          7.702       100.00
+ ---------------------------------------------------------
+            Total Time =     7.702 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  3.297150916410254E-003  for candidate           5  at iteration
+           3
+ 
+ Now using finer mesh
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                          5.899       100.00
+ ---------------------------------------------------------
+            Total Time =     5.899 seconds
+ ---------------------------------------------------------
+ >> Reading KrigSet.inp
+      >> # of Optimizing Functions =    1
+      >> # of Constraint Functions =    0
+      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
+      >> # of Max Sample/G/H/Hv    =    0************
+      >> Ordinary Kriging
+      >> Use Wendland C4 SCF
+      >> Use All Hess for Direct Cokriging
+      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
+      >> Cross Correlation Relaxation Factor  =   0.9999000
+ >> Reading sample.dat
+      >> # of DV, Func, Samples =     2    2   20
+      >> # of Fidelity Levels   =     1
+      >> Fidelity Level :  1
+           >> # of Samples(F     )    =    20
+      >> Min. Dist. between Fidelity-1 Samples (  1,  5 ) =  0.14E+00
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> Reduce Sample Points for Function  1
+           >> # of Modes in Fid-1 =  20   0   0   0   0   0  20
+           >> # of Modes (sum)    =  20   0   0   0   0   0
+ >> Size of Correlation Matrix =     20
+ *mdv   != ndv in paramGALN.inp                 
+ *mdat  != ndat in paramGALN.inp                 
+ *meva  != neva in paramGALN.inp                 
+ >> Reading Parameter from paramGALN.inp
+      >> # of Population       =    24
+      >> # of Generation       =    24
+      >> # of Design Variables =     2
+      >> # of Objectives       =     1
+      >> Set of Objectives     :   Max
+      >> Likelihood Maximization for Theta
+ >> Check Again the Parameters Setting
+      >> Use new sharing function (index-based)
+      >> Use old fitness function (1/rank)
+      >> Use blended crossover
+           >> Probability of directional crossover =    0.100   0.100
+           >> Probability of neighborhood cultivation =    0.500   0.500
+      >> Use old uniform mutation
+ >> Make Initial Population by LHS
+ >> Calling evaluation in GA
+ >> Starting Main Loop of GA  636
+      >>    1 Pareto Designs until   0 Gen.,  0.967E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.109E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.109E+03
+ >> Finishing Main Loop of GA
+ >> Output Results....
+      >> Best Design for  1 : (  23  21) :  0.1091E+03
+      >> # of Function Evaluations for New Ones  =      600
+      >> # of Function Evaluations for Gradient  =        0
+      >> # of Function Evaluations for 1D Search =        0
+      >> # of Function Evaluations in Total      =      600
+      >> Best Design =  109.056   0.000
+      >> Theta =    0.144   0.548
+ >> Theta      =    0.144   0.548
+ >> Deviation  =     0.18259E-02
+ >> Likelihood =     0.10906E+03 with Error =     0.26285E-10
+ >> Output to meta01.krg
+      >> RMSE on All Sample Points    =    0.93188E-13 among    20 pts
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> Make "dak" Database for metamodel
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> MonteCarlo Simulation on Kriging Model
+      >> Target Function =   1
+      >> All Design Variables Fluctuated
+      >> # of Monte-Carlo Samples =     3000
+           >> [         1      3000 ] for Processor  0
+      >> Mean and Variance =     0.20775E-01    0.52534E-03
+      >> Meanprime =     0.82497E+00    0.38608E+00
+      >> Varprime =     0.20733E-01    0.10066E-01
+      >> Range of X(min) =   -0.363  -0.355
+      >> Range of X(max) =    1.361   1.403
+      >> Ymax/min =     0.11868E+00   -0.55371E-04
+      >> Output Histogram  [   -0.55371E-04 :    0.11868E+00 ]
+ 
+ 
+      Real: Mean and Variance    0.22351E-01    0.59826E-03
+ 
+      Krig: Mean and Variance    0.20775E-01    0.52534E-03
+ 
+      Error: Mean and Variance    0.15762E-02    0.72926E-04
+ 
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates         500
+           >> [         1       500 ] for Processor  0
+ 
+ >>Loc diff is  2.475605788221161E-003  for candidate           1  at iteration
+           4
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         14.452       100.00
+ ---------------------------------------------------------
+            Total Time =    14.452 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  1.379114910479581E-003  for candidate           2  at iteration
+           4
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         17.711       100.00
+ ---------------------------------------------------------
+            Total Time =    17.711 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  1.336541541344910E-003  for candidate           3  at iteration
+           4
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         14.117       100.00
+ ---------------------------------------------------------
+            Total Time =    14.117 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  1.100357505816281E-003  for candidate           4  at iteration
+           4
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         12.725       100.00
+ ---------------------------------------------------------
+            Total Time =    12.725 seconds
+ ---------------------------------------------------------
+ 
+ >>Loc diff is  9.223909157711208E-004  for candidate           5  at iteration
+           4
+ 
+ Now using finer mesh
+ Try to solve again with cflm   100.000000000000     
+  
+ ---------------------------------------------------------
+                       Timing Report
+ ---------------------------------------------------------
+   Timer Name                       Time(sec.)  % of Total
+ ---------------------------------------------------------
+   Flow solve                         13.118       100.00
+ ---------------------------------------------------------
+            Total Time =    13.118 seconds
+ ---------------------------------------------------------
+ >> Reading KrigSet.inp
+      >> # of Optimizing Functions =    1
+      >> # of Constraint Functions =    0
+      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
+      >> # of Max Sample/G/H/Hv    =    0************
+      >> Ordinary Kriging
+      >> Use Wendland C4 SCF
+      >> Use All Hess for Direct Cokriging
+      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
+      >> Cross Correlation Relaxation Factor  =   0.9999000
+ >> Reading sample.dat
+      >> # of DV, Func, Samples =     2    2   25
+      >> # of Fidelity Levels   =     1
+      >> Fidelity Level :  1
+           >> # of Samples(F     )    =    25
+      >> Min. Dist. between Fidelity-1 Samples ( 14, 22 ) =  0.12E+00
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> Reduce Sample Points for Function  1
+           >> # of Modes in Fid-1 =  25   0   0   0   0   0  25
+           >> # of Modes (sum)    =  25   0   0   0   0   0
+ >> Size of Correlation Matrix =     25
+ *mdv   != ndv in paramGALN.inp                 
+ *mdat  != ndat in paramGALN.inp                 
+ *meva  != neva in paramGALN.inp                 
+ >> Reading Parameter from paramGALN.inp
+      >> # of Population       =    24
+      >> # of Generation       =    24
+      >> # of Design Variables =     2
+      >> # of Objectives       =     1
+      >> Set of Objectives     :   Max
+      >> Likelihood Maximization for Theta
+ >> Check Again the Parameters Setting
+      >> Use new sharing function (index-based)
+      >> Use old fitness function (1/rank)
+      >> Use blended crossover
+           >> Probability of directional crossover =    0.100   0.100
+           >> Probability of neighborhood cultivation =    0.500   0.500
+      >> Use old uniform mutation
+ >> Make Initial Population by LHS
+ >> Calling evaluation in GA
+ >> Starting Main Loop of GA  637
+      >>    1 Pareto Designs until   0 Gen.,  0.140E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.148E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.148E+03
+ >> Finishing Main Loop of GA
+ >> Output Results....
+      >> Best Design for  1 : (  24  24) :  0.1477E+03
+      >> # of Function Evaluations for New Ones  =      600
+      >> # of Function Evaluations for Gradient  =        0
+      >> # of Function Evaluations for 1D Search =        0
+      >> # of Function Evaluations in Total      =      600
+      >> Best Design =  147.663   0.000
+      >> Theta =    0.159   0.593
+ >> Theta      =    0.159   0.593
+ >> Deviation  =     0.15478E-02
+ >> Likelihood =     0.14766E+03 with Error =     0.57108E-09
+ >> Output to meta01.krg
+      >> RMSE on All Sample Points    =    0.27263E-12 among    25 pts
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> Make "dak" Database for metamodel
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> MonteCarlo Simulation on Kriging Model
+      >> Target Function =   1
+      >> All Design Variables Fluctuated
+      >> # of Monte-Carlo Samples =     3000
+           >> [         1      3000 ] for Processor  0
+      >> Mean and Variance =     0.20849E-01    0.51926E-03
+      >> Meanprime =     0.82528E+00    0.38265E+00
+      >> Varprime =     0.20340E-01    0.98733E-02
+      >> Range of X(min) =   -0.363  -0.355
+      >> Range of X(max) =    1.361   1.403
+      >> Ymax/min =     0.11214E+00    0.53466E-04
+      >> Output Histogram  [    0.53466E-04 :    0.11214E+00 ]
+ 
+ 
+      Real: Mean and Variance    0.22351E-01    0.59826E-03
+ 
+      Krig: Mean and Variance    0.20849E-01    0.51926E-03
+ 
+      Error: Mean and Variance    0.15018E-02    0.78998E-04
+ 
+ 
+ >> Best design: Sample point  16 Fct value   0.0002079
+    with X value   0.0130639   0.0290227
+ 
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates         500
+           >> [         1       500 ] for Processor  0

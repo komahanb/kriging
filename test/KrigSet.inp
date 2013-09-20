@@ -1,0 +1,29 @@
+Optimizing Function
+1
+1
+Constraint Function
+0
+Kriging Type
+0 2           % First number how many Kriging models; next numbers which functional
+1 1           % First number how many direct Cokriging models; next numbers which functional
+0 1           % First number how many indirect Cokriging models; next numbers which functional
+1 1 2         % Dummy?
+1 1           % First number how many variable fidelity models; next numbers which functional
+Max Number of Samples, FG, FGH, FGHv
+0  100000  10000 10000
+Regression Model Type (usually 0)
+0
+Spatial Correlation Function (usually 4)
+4
+Deviratio Range
+0.0 1000.0
+Debug Flag (usually 0)
+0
+Flag for NewSample Point (appear in newsample.dat)
+0
+EI (usually 0)
+0
+Local (usually 0)
+0
+Matrix (usually 2.22e-16, 0.9999 as constant)
+2.22d-16 0.9999

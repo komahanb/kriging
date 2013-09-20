@@ -1,0 +1,87 @@
+Solver control
+-------------------------------------------------------------------------------
+Steady parameters
+----------------
+1e-3		cfls
+50		cflm
+1.05            cflg
+-1              nsol_s
+3		istart (1=freestream, 3=read_file)
+10	       	isubmax_ls
+2500	       	isubmax_ns
+2	       	ilinmax_s   
+1              	mgflag_s
+1e-4	       	convtolsteadyflow
+1e-10	       	convtolunsteadyflow
+1e-10	       	convtoladj
+
+Common parameters
+-----------------
+1		iflux; 1=Roe, 2=Lax, 3=vanLeer, 4=AUFS
+1		ijac;  1=Roe, 2=Lax, 3=vanLeer, 4=AUFS
+0.755		minf
+1.25		alpha
+2		sorder; 1=1st-order; 2=2nd-order
+2       	torder; 1=bdf1; 2=bdf2
+
+Unsteady Parameters
+-------------------
+.false.		unsteady
+.false.		unsteadyfree
+0		itnmax_us
+10		isubmax_lus
+900		isubmax_nus
+2          	ilinmax_us
+1		mgflag_us
+1		idamp
+1e-2            damps
+1e5             dampm
+1.4             dampg
+1       	nsol_us
+32		nstep
+
+Mesh motion control
+-------------------
+0.0814          Vf
+2.51            theta_max
+0.25        	xcr
+0.0     	ycr
+20000           isubmax_m
+.true.		Usebumps
+
+Aeroelastic control
+-------------------
+5		itnmax_usf
+
+Gradient and Hessian Flags
+--------------------------
+4		objfun
+.false.		TRONopt
+.false.		KNITROopt
+.false.		BFGSopt
+.false.		SDopt
+.false.		CGopt
+.false.		Extrapolation
+.false.		MG/OPT
+.false.		MGGrid
+.false.		MGNumberDV
+.false.		Gridsequencing
+.true.		alphadv
+.true.		Machdv
+.false.		output2screen
+.true.		outputhd
+.true.		timing
+.false.		derivfd1
+.false.		derivfd2
+.true.		derivadj
+.false.		hessianfd1
+.false.		hessianfd2
+.true.		hessianadj
+.false.		hessianapprox
+.false.		hessianvector
+
+Constraints
+-----------
+.false.		acon
+0.9		areafac
+1.0		wac

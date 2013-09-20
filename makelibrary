@@ -1,0 +1,3 @@
+cp Makefilelibrary Makefile
+cp main.f90subroutine main.f90
+make

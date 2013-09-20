@@ -1,0 +1,11 @@
+0 -2 -4             ! use trust, # of add for Grad/Hess
+C = 0.e-3           ! nugget effect, 0 means no effect
+0.0010  0.05        ! initial trust region (G,H)
+0.0001  0.20        ! L/U threshold for trust region
+1.d-5 0.2 0.2 0.2   ! dist_min, distratio per dx for r-a, a-a[overlap,other]
+1.1                 ! distance ratio threshold for weighting approximation
+1                   ! 1: special treatment around current optimal
+0.10  0.50          ! factor thresholds for "Very Good", "Good" and "Bad"
+1.5                 ! augumentation Factor for "Very Good"
+0.5                 ! reduction     Factor for "Bad"
+1.0                 ! margin for trust region

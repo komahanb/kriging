@@ -1,0 +1,37 @@
+<< GA Basical Parameters >>
+24                                         : number of populations
+24                                         : number of max generations
+16                                         : number of design variables
+1 Max                                      : number of objectives
+18                                         : number of info
+1                                          : kind of evaluation
+1                                          : random seed
+NoUse initial.inp                          : init pop [Use][File] or [Random]
+<< Sharing Function/Parameters >>
+New Conventional                           : Type [Conventional] or [New]
+0                                          : How to decide Radius (0>pareto)
+2                                          : ngen_sh 
+1.d0                                       : alpha_sh (rec.=1)
+include                                    : include all pareto or not
+<< Mating and Parents Selection >>
+Old                                        : Type [Old] or [New]
+0.200                                      : factor for probability [0:1]
+2                                          : ngen_mat
+4                                          : id_sus   (3<rec.<10)
+<< Crossover >>
+BLX                                        : Type [BLX] or [SBX]
+0                                          : one random number(1) or ndv(else)
+0.5                                        : parameter, rec.=0.5(blx) 1.0(sbx)
+0.1 0.1                                    : prob. of directional crossover
+0.5 0.5                                    : prob. of neighborhood cultivation
+<< Gradient Based Evolution >>
+0                                          : Gradient Evolution per ? Gen
+<< Mutation >>
+Old                                        : Type [Old] or [New]
+0.1 0.1                                    : probability of mutation
+0.1 10.                                    : range, eta (-r<dx<r)
+<< Convergence/Output >>
+0                                          : stop criteria
+0                                          : number of maximum evaluations
+12                                         : output per ? generations
+0                                          : debug mode(1)

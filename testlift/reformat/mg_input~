@@ -1,0 +1,3 @@
+3	mglmax
+0	plot output (1=yes, 0=no)
+1	mode (1=advancing front, 2=max coarsening)
