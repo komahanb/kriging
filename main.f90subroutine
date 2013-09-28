@@ -82,7 +82,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
 
         ! ---------------------------------------------------------------------------
 
-        do fct=fctin,fctin           !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Heaviside (Franke) >9: User supplied
+        do fct=fctin,fctin           !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
            do nstattmp=statin,statin ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
 
