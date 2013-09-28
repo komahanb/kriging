@@ -578,7 +578,7 @@
           df(k)=3.0*x(k)**2
        end do
     else if (fct.eq.9) then
-
+       !Tubular column
        !Thanks: Arora Section 3.7
 
        p=10.0e6               !10 MN
@@ -790,7 +790,7 @@
     use dimKrig, only: fctindx
     implicit none
     integer :: DIM,fct,j,k
-    real*8 :: x(DIM),d2f(DIM,DIM),fac,A,omeg,P,rho,Fs
+    real*8 :: x(DIM),d2f(DIM,DIM),fac,A,omeg,P,rho,Fs,sigmay
     real*8::gamma,L,E,pi,R, T,sigma_allow !Truss design parameters
     real*8::tensile_sigma1_max,tensile_sigma2_max,tensile_sigma3_max
     real*8::comp_sigma1_max,comp_sigma2_max,comp_sigma3_max
@@ -879,6 +879,52 @@
     else if (fct.eq.6) then
 
        d2f(:,:)=0.0
+     !       Two bar truss
+
+     rho=0.2836
+     sigmay=36260.0
+     p=25000.0
+     L=5.0
+     E=30e6
+     pi=4.0*atan(1.0)
+
+     Fs=1.0
+
+     d2f(:,:)=0.0d0
+     if (fctindx.eq.0) then
+        !---- OBJECTIVE FUNCTION
+        d2f(1,1) = 0.0d0
+        d2f(2,1) = 0.0d0
+        d2f(3,1) = rho*x(2)*x(3) / sqrt(L**2+x(3)**2)
+
+     else if (fctindx.eq.1) then
+        !---- INEQUALITY CONSTRAINTS
+
+        d2f(2,3)= p*Fs*L**2/ sqrt(L**2/x(3)**2+1.0) / (x(2)**2*x(3)**3*sigmay)
+        d2f(3,3)= -p*Fs*L**2/(x(2)*sigmay)*(L**2/sqrt(L**2/x(3)**2+1.0)**3/x(3)**6 - 3.0/x(3)**4/sqrt(L**2/x(3)**2+1.0))
+
+        !copy to the upper triangle
+        d2f(3,2)=d2f(2,3)
+
+     else if (fctindx.eq.2) then  
+
+        d2f(1,3)= p*Fs*L / (x(1)**2*x(3)**2*sigmay)
+        d2f(3,3)= 2.0*p*Fs*L / (x(1)*x(3)**3*sigmay)
+
+        !copy to upper
+
+        d2f(3,1)=d2f(1,3)
+
+     else if (fctindx.eq.3) then
+
+        d2f(1,3)= 8.0*p*Fs*L**3 / (pi*x(3)**2*E*x(1)**3)
+        d2f(3,3)= 8.0*p*Fs*L**3 / (pi*x(3)**3*E*x(1)**2)
+
+        !copy to upper Triangle
+
+        d2f(3,1)=d2f(1,3)
+
+     end if
 
     else if (fct.eq.7) then
 
