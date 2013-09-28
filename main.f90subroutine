@@ -1,4 +1,4 @@
-subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,probtype,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
   use dimKrig
   use timer_mod
@@ -26,7 +26,14 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
   ndimt=ndimint
 
   xavg(1:ndim)=xavgin(1:ndim)
-  xstd(1:ndim)=xavgin(1:ndim)*xstdin(1:ndim)
+
+  if (probtype.eq.1) then
+    xstd(1:ndim)=xstdin(1:ndim)
+  else if (probtype.eq.2) then
+    xstd(1:ndim)=xavgin(1:ndim)*xstdin(1:ndim)
+  else
+    stop"Wrong problem type"
+  end if	     
 
   fctindx=fctindxin
 

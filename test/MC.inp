@@ -4,4 +4,4 @@
 1                 ! Target Function
 100000            ! # of MonteCarlo Simulation
 30                ! # of Decomposition, Bounds for Histogram
-0 		  ! Evalfunc
+1 		  ! Evalfunc

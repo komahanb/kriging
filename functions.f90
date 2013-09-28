@@ -239,6 +239,8 @@
        f=cos(f)+0.01*cos(100.0*f)
     else if (fct.eq.6) then
 
+       if (dim.ne.3) stop'Wrong dimension'
+
        rho=0.2836
        sigmay=36260.0
        p=25000.0
@@ -258,6 +260,8 @@
           f = p*Fs*L / (x(1)*x(3)*sigmay) - 1.0
        else if (fctindx.eq.3) then
           f = 4.0*p*Fs*L**3 / (x(1)**2*x(3)*E*pi) - 1.0
+       else
+          stop'Wrong fct index'
        end if
 
     else if (fct.eq.7) then
@@ -276,6 +280,7 @@
     else if (fct.eq.9) then ! Tubular column
 
        !Thanks: Arora Section 3.7
+       if (dim.ne.3) stop'Wrong dimension'
 
        p=10.0e6               !10 MN
        E=207000.0               !N/mm2
@@ -318,6 +323,7 @@
     else if (fct.eq.10) then ! Cantilever beam 
 
        ! Thanks: Section 3.8 Arora 
+       if (dim.ne.2) stop'Wrong dimension'
 
        sigma_allow= 10.0d6 !N/m2
        M=40.0d6 !Nm
@@ -534,7 +540,7 @@
        end do
 
     else if (fct.eq.6) then 
-
+       if (dim.ne.3) stop'Wrong dimension'
        rho=0.2836
        sigmay=36260.0
        p=25000.0
@@ -580,7 +586,7 @@
     else if (fct.eq.9) then
        !Tubular column
        !Thanks: Arora Section 3.7
-
+       if (dim.ne.3) stop'Wrong dimension'
        p=10.0e6               !10 MN
        E=207000               !N/mm2
        rho=7.833e-6           !kg/m3
@@ -626,7 +632,7 @@
 
 
     else if (fct.eq.10) then ! Cantilever beam 
-
+       if (dim.ne.2) stop'Wrong dimension'
        ! Thanks: Section 3.8 Arora 
 
        sigma_allow= 10.0d6 !N/m2
@@ -674,7 +680,7 @@
 
 
     else if (fct.eq.11) then
-
+       if (dim.ne.3) stop'Wrong dimension'
        gamma= 0.1 ! weight density lb/in3
        L=10.0     !in  
        pi=4.0*atan(1.0)
@@ -877,7 +883,7 @@
        end do
 
     else if (fct.eq.6) then
-
+       if (dim.ne.3) stop'Wrong dimension'
        d2f(:,:)=0.0
      !       Two bar truss
 
@@ -945,7 +951,7 @@
           d2f(k,k)=6.0*x(k)
        end do
     else if (fct.eq.9) then
-
+       if (dim.ne.3) stop'Wrong dimension'
        ! Short column
        ! Thanks: Arora Section 3.7
 
@@ -1033,7 +1039,7 @@
        end if
 
     else if (fct.eq.10) then !cantilever beam
-
+       if (dim.ne.2) stop'Wrong dimension'
        ! Thanks: Section 3.8 Arora 
 
        sigma_allow= 10.0d6 !N/m2
@@ -1110,7 +1116,7 @@
        end if !fctindx
 
     else if (fct.eq.11) then
-
+       if (dim.ne.3) stop'Wrong dimension'
        gamma= 0.1 ! weight density lb/in3
        L=10.0     !in  
        pi=4.0*atan(1.0)

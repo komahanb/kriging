@@ -4,6 +4,8 @@
 ! mpi parallel
       integer :: id_proc, num_proc
 
+      integer::probtype ! 1=fixed interval, 2= varialbe interval
+
 ! problem set
       character(len=20) :: Cmode
       integer :: nOPT,nCON,fct,hstat,lstat,nstyle,iterDEL,randomini,randomtestl,dynamics,ifid,reusesamples,maxsample,maxsamplewant

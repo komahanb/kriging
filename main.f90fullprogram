@@ -13,14 +13,12 @@ program Kriging
   integer,parameter::timing=1,numberpointstudy=0 !other number if timing results not needed
   double precision :: time, Initialmach, Finalmach, InitialAOA,FinalAOA
   integer::nmcstemp
-  integer ::evlfnc,fuct
-  common/evf/ evlfnc
 
   call MPI_START
 
   ! Dimension of problem
 
-  ndim=2
+  ndim=3
   ndimt=ndim
 
 
