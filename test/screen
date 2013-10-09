@@ -12,14 +12,14 @@
       >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
       >> Cross Correlation Relaxation Factor  =   0.9999000
  >> Reading sample.dat
-      >> # of DV, Func, Samples =     3    2    5
+      >> # of DV, Func, Samples =     6    2    5
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =     5
-      >> Min. Dist. between Fidelity-1 Samples (  1,  4 ) =  0.25E+00
+      >> Min. Dist. between Fidelity-1 Samples (  1,  2 ) =  0.66E+00
  
- >> Best design: Sample point   4 Fct value   0.8801227
-    with X value   0.3080370   0.3355453   0.5059004
+ >> Best design: Sample point   5 Fct value   6.1573888
+    with X value   0.3482120   0.0788032   0.6605652   0.0415686   0.1660678   0.6701310
  
  >> Reduce Sample Points for Function  1
            >> # of Modes in Fid-1 =   5   0   0   0   0   0   5
@@ -31,7 +31,7 @@
  >> Reading Parameter from paramGALN.inp
       >> # of Population       =    24
       >> # of Generation       =    24
-      >> # of Design Variables =     3
+      >> # of Design Variables =     6
       >> # of Objectives       =     1
       >> Set of Objectives     :   Max
       >> Likelihood Maximization for Theta
@@ -44,42 +44,56 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA  153
-      >>    1 Pareto Designs until   0 Gen.,  0.175E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.175E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.175E+02
+ >> Starting Main Loop of GA  230
+      >>    1 Pareto Designs until   0 Gen.,  0.450E+01
+      >>    1 Pareto Designs until  12 Gen.,  0.594E+01
+      >>    1 Pareto Designs until  24 Gen.,  0.596E+01
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   7) :  0.1747E+02
+      >> Best Design for  1 : (  24  18) :  0.5958E+01
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   17.467   0.000
-      >> Theta =    3.796   0.010   0.010
- >> Theta      =    3.796   0.010   0.010
- >> Deviation  =     0.10296E-02
- >> Likelihood =     0.17467E+02 with Error =     0.56822E-15
+      >> Best Design =    5.958   0.000
+      >> Theta =    0.664   0.011   0.011   0.022   0.281   0.010
+ >> Theta      =    0.664   0.011   0.011   0.022   0.281   0.010
+ >> Deviation  =     0.23301E+00
+ >> Likelihood =     0.59579E+01 with Error =     0.59457E-14
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.34340E-14 among     5 pts
+      >> RMSE on All Sample Points    =    0.69050E-13 among     5 pts
  
- >> Best design: Sample point   4 Fct value   0.8801227
-    with X value   0.3080370   0.3355453   0.5059004
+ >> Best design: Sample point   5 Fct value   6.1573888
+    with X value   0.3482120   0.0788032   0.6605652   0.0415686   0.1660678   0.6701310
  
  >> Make "dak" Database for metamodel
  
- >> Best design: Sample point   4 Fct value   0.8801227
-    with X value   0.3080370   0.3355453   0.5059004
+ >> Best design: Sample point   5 Fct value   6.1573888
+    with X value   0.3482120   0.0788032   0.6605652   0.0415686   0.1660678   0.6701310
  
  >> MonteCarlo Simulation on Kriging Model
       >> Target Function =   1
       >> All Design Variables Fluctuated
       >> # of Monte-Carlo Samples =   100000
-           >> [     62501     75000 ] for Processor  5
-           >> [     75001     87500 ] for Processor  6
            >> [         1     12500 ] for Processor  0
-           >> [     50001     62500 ] for Processor  4
-           >> [     37501     50000 ] for Processor  3
-           >> [     87501    100000 ] for Processor  7
            >> [     12501     25000 ] for Processor  1
+           >> [     87501    100000 ] for Processor  7
+           >> [     75001     87500 ] for Processor  6
            >> [     25001     37500 ] for Processor  2
+           >> [     50001     62500 ] for Processor  4
+           >> [     62501     75000 ] for Processor  5
+           >> [     37501     50000 ] for Processor  3
+ 
+      >> xavg     0.20000E+01    0.20000E+01    0.20000E+01    0.20000E+01    0.20000E+01    0.20000E+01
+      >> xstd     0.15000E+00    0.15000E+00    0.15000E+00    0.15000E+00    0.15000E+00    0.15000E+00
+      >> Fctindx    0
+ 
+      >> Mean and Variance =     0.67107E+01    0.13038E+00
+      >> Meanprime =     0.19607E+01    0.12001E-02   -0.12184E-02    0.84471E-02    0.88782E+00    0.15349E-03
+      >> Varprime =     0.33147E+00   -0.28746E-03    0.29423E-04   -0.29378E-03   -0.10310E+00    0.24384E-03
+      >> Range of X(min) =   -0.572  -0.579  -0.685  -0.614  -0.634  -0.571
+      >> Range of X(max) =    1.671   1.567   1.753   1.618   1.587   1.596
+      >> Ymax/min =     0.74108E+01    0.60858E+01
+      >> Output Histogram  [    0.60858E+01 :    0.74108E+01 ]
+ 
+ 

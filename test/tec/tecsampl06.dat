@@ -1,6 +1,0 @@
-TITLE = " "
-VARIABLES = "x" "y" "f"
-ZONE T="lsample", I=    1, J=    1, K=    1, F=BLOCK
-     2.50000000
-     2.50000000
-     7.09000000

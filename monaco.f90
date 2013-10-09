@@ -339,8 +339,8 @@ subroutine MonteCarlo
            ! output
            if(id_proc.eq.0)then
               write(filenum,*)
-              write(filenum,'(6x,a,5e15.5)')'>> xavg ',xavg(1:ndim)
-              write(filenum,'(6x,a,5e15.5)')'>> xstd ',xstd(1:ndim)   
+              write(filenum,'(6x,a,6e15.5)')'>> xavg ',xavg(1:ndim)
+              write(filenum,'(6x,a,6e15.5)')'>> xstd ',xstd(1:ndim)   
               write(filenum,'(6x,a,i4)')'>> Fctindx ',fctindx
               write(filenum,*)
 

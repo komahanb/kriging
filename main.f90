@@ -1,39 +1,61 @@
-program Kriging
+subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,nptsin,statin,probtypeIN,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+
   use dimKrig
   use timer_mod
   implicit none
   include 'mpif.h'
-  integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,NMCStmp,Casemode,mirdutchhybrid
-  double precision :: diffconv
-  character*60 :: filename
-  character*2 :: dimnumber,fctnumber,nptstoaddpercycnum
-  character*3 :: lsnumber
-  double precision :: freal,df(20),d2f(20,20),v(20),Javg,Jvar!,distloc
-  integer nsamples,counter
-  integer,parameter::timing=1,numberpointstudy=0 !other number if timing results not needed
-  double precision :: time, Initialmach, Finalmach, InitialAOA,FinalAOA
-  integer::nmcstemp
 
-  call MPI_START
+  integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,ndimint,Casemode,fctin,statin,nptsin
+
+  double precision :: diffconv,xavgin(ndimint),xstdin(ndimint),fmeanout,fvarout,fmeanprimeout(ndimint),fvarprimeout(ndimint)
+  character*60 :: filename
+  character*2 :: dimnumber,fctnumber
+  character*3 :: lsnumber
+  double precision :: freal,df(20),d2f(20,20),v(20),Javg,Jvar
+  character*2 :: nptstoaddpercycnum
+
+  integer:: nsamples,counter,numberpointstudy
+  integer,parameter::timing=1 !other number if timing results not needed
+  double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
+  real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
+  integer ::fuct
+  integer,intent(in)::probtypeIN
+
+  ! Settings	
 
   ! Dimension of problem
 
-  ndim=3
-  ndimt=ndim
+  ndim=ndimin
+  ndimt=ndimint
 
+  mainprog=.false.
+   
+  DAT=DATIN
 
+  probtype=probtypeIN
+
+  filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
+  
+  xavg(1:ndim)=xavgin(1:ndim)
+
+  if (probtype.eq.1) then
+    xstd(1:ndim)=xstdin(1:ndim)
+  else if (probtype.eq.2) then
+    xstd(1:ndim)=xavgin(1:ndim)*xstdin(1:ndim)
+  else
+    stop"Wrong problem type"
+  end if	     
+
+  fctindx=fctindxin
+
+!print *,ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout
   randomini=1      ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
-
 
   do randomtestl=2,2   
 
      ! 0: Delaunay triangulation with Dutchintrapolation 
      ! 1: latin hypercube with Dutchintrapolation 
      ! 2: latin hypercube with Multivariate Interpolation and Regression (MIR)
-
-     !     maxsamplewant= 90 !
-
-     !     nptstoaddpercyc=100
 
      ! Low fidelity data
 
@@ -47,13 +69,9 @@ program Kriging
 
      selectedevaluation=0 ! 0: not selected 1: selected 
 
-     filenum=6 ! 6 for screen
-
-     NMCS=0
 
      ! CFD solve input data
 
-     fctindx=0        !0 for drag, 4 for lift
      InitialMach=0.5d0
      FinalMach=1.5d0
      InitialAOA=0.0d0  !degrees
@@ -63,56 +81,41 @@ program Kriging
      ! ---------------------------------------------------------------------------
 
      do  Casemode= 1,1      ! 0: Calculate RMS  1: Output Statistics  2: Optimize using EI
+
         reusesamples=0   ! 0: no  1: yes 
-        Dutchorderg=2    ! Order of Interpolation for Dutch Intrapolation (1 or 2)
-
-
+	
+	Dutchorderg=2    ! Order of Interpolation for Dutch Intrapolation (1 or 2)
 
         ! How to get MC samples
+
         readMCsamples=0     ! 0: Make random samples   1: Read from file MCsamp.dat
-
-
+     
         if (randomtestl.ne.0) then
            dynamics=1
         else 
            dynamics=0
-        end if     ! 0: not dynamic  1: dynamic 
+        end if
+	dynamics =0
 
-        !     dynamics=0
         ! ---------------------------------------------------------------------------
 
-!!$
-!!$         open(10,file='MCsamp.dat',form='formatted',status='unknown')
-!!$         read(10,*) NMCStmp,ndimtmp
-!!$         read(10,*) (xavg(i),i=1,ndim)
-!!$         read(10,*) (xstd(i),i=1,ndim) 
-!!$         close(1
+        do fct=fctin,fctin           !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
-
-        do fct=1,1       !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
-
-!!$           if (fuct.eq.1) fct=0
-!!$           if (fuct.eq.2) fct=2
-!!$           if (fuct.eq.3) fct=10
-
-           evlfnc=1  ! CFD case exact evaluation for MC needed or not
-
-           do nstattmp=0,0                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
-
+           do nstattmp=statin,statin ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
 
               if (nstattmp.eq.0) then
 
-                 maxsamplewant= 15!6000+5
-                 nptstoaddpercyc=5!160
+                 maxsamplewant= nptsin
+                 nptstoaddpercyc=5
 
               else if (nstattmp.eq.1) then
 
-                 maxsamplewant= 15 !1000+5
+                 maxsamplewant= nptsin
                  nptstoaddpercyc=5 
 
               else if (nstattmp.eq.2) then
 
-                 maxsamplewant= 15!15!20+33
+                 maxsamplewant= nptsin
                  nptstoaddpercyc=5
 
               end if
@@ -121,19 +124,16 @@ program Kriging
               if (nstattmp.eq.1) hstat=1
               if (nstattmp.eq.2) hstat=3
               if (nstattmp.eq.3) hstat=5
+
               if (id_proc.eq.0) call TimerInit()
 
               counter=0
-              do nsamples=5,5!2*NDIM+1,2*NDIM+1!40,40!101,101!2*NDIM+1,2*NDIM+1!5,75,5!50,50!50,500,50!500,500!3,47,4 !Makes this many nhs samples per cycle
+
+              do nsamples=nptsin,nptsin !Makes this many nhs samples per cycle
+
                  counter=counter+1
 
                  nhs=nsamples
-
-!!$              if (randomini.eq.0) then
-!!$                 nhs=1+2**ndim
-!!$                 else
-!!$                 call combination(ndim+Dutchorderg,ndim,nhs)
-!!$              end if
 
                  ! Get standard deviation in function space
 
@@ -142,54 +142,50 @@ program Kriging
 
                        if (fct.eq.20) then
                           open(10,file='MC.inp',form='formatted',status='unknown')
-                          read(10,*) (xavg(i),i=1,ndim)
-                          read(10,*) (xstd(i),i=1,ndim)     
+                          read(10,*) !(xavg(i),i=1,ndim)
+                          read(10,*) !(xstd(i),i=1,ndim)     
                           read(10,*)
                           read(10,*)
-                          read(10,*) NMCS!,ndimtmp
+                          read(10,*)
+                          read(10,*) !NMCS!,ndimtmp
+			  read(10,*) evlfnc
                           close(10)
+
                        else 
 
                           open(10,file='MCsamp.dat',form='formatted',status='unknown')
-                          read(10,*) NMCS,ndimtmp
+                          read(10,*) !NMCS,ndimtmp
                           if (ndimtmp.ne.ndim) STOP 'Dimension does not match in MCsamp.dat!'
-                          read(10,*) (xavg(i),i=1,ndim)
-                          read(10,*) (xstd(i),i=1,ndim)         
+                          read(10,*) !(xavg(i),i=1,ndim)
+                          read(10,*) !(xstd(i),i=1,ndim) 
+			  read(10,*)		  
+                          read(10,*)
+                          read(10,*)
+                          read(10,*) !NMCS!,ndimtmp
+			  read(10,*) evlfnc        
                           close(10)
-
                        end if
-!!$                    ! Calculate mean and variance of real function
-!!$                    Javg=0.0
-!!$                    Jvar=0.0
-!!$                    DS(1,:)=0.0
-!!$                    DS(2,:)=1.0              
-!!$                    do j=1,NMCS
-!!$                       read(10,*) (xavg(i),i=1,ndim)
-!!$                  !     call evalfunc(xavg,ndim,fct,0,0,freal,df,d2f,v)
-!!$                       Javg=Javg+freal
-!!$                       Jvar=Jvar+freal**2
-!!$                    end do
-!!$                    Javg=Javg/real(NMCS)      
-!!$                    Jvar=Jvar/real(NMCS)-Javg**2
-!!$                    write(*,*)
-!!$                    write(*,'(6x,a,2e15.5)')'Real: Mean and Variance',Javg,Jvar
-!!$                    write(*,*)
-!!$                    !              stop
-                       close(10)
-                    else if (readMcsamples.eq.0 .and. NMCS.eq.0) then
-                       open(10,file='MC.inp',form='formatted',status='unknown')
-                       read(10,*) (xavg(i),i=1,ndim)
-                       read(10,*) (xstd(i),i=1,ndim)
-                       close(10)
-                    end if
-                 end if
 
+                    else if (readMcsamples.eq.0) then
+
+                       open(10,file='MC.inp',form='formatted',status='unknown')
+		       read(10,*) !(xavg(i),i=1,ndim)
+                       read(10,*) !(xstd(i),i=1,ndim) 
+		       read(10,*)		  
+		       read(10,*)
+                       read(10,*)
+                       read(10,*) !NMCS!,ndimtmp
+		       read(10,*) evlfnc  
+                       close(10)
+
+                    end if
+                 end if ! casemode
 
                  ! Domain size in function space
                  do i=1,ndim
                     if (Casemode.eq.1) then
-                       DS(1,i)=xavg(i)-2.0*xstd(i)
-                       DS(2,i)=xavg(i)+2.0*xstd(i)
+                       DS(1,i)=xavg(i)-3.0*xstd(i)
+                       DS(2,i)=xavg(i)+3.0*xstd(i)
                     else
                        if (fct.eq.4) then
                           DS(1,i)=-5.12
@@ -543,7 +539,7 @@ program Kriging
                  !           if (Casemode.eq.1) close(94)
               end if
 
-              if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
+!              if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
 
            end do ! F or G loop
         end do ! Function number loop
@@ -558,7 +554,11 @@ end do !random testl
 !!$print *,fvar,fvarprime
 !!$end if
 
-  call stop_all
+fmeanout=fmean
+fvarout=fvar
 
-end program Kriging
+fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
+fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
+
+end subroutine Krigingestimate
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

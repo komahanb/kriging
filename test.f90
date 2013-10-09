@@ -1,7 +1,6 @@
 program main
-
+  use dimkrig
   implicit none
-
   include 'mpif.h'
   integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,Casemode
  integer :: nDIMint
@@ -18,9 +17,6 @@ program main
   integer,parameter::timing=1 !other number if timing results not needed
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
 
-  integer ::evlfnc,fuct
-  common/evf/ evlfnc
-
   call MPI_START
 
 ndimin=2
@@ -32,6 +28,8 @@ fctindxin=0
 
 call Krigingestimate(ndimin,xavgin,ndimint,xstdin,fmeanout,fvarout,fmeanprimeout,fvarprimeout,NMCin,fctindxin)
 
-print *, fmeanout,fvarout
+
+
+
 call stop_all
 end program main
