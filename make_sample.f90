@@ -238,31 +238,3 @@
 
 
 
-  recursive subroutine recurcorn(dimact,ndim,sample,nhs,bounds)
-
-    implicit none
-
-    common/global/counter
-
-    integer :: dimact,ndim,nhs,counter,j,counterin
-    real*8 :: sample(ndim,nhs),bounds(2,ndim)
-
-    counterin=counter
-    do j=2,1,-1
-       sample(dimact,counter)=bounds(j,dimact)
-       if (dimact.gt.1) then
-          sample(1:dimact-1,counter)=sample(1:dimact-1,counterin)
-       end if
-       if (dimact.lt.ndim) call recurcorn(dimact+1,ndim,sample,nhs,bounds)
-       if (j.ne.1) counter=counter+1
-    end do
-
-
-  end subroutine recurcorn
-
-
-
-
-
-
-

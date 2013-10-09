@@ -31,7 +31,7 @@ LIBS = -ldl -lstdc++
 	$(MAKE) $< \
 	fi
 
-SRCS =  dimKrig.o main.o functions.o Timer.o\
+SRCS =  dimKrig.o main.o functions.o threebarcost.o Timer.o\
         latin.o mpi.o\
         read_set.o Dutch.o Dutchgeninterp.o\
         read_sample.o check_sample.o \
@@ -43,7 +43,7 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
         indirect.o trust.o trustool.o \
         rank.o vrange.o \
         update.o DynamicPointSelection.o\
-        ludim.o lusol2.o \
+        ludim.o lusol2.o extraroutine.o\
         bfgs.o bfgs_routines.o eva_bfgs.o \
         dimGA.o ga.o gatool.o \
         scf.o post.o monaco.o make_sample.o\

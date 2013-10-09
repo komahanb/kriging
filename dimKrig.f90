@@ -22,6 +22,8 @@
       character(len=7), dimension(10)   :: cCON2
 
 ! direct
+      logical::mainprog
+
       integer :: mode_dck
 
 ! indirect(trust)
@@ -50,7 +52,7 @@
       integer, dimension(0:10,0:10) :: ict_sample
       integer, dimension(0:10     ) :: ict_dummy
       double precision :: ccrf,Reps
-
+      double precision,dimension(20)::dat
 ! All Krig
       integer :: i_dim,d_dim,j_dim,c_dim
       integer, allocatable, dimension(:,:) &

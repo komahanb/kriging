@@ -1,4 +1,4 @@
-subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,probtype,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,nptsin,statin,probtypeIN,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
   use dimKrig
   use timer_mod
@@ -17,14 +17,25 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
   integer:: nsamples,counter,numberpointstudy
   integer,parameter::timing=1 !other number if timing results not needed
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
-
+  real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
   integer ::fuct
+  integer,intent(in)::probtypeIN
+
+  ! Settings	
 
   ! Dimension of problem
 
   ndim=ndimin
   ndimt=ndimint
 
+  mainprog=.false.
+   
+  DAT=DATIN
+
+  probtype=probtypeIN
+
+  filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
+  
   xavg(1:ndim)=xavgin(1:ndim)
 
   if (probtype.eq.1) then
@@ -37,7 +48,6 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
 
   fctindx=fctindxin
 
-  filenum=77 ! 6 for screen
 !print *,ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout
   randomini=1      ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
@@ -552,38 +562,3 @@ fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
 
 end subroutine Krigingestimate
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-
-subroutine i_to_s(intval,s)
-
-  integer idig,intval,ipos,ival,i
-  character ( len = * ) s
-
-  s = ' '
-
-  ival = intval
-
-  !  Working from right to left, strip off the digits of the integer
-  !  and place them into S(1:len ( s )).
-  !
-  ipos = len(s) 
-
-  do while ( ival /= 0 )
-
-     idig = mod( ival, 10 )
-     ival = ival / 10
-     s(ipos:ipos) = char(idig + 48 )
-     ipos = ipos - 1
-
-  end do
-  !
-  !  Fill the empties with zeroes.
-  !
-  do i = 1, ipos
-     s(i:i) = '0'
-  end do
-
-  return
-end subroutine i_to_s
-

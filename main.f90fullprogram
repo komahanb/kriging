@@ -562,38 +562,3 @@ end do !random testl
 
 end program Kriging
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-
-subroutine i_to_s(intval,s)
-
-  integer idig,intval,ipos,ival,i
-  character ( len = * ) s
-
-  s = ' '
-
-  ival = intval
-
-  !  Working from right to left, strip off the digits of the integer
-  !  and place them into S(1:len ( s )).
-  !
-  ipos = len(s) 
-
-  do while ( ival /= 0 )
-
-     idig = mod( ival, 10 )
-     ival = ival / 10
-     s(ipos:ipos) = char(idig + 48 )
-     ipos = ipos - 1
-
-  end do
-  !
-  !  Fill the empties with zeroes.
-  !
-  do i = 1, ipos
-     s(i:i) = '0'
-  end do
-
-  return
-end subroutine i_to_s
-
