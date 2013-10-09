@@ -1,0 +1,3 @@
+ >> Number of Processors =   8
+rank 0 in job 19  cfd3_35594   caused collective abort of all ranks
+  exit status of rank 0: return code 29 

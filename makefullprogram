@@ -1,0 +1,3 @@
+cp Makefilefullprogram Makefile
+cp main.f90fullprogram main.f90
+make
