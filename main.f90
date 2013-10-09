@@ -1,4 +1,4 @@
-subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,nptsin,statin,probtypeIN,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
   use dimKrig
   use timer_mod
@@ -17,20 +17,37 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,s
   integer:: nsamples,counter,numberpointstudy
   integer,parameter::timing=1 !other number if timing results not needed
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
-
+  real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
   integer ::fuct
+  integer,intent(in)::probtypeIN
+
+  ! Settings	
 
   ! Dimension of problem
 
   ndim=ndimin
   ndimt=ndimint
 
+  mainprog=.false.
+   
+  DAT=DATIN
+
+  probtype=probtypeIN
+
+  filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
+  
   xavg(1:ndim)=xavgin(1:ndim)
-  xstd(1:ndim)=xavgin(1:ndim)*xstdin(1:ndim)
+
+  if (probtype.eq.1) then
+    xstd(1:ndim)=xstdin(1:ndim)
+  else if (probtype.eq.2) then
+    xstd(1:ndim)=xavgin(1:ndim)*xstdin(1:ndim)
+  else
+    stop"Wrong problem type"
+  end if	     
 
   fctindx=fctindxin
 
-  filenum=77 ! 6 for screen
 !print *,ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout
   randomini=1      ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 

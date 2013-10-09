@@ -21,6 +21,16 @@ subroutine MonteCarlo
   real*8::average(ndim)
   double precision :: f,muy1,muy2,sigmay1,sigmay2,fobjlin,fobjquad,Javg(3),Jvar(3),freal
   real*8::fvtemp
+  
+  open(10,file='MC.inp',form='formatted',status='unknown')
+  read(10,*)! (xavg(i),i=1,ndim)
+  read(10,*)! (xstd(i),i=1,ndim)     
+  read(10,*)
+  read(10,*)
+  read(10,*) NMCS!,ndimtmp
+  read(10,*)
+  read(10,*) evlfnc
+  close(10)
 
   call find_Optimal
   if(id_proc.eq.0) write(filenum,'(1x,a)')'>> MonteCarlo Simulation on Kriging Model'
@@ -339,8 +349,8 @@ subroutine MonteCarlo
            ! output
            if(id_proc.eq.0)then
               write(filenum,*)
-              write(filenum,'(6x,a,5e15.5)')'>> xavg ',xavg(1:ndim)
-              write(filenum,'(6x,a,5e15.5)')'>> xstd ',xstd(1:ndim)   
+              write(filenum,'(6x,a,6e15.5)')'>> xavg ',xavg(1:ndim)
+              write(filenum,'(6x,a,6e15.5)')'>> xstd ',xstd(1:ndim)   
               write(filenum,'(6x,a,i4)')'>> Fctindx ',fctindx
               write(filenum,*)
 

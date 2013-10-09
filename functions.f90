@@ -192,7 +192,7 @@
 
 
   subroutine calcf(x,DIM,fct,f)
-    use dimKrig, only: fctindx
+    use dimKrig, only: fctindx, DAT,mainprog
     implicit none
 
     integer :: DIM,fct,k
@@ -457,6 +457,81 @@
 
        end if
 
+  else if (fct.eq.12) then ! Threebar 6d problem
+
+     if (dim.ne.6) stop'wrong dim for this problem'
+
+     pi=4.0*atan(1.0)
+
+     if (mainprog) then
+      ! Use these settings if the program is called from main.f90.
+      ! If PC is used as library DAT is passed as an input vector from calling program such as IPOPT
+
+        !Problem data and other constants
+        dat(1)=10.0 !height ref
+        dat(2)=1.0e7 !E
+        dat(3)=0.1 !gamma
+        dat(4)=45.0*pi/180.0
+        dat(5)=20000.0
+
+        ! Max constraint values
+
+        !Tensile
+        dat(6)=5000.0    ! psi tensile_sigma1_max=dat(6)      
+        dat(7)=20000.0    ! psi tensile_sigma2_max=dat(7)
+        dat(8)=5000.0    ! psi tensile_sigma3_max=dat(8)
+        !Compressive
+        dat(9)=5000.0    ! psi comp_sigma1_max=dat(9)
+        dat(10)=20000.0   ! psi comp_sigma2_max=dat(10)
+        dat(11)=5000.0   ! psi comp_sigma3_max=dat(11)
+        !Displacement
+        dat(12)=0.005    ! in  max_u_disp=dat(12)
+        dat(13)=0.005    ! in  max_v_disp=dat(12)
+        dat(14)=1.0      ! Factor of safety
+     end if
+
+     if (fctindx.eq.0) then
+
+        call threebarf(0,dat,x,F)
+
+     else if (fctindx.eq.1) then
+
+        call threebarf(1,dat,x,F)
+
+     else if (fctindx.eq.2) then
+
+      call threebarf(2,dat,x,F)
+
+     else if (fctindx.eq.3) then
+
+      call threebarf(3,dat,x,F)
+
+     else if (fctindx.eq.4) then
+
+      call threebarf(4,dat,x,F)
+
+     else if (fctindx.eq.5) then
+
+      call threebarf(5,dat,x,F)
+
+     else if (fctindx.eq.6) then
+
+      call threebarf(6,dat,x,F)
+
+     else if (fctindx.eq.7) then
+
+      call threebarf(7,dat,x,F)
+
+     else if (fctindx.eq.8) then
+
+      call threebarf(8,dat,x,F)
+
+     else
+
+        stop'wrong fctindx'
+
+     end if
+
     else
        stop'Wrong Fn Number'
 
@@ -466,7 +541,7 @@
 
   
   subroutine calcdf(x,DIM,fct,df)
-    use dimKrig, only: fctindx
+    use dimKrig, only: fctindx,DAT,mainprog
     implicit none
     integer :: DIM,fct,k
     real*8 :: x(DIM),df(DIM),fac,A,omeg
@@ -784,6 +859,72 @@
 
        endif
 
+
+else if (fct.eq.12) then
+
+   if (dim.ne.6) stop'wrong dim for this problem'
+
+   pi=4.0*atan(1.0)
+   if (mainprog) then 
+      ! Use these settings if the program is called from main.f90.
+      ! If PC is used as library DAT is passed as an input vector from calling program such as IPOPT
+      
+      !Problem data and other constants
+      dat(1)=10.0 !height ref
+      dat(2)=1.0e7 !E
+      dat(3)=0.1 !gamma
+      dat(4)=45.0*pi/180.0
+      dat(5)=20000.0
+
+      ! Max constraint values
+
+      !Tensile
+      dat(6)=5000.0    ! psi tensile_sigma1_max=dat(6)      
+      dat(7)=20000.0    ! psi tensile_sigma2_max=dat(7)
+      dat(8)=5000.0    ! psi tensile_sigma3_max=dat(8)
+      !Compressive
+      dat(9)=5000.0    ! psi comp_sigma1_max=dat(9)
+      dat(10)=20000.0   ! psi comp_sigma2_max=dat(10)
+      dat(11)=5000.0   ! psi comp_sigma3_max=dat(11)
+      !Displacement
+      dat(12)=0.005    ! in  max_u_disp=dat(12)
+      dat(13)=0.005    ! in  max_v_disp=dat(12)
+      dat(14)=1.0      ! Factor of safety
+   end if
+
+   if (fctindx.eq.0) then
+      call threebardf(0,dat,x,df)
+
+   else if (fctindx.eq.1) then
+      call threebardf(1,dat,x,df)
+
+   else if (fctindx.eq.2) then
+      call threebardf(2,dat,x,df)
+
+   else if (fctindx.eq.3) then
+      call threebardf(3,dat,x,df)
+
+   else if (fctindx.eq.4) then
+      call threebardf(4,dat,x,df)
+
+   else if (fctindx.eq.5) then
+      call threebardf(5,dat,x,df)
+
+   else if (fctindx.eq.6) then
+      call threebardf(6,dat,x,df)
+
+   else if (fctindx.eq.7) then
+      call threebardf(7,dat,x,df)
+
+   else if (fctindx.eq.8) then
+      call threebardf(8,dat,x,df)
+   else
+
+      stop'wrong fctindx'
+
+   end if
+
+
     else
 
        stop'Unsupported function number'
@@ -793,7 +934,7 @@
   end subroutine calcdf
 
   subroutine calcd2f(x,DIM,fct,d2f)
-    use dimKrig, only: fctindx
+    use dimKrig, only: fctindx,DAT,mainprog
     implicit none
     integer :: DIM,fct,j,k
     real*8 :: x(DIM),d2f(DIM,DIM),fac,A,omeg,P,rho,Fs,sigmay
