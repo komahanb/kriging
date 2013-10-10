@@ -4,7 +4,7 @@
 ! mpi parallel
       integer :: id_proc, num_proc
 
-      integer::probtype ! 1=fixed interval, 2= varialbe interval
+      integer::probtype(20) ! 1=fixed interval, 2= varialbe interval
 
 ! problem set
       character(len=20) :: Cmode

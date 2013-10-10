@@ -19,7 +19,8 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
   real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
   integer ::fuct
-  integer,intent(in)::probtypeIN,initpts,ncyc,flagin(20)
+  integer,intent(in)::initpts,ncyc,flagin(20)
+  integer::probtypeIN(20)
 
   ! Settings	
 
@@ -32,19 +33,23 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
    
   DAT=DATIN
 
-  probtype=probtypeIN
+  probtype(1:ndim)=probtypeIN(1:ndim)
 
   filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
   
   xavg(1:ndim)=xavgin(1:ndim)
 
-  if (probtype.eq.1) then
-    xstd(1:ndim)=xstdin(1:ndim)
-  else if (probtype.eq.2) then
-    xstd(1:ndim)=xavgin(1:ndim)*xstdin(1:ndim)
+
+
+  do i=1,ndim
+  if (probtype(i).eq.1) then
+  xstd(i)=xstdin(i)
+  else if (probtype(i).eq.2) then
+  xstd(i)=xavgin(i)*xstdin(i)
   else
-    stop"Wrong problem type"
+  stop"Wrong problem type"
   end if	     
+  end do
 
   fctindx=fctindxin
 
