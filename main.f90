@@ -1,4 +1,4 @@
-subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,nptsin,statin,probtypeIN,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,initpts,ncyc,nptsin,statin,probtypeIN,flagin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
   use dimKrig
   use timer_mod
@@ -19,7 +19,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,np
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
   real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
   integer ::fuct
-  integer,intent(in)::probtypeIN
+  integer,intent(in)::probtypeIN,initpts,ncyc,flagin(20)
 
   ! Settings	
 
@@ -95,7 +95,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,np
         else 
            dynamics=0
         end if
-	dynamics =0
+!	dynamics =0
 
         ! ---------------------------------------------------------------------------
 
@@ -106,17 +106,17 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,np
               if (nstattmp.eq.0) then
 
                  maxsamplewant= nptsin
-                 nptstoaddpercyc=5
+                 nptstoaddpercyc=ncyc
 
               else if (nstattmp.eq.1) then
 
                  maxsamplewant= nptsin
-                 nptstoaddpercyc=5 
+                 nptstoaddpercyc=ncyc
 
               else if (nstattmp.eq.2) then
 
                  maxsamplewant= nptsin
-                 nptstoaddpercyc=5
+                 nptstoaddpercyc=ncyc
 
               end if
 
@@ -129,7 +129,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,np
 
               counter=0
 
-              do nsamples=nptsin,nptsin !Makes this many nhs samples per cycle
+              do nsamples=initpts,initpts !Makes this many nhs samples per cycle
 
                  counter=counter+1
 
