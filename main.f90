@@ -37,19 +37,30 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
   
-  xavg(1:ndim)=xavgin(1:ndim)
+  xavgt(1:ndimt)=xavgin(1:ndimt)
 
-
-
-  do i=1,ndim
-  if (probtype(i).eq.1) then
-  xstd(i)=xstdin(i)
-  else if (probtype(i).eq.2) then
-  xstd(i)=xavgin(i)*xstdin(i)
-  else
-  stop"Wrong problem type"
-  end if	     
+  do i=1,ndimt
+     if (probtype(i).eq.1) then
+        xstdt(i)=xstdin(i)
+     else if (probtype(i).eq.2) then
+        xstdt(i)=xavgin(i)*xstdin(i)
+     else
+        stop"Wrong problem type"
+     end if
   end do
+
+!  print*,xavg(1:ndim)  
+!  print*,xstd(1:ndim)  
+
+
+  xavg(1:nDIM)=xavgt(ndimt-nDIM+1:ndimt)
+  xstd(1:nDIM)=xstdt(ndimt-nDIM+1:ndimt)
+
+!!$
+!!$  print*,"xavg:"
+!!$  print*,xavg(1:ndimt)
+!!$  print*,"xstd:"
+!!$  print*,xstd(1:ndimt)
 
   fctindx=fctindxin
 
