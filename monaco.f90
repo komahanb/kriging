@@ -21,15 +21,19 @@ subroutine MonteCarlo
   real*8::average(ndim)
   double precision :: f,muy1,muy2,sigmay1,sigmay2,fobjlin,fobjquad,Javg(3),Jvar(3),freal
   real*8::fvtemp
-  
+
+  integer :: expensive
+
   open(10,file='MC.inp',form='formatted',status='unknown')
   read(10,*)! (xavg(i),i=1,ndim)
   read(10,*)! (xstd(i),i=1,ndim)     
   read(10,*)
   read(10,*)
   read(10,*) NMCS!,ndimtmp
-  read(10,*)
+  read(10,*) !npdf
+  read(10,*) !readmcsamples
   read(10,*) evlfnc
+  read(10,*) expensive
   close(10)
 
   call find_Optimal
@@ -397,6 +401,8 @@ subroutine MonteCarlo
 
         if (id_proc.eq.0) then
 
+           if (expensive.ne.1) then ! if not expensive then execute the rest
+
            write(filenum,*)
            write(filenum,*)
 
@@ -437,15 +443,17 @@ subroutine MonteCarlo
 
            end if
 
+
+
            Javg(:)=0.0
            Jvar(:)=0.0
 
-           if (fct.lt.20) then
+           if (fct.lt.20.or.fct.eq.22) then
 
               open(10,file='MCvalues.dat',form='formatted',status='unknown')
 
 
-           else if (fct.eq.20)then
+           else if (fct.eq.20.or.fct.eq.22)then
 
               if (fctindx.eq.0) then
 
@@ -458,18 +466,20 @@ subroutine MonteCarlo
               end if
            end if
 
+
+          
            do i=1,NMCS
 
               ! Real function evaluation
 
               if (evlfnc.eq.1) then
 
-                call evalfunc(MNCx(:,i),ndim,fct,0,0,freal,df,d2f,v) 
-                write(10,*) (MNCx(kk,i),kk=1,ndim),freal 
+                 call evalfunc(MNCx(:,i),ndim,fct,0,0,freal,df,d2f,v) 
+                 write(10,*) (MNCx(kk,i),kk=1,ndim),freal 
 
               else
 
-                read(10,*) (MNCx(kk,i),kk=1,ndim),freal               
+                 read(10,*) (MNCx(kk,i),kk=1,ndim),freal               
 
               end if
 
@@ -505,9 +515,10 @@ subroutine MonteCarlo
                  end if
 
               end if
-              
+
            end do
            close(10)
+
 
            Javg(:)=Javg(:)/real(NMCS)      
            Jvar(:)=Jvar(:)/real(NMCS)-Javg(:)**2
@@ -558,14 +569,15 @@ subroutine MonteCarlo
 !!$              end if
 !!$
         end if
-        call MPI_Barrier(MPI_COMM_WORLD,ierr)
-        !!     end if  !readMCsamples.ne.0 ?
-
-        deallocate(MNCf,MNCx) 
-        deallocate(HST,HSTglb) 
-
-      end subroutine MonteCarlo
-!++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     end if
+     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+     !!     end if  !readMCsamples.ne.0 ?
+     
+     deallocate(MNCf,MNCx) 
+     deallocate(HST,HSTglb) 
+     
+   end subroutine MonteCarlo
+      !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subroutine find_st(pst,dx,st)
         implicit none
 ! find st which ensures the probability within [-dx:dx] is pst

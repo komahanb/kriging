@@ -13,11 +13,17 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
   ! ifid      0: high fidelity  other:lower fidelity
 
-  xtmp(1:ndimt-DIM)=xavgt(1:ndimt-DIM)
-  do k=1,DIM
-     scal=DS(2,k)-DS(1,k)
-     xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
-  end do
+  
+    xtmp(1:ndimt)=xavgt(1:ndimt)
+
+ 
+    do k=1,DIM
+       scal=DS(2,k)-DS(1,k)
+       xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
+    end do
+
+!    print*,'x:',xtmp
+
 
   if (fct.lt.20) then
 
@@ -32,6 +38,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      end if
 
   else if (fct.eq.20) then
+
      CALL chdir('lowfid') ! Comment when using fine mesh
 
      call omp_set_num_threads(omp_get_max_threads())
@@ -67,25 +74,31 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
+!     print*,'before optimize',fctindx,fct,xtmp,ndimt,low(1:ndimt-dim),up(1:ndimt-dim)
+
      call omp_set_num_threads(omp_get_max_threads())
 
-     if (fctindx.eq.0) then 
+     if (fctindx.eq.0) then !what is the max possible drag? (objective function)
 
         call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx+10)
 
-     else if (fctindx.eq.4) then
+     else if (fctindx.eq.4) then !what is the least lift possible? (lift constraint)
 
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx+10)
+      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx+10)
+
 
      else
         write(*,*) 'Wrong fctindx in function call'
         stop
      end if
 
+!   print*,'after optimize',xtmp,f,dftmp
+
   end if
 
   df(1:DIM)=dftmp(ndimt-DIM+1:ndimt)
   d2f(1:DIM,1:DIM)=d2ftmp(ndimt-DIM+1:ndimt,ndimt-DIM+1:ndimt)
+
   do k=1,DIM
      scal=DS(2,k)-DS(1,k)
      df(k)=df(k)*scal
@@ -95,6 +108,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      end do
   end do
 
+!  print*,'f:',f
 
   if (flag.eq.5) then   ! Hessian-vector product
 
@@ -238,7 +252,7 @@ subroutine calcf(x,DIM,fct,f)
      end do
      f=cos(f)+0.01*cos(100.0*f)
   else if (fct.eq.6) then
-     if (dim.ne.3) stop'Wrong dimension'
+!     if (dim.ne.3) stop'Wrong dimension'
 
      pi=4.0*atan(1.0)
 
@@ -301,7 +315,7 @@ subroutine calcf(x,DIM,fct,f)
      f=f+5.0
   else if (fct.eq.9) then ! Tubular column
 
-     if (dim.ne.3) stop'Wrong dimension'
+!     if (dim.ne.3) stop'Wrong dimension'
 
      !Thanks: Arora Section 3.7
 
@@ -370,7 +384,7 @@ subroutine calcf(x,DIM,fct,f)
 
 
   else if (fct.eq.10) then ! Cantilever beam 
-     if (dim.ne.2) stop'Wrong dimension'
+!     if (dim.ne.2) stop'Wrong dimension'
 
      ! Thanks: Section 3.8 Arora 
      if (mainprog) then
@@ -437,7 +451,7 @@ subroutine calcf(x,DIM,fct,f)
   else if (fct.eq.11) then ! Three bar truss 
 
 
-     if (dim.ne.3) stop'wrong dim for this problem'
+!     if (dim.ne.3) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
@@ -585,7 +599,7 @@ subroutine calcf(x,DIM,fct,f)
 
   else if (fct.eq.12) then ! Threebar 6d problem
 
-     if (dim.ne.6) stop'wrong dim for this problem'
+!     if (dim.ne.6) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
@@ -741,7 +755,7 @@ subroutine calcdf(x,DIM,fct,df)
      end do
 
   else if (fct.eq.6) then 
-     if (dim.ne.3) stop'Wrong dimension'
+!     if (dim.ne.3) stop'Wrong dimension'
 
      pi=4.0*atan(1.0)
 
@@ -812,7 +826,7 @@ subroutine calcdf(x,DIM,fct,df)
      !Tubular column
      !Thanks: Arora Section 3.7
 
-     if (dim.ne.3) stop'Wrong dimension'
+!     if (dim.ne.3) stop'Wrong dimension'
 
      !Thanks: Arora Section 3.7
 
@@ -886,7 +900,7 @@ subroutine calcdf(x,DIM,fct,df)
 
 
   else if (fct.eq.10) then ! Cantilever beam 
-     if (dim.ne.2) stop'Wrong dimension'
+!     if (dim.ne.2) stop'Wrong dimension'
 
      ! Thanks: Section 3.8 Arora 
      if (mainprog) then
@@ -955,7 +969,7 @@ subroutine calcdf(x,DIM,fct,df)
 
   else if (fct.eq.11) then
 
-     if (dim.ne.3) stop'wrong dim for this problem'
+!     if (dim.ne.3) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
@@ -1121,7 +1135,7 @@ subroutine calcdf(x,DIM,fct,df)
 
   else if (fct.eq.12) then
 
-     if (dim.ne.6) stop'wrong dim for this problem'
+!     if (dim.ne.6) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
      if (mainprog) then 
@@ -1283,7 +1297,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
      end do
 
   else if (fct.eq.6) then
-     if (dim.ne.3) stop'Wrong dimension'
+!     if (dim.ne.3) stop'Wrong dimension'
 
      pi=4.0*atan(1.0)
 
@@ -1372,7 +1386,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
      end do
   else if (fct.eq.9) then
 
-     if (dim.ne.3) stop'Wrong dimension'
+!     if (dim.ne.3) stop'Wrong dimension'
 
      !Thanks: Arora Section 3.7
 
@@ -1485,7 +1499,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
      end if
 
   else if (fct.eq.10) then !cantilever beam
-     if (dim.ne.2) stop'Wrong dimension'
+!     if (dim.ne.2) stop'Wrong dimension'
 
      ! Thanks: Section 3.8 Arora 
      if (mainprog) then
@@ -1583,7 +1597,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
 
   else if (fct.eq.11) then
 
-     if (dim.ne.3) stop'wrong dim for this problem'
+!     if (dim.ne.3) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
