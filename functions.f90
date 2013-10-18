@@ -1,3 +1,4 @@
+
 subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
   use dimKrig, only: DS,fctindx,reusesamples,ndimt,xavgt,xstdt
   use omp_lib
@@ -46,9 +47,10 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
      CALL chdir('../') !Comment when using fine mesh
 
+     ! Meant for optimizations
 
-  else if (fct.eq.21) then
-
+  else if (fct.eq.21) then ! Three
+     
      gtol=1e-6
 
      low(1:ndimt-DIM)=xtmp(1:ndimt-DIM)-xstdt(1:ndimt-DIM)
@@ -59,8 +61,18 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
-     call omp_set_num_threads(omp_get_max_threads())
-     call optimize(ndimt-DIM,xtmp,ndimt,f,df,low,up,gtol,.true.,.false.,fctindx+1)
+
+  if (fctindx.eq.0) then ! what is the worst objective function 
+
+         call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
+
+      else
+
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+        
+      end if
+
+!     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
   else if (fct.eq.22) then
 
@@ -74,17 +86,15 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
-!     print*,'before optimize',fctindx,fct,xtmp,ndimt,low(1:ndimt-dim),up(1:ndimt-dim)
-
      call omp_set_num_threads(omp_get_max_threads())
 
      if (fctindx.eq.0) then !what is the max possible drag? (objective function)
 
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx+10)
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
 
      else if (fctindx.eq.4) then !what is the least lift possible? (lift constraint)
 
-      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx+10)
+      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
 
      else
@@ -92,9 +102,8 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
-!   print*,'after optimize',xtmp,f,dftmp
-
   end if
+
 
   df(1:DIM)=dftmp(ndimt-DIM+1:ndimt)
   d2f(1:DIM,1:DIM)=d2ftmp(ndimt-DIM+1:ndimt,ndimt-DIM+1:ndimt)
@@ -271,7 +280,7 @@ subroutine calcf(x,DIM,fct,f)
         sigmay=36260.0
         p=25000.0
         L=5.0
-        E=30e6
+        E=30.0e6
         Fs=1.0
      else
 

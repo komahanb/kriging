@@ -1,3 +1,13 @@
  >> Number of Processors =   8
-rank 0 in job 19  cfd3_35594   caused collective abort of all ranks
-  exit status of rank 0: return code 29 
+rank 6 in job 75  cfd2_39645   caused collective abort of all ranks
+  exit status of rank 6: return code 174 
+rank 5 in job 75  cfd2_39645   caused collective abort of all ranks
+  exit status of rank 5: killed by signal 9 
+rank 4 in job 75  cfd2_39645   caused collective abort of all ranks
+  exit status of rank 4: killed by signal 9 
+rank 2 in job 75  cfd2_39645   caused collective abort of all ranks
+  exit status of rank 2: killed by signal 9 
+rank 1 in job 75  cfd2_39645   caused collective abort of all ranks
+  exit status of rank 1: return code 174 
+rank 0 in job 75  cfd2_39645   caused collective abort of all ranks
+  exit status of rank 0: return code 174 
