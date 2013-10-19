@@ -23,8 +23,6 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
        xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
     end do
 
-!    print*,'x:',xtmp
-
 
   if (fct.lt.20) then
 
@@ -49,7 +47,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
      ! Meant for optimizations
 
-  else if (fct.eq.21) then ! Three
+  else if (fct.eq.21) then ! Two bar truss 
      
      gtol=1e-6
 
@@ -74,7 +72,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
 !     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
-  else if (fct.eq.22) then
+  else if (fct.eq.22) then !CFD
 
      gtol=1e-6
 
@@ -85,6 +83,8 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         write(*,*) 'Error in function call, optimization does not support gradient evalution'
         stop
      end if
+
+!     print*,'before optimize',fctindx,fct,xtmp,ndimt,low(1:ndimt-dim),up(1:ndimt-dim)
 
      call omp_set_num_threads(omp_get_max_threads())
 
@@ -102,6 +102,8 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
+!   print*,'after optimize',xtmp,f,dftmp
+
   end if
 
 
@@ -117,7 +119,6 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      end do
   end do
 
-!  print*,'f:',f
 
   if (flag.eq.5) then   ! Hessian-vector product
 

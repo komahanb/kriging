@@ -53,10 +53,6 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      end if
   end do
 
-  !  print*,xavg(1:ndim)  
-  !  print*,xstd(1:ndim)  
-
-
   xavg(1:nDIM)=xavgt(ndimt-nDIM+1:ndimt)
   xstd(1:nDIM)=xstdt(ndimt-nDIM+1:ndimt)
 
