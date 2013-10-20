@@ -16,8 +16,6 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
   
     xtmp(1:ndimt)=xavgt(1:ndimt)
-
- 
     do k=1,DIM
        scal=DS(2,k)-DS(1,k)
        xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
@@ -96,15 +94,20 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
       call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
+   else if (fct.eq.23) then !CFD
 
-     else
-        write(*,*) 'Wrong fctindx in function call'
-        stop
-     end if
+      
+      
+      
+   else
 
-!   print*,'after optimize',xtmp,f,dftmp
+      write(*,*) 'Wrong fctindx in function call'
+      stop
+   end if
 
-  end if
+   !   print*,'after optimize',xtmp,f,dftmp
+
+end if
 
 
   df(1:DIM)=dftmp(ndimt-DIM+1:ndimt)
@@ -682,10 +685,72 @@ subroutine calcf(x,DIM,fct,f)
 
      end if
 
-  else
-     stop'Wrong Fn Number'
+ else if (fct.eq.13) then ! Cantilever beam 4d problem
 
-  end if
+       ! Thanks: Section 3.8 Arora 
+       !  if (dim.ne.2) stop'Wrong dimension'
+       
+       
+       if (mainprog) then
+
+          sigma_allow= 10.0d6 !N/m2
+          tau_allow= 2.0d6 !N/m2     
+          Fs=1.0
+
+       else
+          
+          sigma_allow=dat(1)
+          tau_allow=dat(2)
+          Fs=dat(3)
+
+       end if
+
+       !define R,T
+       
+       B=x(1)
+       D=x(2)
+       M=x(3)
+       V=x(4)
+
+       !     L=x(3)
+
+       if (fctindx.eq.0) then
+
+          !---- OBJECTIVE FUNCTION
+          f = B*D
+
+       else if (fctindx.eq.1) then
+
+          !---- INEQUALITY CONSTRAINTS
+          !bending stress constraint
+
+          f=6.0*M*Fs/(B*D**2*sigma_allow) -1.0
+
+       else if (fctindx.eq.2) then
+
+          ! Inequality constraint 2
+          ! Shear Stress constraint
+
+          f=3.0*V*Fs/(2.0*B*D*tau_allow) -1.0
+
+       else if (fctindx.eq.3) then
+
+
+          f=D*Fs/(2.0*B) -1.0
+
+       else 
+
+          print*, 'Wrong function index for this test case',fctindx
+          stop
+       end if
+
+
+   
+else
+
+   stop'Wrong Fn Number'
+
+end if
 
 end subroutine calcf
 
@@ -765,7 +830,7 @@ subroutine calcdf(x,DIM,fct,df)
      end do
 
   else if (fct.eq.6) then 
-!     if (dim.ne.3) stop'Wrong dimension'
+     !     if (dim.ne.3) stop'Wrong dimension'
 
      pi=4.0*atan(1.0)
 
@@ -836,7 +901,7 @@ subroutine calcdf(x,DIM,fct,df)
      !Tubular column
      !Thanks: Arora Section 3.7
 
-!     if (dim.ne.3) stop'Wrong dimension'
+     !     if (dim.ne.3) stop'Wrong dimension'
 
      !Thanks: Arora Section 3.7
 
@@ -910,7 +975,7 @@ subroutine calcdf(x,DIM,fct,df)
 
 
   else if (fct.eq.10) then ! Cantilever beam 
-!     if (dim.ne.2) stop'Wrong dimension'
+     !     if (dim.ne.2) stop'Wrong dimension'
 
      ! Thanks: Section 3.8 Arora 
      if (mainprog) then
@@ -979,7 +1044,7 @@ subroutine calcdf(x,DIM,fct,df)
 
   else if (fct.eq.11) then
 
-!     if (dim.ne.3) stop'wrong dim for this problem'
+     !     if (dim.ne.3) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
@@ -1145,7 +1210,7 @@ subroutine calcdf(x,DIM,fct,df)
 
   else if (fct.eq.12) then
 
-!     if (dim.ne.6) stop'wrong dim for this problem'
+     !     if (dim.ne.6) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
      if (mainprog) then 
@@ -1207,6 +1272,63 @@ subroutine calcdf(x,DIM,fct,df)
 
      end if
 
+
+  else if (fct.eq.13) then ! Cantilever beam 4d problem
+
+     if (mainprog) then
+
+        sigma_allow= 10.0d6 !N/m2
+        tau_allow= 2.0d6 !N/m2     
+        Fs=1.0
+
+     else
+
+        sigma_allow=dat(1)
+        tau_allow=dat(2)
+        Fs=dat(3)
+
+     end if
+
+     !define R,T
+
+     B=x(1)
+     D=x(2)
+     M=x(3)
+     V=x(4)
+
+     if (fctindx.eq.0) then
+
+        df(1)= D 
+        df(2)= B
+        df(3)= 0.0
+        df(4)= 0.0
+
+     else if (fctindx.eq.1) then
+
+        df(1)= -(6.0*Fs*M)/(B**2*D**2*sigma_allow)
+        df(2)= -(12.0*Fs*M)/(B*D**3*sigma_allow)
+        df(3)=  (6.0*Fs)/(B*D**2*sigma_allow)
+        df(4)=  0.0
+
+     else if (fctindx.eq.2) then
+
+        df(1)= -(3.0*Fs*V)/(2.0*B**2*D*tau_allow)
+        df(2)= -(3.0*Fs*V)/(2.0*B*D**2*tau_allow)
+        df(3)=   0.0
+        df(4)=  (3.0*Fs)/(2.0*B*D*tau_allow)
+
+     else if (fctindx.eq.3) then
+
+        df(1)= -(D*Fs)/(2.0*B**2)
+        df(2)= Fs/(2.0*B)
+        df(3)= 0.0
+        df(4)= 0.0
+
+     else
+
+        stop"Wrong fctindx for 4d cantilever"
+
+     end if
 
   else
 
