@@ -277,6 +277,7 @@ subroutine DynamicPointSelection
         sigv=0.d0
         sigg=0.d0
 
+
         CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0), BETA, GAMM, IERR)
         if (ierr.ne.0) stop'MIR BETA gamma error'
         CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)

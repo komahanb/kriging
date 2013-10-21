@@ -25,7 +25,6 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   real*8::dftmp(ndimt)
 
 
-
   ! Settings	
 
   ! Dimension of problem
@@ -111,15 +110,14 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   else 
      dynamics=0
   end if
-  !	dynamics =0
+!	dynamics =0
 
   ! ---------------------------------------------------------------------------
 
   !        do
   fct=fctin
 
-
-  if (fct.gt.20) epiflag=1 ! mixed uncertainties, need to  call optimization at the end
+  if (ndim.ne.ndimt) epiflag=1 ! mixed uncertainties, need to  call optimization at the end
   
   !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 

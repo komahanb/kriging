@@ -89,25 +89,44 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      if (fctindx.eq.0) then !what is the max possible drag? (objective function)
 
         call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
-
+        
      else if (fctindx.eq.4) then !what is the least lift possible? (lift constraint)
 
-      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
-   else if (fct.eq.23) then !CFD
+     end if
 
-      
-      
-      
-   else
+  else if (fct.eq.23) then !CFD
 
-      write(*,*) 'Wrong fctindx in function call'
-      stop
-   end if
+     gtol=1e-6
 
-   !   print*,'after optimize',xtmp,f,dftmp
+     low(1:ndimt-DIM)=xtmp(1:ndimt-DIM)-xstdt(1:ndimt-DIM)
+     up(1:ndimt-DIM)=xtmp(1:ndimt-DIM)+xstdt(1:ndimt-DIM)
 
-end if
+     if (flag.ge.1) then
+        write(*,*) 'Error in function call, optimization does not support gradient evalution'
+        stop
+     end if
+
+
+     if (fctindx.eq.0) then ! what is the worst objective function 
+
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
+
+     else
+!        print*,xtmp,fctindx
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+
+     end if
+
+
+  else
+
+     write(*,*) 'Wrong fctindx in function call'
+     stop
+
+  end if
+  
 
 
   df(1:DIM)=dftmp(ndimt-DIM+1:ndimt)
@@ -302,6 +321,8 @@ subroutine calcf(x,DIM,fct,f)
      if (fctindx.eq.0) then
         !---- OBJECTIVE FUNCTION
         f = rho*x(1)*L+rho*x(2)*sqrt(L**2+x(3)**2)
+!        print*,x,f
+!stop
      else if (fctindx.eq.1) then
         !---- INEQUALITY CONSTRAINTS
         f = p*Fs*sqrt(L**2+x(3)**2) / (x(2)*x(3)*sigmay) - 1.0

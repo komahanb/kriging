@@ -244,6 +244,8 @@ subroutine MonteCarlo
 
         !call meta_call(1,0,x,yhat,yhatprime,RMSE,EI)
         call meta_call(1,2,x,yhat,yhatprime,RMSE,EI)
+!        print*,x,yhat
+    !    stop
 
         !              call evalfunc(x,ndim,fct,0,1,freal,df,d2f,v)
         !!              print *, 'x:',x!,'Kr:',yhat,'Ex:',freal ,id_proc 
@@ -473,8 +475,13 @@ subroutine MonteCarlo
               ! Real function evaluation
 
               if (evlfnc.eq.1) then
-
+!                 MNCX(1,i)=0.98479075038254
                  call evalfunc(MNCx(:,i),ndim,fct,0,0,freal,df,d2f,v) 
+!                 print*,MNCx(:,i)*(DS(2,1)-DS(1,1))+DS(1,1),freal
+
+ !                call evalfunc(MNCx(:,i),ndim,6,0,0,freal,df,d2f,v) 
+  !               print*,MNCx(:,i),freal
+   !              stop
                  write(10,*) (MNCx(kk,i),kk=1,ndim),freal 
 
               else
