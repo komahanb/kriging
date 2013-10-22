@@ -22,7 +22,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   integer,intent(in)::initpts,ncyc,flagin(20)
   integer::probtypeIN(20)
 
-  real*8::dftmp(ndimt)
+  real*8::dftmp(ndimt),ftmp
 
 
   ! Settings	
@@ -582,20 +582,47 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
      if (id_proc.eq.0) then
 
-        call epigrads(fct,fctindx,ndim,ndimt,xavgt,xstdt,dftmp)
+
+
+
+        call epigrads(fct,fctindx,ndim,ndimt,xavgt,xstdt,ftmp,dftmp)
+        !print*,'ftmp',ftmp,dftmp,fct,fctindx
+      !  print*,dftmp
+      !  stop
+        do j=1,ndimt-ndim
+
+       !    print*,ftmp*dftmp(j)
+
+           fmeanprimeout(j)=dftmp(j)
+           fvarprimeout(j)=ftmp*dftmp(j)
+           fvarprimeout(j)=2.0*fvarprimeout(j) - 2.0* ftmp*fmeanprimeout(j)
+        
+!                 MCmprime(j) = MCmprime(j) + df(j)  !for derivative of mean
+!                 MCdprime(j) = MCdprime(j) + freal*df(j)  !for derivative of variance
+        end do
+!!$
+!!$     fmean = MCmglb / dble(ictglb)
+!!$     fvar = MCdglb / dble(ictglb) - fmean**2  
+!!     do i=1,ndimt-ndim
+
+!!$        fmeanprime(i) = MCmprimeglb(i) / dble(ictglb)
+!!$        fvarprime(i) = 2.0 * MCdprimeglb(i) / dble(ictglb) - 2.0 * fmean * fmeanprime(i)
+  !!   end do
 
 !        print*,'dftmp',dftmp(1:ndimt),fctindx
 
-        fmeanprimeout(1:ndimt-ndim)=dftmp(1:ndimt-ndim)
-        fvarprimeout(1:ndimt-ndim)=0.0
+ !       fmeanprimeout(1:ndimt-ndim)=dftmp(1:ndimt-ndim)
+ !       fvarprimeout(1:ndimt-ndim)=0.0 !dftmp(1:ndimt-ndim)*xavg(1:ndimt-ndim)
 
      end if
+
 
 
     call MPI_Barrier(MPI_COMM_WORLD,ierr)
     
     call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+
   end if
 
   fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))

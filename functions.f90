@@ -1,4 +1,6 @@
 
+!===============================
+
 subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
   use dimKrig, only: DS,fctindx,reusesamples,ndimt,xavgt,xstdt
   use omp_lib
@@ -14,12 +16,12 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 
   ! ifid      0: high fidelity  other:lower fidelity
 
-  
-    xtmp(1:ndimt)=xavgt(1:ndimt)
-    do k=1,DIM
-       scal=DS(2,k)-DS(1,k)
-       xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
-    end do
+
+  xtmp(1:ndimt)=xavgt(1:ndimt)
+  do k=1,DIM
+     scal=DS(2,k)-DS(1,k)
+     xtmp(ndimt-DIM+k)=x(k)*scal+DS(1,k)
+  end do
 
 
   if (fct.lt.20) then
@@ -46,7 +48,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      ! Meant for optimizations
 
   else if (fct.eq.21) then ! Two bar truss 
-     
+
      gtol=1e-6
 
      low(1:ndimt-DIM)=xtmp(1:ndimt-DIM)-xstdt(1:ndimt-DIM)
@@ -58,17 +60,17 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      end if
 
 
-  if (fctindx.eq.0) then ! what is the worst objective function 
+     !     if (fctindx.eq.0) then ! what is the worst objective function 
 
-         call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
+     !       call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
-      else
+     !   else
 
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
-        
-      end if
+     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
-!     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+     !  end if
+
+     !     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
   else if (fct.eq.22) then !CFD
 
@@ -82,21 +84,21 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
-!     print*,'before optimize',fctindx,fct,xtmp,ndimt,low(1:ndimt-dim),up(1:ndimt-dim)
+     !     print*,'before optimize',fctindx,fct,xtmp,ndimt,low(1:ndimt-dim),up(1:ndimt-dim)
 
      call omp_set_num_threads(omp_get_max_threads())
 
      if (fctindx.eq.0) then !what is the max possible drag? (objective function)
 
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
-        
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+
      else if (fctindx.eq.4) then !what is the least lift possible? (lift constraint)
 
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
 
      end if
 
-  else if (fct.eq.23) then !CFD
+  else if (fct.eq.23) then ! Beam
 
      gtol=1e-6
 
@@ -109,15 +111,13 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      end if
 
 
-     if (fctindx.eq.0) then ! what is the worst objective function 
+     !    if (fctindx.eq.0) then ! what is the worst objective function 
 
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.false.,.false.,fctindx)
+     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
-     else
-!        print*,xtmp,fctindx
-        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+     !        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
-     end if
+     !   end if
 
 
   else
@@ -126,7 +126,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      stop
 
   end if
-  
+
 
 
   df(1:DIM)=dftmp(ndimt-DIM+1:ndimt)
@@ -232,7 +232,6 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
 100 format(a,1x,10000e20.10)
 
 end subroutine evalfunc
-
 
 
 
