@@ -5,7 +5,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   implicit none
   include 'mpif.h'
 
-  integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,ndimint,Casemode,fctin,statin,nptsin,epiflag
+  integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,ndimint,Casemode,fctin,statin,nptsin
 
   double precision :: diffconv,xavgin(ndimint),xstdin(ndimint),fmeanout,fvarout,fmeanprimeout(ndimint),fvarprimeout(ndimint)
   character*60 :: filename
@@ -22,8 +22,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   integer,intent(in)::initpts,ncyc,flagin(20)
   integer::probtypeIN(20)
 
-  real*8::dftmp(ndimt)
-
+  real*8::dftmp(ndimt),ftmp
 
 
   ! Settings	
@@ -111,15 +110,14 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   else 
      dynamics=0
   end if
-  !	dynamics =0
+!	dynamics =0
 
   ! ---------------------------------------------------------------------------
 
   !        do
   fct=fctin
 
-
-  if (fct.gt.20) epiflag=1 ! mixed uncertainties, need to  call optimization at the end
+  if (ndim.ne.ndimt) OUUflag=1 ! mixed uncertainties, need to  call optimization at the end
   
   !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
@@ -580,28 +578,61 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   fmeanout=fmean
   fvarout=fvar
 
-  if (epiflag.eq.1) then
+  if (OUUflag.eq.1) then
 
      if (id_proc.eq.0) then
 
-        call epigrads(fct,fctindx,ndim,ndimt,xavgt,xstdt,dftmp)
+
+
+
+        call epigrads(fct,fctindx,ndim,ndimt,xavgt,xstdt,ftmp,dftmp)
+        !print*,'ftmp',ftmp,dftmp,fct,fctindx
+      !  print*,dftmp
+      !  stop
+        do j=1,ndimt-ndim
+
+       !    print*,ftmp*dftmp(j)
+
+           fmeanprimeout(j)=dftmp(j)
+           fvarprimeout(j)=ftmp*dftmp(j)
+           fvarprimeout(j)=2.0*fvarprimeout(j) - 2.0* ftmp*fmeanprimeout(j)
+        
+!                 MCmprime(j) = MCmprime(j) + df(j)  !for derivative of mean
+!                 MCdprime(j) = MCdprime(j) + freal*df(j)  !for derivative of variance
+        end do
+!!$
+!!$     fmean = MCmglb / dble(ictglb)
+!!$     fvar = MCdglb / dble(ictglb) - fmean**2  
+!!     do i=1,ndimt-ndim
+
+!!$        fmeanprime(i) = MCmprimeglb(i) / dble(ictglb)
+!!$        fvarprime(i) = 2.0 * MCdprimeglb(i) / dble(ictglb) - 2.0 * fmean * fmeanprime(i)
+  !!   end do
 
 !        print*,'dftmp',dftmp(1:ndimt),fctindx
 
-        fmeanprimeout(1:ndimt-ndim)=dftmp(1:ndimt-ndim)
-        fvarprimeout(1:ndimt-ndim)=0.0
+ !       fmeanprimeout(1:ndimt-ndim)=dftmp(1:ndimt-ndim)
+ !       fvarprimeout(1:ndimt-ndim)=0.0 !dftmp(1:ndimt-ndim)*xavg(1:ndimt-ndim)
 
      end if
+
 
 
     call MPI_Barrier(MPI_COMM_WORLD,ierr)
     
     call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+
   end if
 
   fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
   fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
+
+  if (id_proc.eq.0) then
+     write(filenum,*)
+     write(filenum,*)'>> Program call is successful'
+     write(filenum,*) 
+  end if
 
 end subroutine Krigingestimate
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

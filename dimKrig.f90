@@ -2,7 +2,7 @@
       implicit none
 
 ! mpi parallel
-      integer :: id_proc, num_proc
+      integer :: id_proc, num_proc,OUUflag
 
       integer::probtype(20) ! 1=fixed interval, 2= varialbe interval
 

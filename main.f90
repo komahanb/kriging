@@ -5,7 +5,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   implicit none
   include 'mpif.h'
 
-  integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,ndimint,Casemode,fctin,statin,nptsin,epiflag
+  integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,ndimint,Casemode,fctin,statin,nptsin
 
   double precision :: diffconv,xavgin(ndimint),xstdin(ndimint),fmeanout,fvarout,fmeanprimeout(ndimint),fvarprimeout(ndimint)
   character*60 :: filename
@@ -117,7 +117,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   !        do
   fct=fctin
 
-  if (ndim.ne.ndimt) epiflag=1 ! mixed uncertainties, need to  call optimization at the end
+  if (ndim.ne.ndimt) OUUflag=1 ! mixed uncertainties, need to  call optimization at the end
   
   !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
@@ -578,7 +578,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   fmeanout=fmean
   fvarout=fvar
 
-  if (epiflag.eq.1) then
+  if (OUUflag.eq.1) then
 
      if (id_proc.eq.0) then
 
@@ -627,6 +627,12 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
   fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
+
+  if (id_proc.eq.0) then
+     write(filenum,*)
+     write(filenum,*)'>> Program call is successful'
+     write(filenum,*) 
+  end if
 
 end subroutine Krigingestimate
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
