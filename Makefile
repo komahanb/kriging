@@ -21,7 +21,7 @@ FFLAGS  = -r8 -O4 -openmp
 
 LIBS    = 
 
-SRCS =  dimKrig.o main.o\
+SRCS =  dimKrig.o main.o functions.o\
         latin.o mpi.o threebarcost.o\
         read_set.o Dutch.o Dutchgeninterp.o\
         read_sample.o check_sample.o \
