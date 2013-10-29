@@ -574,32 +574,28 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   !        end do !random testl
 
 
-
+  
   fmeanout=fmean
   fvarout=fvar
-
+  
   if (OUUflag.eq.1) then
 
      if (id_proc.eq.0) then
-        write(filenum,*)' >> Finding Epistemic Gradients'
+
         call epigrads(fct,fctindx,ndim,ndimt,xavgt,xstdt,ftmp,dftmp)
-    !    print*,"aftecall"
 
         do j=1,ndimt-ndim
-
            fmeanprimeout(j)=dftmp(j)
            fvarprimeout(j)=0.0     !ftmp*dftmp(j)
-!           fvarprimeout(j)=12.0*fvarprimeout(j) - 2.0* ftmp*fmeanprimeout(j)
-
         end do
 
      end if
-     !print*,"sharing"
-     call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-     call MPI_Barrier(MPI_COMM_WORLD,ierr)
 
   end if
+
+  call MPI_Barrier(MPI_COMM_WORLD,ierr)
+  call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+  call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
   fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
   fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
@@ -610,6 +606,9 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      write(filenum,*) 
   end if
 
+  call MPI_Barrier(MPI_COMM_WORLD,ierr)
+
+  return
 end subroutine Krigingestimate
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -79,7 +79,7 @@ subroutine threebarf(fctindx,dat,x,f)
 !!$  print*,'sigma2 :',sigma(2)
 !!$  print*,'sigma3 :',sigma(3)
 !!$  print*,''
-!!$
+
 
 
   f=0.0 ! initialize
@@ -87,17 +87,17 @@ subroutine threebarf(fctindx,dat,x,f)
   if (fctindx.eq.0) then
      F= x(1)*gamma*L(1) + x(2)*gamma*L(2) +  x(3)*gamma*L(3)
   else if (fctindx.eq.1) then
-     F = (sigma(1) - tensile_sigma1_max)/tensile_sigma1_max    !tensile 1
+     F = (sigma(1) - tensile_sigma1_max)/tensile_sigma1_max   !tensile 1
   else if (fctindx.eq.2) then
      F = (sigma(2) - tensile_sigma2_max)/tensile_sigma2_max   !tensile 2
-  else if (fctindx.eq.3) then
-     F = (sigma(3) - tensile_sigma3_max)/tensile_sigma3_max    ! tensile 3
+  else if (fctindx.eq.3) then 
+     F = (sigma(3) - tensile_sigma3_max)/tensile_sigma3_max   !tensile 3
   else if (fctindx.eq.4) then
-     F = (-1.0*sigma(1)/comp_sigma1_max) -1.0     !compressive 1
+     F = (-1.0*sigma(1)/comp_sigma1_max) -1.0                 !compressive 1
   else if (fctindx.eq.5) then
-     F = (-1.0*sigma(2)/comp_sigma2_max) -1.0  !compressive 2
+     F = (-1.0*sigma(2)/comp_sigma2_max) -1.0                 !compressive 2
   else if (fctindx.eq.6) then
-     F = (-1.0*sigma(3) / comp_sigma3_max) -1.0 !compressive 3
+     F = (-1.0*sigma(3) / comp_sigma3_max) -1.0               !compressive 3
   else if (fctindx.eq.7) then
      F = (u -max_u_disp)/max_u_disp
   else if (fctindx.eq.8) then
@@ -312,7 +312,7 @@ subroutine threebardf(fctindx,dat,x,df)
      df(6)=((Pv*(X(3)*L(1)*L(2)*cos(phi(3))**2.0 - X(3)*L(1)*L(2)*sin(phi(3))**2.0))/(X(1)*X(2)*E*L(3)*cos(phi(1))**2.0*sin(phi(2))**2.0 + X(1)*X(2)*E*L(3)*cos(phi(2))**2.0*sin(phi(1))**2.0 + X(1)*X(3)*E*L(2)*cos(phi(1))**2.0*sin(phi(3))**2.0 + X(1)*X(3)*E*L(2)*cos(phi(3))**2.0*sin(phi(1))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(2))**2.0*sin(phi(3))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(3))**2.0*sin(phi(2))**2.0 - 2.0*X(1)*X(2)*E*L(3)*cos(phi(1))*cos(phi(2))*sin(phi(1))*sin(phi(2)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*cos(phi(3))*sin(phi(1))*sin(phi(3)) - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*cos(phi(3))*sin(phi(2))*sin(phi(3))) + (Pv*(X(1)*L(2)*L(3)*cos(phi(1))*sin(phi(1)) + X(2)*L(1)*L(3)*cos(phi(2))*sin(phi(2)) + X(3)*L(1)*L(2)*cos(phi(3))*sin(phi(3)))*(2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*cos(phi(3))**2.0*sin(phi(1)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))**2.0*cos(phi(3))*sin(phi(3)) + 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*cos(phi(3))**2.0*sin(phi(2)) - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))**2.0*cos(phi(3))*sin(phi(3)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*sin(phi(1))*sin(phi(3))**2.0 + 2.0*X(1)*X(3)*E*L(2)*cos(phi(3))*sin(phi(1))**2.0*sin(phi(3)) - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*sin(phi(2))*sin(phi(3))**2.0 + 2.0*X(2)*X(3)*E*L(1)*cos(phi(3))*sin(phi(2))**2.0*sin(phi(3))))/(X(1)*X(2)*E*L(3)*cos(phi(1))**2.0*sin(phi(2))**2.0 + X(1)*X(3)*E*L(2)*cos(phi(1))**2.0*sin(phi(3))**2.0 - 2.0*X(1)*X(2)*E*L(3)*cos(phi(1))*cos(phi(2))*sin(phi(1))*sin(phi(2)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*cos(phi(3))*sin(phi(1))*sin(phi(3)) + X(1)*X(2)*E*L(3)*cos(phi(2))**2.0*sin(phi(1))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(2))**2.0*sin(phi(3))**2.0 - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*cos(phi(3))*sin(phi(2))*sin(phi(3)) + X(1)*X(3)*E*L(2)*cos(phi(3))**2.0*sin(phi(1))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(3))**2.0*sin(phi(2))**2.0)**2.0 - (Pu*(X(1)*L(2)*L(3)*cos(phi(1))**2.0 + X(2)*L(1)*L(3)*cos(phi(2))**2.0 + X(3)*L(1)*L(2)*cos(phi(3))**2.0)*(2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*cos(phi(3))**2.0*sin(phi(1)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))**2.0*cos(phi(3))*sin(phi(3)) + 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*cos(phi(3))**2.0*sin(phi(2)) - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))**2.0*cos(phi(3))*sin(phi(3)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*sin(phi(1))*sin(phi(3))**2.0 + 2.0*X(1)*X(3)*E*L(2)*cos(phi(3))*sin(phi(1))**2.0*sin(phi(3)) - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*sin(phi(2))*sin(phi(3))**2.0 + 2.0*X(2)*X(3)*E*L(1)*cos(phi(3))*sin(phi(2))**2.0*sin(phi(3))))/(X(1)*X(2)*E*L(3)*cos(phi(1))**2.0*sin(phi(2))**2.0 + X(1)*X(3)*E*L(2)*cos(phi(1))**2.0*sin(phi(3))**2.0 - 2.0*X(1)*X(2)*E*L(3)*cos(phi(1))*cos(phi(2))*sin(phi(1))*sin(phi(2)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*cos(phi(3))*sin(phi(1))*sin(phi(3)) + X(1)*X(2)*E*L(3)*cos(phi(2))**2.0*sin(phi(1))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(2))**2.0*sin(phi(3))**2.0 - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*cos(phi(3))*sin(phi(2))*sin(phi(3)) + X(1)*X(3)*E*L(2)*cos(phi(3))**2.0*sin(phi(1))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(3))**2.0*sin(phi(2))**2.0)**2.0 + (2.0*X(3)*L(1)*L(2)*Pu*cos(phi(3))*sin(phi(3)))/(X(1)*X(2)*E*L(3)*cos(phi(1))**2.0*sin(phi(2))**2.0 + X(1)*X(2)*E*L(3)*cos(phi(2))**2.0*sin(phi(1))**2.0 + X(1)*X(3)*E*L(2)*cos(phi(1))**2.0*sin(phi(3))**2.0 + X(1)*X(3)*E*L(2)*cos(phi(3))**2.0*sin(phi(1))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(2))**2.0*sin(phi(3))**2.0 + X(2)*X(3)*E*L(1)*cos(phi(3))**2.0*sin(phi(2))**2.0 - 2.0*X(1)*X(2)*E*L(3)*cos(phi(1))*cos(phi(2))*sin(phi(1))*sin(phi(2)) - 2.0*X(1)*X(3)*E*L(2)*cos(phi(1))*cos(phi(3))*sin(phi(1))*sin(phi(3)) - 2.0*X(2)*X(3)*E*L(1)*cos(phi(2))*cos(phi(3))*sin(phi(2))*sin(phi(3))))/max_u_disp
 
 
-     df(:)=-df(:) ! to correct the change in coordinate system/meaningful constaint
+!     df(:)=-df(:) ! to correct the change in coordinate system/meaningful constaint
 
 
   else if (fctindx.eq.8) then
