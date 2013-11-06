@@ -21,7 +21,8 @@ subroutine MonteCarlo
   real*8::average(ndim)
   double precision :: f,muy1,muy2,sigmay1,sigmay2,fobjlin,fobjquad,Javg(3),Jvar(3),freal
   real*8::fvtemp
-
+  character*60 :: histname
+  character*2  :: fctindxnumber
   integer :: expensive
 
   open(10,file='MC.inp',form='formatted',status='unknown')
@@ -368,8 +369,14 @@ subroutine MonteCarlo
               write(filenum,'(6x,a,2e15.5)')'>> Ymax/min = ',ymaxglb,yminglb
               write(filenum,'(6x,a,2(e15.5,a))')'>> Output Histogram  [',yhmin,' :',yhmax,' ]'
 
+              histname(1:8)='HISTGidx'
+              call i_to_s(fctindx,fctindxnumber)
+              histname(9:10)=fctindxnumber
+              histname(11:14)='.dat'
+
               pdf = 0.d0
-              open(10,file='HISTG.dat',form='formatted',status='unknown')
+
+              open(10,file=histname,form='formatted',status='unknown')
               do i=1,npdf
                  pdf = pdf + HSTglb(i,3)/dble(NMCS)
                  write(10,'(4e15.5)')(HSTglb(i,1)+HSTglb(i,2))*0.5d0,HSTglb(i,3),HSTglb(i,3)/dble(NMCS),pdf
