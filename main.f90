@@ -80,7 +80,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   ! Dynamic sample point location parameters
 
-  diffconv=1.e-6       ! 
+  diffconv=1.e-3       ! 
 
   selectedevaluation=0 ! 0: not selected 1: selected 
 

@@ -21,6 +21,8 @@ subroutine DynamicPointSelection
 
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
 
+  integer::npass
+
   call find_Optimal
   call read_all_krig
 
@@ -350,52 +352,67 @@ subroutine DynamicPointSelection
      RMSEmean=RMSEmean/real(NTOEX)
      if(randomtestl.eq.2)   SIGMAmean=SIGMAmean/real(NTOEX)
 
-     
      ! Pick test candidate with largest difference in values, but above distcomp distance to nearest neighbours
-     
-     if (iterDel.eq.1) then
-        distcomp=distmean/2.0d0 
-     else
-        distcomp=1.1*distmean !0.618
-     end if
 
+!     if (iterDel.eq.1) then
+!        distcomp=1.5*distmean
+!     else
+     distcomp=distmean !0.618 ! 
+!     end if
 
      diffloc=0.0
-
+     
      do ii=1,nptstoaddpercyc
 
-        kp=0
-        diffloctmp=0.0d0
+        npass=0
+        do while (npass.ne.1)
 
-        do k=1,NTOEX
-           !! Successful Training point passes the follwing tests:
-           !! 1. The local difference between the local and global surrogate should > 
-           !! 2. The next training point should be atleast distcomp away from the closest existing sample
-           !! 3. RMSE should be greater than RMSE mean of Kriging
-           !! 4. SIGMA should be greater than SIGMA mean of MIR 
+           kp=0
 
-           if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp ) then !.and. SIGMA(k).ge.SIGMAmean .and. RMSE(k).ge.RMSEmean
-              diffloctmp=maxftoex(k)-minftoex(k)
-              kp=k
-           end if
-        end do
-        diffloc=max(diffloc,diffloctmp)
+           diffloctmp=0.0d0
 
-        
-        if (kp.eq.0) then
-           write (filenum,*) 'Could not find suitable test candidate just take the one with largest difference'
-           diffloctmp=0.0
            do k=1,NTOEX
-              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp) then
+              !! Successful Training point passes the follwing tests:
+
+              !! 1. The local difference between the local and global surrogate should > 
+              !! 2. The next training point should be atleast distcomp away from the closest existing sample
+              !! 3. RMSE should be greater than RMSE mean of Kriging
+              !! 4. SIGMA should be greater than SIGMA mean of MIR 
+
+              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp) then !.and. SIGMA(k).ge.SIGMAmean .and. RMSE(k).ge.RMSEmean
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if
            end do
-        end if
-        
-        write(filenum,*)
-        write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL
-        write(filenum,*)
+
+           diffloc=max(diffloc,diffloctmp)
+
+           if (kp.eq.0) then ! if no successful candidate
+
+              write (filenum,*) '  >>No passing candidate found . . .'
+              write (filenum,*) '  >>Relaxing geometric constraint by 2 percent . . .'
+              distcomp=0.98*distcomp
+
+!!$           write (filenum,*) 'Could not find suitable test candidate just take the one with largest difference'
+!!$           diffloctmp=0.0
+!!$           do k=1,NTOEX
+!!$              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp) then
+!!$                 diffloctmp=maxftoex(k)-minftoex(k)
+!!$                 kp=k
+!!$              end if
+!!$           end do
+
+           else 
+              
+              npass=npass+1 ! one successful candidate
+              
+              write(filenum,*)
+              write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL
+              write(filenum,*)
+
+           end if
+
+        end do! while loop execute until a passing candidate is found
 
 
         ! Trick to not consider this point again
@@ -415,6 +432,7 @@ subroutine DynamicPointSelection
            end if
         end do
 
+     !   call stop_all
 
         hstatad(ii)=hstat
         if (selectedevaluation.eq.1) then
