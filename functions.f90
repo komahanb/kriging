@@ -248,8 +248,14 @@ subroutine calcf(x,DIM,fct,f)
   real*8::tensile_sigma1_max,tensile_sigma2_max,tensile_sigma3_max
   real*8::comp_sigma1_max,comp_sigma2_max,comp_sigma3_max
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
-
-  if (fct.eq.1) then
+  
+  if (fct.eq.0) then
+     f=0.0
+     do k=1,DIM
+        f=f+x(k)
+     end do
+     f=exp(f)
+  else  if (fct.eq.1) then
      f=0.0
      do k=1,DIM
         f=f+x(k)
@@ -789,8 +795,21 @@ subroutine calcdf(x,DIM,fct,df)
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
 
 
+  if (fct.eq.0) then
 
-  if (fct.eq.1) then
+
+     fac=0.0
+     do k=1,DIM
+        fac=fac+x(k)
+     end do
+
+     fac=exp(fac)
+     do k=1,DIM
+        df(k)=fac
+     end do
+
+
+  else  if (fct.eq.1) then
      !f=cos(x+y)
 
      fac=0.0
@@ -1369,7 +1388,23 @@ subroutine calcd2f(x,DIM,fct,d2f)
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
   real*8:: tau_allow,M,V,B,D
 
-  if (fct.eq.1) then
+  if (fct.eq.0) then
+
+     !f=cos(x+y)
+
+     fac=0.0
+     do k=1,DIM
+        fac=fac+x(k)
+     end do
+
+     fac=exp(fac)
+     do j=1,DIM
+        do k=1,DIM
+           d2f(j,k)=fac
+        end do
+     end do
+
+  else if (fct.eq.1) then
 
      !f=cos(x+y)
 
