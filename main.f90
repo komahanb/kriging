@@ -491,7 +491,8 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
            else if(Cmode(:5).eq.'Post_')then
               if (id_proc.eq.0) call TimerStart('Post process')
-              if (nhs.ge.maxsample)   call Post_Process ! Trick to avoid monte carlo during each dyncyc iteration
+!              if (nhs.ge.maxsample)    ! Trick to avoid monte carlo during each dyncyc iteration
+              call Post_Process
               if (id_proc.eq.0) call TimerStop('Post process')
 
            else if(Cmode(:5).eq.'Rank ')then
