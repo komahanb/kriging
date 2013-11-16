@@ -25,6 +25,57 @@ subroutine DynamicPointSelection
 
   call find_Optimal
   call read_all_krig
+  
+  if (lhsdyn) then
+
+     if (id_proc.eq.0) then
+        call get_seed(nseed)
+        call latin_random(ndim,nptstoaddpercyc,nseed,Dtoex) 
+        !   end if
+
+        !     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+        !    call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
+
+        do ii=1,nptstoaddpercyc
+           hstatad(ii)=hstat
+           if(nstyle.eq.0) then
+              Dad(:,ii)=Dtoex(:,ii)
+              call evalfunc(Dtoex(:,ii),ndim,fct,0,hstatad(ii),f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
+           end if
+!           print*, DTOEX(:,ii),f(ii)
+        end do !! ii loop
+        ! Add successful test candidates to sample points 
+        if(nstyle.eq.0)then
+           open(10,file='sample.dat',form='formatted',status='unknown')
+           !$$ write(10,'(3i8)')ndim,nhs+nls+nptstoaddpercyc,3
+           write(10,'(3i8)')ndim,nhs+nls+nptstoaddpercyc,2
+           do i=1,nhs+nls
+              if (info(i)(3:6).ne.'FGHv') then
+                 write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),j=1,nCOK)
+              else
+                 write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
+              end if
+           end do
+           do ii=1,nptstoaddpercyc
+              if (hstatad(ii).le.3) then
+                 !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
+                 write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
+              else
+                 !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
+                 write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
+              end if
+           end do
+           close(10)
+
+        end if !nstyle
+
+     end if
+     
+     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+     call deallocate_all_krig
+
+     return ! returns the routine
+  end if
 
   phi=(1+sqrt(5.0d0))/2.0d0 !1.618
   invphi=1.0d0/phi
@@ -366,7 +417,6 @@ subroutine DynamicPointSelection
 
         npass=0
         do while (npass.ne.1)
-
            kp=0
 
            diffloctmp=0.0d0
@@ -379,7 +429,7 @@ subroutine DynamicPointSelection
               !! 3. RMSE should be greater than RMSE mean of Kriging
               !! 4. SIGMA should be greater than SIGMA mean of MIR 
 
-              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp) then !.and. SIGMA(k).ge.SIGMAmean .and. RMSE(k).ge.RMSEmean
+              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp.and. RMSE(k).ge.RMSEmean) then !.and. SIGMA(k).ge.SIGMAmean 
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if

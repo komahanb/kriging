@@ -22,9 +22,9 @@
       character(len=7), dimension(10)   :: cCON2
 
 ! direct
-      logical::mainprog
-
-      integer :: mode_dck
+      logical:: mainprog
+      logical:: lhsdyn
+      integer:: mode_dck
 
 ! indirect(trust)
       integer :: itrust,ngput,nhput,it4opt
