@@ -13,6 +13,7 @@ program Kriging
   integer,parameter::timing=1,numberpointstudy=0 !other number if timing results not needed
   double precision :: time, Initialmach, Finalmach, InitialAOA,FinalAOA
   integer::nmcstemp
+  integer::ctest,fuct
 
   call MPI_START
 
@@ -24,8 +25,9 @@ program Kriging
   randomini=1      ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
   mainprog =.true.
-  lhsdyn   =.true.
-!  lhsdyn   =.false.
+  filenum=6
+
+
   do randomtestl=2,2   
 
      ! 0: Delaunay triangulation with Dutchintrapolation 
@@ -44,7 +46,7 @@ program Kriging
 
      ! Dynamic sample point location parameters
 
-     diffconv=1.e-10       ! 
+     diffconv=1.e-6      ! 
 
      selectedevaluation=0 ! 0: not selected 1: selected 
 
@@ -70,14 +72,26 @@ program Kriging
         ! How to get MC samples
         readMCsamples=0     ! 0: Make random samples   1: Read from file MCsamp.dat
 
-        if (randomtestl.ne.0) then
-           dynamics=1
-        else 
-           dynamics=0
-        end if     ! 0: not dynamic  1: dynamic 
+!!$
+!!$        if (randomtestl.ne.0) then
+!!$           dynamics=1
+!!$        else 
+!!$           dynamics=0
+!!$        end if     ! 0: not dynamic  1: dynamic 
 
-        dynamics=0
-        ! ---------------------------------------------------------------------------
+        do ctest=1,3
+           
+           if (ctest.eq.1) dynamics=0
+           if (ctest.eq.2) then
+              dynamics=1
+              lhsdyn=.true.
+           end if
+           if (ctest.eq.3) then
+              dynamics=1
+              lhsdyn=.false. !mirdyn is true
+           end if
+
+           ! ---------------------------------------------------------------------------
 
 !!$
 !!$         open(10,file='MCsamp.dat',form='formatted',status='unknown')
@@ -87,28 +101,31 @@ program Kriging
 !!$         close(1
 
 
-        do fct=2,2 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
+        do fuct=1,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
-!!$           if (fuct.eq.1) fct=0
-!!$           if (fuct.eq.2) fct=2
-!!$           if (fuct.eq.3) fct=10
+           if (fuct.eq.1) fct=0
+           if (fuct.eq.2) fct=2
+           if (fuct.eq.3) fct=3
+
+           if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
+           if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test function number",fct
 
            evlfnc=1  ! CFD case exact evaluation for MC needed or not
 
-           do nstattmp=0,0                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
+           do nstattmp=0,2                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
               if (nstattmp.eq.0) then
 
-                 maxsamplewant= 75
+                 maxsamplewant= 150
                  nptstoaddpercyc=5!160
 
               else if (nstattmp.eq.1) then
 
-                 maxsamplewant= 75 !1000+5
+                 maxsamplewant= 150 !1000+5
                  nptstoaddpercyc=5 
 
               else if (nstattmp.eq.2) then
 
-                 maxsamplewant= 75!15!20+33
+                 maxsamplewant= 150!15!20+33
                  nptstoaddpercyc=5
 
               end if
@@ -120,7 +137,7 @@ program Kriging
               if (id_proc.eq.0) call TimerInit()
 
               counter=0
-              do nsamples=5,5!2*NDIM+1,2*NDIM+1!40,40!101,101!2*NDIM+1,2*NDIM+1!5,75,5!50,50!50,500,50!500,500!3,47,4 !Makes this many nhs samples per cycle
+              do nsamples=5,5 !2*NDIM+1,2*NDIM+1!40,40!101,101!2*NDIM+1,2*NDIM+1!5,75,5!50,50!50,500,50!500,500!3,47,4 !Makes this many nhs samples per cycle
                  counter=counter+1
 
                  nhs=nsamples
@@ -546,12 +563,15 @@ program Kriging
               if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
 
            end do ! F or G loop
+
         end do ! Function number loop
+        
+     end do ! test case loop
      
   end do !casemode loop
-
   
-end do !random testl
+end do !random testl DI or MIR loop
+
 !!$
 !!$if (id_proc.eq.0) then
 !!$print *, fmean,fmeanprime

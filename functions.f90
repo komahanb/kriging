@@ -773,11 +773,12 @@ subroutine calcf(x,DIM,fct,f)
 
    
 else
-
+   print*,fct
    stop'Wrong Fn Number'
-
+   
 end if
 
+return
 end subroutine calcf
 
   

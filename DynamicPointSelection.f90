@@ -29,6 +29,8 @@ subroutine DynamicPointSelection
   if (lhsdyn) then
 
      if (id_proc.eq.0) then
+
+        write(filenum,*) '>> [Picking points dynamically for LHS]'        
         call get_seed(nseed)
         call latin_random(ndim,nptstoaddpercyc,nseed,Dtoex) 
         !   end if
@@ -220,7 +222,9 @@ subroutine DynamicPointSelection
      ! Figure out locations of test candidates (randomly). Calculate local Dutch intrapolations and compare to Kriging values
 
      call combination(ndim+Dutchorderg,ndim,NCP)
-     NTOEX=(30-ndim)*NCP
+!     NTOEX=(30-ndim)*NCP
+
+     NTOEX=5000*NDIM
 
      if (id_proc.eq.0) then
         call get_seed(nseed)
@@ -281,8 +285,10 @@ subroutine DynamicPointSelection
      if(id_proc.eq.0)  write(filenum,*) '>> [MIR is being used as local surrogate]'
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder,NTOEX)
+     
+     NTOEX=5000*NDIM
 
-      NTOEX=int((1000*num_proc)/ndim)
+!      NTOEX=int((1000*num_proc)/ndim)
 
 !     NTOEX=1000
 
@@ -430,6 +436,7 @@ subroutine DynamicPointSelection
               !! 4. SIGMA should be greater than SIGMA mean of MIR 
 
               if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp.and. RMSE(k).ge.RMSEmean) then !.and. SIGMA(k).ge.SIGMAmean 
+                 print*,RMSE(k),RMSEmean
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if
