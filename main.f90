@@ -120,7 +120,7 @@ program Kriging
            do nstattmp=0,0                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
               if (nstattmp.eq.0) then
 
-                 maxsamplewant= 25
+                 maxsamplewant= 150
                  nptstoaddpercyc=5!160
 
               else if (nstattmp.eq.1) then
