@@ -138,12 +138,30 @@
               
            else if (randomini.eq.1) then
 
-              write(filenum,*)'>> Initial Sample Points by Latin Hypercube'
+              
+              if (randomflag.eq.1) then
 
-              sample(:,1)=0.5
-              call get_seed(nseed)
-              call latin_random(ndim,nhs-1-nhstmp,nseed,sample(:,2:nhs-nhstmp))       
-              !call Latin_Hypercube(ndim,nhs-1,bound,sample(:,2:nhs))
+                 write(filenum,*)'>> Initial Sample Points by Latin Hypercube'
+                 sample(:,1)=0.5
+                 call get_seed(nseed)
+                 call latin_random(ndim,nhs-1-nhstmp,nseed,sample(:,2:nhs-nhstmp))       
+
+              else if (randomflag.eq.2) then
+
+                 write(filenum,*)'>> Initial Sample Points by NIEDER Sequence'
+                 call get_seed(nseed)
+                 call nieder(nseed,ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
+    
+              else if (randomflag.eq.3) then
+
+                 write(filenum,*)'>> Initial Sample Points by Which Sequence'
+                 print*,"Cool.. Please go ahead and implement"
+                 stop
+
+              end if
+             
+  
+                 !call Latin_Hypercube(ndim,nhs-1,bound,sample(:,2:nhs))
 
            end if
 

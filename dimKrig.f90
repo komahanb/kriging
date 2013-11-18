@@ -24,8 +24,9 @@
 ! direct
       logical:: mainprog
       logical:: lhsdyn
+      integer :: randomflag
       integer:: mode_dck
-
+      
 ! indirect(trust)
       integer :: itrust,ngput,nhput,it4opt
       character(len=1) :: Cnug

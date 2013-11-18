@@ -32,6 +32,7 @@ subroutine DynamicPointSelection
 
         write(filenum,*) '>> [Picking points dynamically for LHS]'        
         call get_seed(nseed)
+!        call nieder(nseed,ndim,nptstoaddpercyc,Dtoex)
         call latin_random(ndim,nptstoaddpercyc,nseed,Dtoex) 
         !   end if
 
