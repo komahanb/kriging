@@ -1,7 +1,7 @@
 
-    subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder,NTOEX)
+subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
       implicit none
-      integer::fct,ndim,taylororder,ncp,nhs,NTOEX
+      integer::fct,ndim,taylororder,ncp,nhs
       
       !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
       !                 EXP
@@ -33,7 +33,7 @@
            NCP=20!+5*ndim
            tAYLORORDER=5
         end if
-        NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!    
 !                COS
@@ -64,7 +64,7 @@
            NCP=20
            tAYLORORDER=5
         end if
-NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !               RUNGE
@@ -96,7 +96,7 @@ NTOEX=(30-ndim)*NCP
            NCP=20
            tAYLORORDER=5
         end if
-NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !           ROSENBROCK    
@@ -127,7 +127,7 @@ NTOEX=(30-ndim)*NCP
            NCP=70
            tAYLORORDER=5
         end if
-NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !                      CFD   
@@ -160,7 +160,7 @@ NTOEX=(30-ndim)*NCP
            Taylororder=7
            
         end if
-        NTOEX=(30-ndim)*NCP
+
 
      else
 
@@ -190,11 +190,11 @@ NTOEX=(30-ndim)*NCP
            NCP=20
            tAYLORORDER=5
         end if
-        NTOEX=(30-ndim)*NCP
+
 
 
      end if ! end of CFD 
 
 
-
+     return
     end subroutine mirtunableparams

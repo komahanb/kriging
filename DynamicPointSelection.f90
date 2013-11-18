@@ -284,7 +284,7 @@ subroutine DynamicPointSelection
 
      if(id_proc.eq.0)  write(filenum,*) '>> [MIR is being used as local surrogate]'
 
-     call mirtunableparams(fct,ndim,nhs,ncp,taylororder,NTOEX)
+     call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
      
      NTOEX=5000*NDIM
 
@@ -436,7 +436,7 @@ subroutine DynamicPointSelection
               !! 4. SIGMA should be greater than SIGMA mean of MIR 
 
               if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp.and. RMSE(k).ge.RMSEmean) then !.and. SIGMA(k).ge.SIGMAmean 
-                 print*,RMSE(k),RMSEmean
+!                 print*,RMSE(k),RMSEmean
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if
