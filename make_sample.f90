@@ -161,6 +161,13 @@
  !                stop
               else if (randomflag.eq.4) then
 
+                 write(filenum,*)'>> Initial Sample Points by Hammersley Sequence'
+                 call hammersley_real(ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
+!                 print*,sample(:,1:nhs-nhstmp)
+!                stop
+
+              else if (randomflag.eq.5) then
+
                  write(filenum,*)'>> Initial Sample Points by Which Sequence'
                  print*,"Cool.. Please go ahead and implement"
                  stop

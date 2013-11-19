@@ -49,7 +49,8 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
         scf.o post.o monaco.o make_sample.o\
         scf_df.o scf_df_df.o scf_df_df_db.o \
         scf_db.o scf_db_db.o scf_db_db_df.o \
-	scf_db_df.o scf_df_db.o scf_df_df_db_db.o
+	scf_db_df.o scf_df_db.o scf_df_df_db_db.o \
+	hammersley.o
 
 OBJS =  ${SRCS:.$(SUF)=.o}
 
