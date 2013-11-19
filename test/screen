@@ -1,7 +1,7 @@
  >> Number of Processors =   8
     >> Test case number       1
-    >> Test function number       0
+    >> Test function number       2
  >> Initial Sample Points by Sobol Sequence
       >> Output to sample.dat    5
-rank 0 in job 74  cfd3_41722   caused collective abort of all ranks
+rank 0 in job 82  cfd3_41722   caused collective abort of all ranks
   exit status of rank 0: killed by signal 6 

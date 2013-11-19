@@ -168,6 +168,22 @@
 
               else if (randomflag.eq.5) then
 
+                 write(filenum,*)'>> Initial Sample Points by Sobol Sequence'
+                 call get_seed(nseed)
+                 call sobol_real(nseed,ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
+!                 print*,sample(:,1:nhs-nhstmp)
+!                stop
+
+              else if (randomflag.eq.6) then
+
+                 write(filenum,*)'>> Initial Sample Points by Sobol Sequence'
+                 call get_seed(nseed)
+                 call faure_real(nseed,ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
+!                print*,sample(:,1:nhs-nhstmp)
+!                stop
+
+              else !if (randomflag.eq.6) then
+
                  write(filenum,*)'>> Initial Sample Points by Which Sequence'
                  print*,"Cool.. Please go ahead and implement"
                  stop
