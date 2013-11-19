@@ -92,7 +92,7 @@ program Kriging
               !5=Sobol
               !6=Faure
 
-              randomflag=6
+              randomflag=5
               
            end if
            if (ctest.eq.2) then
