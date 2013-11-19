@@ -151,8 +151,15 @@
                  write(filenum,*)'>> Initial Sample Points by NIEDER Sequence'
                  call get_seed(nseed)
                  call nieder(nseed,ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
-    
+!                 print*,sample(:,1:nhs-nhstmp)
+!                 stop    
               else if (randomflag.eq.3) then
+
+                 write(filenum,*)'>> Initial Sample Points by Halton Sequence'
+                 call halton_real(ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
+ !                print*,sample(:,1:nhs-nhstmp)
+ !                stop
+              else if (randomflag.eq.4) then
 
                  write(filenum,*)'>> Initial Sample Points by Which Sequence'
                  print*,"Cool.. Please go ahead and implement"

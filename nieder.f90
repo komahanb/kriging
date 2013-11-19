@@ -19,7 +19,7 @@ subroutine nieder(seed,dim_max,npts,rmat)
 
   integer ( kind = 4 ), intent(in) :: dim_max
   integer ( kind = 4 ), intent(in) :: npts
-  real    ( kind = 8 ) :: rmat(dim_max,npts)
+  real    ( kind = 8 ),intent(out) :: rmat(dim_max,npts)
   integer ( kind = 4 ) dim_num
   integer ( kind = 4 ) i
   real    ( kind = 8 ) :: r(dim_max)

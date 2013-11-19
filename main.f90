@@ -83,8 +83,8 @@ program Kriging
            
            if (ctest.eq.1) then
               dynamics=0
-              randomflag=2
-!              1= LHS , 2= NIEDER, 3=
+              randomflag=3
+!              1= LHS , 2= NIEDER, 3=Halton
               
            end if
            if (ctest.eq.2) then

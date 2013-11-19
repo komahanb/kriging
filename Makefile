@@ -43,7 +43,7 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
         indirect.o trust.o trustool.o \
         rank.o vrange.o nieder.o \
         update.o DynamicPointSelection.o\
-        ludim.o lusol2.o \
+        ludim.o lusol2.o halton.o \
         bfgs.o bfgs_routines.o eva_bfgs.o \
         dimGA.o ga.o gatool.o \
         scf.o post.o monaco.o make_sample.o\

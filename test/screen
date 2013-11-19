@@ -1,7 +1,7 @@
  >> Number of Processors =   8
     >> Test case number       1
     >> Test function number       2
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat    5
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -18,7 +18,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =     5
-      >> Min. Dist. between Fidelity-1 Samples (  2,  5 ) =  0.18E+00
+      >> Min. Dist. between Fidelity-1 Samples (  3,  5 ) =  0.25E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -46,24 +46,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1474
-      >>    1 Pareto Designs until   0 Gen.,  0.629E+01
-      >>    1 Pareto Designs until  12 Gen.,  0.642E+01
-      >>    1 Pareto Designs until  24 Gen.,  0.642E+01
+ >> Starting Main Loop of GA 1549
+      >>    1 Pareto Designs until   0 Gen.,  0.830E+01
+      >>    1 Pareto Designs until  12 Gen.,  0.836E+01
+      >>    9 Pareto Designs until  24 Gen.,  0.836E+01
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  24) :  0.6424E+01
+      >> Best Design for  1 : (  19   1) :  0.8363E+01
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =    6.424   0.000
-      >> Theta =    1.721   0.010
- >> Theta      =    1.721   0.010
- >> Deviation  =     0.10340E+00
- >> Likelihood =     0.64236E+01 with Error =     0.83726E-15
+      >> Best Design =    8.363   0.000
+      >> Theta =    2.032   0.010
+ >> Theta      =    2.032   0.010
+ >> Deviation  =     0.42234E-01
+ >> Likelihood =     0.83631E+01 with Error =     0.65246E-15
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.42056E-13 among     5 pts
+      >> RMSE on All Sample Points    =    0.23694E-13 among     5 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -71,15 +71,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0474839 @   0.960   0.210
-      >> Yhat min =    0.1105242 @   0.010   0.010
+      >> EI   max =    0.0211834 @   0.920   0.100
+      >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3599924752E+00
+      >> RMSE on 2D Function =     0.2478887347E+00
  
            >> # of Modes in Fid-1 =   5   0   0   0   0   0   5
            >> # of Modes (sum)    =   5   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   10
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -96,7 +96,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    10
-      >> Min. Dist. between Fidelity-1 Samples (  2,  5 ) =  0.18E+00
+      >> Min. Dist. between Fidelity-1 Samples (  2,  7 ) =  0.17E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -124,24 +124,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1475
-      >>    1 Pareto Designs until   0 Gen.,  0.151E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.161E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.161E+02
+ >> Starting Main Loop of GA 1550
+      >>    1 Pareto Designs until   0 Gen.,  0.189E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.191E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.191E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   3) :  0.1614E+02
+      >> Best Design for  1 : (  24   5) :  0.1906E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   16.138   0.000
-      >> Theta =    2.701   0.010
- >> Theta      =    2.701   0.010
- >> Deviation  =     0.71288E-01
- >> Likelihood =     0.16138E+02 with Error =     0.43144E-14
+      >> Best Design =   19.062   0.000
+      >> Theta =    0.310   3.184
+ >> Theta      =    0.310   3.184
+ >> Deviation  =     0.26374E-01
+ >> Likelihood =     0.19062E+02 with Error =     0.93338E-15
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.35781E-13 among    10 pts
+      >> RMSE on All Sample Points    =    0.14267E-13 among    10 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -149,15 +149,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0312895 @   1.000   0.000
+      >> EI   max =    0.0185244 @   0.000   0.960
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3292710139E+00
+      >> RMSE on 2D Function =     0.2830882212E+00
  
            >> # of Modes in Fid-1 =  10   0   0   0   0   0  10
            >> # of Modes (sum)    =  10   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   15
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -174,7 +174,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    15
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples (  8, 12 ) =  0.16E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -202,24 +202,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1476
-      >>    1 Pareto Designs until   0 Gen.,  0.249E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.284E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.284E+02
+ >> Starting Main Loop of GA 1551
+      >>    1 Pareto Designs until   0 Gen.,  0.308E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.336E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.336E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  10) :  0.2838E+02
+      >> Best Design for  1 : (  24   5) :  0.3362E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   28.378   0.000
-      >> Theta =    1.208   1.238
- >> Theta      =    1.208   1.238
- >> Deviation  =     0.44128E-01
- >> Likelihood =     0.28378E+02 with Error =     0.24783E-13
+      >> Best Design =   33.623   0.000
+      >> Theta =    0.807   0.915
+ >> Theta      =    0.807   0.915
+ >> Deviation  =     0.37020E-01
+ >> Likelihood =     0.33623E+02 with Error =     0.33614E-13
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.46642E-13 among    15 pts
+      >> RMSE on All Sample Points    =    0.43458E-13 among    15 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -227,15 +227,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0276255 @   0.000   0.140
+      >> EI   max =    0.0523881 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.6201670464E-01
+      >> RMSE on 2D Function =     0.6813598854E-01
  
            >> # of Modes in Fid-1 =  15   0   0   0   0   0  15
            >> # of Modes (sum)    =  15   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   20
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -252,7 +252,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    20
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 13, 19 ) =  0.12E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -280,24 +280,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1477
-      >>    1 Pareto Designs until   0 Gen.,  0.401E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.428E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.428E+02
+ >> Starting Main Loop of GA 1552
+      >>    1 Pareto Designs until   0 Gen.,  0.474E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.490E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.490E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  24) :  0.4282E+02
+      >> Best Design for  1 : (  24  13) :  0.4900E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   42.822   0.000
-      >> Theta =    1.206   1.059
- >> Theta      =    1.206   1.059
- >> Deviation  =     0.39950E-01
- >> Likelihood =     0.42822E+02 with Error =     0.85650E-13
+      >> Best Design =   48.999   0.000
+      >> Theta =    0.912   0.865
+ >> Theta      =    0.912   0.865
+ >> Deviation  =     0.30610E-01
+ >> Likelihood =     0.48999E+02 with Error =     0.66610E-13
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.59735E-13 among    20 pts
+      >> RMSE on All Sample Points    =    0.34854E-13 among    20 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -305,15 +305,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0240306 @   0.140   0.000
+      >> EI   max =    0.0261529 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3176966506E-01
+      >> RMSE on 2D Function =     0.4726215548E-01
  
            >> # of Modes in Fid-1 =  20   0   0   0   0   0  20
            >> # of Modes (sum)    =  20   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   25
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -330,7 +330,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    25
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples (  3, 21 ) =  0.12E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -358,24 +358,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1478
+ >> Starting Main Loop of GA 1553
       >>    1 Pareto Designs until   0 Gen.,  0.590E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.597E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.597E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.611E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.611E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  12) :  0.5968E+02
+      >> Best Design for  1 : (  24  10) :  0.6114E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   59.680   0.000
-      >> Theta =    1.061   1.082
- >> Theta      =    1.061   1.082
- >> Deviation  =     0.36518E-01
- >> Likelihood =     0.59680E+02 with Error =     0.22242E-12
+      >> Best Design =   61.143   0.000
+      >> Theta =    0.981   0.966
+ >> Theta      =    0.981   0.966
+ >> Deviation  =     0.32997E-01
+ >> Likelihood =     0.61143E+02 with Error =     0.61203E-13
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.73433E-13 among    25 pts
+      >> RMSE on All Sample Points    =    0.35188E-13 among    25 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -383,15 +383,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0152315 @   0.160   0.000
+      >> EI   max =    0.0225716 @   0.210   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3018289191E-01
+      >> RMSE on 2D Function =     0.2366482531E-01
  
            >> # of Modes in Fid-1 =  25   0   0   0   0   0  25
            >> # of Modes (sum)    =  25   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   30
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -408,7 +408,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    30
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 12, 30 ) =  0.97E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -436,24 +436,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1479
-      >>    1 Pareto Designs until   0 Gen.,  0.752E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.787E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.787E+02
+ >> Starting Main Loop of GA 1554
+      >>    1 Pareto Designs until   0 Gen.,  0.605E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.801E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.801E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23  16) :  0.7872E+02
+      >> Best Design for  1 : (  24   7) :  0.8010E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   78.721   0.000
-      >> Theta =    1.198   0.789
- >> Theta      =    1.198   0.789
- >> Deviation  =     0.42485E-01
- >> Likelihood =     0.78721E+02 with Error =     0.61513E-12
+      >> Best Design =   80.103   0.000
+      >> Theta =    0.963   0.961
+ >> Theta      =    0.963   0.961
+ >> Deviation  =     0.31025E-01
+ >> Likelihood =     0.80103E+02 with Error =     0.32712E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.85973E-13 among    30 pts
+      >> RMSE on All Sample Points    =    0.49076E-13 among    30 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -461,15 +461,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0282830 @   1.000   1.000
+      >> EI   max =    0.0206271 @   0.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3776823653E-01
+      >> RMSE on 2D Function =     0.1714028650E-01
  
            >> # of Modes in Fid-1 =  30   0   0   0   0   0  30
            >> # of Modes (sum)    =  30   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   35
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -486,7 +486,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    35
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 12, 30 ) =  0.97E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -514,24 +514,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1480
-      >>    1 Pareto Designs until   0 Gen.,  0.969E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.971E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.972E+02
+ >> Starting Main Loop of GA 1555
+      >>    1 Pareto Designs until   0 Gen.,  0.951E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.100E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.100E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   2) :  0.9718E+02
+      >> Best Design for  1 : (  24   3) :  0.1000E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   97.175   0.000
-      >> Theta =    0.812   1.187
- >> Theta      =    0.812   1.187
- >> Deviation  =     0.36272E-01
- >> Likelihood =     0.97175E+02 with Error =     0.88617E-12
+      >> Best Design =  100.022   0.000
+      >> Theta =    1.041   0.938
+ >> Theta      =    1.041   0.938
+ >> Deviation  =     0.27434E-01
+ >> Likelihood =     0.10002E+03 with Error =     0.47460E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.70994E-13 among    35 pts
+      >> RMSE on All Sample Points    =    0.46173E-13 among    35 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -539,15 +539,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0234784 @   1.000   1.000
-      >> Yhat min =    0.1111111 @   0.000   0.000
+      >> EI   max =    0.0181220 @   1.000   1.000
+      >> Yhat min =    0.1110660 @   0.000   0.010
  
-      >> RMSE on 2D Function =     0.3088847987E-01
+      >> RMSE on 2D Function =     0.1759062202E-01
  
            >> # of Modes in Fid-1 =  35   0   0   0   0   0  35
            >> # of Modes (sum)    =  35   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   40
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -564,7 +564,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    40
-      >> Min. Dist. between Fidelity-1 Samples ( 21, 37 ) =  0.66E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 12, 30 ) =  0.97E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -592,24 +592,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1481
-      >>    1 Pareto Designs until   0 Gen.,  0.970E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.120E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.120E+03
+ >> Starting Main Loop of GA 1556
+      >>    1 Pareto Designs until   0 Gen.,  0.827E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.119E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.119E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  18) :  0.1199E+03
+      >> Best Design for  1 : (  23   2) :  0.1189E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  119.900   0.000
-      >> Theta =    1.047   1.011
- >> Theta      =    1.047   1.011
- >> Deviation  =     0.29895E-01
- >> Likelihood =     0.11990E+03 with Error =     0.15658E-11
+      >> Best Design =  118.908   0.000
+      >> Theta =    1.043   0.997
+ >> Theta      =    1.043   0.997
+ >> Deviation  =     0.25188E-01
+ >> Likelihood =     0.11891E+03 with Error =     0.69598E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.64957E-13 among    40 pts
+      >> RMSE on All Sample Points    =    0.63530E-13 among    40 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -617,15 +617,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0230606 @   1.000   1.000
-      >> Yhat min =    0.1111111 @   0.000   0.000
+      >> EI   max =    0.0159971 @   1.000   1.000
+      >> Yhat min =    0.1108819 @   0.000   0.010
  
-      >> RMSE on 2D Function =     0.1149010005E-01
+      >> RMSE on 2D Function =     0.1227866412E-01
  
            >> # of Modes in Fid-1 =  40   0   0   0   0   0  40
            >> # of Modes (sum)    =  40   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   45
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -642,7 +642,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    45
-      >> Min. Dist. between Fidelity-1 Samples ( 21, 37 ) =  0.66E-01
+      >> Min. Dist. between Fidelity-1 Samples (  6, 42 ) =  0.68E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -670,24 +670,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1482
-      >>    1 Pareto Designs until   0 Gen.,  0.116E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.141E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.141E+03
+ >> Starting Main Loop of GA 1557
+      >>    1 Pareto Designs until   0 Gen.,  0.123E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.144E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.144E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  22) :  0.1413E+03
+      >> Best Design for  1 : (  24  11) :  0.1442E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  141.329   0.000
-      >> Theta =    1.069   0.993
- >> Theta      =    1.069   0.993
- >> Deviation  =     0.27353E-01
- >> Likelihood =     0.14133E+03 with Error =     0.29050E-11
+      >> Best Design =  144.210   0.000
+      >> Theta =    1.032   1.015
+ >> Theta      =    1.032   1.015
+ >> Deviation  =     0.22977E-01
+ >> Likelihood =     0.14421E+03 with Error =     0.24001E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.69978E-13 among    45 pts
+      >> RMSE on All Sample Points    =    0.65872E-13 among    45 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -695,15 +695,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0214877 @   1.000   1.000
-      >> Yhat min =    0.1111111 @   0.000   0.000
+      >> EI   max =    0.0162591 @   1.000   1.000
+      >> Yhat min =    0.1097099 @   0.000   0.030
  
-      >> RMSE on 2D Function =     0.1039140845E-01
+      >> RMSE on 2D Function =     0.1131503223E-01
  
            >> # of Modes in Fid-1 =  45   0   0   0   0   0  45
            >> # of Modes (sum)    =  45   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   50
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -720,7 +720,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    50
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4, 46 ) =  0.53E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -748,24 +748,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1483
-      >>    1 Pareto Designs until   0 Gen.,  0.135E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.166E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.166E+03
+ >> Starting Main Loop of GA 1558
+      >>    1 Pareto Designs until   0 Gen.,  0.136E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.161E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.161E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  10) :  0.1661E+03
+      >> Best Design for  1 : (  24  10) :  0.1611E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  166.082   0.000
-      >> Theta =    1.065   0.986
- >> Theta      =    1.065   0.986
- >> Deviation  =     0.25449E-01
- >> Likelihood =     0.16608E+03 with Error =     0.76071E-11
+      >> Best Design =  161.130   0.000
+      >> Theta =    1.083   1.073
+ >> Theta      =    1.083   1.073
+ >> Deviation  =     0.22665E-01
+ >> Likelihood =     0.16113E+03 with Error =     0.24150E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.66887E-13 among    50 pts
+      >> RMSE on All Sample Points    =    0.56294E-13 among    50 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -773,15 +773,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0221799 @   1.000   1.000
+      >> EI   max =    0.0133468 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9007594402E-02
+      >> RMSE on 2D Function =     0.8203081989E-02
  
            >> # of Modes in Fid-1 =  50   0   0   0   0   0  50
            >> # of Modes (sum)    =  50   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   55
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -798,7 +798,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    55
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4, 46 ) =  0.53E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -826,24 +826,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1484
-      >>    1 Pareto Designs until   0 Gen.,  0.147E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.187E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.187E+03
+ >> Starting Main Loop of GA 1559
+      >>    1 Pareto Designs until   0 Gen.,  0.167E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.184E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.184E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  18) :  0.1872E+03
+      >> Best Design for  1 : (  24  14) :  0.1837E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  187.249   0.000
-      >> Theta =    1.062   1.051
- >> Theta      =    1.062   1.051
- >> Deviation  =     0.22344E-01
- >> Likelihood =     0.18725E+03 with Error =     0.94464E-11
+      >> Best Design =  183.718   0.000
+      >> Theta =    1.071   1.066
+ >> Theta      =    1.071   1.066
+ >> Deviation  =     0.21495E-01
+ >> Likelihood =     0.18372E+03 with Error =     0.31718E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.63533E-13 among    55 pts
+      >> RMSE on All Sample Points    =    0.54891E-13 among    55 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -851,15 +851,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0116262 @   1.000   1.000
+      >> EI   max =    0.0133111 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.7189169987E-02
+      >> RMSE on 2D Function =     0.6584911948E-02
  
            >> # of Modes in Fid-1 =  55   0   0   0   0   0  55
            >> # of Modes (sum)    =  55   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   60
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -876,7 +876,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    60
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4, 46 ) =  0.53E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -904,24 +904,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1485
-      >>    1 Pareto Designs until   0 Gen.,  0.191E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.213E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.213E+03
+ >> Starting Main Loop of GA 1560
+      >>    1 Pareto Designs until   0 Gen.,  0.171E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.209E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.209E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   8) :  0.2134E+03
+      >> Best Design for  1 : (  24  16) :  0.2094E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  213.401   0.000
-      >> Theta =    1.064   1.062
- >> Theta      =    1.064   1.062
- >> Deviation  =     0.20751E-01
- >> Likelihood =     0.21340E+03 with Error =     0.10105E-10
+      >> Best Design =  209.427   0.000
+      >> Theta =    1.084   1.051
+ >> Theta      =    1.084   1.051
+ >> Deviation  =     0.20324E-01
+ >> Likelihood =     0.20943E+03 with Error =     0.40412E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.65103E-13 among    60 pts
+      >> RMSE on All Sample Points    =    0.59521E-13 among    60 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -929,15 +929,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0089949 @   1.000   1.000
+      >> EI   max =    0.0125173 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.5790945720E-02
+      >> RMSE on 2D Function =     0.5891912410E-02
  
            >> # of Modes in Fid-1 =  60   0   0   0   0   0  60
            >> # of Modes (sum)    =  60   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   65
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -954,7 +954,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    65
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 18, 63 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -982,24 +982,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1486
-      >>    1 Pareto Designs until   0 Gen.,  0.153E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.239E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.239E+03
+ >> Starting Main Loop of GA 1561
+      >>    1 Pareto Designs until   0 Gen.,  0.213E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.234E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.234E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  12) :  0.2392E+03
+      >> Best Design for  1 : (  24   5) :  0.2342E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  239.155   0.000
-      >> Theta =    1.070   1.060
- >> Theta      =    1.070   1.060
- >> Deviation  =     0.19354E-01
- >> Likelihood =     0.23916E+03 with Error =     0.15785E-10
+      >> Best Design =  234.170   0.000
+      >> Theta =    1.082   1.039
+ >> Theta      =    1.082   1.039
+ >> Deviation  =     0.19538E-01
+ >> Likelihood =     0.23417E+03 with Error =     0.64499E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.63242E-13 among    65 pts
+      >> RMSE on All Sample Points    =    0.59094E-13 among    65 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1007,15 +1007,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0086469 @   1.000   1.000
+      >> EI   max =    0.0087052 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.5528652669E-02
+      >> RMSE on 2D Function =     0.5428166385E-02
  
            >> # of Modes in Fid-1 =  65   0   0   0   0   0  65
            >> # of Modes (sum)    =  65   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   70
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1032,7 +1032,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    70
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 18, 63 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1060,24 +1060,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1487
-      >>    1 Pareto Designs until   0 Gen.,  0.197E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.264E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.265E+03
+ >> Starting Main Loop of GA 1562
+      >>    1 Pareto Designs until   0 Gen.,  0.243E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.260E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.260E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23  21) :  0.2646E+03
+      >> Best Design for  1 : (  24  13) :  0.2603E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  264.603   0.000
-      >> Theta =    1.063   1.071
- >> Theta      =    1.063   1.071
- >> Deviation  =     0.18326E-01
- >> Likelihood =     0.26460E+03 with Error =     0.19565E-10
+      >> Best Design =  260.344   0.000
+      >> Theta =    1.083   1.058
+ >> Theta      =    1.083   1.058
+ >> Deviation  =     0.18276E-01
+ >> Likelihood =     0.26034E+03 with Error =     0.98409E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.61702E-13 among    70 pts
+      >> RMSE on All Sample Points    =    0.59146E-13 among    70 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1085,15 +1085,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048111 @   0.000   1.000
+      >> EI   max =    0.0084992 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.4908328732E-02
+      >> RMSE on 2D Function =     0.4814992977E-02
  
            >> # of Modes in Fid-1 =  70   0   0   0   0   0  70
            >> # of Modes (sum)    =  70   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   75
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1110,7 +1110,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    75
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 18, 63 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1138,24 +1138,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1488
-      >>    1 Pareto Designs until   0 Gen.,  0.261E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.292E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.292E+03
+ >> Starting Main Loop of GA 1563
+      >>    1 Pareto Designs until   0 Gen.,  0.235E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.286E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.286E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  15) :  0.2919E+03
+      >> Best Design for  1 : (  24  22) :  0.2864E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  291.905   0.000
-      >> Theta =    1.066   1.058
- >> Theta      =    1.066   1.058
- >> Deviation  =     0.17761E-01
- >> Likelihood =     0.29191E+03 with Error =     0.18852E-10
+      >> Best Design =  286.376   0.000
+      >> Theta =    1.084   1.062
+ >> Theta      =    1.084   1.062
+ >> Deviation  =     0.17198E-01
+ >> Likelihood =     0.28638E+03 with Error =     0.12710E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.69260E-13 among    75 pts
+      >> RMSE on All Sample Points    =    0.69179E-13 among    75 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1163,15 +1163,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048151 @   0.000   1.000
+      >> EI   max =    0.0053140 @   0.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.4537534043E-02
+      >> RMSE on 2D Function =     0.4699049585E-02
  
            >> # of Modes in Fid-1 =  75   0   0   0   0   0  75
            >> # of Modes (sum)    =  75   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   80
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1188,7 +1188,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    80
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 18, 63 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1216,24 +1216,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1489
-      >>    1 Pareto Designs until   0 Gen.,  0.309E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.322E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.322E+03
+ >> Starting Main Loop of GA 1564
+      >>    1 Pareto Designs until   0 Gen.,  0.297E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.314E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.314E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  23) :  0.3219E+03
+      >> Best Design for  1 : (  24  13) :  0.3138E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  321.934   0.000
-      >> Theta =    1.058   1.058
- >> Theta      =    1.058   1.058
- >> Deviation  =     0.17064E-01
- >> Likelihood =     0.32193E+03 with Error =     0.30980E-10
+      >> Best Design =  313.773   0.000
+      >> Theta =    1.080   1.072
+ >> Theta      =    1.080   1.072
+ >> Deviation  =     0.16406E-01
+ >> Likelihood =     0.31377E+03 with Error =     0.18321E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.74225E-13 among    80 pts
+      >> RMSE on All Sample Points    =    0.83186E-13 among    80 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1241,15 +1241,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0049947 @   1.000   0.000
+      >> EI   max =    0.0053267 @   0.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.4412301042E-02
+      >> RMSE on 2D Function =     0.3863783210E-02
  
            >> # of Modes in Fid-1 =  80   0   0   0   0   0  80
            >> # of Modes (sum)    =  80   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   85
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1266,7 +1266,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    85
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 13, 85 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1294,24 +1294,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1490
-      >>    1 Pareto Designs until   0 Gen.,  0.267E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.352E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.352E+03
+ >> Starting Main Loop of GA 1565
+      >>    1 Pareto Designs until   0 Gen.,  0.260E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.344E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.344E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   9) :  0.3519E+03
+      >> Best Design for  1 : (  24   3) :  0.3436E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  351.896   0.000
-      >> Theta =    1.067   1.067
- >> Theta      =    1.067   1.067
- >> Deviation  =     0.16474E-01
- >> Likelihood =     0.35190E+03 with Error =     0.10933E-09
+      >> Best Design =  343.596   0.000
+      >> Theta =    1.088   1.064
+ >> Theta      =    1.088   1.064
+ >> Deviation  =     0.15714E-01
+ >> Likelihood =     0.34360E+03 with Error =     0.30911E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.17342E-12 among    85 pts
+      >> RMSE on All Sample Points    =    0.74546E-13 among    85 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1319,15 +1319,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0047244 @   0.000   1.000
+      >> EI   max =    0.0044995 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3523824312E-02
+      >> RMSE on 2D Function =     0.3350609129E-02
  
            >> # of Modes in Fid-1 =  85   0   0   0   0   0  85
            >> # of Modes (sum)    =  85   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   90
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1344,7 +1344,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    90
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 13, 85 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1372,24 +1372,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1491
-      >>    1 Pareto Designs until   0 Gen.,  0.337E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.386E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.386E+03
+ >> Starting Main Loop of GA 1566
+      >>    1 Pareto Designs until   0 Gen.,  0.336E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.376E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.376E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  19) :  0.3856E+03
+      >> Best Design for  1 : (  23   5) :  0.3762E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  385.649   0.000
-      >> Theta =    1.062   1.067
- >> Theta      =    1.062   1.067
- >> Deviation  =     0.15935E-01
- >> Likelihood =     0.38565E+03 with Error =     0.20478E-09
+      >> Best Design =  376.217   0.000
+      >> Theta =    1.084   1.061
+ >> Theta      =    1.084   1.061
+ >> Deviation  =     0.15130E-01
+ >> Likelihood =     0.37622E+03 with Error =     0.48818E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.12350E-11 among    90 pts
+      >> RMSE on All Sample Points    =    0.83223E-13 among    90 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1397,15 +1397,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0050360 @   1.000   0.000
+      >> EI   max =    0.0046231 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.2925937406E-02
+      >> RMSE on 2D Function =     0.3026189835E-02
  
            >> # of Modes in Fid-1 =  90   0   0   0   0   0  90
            >> # of Modes (sum)    =  90   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat   95
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1422,7 +1422,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    95
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 13, 85 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1450,24 +1450,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1492
-      >>    1 Pareto Designs until   0 Gen.,  0.398E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.421E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.421E+03
+ >> Starting Main Loop of GA 1567
+      >>    1 Pareto Designs until   0 Gen.,  0.340E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.405E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.405E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  10) :  0.4206E+03
+      >> Best Design for  1 : (  24  18) :  0.4050E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  420.578   0.000
-      >> Theta =    1.079   1.082
- >> Theta      =    1.079   1.082
- >> Deviation  =     0.14731E-01
- >> Likelihood =     0.42058E+03 with Error =     0.36173E-09
+      >> Best Design =  405.020   0.000
+      >> Theta =    1.104   1.053
+ >> Theta      =    1.104   1.053
+ >> Deviation  =     0.14954E-01
+ >> Likelihood =     0.40502E+03 with Error =     0.68536E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.43837E-12 among    95 pts
+      >> RMSE on All Sample Points    =    0.15272E-12 among    95 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1475,15 +1475,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048325 @   0.000   1.000
+      >> EI   max =    0.0043142 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1975912031E-02
+      >> RMSE on 2D Function =     0.3300249602E-02
  
            >> # of Modes in Fid-1 =  95   0   0   0   0   0  95
            >> # of Modes (sum)    =  95   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  100
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1500,7 +1500,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   100
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4,100 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1528,24 +1528,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1493
-      >>    1 Pareto Designs until   0 Gen.,  0.392E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.450E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.450E+03
+ >> Starting Main Loop of GA 1568
+      >>    1 Pareto Designs until   0 Gen.,  0.393E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.434E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.434E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  22) :  0.4500E+03
+      >> Best Design for  1 : (  24  13) :  0.4338E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  450.001   0.000
-      >> Theta =    1.081   1.086
- >> Theta      =    1.081   1.086
- >> Deviation  =     0.14089E-01
- >> Likelihood =     0.45000E+03 with Error =     0.36607E-09
+      >> Best Design =  433.828   0.000
+      >> Theta =    1.066   1.069
+ >> Theta      =    1.066   1.069
+ >> Deviation  =     0.15414E-01
+ >> Likelihood =     0.43383E+03 with Error =     0.82216E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.39378E-12 among   100 pts
+      >> RMSE on All Sample Points    =    0.14996E-12 among   100 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1553,15 +1553,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0046625 @   0.000   1.000
+      >> EI   max =    0.0062612 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1878071735E-02
+      >> RMSE on 2D Function =     0.2183924491E-02
  
            >> # of Modes in Fid-1 = 100   0   0   0   0   0 100
            >> # of Modes (sum)    = 100   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  105
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1578,7 +1578,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   105
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4,100 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1606,24 +1606,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1494
-      >>    1 Pareto Designs until   0 Gen.,  0.456E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.478E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.478E+03
+ >> Starting Main Loop of GA 1569
+      >>    1 Pareto Designs until   0 Gen.,  0.396E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.468E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.468E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   3) :  0.4785E+03
+      >> Best Design for  1 : (  24  17) :  0.4677E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  478.499   0.000
-      >> Theta =    1.082   1.084
- >> Theta      =    1.082   1.084
- >> Deviation  =     0.13769E-01
- >> Likelihood =     0.47850E+03 with Error =     0.57629E-09
+      >> Best Design =  467.718   0.000
+      >> Theta =    1.100   1.060
+ >> Theta      =    1.100   1.060
+ >> Deviation  =     0.13993E-01
+ >> Likelihood =     0.46772E+03 with Error =     0.10720E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.28474E-11 among   105 pts
+      >> RMSE on All Sample Points    =    0.13934E-12 among   105 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1631,15 +1631,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048900 @   0.000   1.000
+      >> EI   max =    0.0062312 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1766123426E-02
+      >> RMSE on 2D Function =     0.1969043167E-02
  
            >> # of Modes in Fid-1 = 105   0   0   0   0   0 105
            >> # of Modes (sum)    = 105   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  110
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1656,7 +1656,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   110
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4,100 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1684,24 +1684,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1495
-      >>    1 Pareto Designs until   0 Gen.,  0.505E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.506E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.506E+03
+ >> Starting Main Loop of GA 1570
+      >>    1 Pareto Designs until   0 Gen.,  0.441E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.498E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.498E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  22) :  0.5063E+03
+      >> Best Design for  1 : (  24  14) :  0.4983E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  506.271   0.000
-      >> Theta =    1.086   1.096
- >> Theta      =    1.086   1.096
- >> Deviation  =     0.13118E-01
- >> Likelihood =     0.50627E+03 with Error =     0.58165E-09
+      >> Best Design =  498.260   0.000
+      >> Theta =    1.101   1.063
+ >> Theta      =    1.101   1.063
+ >> Deviation  =     0.13433E-01
+ >> Likelihood =     0.49826E+03 with Error =     0.12628E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.19978E-11 among   110 pts
+      >> RMSE on All Sample Points    =    0.31632E-12 among   110 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1709,15 +1709,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0041772 @   0.000   1.000
+      >> EI   max =    0.0050948 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1528337639E-02
+      >> RMSE on 2D Function =     0.1890333284E-02
  
            >> # of Modes in Fid-1 = 110   0   0   0   0   0 110
            >> # of Modes (sum)    = 110   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  115
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1734,7 +1734,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   115
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4,100 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1762,24 +1762,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1496
-      >>    1 Pareto Designs until   0 Gen.,  0.416E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.537E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.537E+03
+ >> Starting Main Loop of GA 1571
+      >>    1 Pareto Designs until   0 Gen.,  0.476E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.529E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.529E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   1) :  0.5369E+03
+      >> Best Design for  1 : (  23   9) :  0.5290E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  536.872   0.000
-      >> Theta =    1.085   1.087
- >> Theta      =    1.085   1.087
- >> Deviation  =     0.12974E-01
- >> Likelihood =     0.53687E+03 with Error =     0.66371E-09
+      >> Best Design =  529.009   0.000
+      >> Theta =    1.106   1.089
+ >> Theta      =    1.106   1.089
+ >> Deviation  =     0.12538E-01
+ >> Likelihood =     0.52901E+03 with Error =     0.14775E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.30448E-11 among   115 pts
+      >> RMSE on All Sample Points    =    0.38149E-12 among   115 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1787,15 +1787,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0030297 @   1.000   0.000
+      >> EI   max =    0.0055064 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1465223161E-02
+      >> RMSE on 2D Function =     0.1340638480E-02
  
            >> # of Modes in Fid-1 = 115   0   0   0   0   0 115
            >> # of Modes (sum)    = 115   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  120
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1812,7 +1812,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   120
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4,100 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1840,24 +1840,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1497
-      >>    1 Pareto Designs until   0 Gen.,  0.435E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.566E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.566E+03
+ >> Starting Main Loop of GA 1572
+      >>    1 Pareto Designs until   0 Gen.,  0.524E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.563E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.563E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23  14) :  0.5659E+03
+      >> Best Design for  1 : (  24  19) :  0.5632E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  565.932   0.000
-      >> Theta =    1.094   1.098
- >> Theta      =    1.094   1.098
- >> Deviation  =     0.12429E-01
- >> Likelihood =     0.56593E+03 with Error =     0.81868E-09
+      >> Best Design =  563.177   0.000
+      >> Theta =    1.102   1.084
+ >> Theta      =    1.102   1.084
+ >> Deviation  =     0.12346E-01
+ >> Likelihood =     0.56318E+03 with Error =     0.16660E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.14815E-11 among   120 pts
+      >> RMSE on All Sample Points    =    0.40691E-12 among   120 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1865,15 +1865,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0029328 @   1.000   0.000
+      >> EI   max =    0.0048911 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1138122995E-02
+      >> RMSE on 2D Function =     0.1329115899E-02
  
            >> # of Modes in Fid-1 = 120   0   0   0   0   0 120
            >> # of Modes (sum)    = 120   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  125
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1890,7 +1890,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   125
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (  4,100 ) =  0.40E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1918,24 +1918,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1498
-      >>    1 Pareto Designs until   0 Gen.,  0.583E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.596E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.597E+03
+ >> Starting Main Loop of GA 1573
+      >>    1 Pareto Designs until   0 Gen.,  0.565E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.594E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.594E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23   6) :  0.5970E+03
+      >> Best Design for  1 : (  24  13) :  0.5941E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  597.041   0.000
-      >> Theta =    1.104   1.095
- >> Theta      =    1.104   1.095
- >> Deviation  =     0.12032E-01
- >> Likelihood =     0.59704E+03 with Error =     0.11272E-08
+      >> Best Design =  594.084   0.000
+      >> Theta =    1.075   1.116
+ >> Theta      =    1.075   1.116
+ >> Deviation  =     0.12251E-01
+ >> Likelihood =     0.59408E+03 with Error =     0.20457E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.20318E-11 among   125 pts
+      >> RMSE on All Sample Points    =    0.18350E-12 among   125 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1943,15 +1943,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0025741 @   0.000   1.000
+      >> EI   max =    0.0048180 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1090108039E-02
+      >> RMSE on 2D Function =     0.1413829559E-02
  
            >> # of Modes in Fid-1 = 125   0   0   0   0   0 125
            >> # of Modes (sum)    = 125   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  130
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -1968,7 +1968,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   130
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 33,129 ) =  0.35E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1996,24 +1996,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1499
-      >>    1 Pareto Designs until   0 Gen.,  0.615E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.629E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.629E+03
+ >> Starting Main Loop of GA 1574
+      >>    1 Pareto Designs until   0 Gen.,  0.599E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.627E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.627E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  22) :  0.6293E+03
+      >> Best Design for  1 : (  24  11) :  0.6267E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  629.309   0.000
-      >> Theta =    1.093   1.098
- >> Theta      =    1.093   1.098
- >> Deviation  =     0.11848E-01
- >> Likelihood =     0.62931E+03 with Error =     0.12407E-08
+      >> Best Design =  626.665   0.000
+      >> Theta =    1.104   1.100
+ >> Theta      =    1.104   1.100
+ >> Deviation  =     0.11472E-01
+ >> Likelihood =     0.62667E+03 with Error =     0.20704E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.20522E-11 among   130 pts
+      >> RMSE on All Sample Points    =    0.17712E-12 among   130 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2021,15 +2021,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0025845 @   1.000   0.000
+      >> EI   max =    0.0047346 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1026431323E-02
+      >> RMSE on 2D Function =     0.1284804646E-02
  
            >> # of Modes in Fid-1 = 130   0   0   0   0   0 130
            >> # of Modes (sum)    = 130   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  135
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -2046,7 +2046,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   135
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 33,129 ) =  0.35E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2074,24 +2074,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1500
-      >>    1 Pareto Designs until   0 Gen.,  0.518E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.664E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.664E+03
+ >> Starting Main Loop of GA 1575
+      >>    1 Pareto Designs until   0 Gen.,  0.566E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.660E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.660E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   8) :  0.6636E+03
+      >> Best Design for  1 : (  24  17) :  0.6598E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  663.576   0.000
-      >> Theta =    1.084   1.109
- >> Theta      =    1.084   1.109
- >> Deviation  =     0.11475E-01
- >> Likelihood =     0.66358E+03 with Error =     0.14727E-08
+      >> Best Design =  659.766   0.000
+      >> Theta =    1.100   1.109
+ >> Theta      =    1.100   1.109
+ >> Deviation  =     0.11094E-01
+ >> Likelihood =     0.65977E+03 with Error =     0.21659E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.19935E-11 among   135 pts
+      >> RMSE on All Sample Points    =    0.36166E-12 among   135 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2099,15 +2099,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0026658 @   1.000   0.000
+      >> EI   max =    0.0039798 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9778478704E-03
+      >> RMSE on 2D Function =     0.1019134035E-02
  
            >> # of Modes in Fid-1 = 135   0   0   0   0   0 135
            >> # of Modes (sum)    = 135   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  140
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -2124,7 +2124,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   140
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 33,129 ) =  0.35E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2152,24 +2152,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1501
-      >>    1 Pareto Designs until   0 Gen.,  0.608E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.698E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.698E+03
+ >> Starting Main Loop of GA 1576
+      >>    1 Pareto Designs until   0 Gen.,  0.564E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.692E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.692E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23  13) :  0.6977E+03
+      >> Best Design for  1 : (  24   2) :  0.6923E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  697.721   0.000
-      >> Theta =    1.083   1.109
- >> Theta      =    1.083   1.109
- >> Deviation  =     0.11118E-01
- >> Likelihood =     0.69772E+03 with Error =     0.14992E-08
+      >> Best Design =  692.315   0.000
+      >> Theta =    1.106   1.103
+ >> Theta      =    1.106   1.103
+ >> Deviation  =     0.10830E-01
+ >> Likelihood =     0.69231E+03 with Error =     0.25765E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.77703E-11 among   140 pts
+      >> RMSE on All Sample Points    =    0.31385E-12 among   140 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2177,15 +2177,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0026086 @   1.000   0.000
+      >> EI   max =    0.0043199 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9388815231E-03
+      >> RMSE on 2D Function =     0.7808868550E-03
  
            >> # of Modes in Fid-1 = 140   0   0   0   0   0 140
            >> # of Modes (sum)    = 140   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  145
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -2202,7 +2202,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   145
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 33,129 ) =  0.35E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2230,24 +2230,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1502
-      >>    1 Pareto Designs until   0 Gen.,  0.667E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.733E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.733E+03
+ >> Starting Main Loop of GA 1577
+      >>    1 Pareto Designs until   0 Gen.,  0.710E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.725E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.725E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  17) :  0.7333E+03
+      >> Best Design for  1 : (  23  24) :  0.7252E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  733.290   0.000
-      >> Theta =    1.080   1.110
- >> Theta      =    1.080   1.110
- >> Deviation  =     0.10839E-01
- >> Likelihood =     0.73329E+03 with Error =     0.18967E-08
+      >> Best Design =  725.249   0.000
+      >> Theta =    1.095   1.106
+ >> Theta      =    1.095   1.106
+ >> Deviation  =     0.10696E-01
+ >> Likelihood =     0.72525E+03 with Error =     0.29489E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.27562E-11 among   145 pts
+      >> RMSE on All Sample Points    =    0.30954E-12 among   145 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2255,15 +2255,15 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0024867 @   1.000   0.000
+      >> EI   max =    0.0029531 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9191534002E-03
+      >> RMSE on 2D Function =     0.7381226735E-03
  
            >> # of Modes in Fid-1 = 145   0   0   0   0   0 145
            >> # of Modes (sum)    = 145   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by NIEDER Sequence
+ >> Initial Sample Points by Halton Sequence
       >> Output to sample.dat  150
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
@@ -2280,7 +2280,7 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   150
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 33,129 ) =  0.35E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2308,24 +2308,24 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1503
-      >>    1 Pareto Designs until   0 Gen.,  0.569E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.768E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.768E+03
+ >> Starting Main Loop of GA 1578
+      >>    1 Pareto Designs until   0 Gen.,  0.564E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.762E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.762E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   6) :  0.7677E+03
+      >> Best Design for  1 : (  24   4) :  0.7617E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  767.712   0.000
-      >> Theta =    1.084   1.100
- >> Theta      =    1.084   1.100
- >> Deviation  =     0.10623E-01
- >> Likelihood =     0.76771E+03 with Error =     0.18489E-08
+      >> Best Design =  761.690   0.000
+      >> Theta =    1.112   1.064
+ >> Theta      =    1.112   1.064
+ >> Deviation  =     0.11118E-01
+ >> Likelihood =     0.76169E+03 with Error =     0.44639E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.21135E-11 among   150 pts
+      >> RMSE on All Sample Points    =    0.17071E-11 among   150 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2333,10 +2333,10 @@
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0025056 @   1.000   0.000
+      >> EI   max =    0.0028793 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.8713825846E-03
+      >> RMSE on 2D Function =     0.7493572588E-03
  
            >> # of Modes in Fid-1 = 150   0   0   0   0   0 150
            >> # of Modes (sum)    = 150   0   0   0   0   0
@@ -2347,7 +2347,7 @@
  ---------------------------------------------------------
    Timer Name                       Time(sec.)  % of Total
  ---------------------------------------------------------
-   Post process                       35.183        49.08
+   Post process                       38.189        49.35
  ---------------------------------------------------------
-            Total Time =    71.686 seconds
+            Total Time =    77.377 seconds
  ---------------------------------------------------------
