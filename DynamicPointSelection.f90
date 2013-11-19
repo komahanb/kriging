@@ -293,11 +293,13 @@ subroutine DynamicPointSelection
 
 !     NTOEX=1000
 
+!     print*,taylororder
 
      if(id_proc.eq.0)  write(filenum,*) '     >> Number of test candidates',NTOEX
      if (id_proc.eq.0) then
         call get_seed(nseed)
         call latin_random(ndim,NTOEX,nseed,Dtoex) 
+!        call hammersley_real(ndim,NTOEX,DTOEX)
         !        write(export, '(a,i3.3,a)')'testcand.dat'
         !        open(10,file='./KrigSamples/'//export,form='formatted',status='unknown')
         !        read(10,*)(Dtoex(:,i),i=1,NToex)
@@ -307,7 +309,6 @@ subroutine DynamicPointSelection
      ! Information sharing by master with slaves        
      call MPI_Barrier(MPI_COMM_WORLD,ierr)           
      call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
-
      idec = dble(NTOEX)/dble(num_proc)
      is   = idec*id_proc + 1
      ie   = idec*(id_proc+1)
@@ -575,10 +576,10 @@ subroutine DynamicPointSelection
 
 end subroutine DynamicPointSelection
 ! call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
-    subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder,NTOEX)
+    subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
       implicit none
       integer,INTENT(IN)::fct,ndim,nhs
-      INTEGER,INTENT(OUT)::NCP,NTOEX,TAYLORORDER
+      INTEGER,INTENT(OUT)::NCP,TAYLORORDER
       
       !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
       !                 EXP
@@ -610,7 +611,7 @@ end subroutine DynamicPointSelection
            NCP=20!+5*ndim
            tAYLORORDER=5
         end if
-        NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!    
 !                COS
@@ -641,7 +642,7 @@ end subroutine DynamicPointSelection
            NCP=20
            tAYLORORDER=5
         end if
-NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !               RUNGE
@@ -673,7 +674,7 @@ NTOEX=(30-ndim)*NCP
            NCP=20
            tAYLORORDER=5
         end if
-NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !           ROSENBROCK    
@@ -704,7 +705,7 @@ NTOEX=(30-ndim)*NCP
            NCP=70
            tAYLORORDER=5
         end if
-NTOEX=(30-ndim)*NCP
+
      end if
 !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
 !                      CFD   
@@ -737,7 +738,7 @@ NTOEX=(30-ndim)*NCP
            Taylororder=7
            
         end if
-        NTOEX=(30-ndim)*NCP
+
 
      else
 
@@ -767,7 +768,7 @@ NTOEX=(30-ndim)*NCP
            NCP=20
            tAYLORORDER=5
         end if
-        NTOEX=(30-ndim)*NCP
+
 
 
      end if ! end of CFD 

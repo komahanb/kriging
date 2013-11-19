@@ -79,7 +79,7 @@ program Kriging
 !!$           dynamics=0
 !!$        end if     ! 0: not dynamic  1: dynamic 
 
-        do ctest=1,1
+        do ctest=3,3
            
            if (ctest.eq.1) then
               dynamics=0
@@ -106,7 +106,7 @@ program Kriging
 !!$         close(1
 
 
-        do fuct=2,2 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
+        do fuct=1,1 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
            if (fuct.eq.1) fct=0
            if (fuct.eq.2) fct=2
