@@ -79,7 +79,7 @@ program Kriging
 !!$           dynamics=0
 !!$        end if     ! 0: not dynamic  1: dynamic 
 
-        do ctest=1,1
+        do ctest=3,3
            
            if (ctest.eq.1) then
 
@@ -98,11 +98,13 @@ program Kriging
            if (ctest.eq.2) then
               dynamics=1
               lhsdyn=.true.
+              randomflag=1
            end if
            if (ctest.eq.3) then
               dynamics=1
               lhsdyn=.false. !mirdyn is true
-           end if
+              randomflag=1
+          end if
 
            ! ---------------------------------------------------------------------------
 

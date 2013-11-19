@@ -41,15 +41,16 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
         correct.o LUroutines.o\
         higher.o variance.o\
         indirect.o trust.o trustool.o \
-        rank.o vrange.o \
+        rank.o vrange.o nieder.o \
         update.o DynamicPointSelection.o\
-        ludim.o lusol2.o \
+        ludim.o lusol2.o halton.o \
         bfgs.o bfgs_routines.o eva_bfgs.o \
         dimGA.o ga.o gatool.o \
         scf.o post.o monaco.o make_sample.o\
         scf_df.o scf_df_df.o scf_df_df_db.o \
         scf_db.o scf_db_db.o scf_db_db_df.o \
-	scf_db_df.o scf_df_db.o scf_df_df_db_db.o
+	scf_db_df.o scf_df_db.o scf_df_df_db_db.o \
+	hammersley.o sobol.o faure.o
 
 OBJS =  ${SRCS:.$(SUF)=.o}
 

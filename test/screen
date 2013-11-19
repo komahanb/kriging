@@ -1,5 +1,5 @@
  >> Number of Processors =   8
-    >> Test case number       1
+    >> Test case number       3
     >> Test function number       2
  >> Initial Sample Points by Sobol Sequence
  
@@ -53,24 +53,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 1999
-      >>    1 Pareto Designs until   0 Gen.,  0.640E+01
+ >> Starting Main Loop of GA 2059
+      >>    1 Pareto Designs until   0 Gen.,  0.631E+01
       >>    1 Pareto Designs until  12 Gen.,  0.642E+01
       >>    1 Pareto Designs until  24 Gen.,  0.642E+01
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  18) :  0.6424E+01
+      >> Best Design for  1 : (  24  10) :  0.6424E+01
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
       >> Best Design =    6.424   0.000
-      >> Theta =    0.010   1.721
- >> Theta      =    0.010   1.721
- >> Deviation  =     0.10341E+00
- >> Likelihood =     0.64236E+01 with Error =     0.12863E-14
+      >> Theta =    1.721   0.010
+ >> Theta      =    1.721   0.010
+ >> Deviation  =     0.10340E+00
+ >> Likelihood =     0.64236E+01 with Error =     0.16977E-14
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.42016E-13 among     5 pts
+      >> RMSE on All Sample Points    =    0.42038E-13 among     5 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -78,23 +78,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0474936 @   0.210   0.960
-      >> Yhat min =    0.1105245 @   0.010   0.010
+      >> EI   max =    0.0474838 @   0.960   0.210
+      >> Yhat min =    0.1105242 @   0.010   0.010
  
-      >> RMSE on 2D Function =     0.3599933979E+00
+      >> RMSE on 2D Function =     0.3599924678E+00
  
            >> # of Modes in Fid-1 =   5   0   0   0   0   0   5
            >> # of Modes (sum)    =   5   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   10
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+           >> [      5001      6250 ] for Processor  4
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      2501      3750 ] for Processor  2
+ 
+ >>Loc diff is  0.798621733213508       for candidate           1  at iteration
+           1
+ 
+ 
+ >>Loc diff is  0.618703797406335       for candidate           2  at iteration
+           1
+ 
+ 
+ >>Loc diff is  0.529498827612720       for candidate           3  at iteration
+           1
+ 
+ 
+ >>Loc diff is  0.366892909170931       for candidate           4  at iteration
+           1
+ 
+ 
+ >>Loc diff is  0.278163753954044       for candidate           5  at iteration
+           1
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -138,24 +164,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2000
-      >>    1 Pareto Designs until   0 Gen.,  0.158E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.159E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.159E+02
+ >> Starting Main Loop of GA 2060
+      >>    1 Pareto Designs until   0 Gen.,  0.150E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.154E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.154E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  14) :  0.1585E+02
+      >> Best Design for  1 : (  24  13) :  0.1541E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   15.852   0.000
-      >> Theta =    0.918   1.280
- >> Theta      =    0.918   1.280
- >> Deviation  =     0.64822E-01
- >> Likelihood =     0.15852E+02 with Error =     0.32762E-14
+      >> Best Design =   15.410   0.000
+      >> Theta =    1.403   0.840
+ >> Theta      =    1.403   0.840
+ >> Deviation  =     0.64857E-01
+ >> Likelihood =     0.15410E+02 with Error =     0.22484E-14
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.23475E-13 among    10 pts
+      >> RMSE on All Sample Points    =    0.22628E-13 among    10 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -163,23 +189,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0432760 @   0.220   0.000
-      >> Yhat min =    0.1097211 @   0.010   0.020
+      >> EI   max =    0.0480628 @   0.180   0.000
+      >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1095479243E+00
+      >> RMSE on 2D Function =     0.1311954996E+00
  
            >> # of Modes in Fid-1 =  10   0   0   0   0   0  10
            >> # of Modes (sum)    =  10   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   15
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      8751     10000 ] for Processor  7
+           >> [      2501      3750 ] for Processor  2
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      7501      8750 ] for Processor  6
+ 
+ >>Loc diff is  0.136594109225723       for candidate           1  at iteration
+           2
+ 
+ 
+ >>Loc diff is  0.116115530871251       for candidate           2  at iteration
+           2
+ 
+ 
+ >>Loc diff is  0.110137231264466       for candidate           3  at iteration
+           2
+ 
+ 
+ >>Loc diff is  0.104256373364674       for candidate           4  at iteration
+           2
+ 
+ 
+ >>Loc diff is  7.575112806683632E-002  for candidate           5  at iteration
+           2
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -195,7 +247,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    15
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples (  3, 15 ) =  0.16E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -223,24 +275,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2001
-      >>    1 Pareto Designs until   0 Gen.,  0.252E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.284E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.284E+02
+ >> Starting Main Loop of GA 2061
+      >>    1 Pareto Designs until   0 Gen.,  0.253E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.277E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.277E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  15) :  0.2838E+02
+      >> Best Design for  1 : (  24  15) :  0.2773E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   28.378   0.000
-      >> Theta =    1.199   1.249
- >> Theta      =    1.199   1.249
- >> Deviation  =     0.44074E-01
- >> Likelihood =     0.28378E+02 with Error =     0.30028E-13
+      >> Best Design =   27.728   0.000
+      >> Theta =    0.963   1.073
+ >> Theta      =    0.963   1.073
+ >> Deviation  =     0.51327E-01
+ >> Likelihood =     0.27728E+02 with Error =     0.66271E-14
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.46455E-13 among    15 pts
+      >> RMSE on All Sample Points    =    0.25427E-13 among    15 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -248,23 +300,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0278829 @   0.000   0.140
+      >> EI   max =    0.0490531 @   0.170   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.6222955755E-01
+      >> RMSE on 2D Function =     0.5196977987E-01
  
            >> # of Modes in Fid-1 =  15   0   0   0   0   0  15
            >> # of Modes (sum)    =  15   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   20
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      8751     10000 ] for Processor  7
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      7501      8750 ] for Processor  6
+ 
+ >>Loc diff is  0.137063463350829       for candidate           1  at iteration
+           3
+ 
+ 
+ >>Loc diff is  0.130972749014139       for candidate           2  at iteration
+           3
+ 
+ 
+ >>Loc diff is  0.104818103894682       for candidate           3  at iteration
+           3
+ 
+ 
+ >>Loc diff is  0.104559398094758       for candidate           4  at iteration
+           3
+ 
+ 
+ >>Loc diff is  9.949276996735484E-002  for candidate           5  at iteration
+           3
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -280,7 +358,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    20
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 16, 19 ) =  0.11E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -308,24 +386,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2002
-      >>    1 Pareto Designs until   0 Gen.,  0.412E+02
+ >> Starting Main Loop of GA 2062
+      >>    1 Pareto Designs until   0 Gen.,  0.396E+02
       >>    1 Pareto Designs until  12 Gen.,  0.428E+02
       >>    1 Pareto Designs until  24 Gen.,  0.428E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  20) :  0.4282E+02
+      >> Best Design for  1 : (  24   5) :  0.4275E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   42.822   0.000
-      >> Theta =    1.216   1.050
- >> Theta      =    1.216   1.050
- >> Deviation  =     0.39969E-01
- >> Likelihood =     0.42822E+02 with Error =     0.15804E-12
+      >> Best Design =   42.752   0.000
+      >> Theta =    0.927   1.057
+ >> Theta      =    0.927   1.057
+ >> Deviation  =     0.41779E-01
+ >> Likelihood =     0.42752E+02 with Error =     0.29426E-13
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.59268E-13 among    20 pts
+      >> RMSE on All Sample Points    =    0.25097E-13 among    20 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -333,23 +411,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0241410 @   0.140   0.000
+      >> EI   max =    0.0233272 @   0.000   0.810
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3219191758E-01
+      >> RMSE on 2D Function =     0.4797999941E-01
  
            >> # of Modes in Fid-1 =  20   0   0   0   0   0  20
            >> # of Modes (sum)    =  20   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   25
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      8751     10000 ] for Processor  7
+           >> [      1251      2500 ] for Processor  1
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      2501      3750 ] for Processor  2
+           >> [      3751      5000 ] for Processor  3
+           >> [      7501      8750 ] for Processor  6
+ 
+ >>Loc diff is  0.139683233314283       for candidate           1  at iteration
+           4
+ 
+ 
+ >>Loc diff is  0.106789084917118       for candidate           2  at iteration
+           4
+ 
+ 
+ >>Loc diff is  0.102978771233661       for candidate           3  at iteration
+           4
+ 
+ 
+ >>Loc diff is  9.319791725071747E-002  for candidate           4  at iteration
+           4
+ 
+ 
+ >>Loc diff is  9.281301905794925E-002  for candidate           5  at iteration
+           4
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -365,7 +469,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    25
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 21, 22 ) =  0.11E+00
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -393,24 +497,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2003
-      >>    1 Pareto Designs until   0 Gen.,  0.481E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.597E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.597E+02
+ >> Starting Main Loop of GA 2063
+      >>    1 Pareto Designs until   0 Gen.,  0.514E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.574E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.574E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   3) :  0.5968E+02
+      >> Best Design for  1 : (  24  11) :  0.5735E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   59.681   0.000
-      >> Theta =    1.069   1.069
- >> Theta      =    1.069   1.069
- >> Deviation  =     0.36770E-01
- >> Likelihood =     0.59681E+02 with Error =     0.17754E-12
+      >> Best Design =   57.354   0.000
+      >> Theta =    1.133   1.080
+ >> Theta      =    1.133   1.080
+ >> Deviation  =     0.34580E-01
+ >> Likelihood =     0.57354E+02 with Error =     0.85272E-13
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.74535E-13 among    25 pts
+      >> RMSE on All Sample Points    =    0.29385E-13 among    25 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -418,23 +522,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0152332 @   0.160   0.000
+      >> EI   max =    0.0308978 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3020476416E-01
+      >> RMSE on 2D Function =     0.2288599021E-01
  
            >> # of Modes in Fid-1 =  25   0   0   0   0   0  25
            >> # of Modes (sum)    =  25   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   30
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  6.959885884855804E-002  for candidate           1  at iteration
+           5
+ 
+ 
+ >>Loc diff is  5.742998237292196E-002  for candidate           2  at iteration
+           5
+ 
+ 
+ >>Loc diff is  4.475659488852946E-002  for candidate           3  at iteration
+           5
+ 
+ 
+ >>Loc diff is  4.190093948909845E-002  for candidate           4  at iteration
+           5
+ 
+ 
+ >>Loc diff is  4.150215838870874E-002  for candidate           5  at iteration
+           5
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -450,7 +580,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    30
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 26, 30 ) =  0.92E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -478,24 +608,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2004
-      >>    1 Pareto Designs until   0 Gen.,  0.783E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.787E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.787E+02
+ >> Starting Main Loop of GA 2064
+      >>    1 Pareto Designs until   0 Gen.,  0.570E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.761E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.761E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  18) :  0.7872E+02
+      >> Best Design for  1 : (  24   8) :  0.7608E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   78.721   0.000
-      >> Theta =    1.197   0.790
- >> Theta      =    1.197   0.790
- >> Deviation  =     0.42468E-01
- >> Likelihood =     0.78721E+02 with Error =     0.62916E-12
+      >> Best Design =   76.075   0.000
+      >> Theta =    1.046   1.153
+ >> Theta      =    1.046   1.153
+ >> Deviation  =     0.32091E-01
+ >> Likelihood =     0.76075E+02 with Error =     0.23612E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.86763E-13 among    30 pts
+      >> RMSE on All Sample Points    =    0.33822E-13 among    30 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -503,23 +633,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0282744 @   1.000   1.000
+      >> EI   max =    0.0292240 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3762617311E-01
+      >> RMSE on 2D Function =     0.1674109334E-01
  
            >> # of Modes in Fid-1 =  30   0   0   0   0   0  30
            >> # of Modes (sum)    =  30   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   35
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  4.244052251294705E-002  for candidate           1  at iteration
+           6
+ 
+ 
+ >>Loc diff is  3.325093575805324E-002  for candidate           2  at iteration
+           6
+ 
+ 
+ >>Loc diff is  2.967354896851071E-002  for candidate           3  at iteration
+           6
+ 
+ 
+ >>Loc diff is  2.708064434056034E-002  for candidate           4  at iteration
+           6
+ 
+ 
+ >>Loc diff is  2.662976913878723E-002  for candidate           5  at iteration
+           6
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -535,7 +691,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    35
-      >> Min. Dist. between Fidelity-1 Samples (  2, 12 ) =  0.88E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 32, 35 ) =  0.86E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -563,24 +719,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2005
-      >>    1 Pareto Designs until   0 Gen.,  0.846E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.972E+02
-      >>    1 Pareto Designs until  24 Gen.,  0.972E+02
+ >> Starting Main Loop of GA 2065
+      >>    1 Pareto Designs until   0 Gen.,  0.762E+02
+      >>    1 Pareto Designs until  12 Gen.,  0.940E+02
+      >>    1 Pareto Designs until  24 Gen.,  0.940E+02
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  13) :  0.9718E+02
+      >> Best Design for  1 : (  24  18) :  0.9404E+02
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =   97.175   0.000
-      >> Theta =    0.812   1.187
- >> Theta      =    0.812   1.187
- >> Deviation  =     0.36232E-01
- >> Likelihood =     0.97175E+02 with Error =     0.96973E-12
+      >> Best Design =   94.044   0.000
+      >> Theta =    1.044   1.121
+ >> Theta      =    1.044   1.121
+ >> Deviation  =     0.29328E-01
+ >> Likelihood =     0.94044E+02 with Error =     0.25627E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.71337E-13 among    35 pts
+      >> RMSE on All Sample Points    =    0.33476E-13 among    35 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -588,23 +744,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0234604 @   1.000   1.000
+      >> EI   max =    0.0292004 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3087739281E-01
+      >> RMSE on 2D Function =     0.1225713883E-01
  
            >> # of Modes in Fid-1 =  35   0   0   0   0   0  35
            >> # of Modes (sum)    =  35   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   40
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      7501      8750 ] for Processor  6
+           >> [      8751     10000 ] for Processor  7
+           >> [      6251      7500 ] for Processor  5
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      2501      3750 ] for Processor  2
+           >> [      1251      2500 ] for Processor  1
+ 
+ >>Loc diff is  5.712422053221400E-002  for candidate           1  at iteration
+           7
+ 
+ 
+ >>Loc diff is  3.189078758833724E-002  for candidate           2  at iteration
+           7
+ 
+ 
+ >>Loc diff is  2.921280667061507E-002  for candidate           3  at iteration
+           7
+ 
+ 
+ >>Loc diff is  2.585278167822594E-002  for candidate           4  at iteration
+           7
+ 
+ 
+ >>Loc diff is  2.405066655034643E-002  for candidate           5  at iteration
+           7
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -620,7 +802,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    40
-      >> Min. Dist. between Fidelity-1 Samples ( 21, 37 ) =  0.66E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 36, 37 ) =  0.80E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -648,24 +830,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2006
-      >>    1 Pareto Designs until   0 Gen.,  0.997E+02
-      >>    1 Pareto Designs until  12 Gen.,  0.120E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.120E+03
+ >> Starting Main Loop of GA 2066
+      >>    1 Pareto Designs until   0 Gen.,  0.107E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.114E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.114E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  21) :  0.1199E+03
+      >> Best Design for  1 : (  24  19) :  0.1140E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  119.900   0.000
-      >> Theta =    1.047   1.012
- >> Theta      =    1.047   1.012
- >> Deviation  =     0.29860E-01
- >> Likelihood =     0.11990E+03 with Error =     0.18826E-11
+      >> Best Design =  113.964   0.000
+      >> Theta =    1.046   1.095
+ >> Theta      =    1.046   1.095
+ >> Deviation  =     0.27246E-01
+ >> Likelihood =     0.11396E+03 with Error =     0.54596E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.64730E-13 among    40 pts
+      >> RMSE on All Sample Points    =    0.34251E-13 among    40 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -673,23 +855,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0230462 @   1.000   1.000
+      >> EI   max =    0.0324057 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1147517799E-01
+      >> RMSE on 2D Function =     0.7965056641E-02
  
            >> # of Modes in Fid-1 =  40   0   0   0   0   0  40
            >> # of Modes (sum)    =  40   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   45
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      8751     10000 ] for Processor  7
+ 
+ >>Loc diff is  2.616503077011667E-002  for candidate           1  at iteration
+           8
+ 
+ 
+ >>Loc diff is  2.453607539765557E-002  for candidate           2  at iteration
+           8
+ 
+ 
+ >>Loc diff is  2.425855729960597E-002  for candidate           3  at iteration
+           8
+ 
+ 
+ >>Loc diff is  2.381401117174722E-002  for candidate           4  at iteration
+           8
+ 
+ 
+ >>Loc diff is  2.154905837083426E-002  for candidate           5  at iteration
+           8
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -705,7 +913,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    45
-      >> Min. Dist. between Fidelity-1 Samples ( 21, 37 ) =  0.66E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 44, 45 ) =  0.78E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -733,24 +941,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2007
-      >>    1 Pareto Designs until   0 Gen.,  0.139E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.141E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.141E+03
+ >> Starting Main Loop of GA 2067
+      >>    1 Pareto Designs until   0 Gen.,  0.114E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.134E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.134E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  22) :  0.1413E+03
+      >> Best Design for  1 : (  24   4) :  0.1339E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  141.329   0.000
-      >> Theta =    1.069   0.992
- >> Theta      =    1.069   0.992
- >> Deviation  =     0.27399E-01
- >> Likelihood =     0.14133E+03 with Error =     0.29473E-11
+      >> Best Design =  133.943   0.000
+      >> Theta =    1.053   1.108
+ >> Theta      =    1.053   1.108
+ >> Deviation  =     0.24520E-01
+ >> Likelihood =     0.13394E+03 with Error =     0.84381E-12
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.69537E-13 among    45 pts
+      >> RMSE on All Sample Points    =    0.35225E-13 among    45 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -758,23 +966,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0215186 @   1.000   1.000
-      >> Yhat min =    0.1111111 @   0.000   0.000
+      >> EI   max =    0.0177201 @   1.000   0.000
+      >> Yhat min =    0.1106773 @   0.000   0.020
  
-      >> RMSE on 2D Function =     0.1040991544E-01
+      >> RMSE on 2D Function =     0.8411126937E-02
  
            >> # of Modes in Fid-1 =  45   0   0   0   0   0  45
            >> # of Modes (sum)    =  45   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   50
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [         1      1250 ] for Processor  0
+           >> [      2501      3750 ] for Processor  2
+           >> [      1251      2500 ] for Processor  1
+           >> [      7501      8750 ] for Processor  6
+           >> [      8751     10000 ] for Processor  7
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  2.392043018425594E-002  for candidate           1  at iteration
+           9
+ 
+ 
+ >>Loc diff is  2.386212717230685E-002  for candidate           2  at iteration
+           9
+ 
+ 
+ >>Loc diff is  2.053466485265976E-002  for candidate           3  at iteration
+           9
+ 
+ 
+ >>Loc diff is  1.957877001449454E-002  for candidate           4  at iteration
+           9
+ 
+ 
+ >>Loc diff is  1.813316972576312E-002  for candidate           5  at iteration
+           9
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -790,7 +1024,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    50
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 47, 49 ) =  0.69E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -818,24 +1052,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2008
-      >>    1 Pareto Designs until   0 Gen.,  0.120E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.166E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.166E+03
+ >> Starting Main Loop of GA 2068
+      >>    1 Pareto Designs until   0 Gen.,  0.112E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.155E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.155E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  16) :  0.1661E+03
+      >> Best Design for  1 : (  24  11) :  0.1549E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  166.082   0.000
-      >> Theta =    1.065   0.985
- >> Theta      =    1.065   0.985
- >> Deviation  =     0.25499E-01
- >> Likelihood =     0.16608E+03 with Error =     0.65724E-11
+      >> Best Design =  154.912   0.000
+      >> Theta =    1.066   1.106
+ >> Theta      =    1.066   1.106
+ >> Deviation  =     0.22939E-01
+ >> Likelihood =     0.15491E+03 with Error =     0.11259E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.70136E-13 among    50 pts
+      >> RMSE on All Sample Points    =    0.43971E-13 among    50 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -843,23 +1077,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0222315 @   1.000   1.000
+      >> EI   max =    0.0153192 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9020502156E-02
+      >> RMSE on 2D Function =     0.6486998973E-02
  
            >> # of Modes in Fid-1 =  50   0   0   0   0   0  50
            >> # of Modes (sum)    =  50   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   55
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      5001      6250 ] for Processor  4
+           >> [      7501      8750 ] for Processor  6
+           >> [      8751     10000 ] for Processor  7
+           >> [      3751      5000 ] for Processor  3
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  4.126301841235736E-002  for candidate           1  at iteration
+          10
+ 
+ 
+ >>Loc diff is  3.036917481311757E-002  for candidate           2  at iteration
+          10
+ 
+ 
+ >>Loc diff is  2.411974924896221E-002  for candidate           3  at iteration
+          10
+ 
+ 
+ >>Loc diff is  2.063640231394401E-002  for candidate           4  at iteration
+          10
+ 
+ 
+ >>Loc diff is  1.727443464343681E-002  for candidate           5  at iteration
+          10
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -875,7 +1135,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    55
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 52, 55 ) =  0.64E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -903,24 +1163,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2009
-      >>    1 Pareto Designs until   0 Gen.,  0.117E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.187E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.187E+03
+ >> Starting Main Loop of GA 2069
+      >>    1 Pareto Designs until   0 Gen.,  0.160E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.180E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.180E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  18) :  0.1872E+03
+      >> Best Design for  1 : (  24   2) :  0.1803E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  187.249   0.000
-      >> Theta =    1.062   1.051
- >> Theta      =    1.062   1.051
- >> Deviation  =     0.22337E-01
- >> Likelihood =     0.18725E+03 with Error =     0.89936E-11
+      >> Best Design =  180.281   0.000
+      >> Theta =    1.089   1.115
+ >> Theta      =    1.089   1.115
+ >> Deviation  =     0.20962E-01
+ >> Likelihood =     0.18028E+03 with Error =     0.76163E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.65759E-13 among    55 pts
+      >> RMSE on All Sample Points    =    0.60740E-13 among    55 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -928,23 +1188,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0116243 @   1.000   1.000
+      >> EI   max =    0.0138074 @   1.000   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.7189023490E-02
+      >> RMSE on 2D Function =     0.5534221832E-02
  
            >> # of Modes in Fid-1 =  55   0   0   0   0   0  55
            >> # of Modes (sum)    =  55   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   60
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      2501      3750 ] for Processor  2
+           >> [      5001      6250 ] for Processor  4
+           >> [      3751      5000 ] for Processor  3
+           >> [      6251      7500 ] for Processor  5
+           >> [      8751     10000 ] for Processor  7
+           >> [      7501      8750 ] for Processor  6
+           >> [      1251      2500 ] for Processor  1
+ 
+ >>Loc diff is  1.801251753905583E-002  for candidate           1  at iteration
+          11
+ 
+ 
+ >>Loc diff is  1.674004505174226E-002  for candidate           2  at iteration
+          11
+ 
+ 
+ >>Loc diff is  1.603707499472917E-002  for candidate           3  at iteration
+          11
+ 
+ 
+ >>Loc diff is  1.578883271349724E-002  for candidate           4  at iteration
+          11
+ 
+ 
+ >>Loc diff is  1.195594769220387E-002  for candidate           5  at iteration
+          11
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -960,7 +1246,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    60
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 59, 60 ) =  0.61E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -988,24 +1274,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2010
-      >>    1 Pareto Designs until   0 Gen.,  0.189E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.213E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.213E+03
+ >> Starting Main Loop of GA 2070
+      >>    1 Pareto Designs until   0 Gen.,  0.177E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.203E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.203E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   4) :  0.2134E+03
+      >> Best Design for  1 : (  24  11) :  0.2032E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  213.401   0.000
-      >> Theta =    1.064   1.062
- >> Theta      =    1.064   1.062
- >> Deviation  =     0.20751E-01
- >> Likelihood =     0.21340E+03 with Error =     0.12671E-10
+      >> Best Design =  203.215   0.000
+      >> Theta =    1.098   1.097
+ >> Theta      =    1.098   1.097
+ >> Deviation  =     0.20069E-01
+ >> Likelihood =     0.20322E+03 with Error =     0.63829E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.64259E-13 among    60 pts
+      >> RMSE on All Sample Points    =    0.60522E-13 among    60 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1013,23 +1299,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0089950 @   1.000   1.000
+      >> EI   max =    0.0038685 @   1.000   0.060
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.5790971768E-02
+      >> RMSE on 2D Function =     0.5427749063E-02
  
            >> # of Modes in Fid-1 =  60   0   0   0   0   0  60
            >> # of Modes (sum)    =  60   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   65
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  2.118852919714959E-002  for candidate           1  at iteration
+          12
+ 
+ 
+ >>Loc diff is  1.652376409923492E-002  for candidate           2  at iteration
+          12
+ 
+ 
+ >>Loc diff is  1.529543101260961E-002  for candidate           3  at iteration
+          12
+ 
+ 
+ >>Loc diff is  1.433699743962202E-002  for candidate           4  at iteration
+          12
+ 
+ 
+ >>Loc diff is  1.175275425577199E-002  for candidate           5  at iteration
+          12
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1045,7 +1357,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    65
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 59, 60 ) =  0.61E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1073,24 +1385,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2011
-      >>    1 Pareto Designs until   0 Gen.,  0.226E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.239E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.239E+03
+ >> Starting Main Loop of GA 2071
+      >>    1 Pareto Designs until   0 Gen.,  0.204E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.227E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.227E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  12) :  0.2392E+03
+      >> Best Design for  1 : (  24  12) :  0.2271E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  239.155   0.000
-      >> Theta =    1.070   1.060
- >> Theta      =    1.070   1.060
- >> Deviation  =     0.19367E-01
- >> Likelihood =     0.23916E+03 with Error =     0.16633E-10
+      >> Best Design =  227.131   0.000
+      >> Theta =    1.095   1.118
+ >> Theta      =    1.095   1.118
+ >> Deviation  =     0.18728E-01
+ >> Likelihood =     0.22713E+03 with Error =     0.68188E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.63357E-13 among    65 pts
+      >> RMSE on All Sample Points    =    0.61433E-13 among    65 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1098,23 +1410,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0086507 @   1.000   1.000
+      >> EI   max =    0.0023047 @   0.940   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.5529394077E-02
+      >> RMSE on 2D Function =     0.3738867205E-02
  
            >> # of Modes in Fid-1 =  65   0   0   0   0   0  65
            >> # of Modes (sum)    =  65   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   70
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  2.656289174210325E-002  for candidate           1  at iteration
+          13
+ 
+ 
+ >>Loc diff is  1.368698355301459E-002  for candidate           2  at iteration
+          13
+ 
+ 
+ >>Loc diff is  1.177221587388913E-002  for candidate           3  at iteration
+          13
+ 
+ 
+ >>Loc diff is  1.124982764624027E-002  for candidate           4  at iteration
+          13
+ 
+ 
+ >>Loc diff is  1.025421419934480E-002  for candidate           5  at iteration
+          13
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1130,7 +1468,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    70
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 59, 60 ) =  0.61E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1158,24 +1496,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2012
-      >>    1 Pareto Designs until   0 Gen.,  0.225E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.265E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.265E+03
+ >> Starting Main Loop of GA 2072
+      >>    1 Pareto Designs until   0 Gen.,  0.234E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.250E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.250E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  18) :  0.2646E+03
+      >> Best Design for  1 : (  24   6) :  0.2505E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  264.606   0.000
-      >> Theta =    1.068   1.067
- >> Theta      =    1.068   1.067
- >> Deviation  =     0.18267E-01
- >> Likelihood =     0.26461E+03 with Error =     0.16504E-10
+      >> Best Design =  250.457   0.000
+      >> Theta =    1.098   1.126
+ >> Theta      =    1.098   1.126
+ >> Deviation  =     0.17601E-01
+ >> Likelihood =     0.25046E+03 with Error =     0.77982E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.61387E-13 among    70 pts
+      >> RMSE on All Sample Points    =    0.59487E-13 among    70 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1183,23 +1521,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048034 @   0.000   1.000
+      >> EI   max =    0.0016162 @   0.950   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.4904680693E-02
+      >> RMSE on 2D Function =     0.2988308567E-02
  
            >> # of Modes in Fid-1 =  70   0   0   0   0   0  70
            >> # of Modes (sum)    =  70   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   75
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      6251      7500 ] for Processor  5
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      5001      6250 ] for Processor  4
+ 
+ >>Loc diff is  3.922291850016657E-002  for candidate           1  at iteration
+          14
+ 
+ 
+ >>Loc diff is  3.252357569111020E-002  for candidate           2  at iteration
+          14
+ 
+ 
+ >>Loc diff is  9.796122352906445E-003  for candidate           3  at iteration
+          14
+ 
+ 
+ >>Loc diff is  9.570382576501169E-003  for candidate           4  at iteration
+          14
+ 
+ 
+ >>Loc diff is  8.386964882275916E-003  for candidate           5  at iteration
+          14
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1215,7 +1579,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    75
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 59, 60 ) =  0.61E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1243,24 +1607,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2013
-      >>    1 Pareto Designs until   0 Gen.,  0.283E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.292E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.292E+03
+ >> Starting Main Loop of GA 2073
+      >>    1 Pareto Designs until   0 Gen.,  0.237E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.276E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.276E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  23) :  0.2919E+03
+      >> Best Design for  1 : (  23  19) :  0.2760E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  291.899   0.000
-      >> Theta =    1.059   1.056
- >> Theta      =    1.059   1.056
- >> Deviation  =     0.18122E-01
- >> Likelihood =     0.29190E+03 with Error =     0.19861E-10
+      >> Best Design =  276.031   0.000
+      >> Theta =    1.124   1.117
+ >> Theta      =    1.124   1.117
+ >> Deviation  =     0.16561E-01
+ >> Likelihood =     0.27603E+03 with Error =     0.97222E-11
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.64920E-13 among    75 pts
+      >> RMSE on All Sample Points    =    0.65026E-13 among    75 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1268,23 +1632,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048748 @   0.000   1.000
+      >> EI   max =    0.0014301 @   0.950   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.4556501741E-02
+      >> RMSE on 2D Function =     0.2256523243E-02
  
            >> # of Modes in Fid-1 =  75   0   0   0   0   0  75
            >> # of Modes (sum)    =  75   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   80
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [      3751      5000 ] for Processor  3
+           >> [      1251      2500 ] for Processor  1
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+           >> [      6251      7500 ] for Processor  5
+           >> [         1      1250 ] for Processor  0
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+ 
+ >>Loc diff is  2.545694193068238E-002  for candidate           1  at iteration
+          15
+ 
+ 
+ >>Loc diff is  6.563328083873943E-003  for candidate           2  at iteration
+          15
+ 
+ 
+ >>Loc diff is  6.247826970576797E-003  for candidate           3  at iteration
+          15
+ 
+ 
+ >>Loc diff is  5.997930375153421E-003  for candidate           4  at iteration
+          15
+ 
+ 
+ >>Loc diff is  5.790093841261279E-003  for candidate           5  at iteration
+          15
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1300,7 +1690,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    80
-      >> Min. Dist. between Fidelity-1 Samples ( 33, 49 ) =  0.44E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 59, 60 ) =  0.61E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1328,24 +1718,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2014
-      >>    1 Pareto Designs until   0 Gen.,  0.288E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.322E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.322E+03
+ >> Starting Main Loop of GA 2074
+      >>    1 Pareto Designs until   0 Gen.,  0.295E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.302E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.302E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23   4) :  0.3219E+03
+      >> Best Design for  1 : (  24   1) :  0.3021E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  321.934   0.000
-      >> Theta =    1.058   1.058
- >> Theta      =    1.058   1.058
- >> Deviation  =     0.17060E-01
- >> Likelihood =     0.32193E+03 with Error =     0.28787E-10
+      >> Best Design =  302.101   0.000
+      >> Theta =    1.115   1.120
+ >> Theta      =    1.115   1.120
+ >> Deviation  =     0.16000E-01
+ >> Likelihood =     0.30210E+03 with Error =     0.12134E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.74350E-13 among    80 pts
+      >> RMSE on All Sample Points    =    0.10174E-12 among    80 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1353,23 +1743,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0049940 @   0.000   1.000
+      >> EI   max =    0.0013779 @   0.050   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.4412064872E-02
+      >> RMSE on 2D Function =     0.2184341430E-02
  
            >> # of Modes in Fid-1 =  80   0   0   0   0   0  80
            >> # of Modes (sum)    =  80   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   85
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+ 
+ >>Loc diff is  7.783173926102782E-003  for candidate           1  at iteration
+          16
+ 
+ 
+ >>Loc diff is  6.286387071030630E-003  for candidate           2  at iteration
+          16
+ 
+ 
+ >>Loc diff is  5.784982595882449E-003  for candidate           3  at iteration
+          16
+ 
+ 
+ >>Loc diff is  4.909290078953576E-003  for candidate           4  at iteration
+          16
+ 
+ 
+ >>Loc diff is  4.557474382988813E-003  for candidate           5  at iteration
+          16
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1385,7 +1801,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    85
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 83, 85 ) =  0.51E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1413,24 +1829,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2015
-      >>    1 Pareto Designs until   0 Gen.,  0.215E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.352E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.352E+03
+ >> Starting Main Loop of GA 2075
+      >>    1 Pareto Designs until   0 Gen.,  0.280E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.329E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.329E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   6) :  0.3519E+03
+      >> Best Design for  1 : (  24  19) :  0.3291E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  351.896   0.000
-      >> Theta =    1.067   1.067
- >> Theta      =    1.067   1.067
- >> Deviation  =     0.16473E-01
- >> Likelihood =     0.35190E+03 with Error =     0.13420E-09
+      >> Best Design =  329.074   0.000
+      >> Theta =    1.119   1.119
+ >> Theta      =    1.119   1.119
+ >> Deviation  =     0.15140E-01
+ >> Likelihood =     0.32907E+03 with Error =     0.14555E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.19270E-11 among    85 pts
+      >> RMSE on All Sample Points    =    0.70467E-13 among    85 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1438,23 +1854,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0047241 @   1.000   0.000
+      >> EI   max =    0.0013692 @   0.960   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.3523733984E-02
+      >> RMSE on 2D Function =     0.1788613799E-02
  
            >> # of Modes in Fid-1 =  85   0   0   0   0   0  85
            >> # of Modes (sum)    =  85   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   90
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      8751     10000 ] for Processor  7
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      5001      6250 ] for Processor  4
+           >> [      3751      5000 ] for Processor  3
+ 
+ >>Loc diff is  1.523616048684584E-002  for candidate           1  at iteration
+          17
+ 
+ 
+ >>Loc diff is  5.847346421522431E-003  for candidate           2  at iteration
+          17
+ 
+ 
+ >>Loc diff is  5.303437941379718E-003  for candidate           3  at iteration
+          17
+ 
+ 
+ >>Loc diff is  5.163628174785134E-003  for candidate           4  at iteration
+          17
+ 
+ 
+ >>Loc diff is  4.828670466744123E-003  for candidate           5  at iteration
+          17
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1470,7 +1912,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    90
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 87, 89 ) =  0.50E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1498,24 +1940,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2016
-      >>    1 Pareto Designs until   0 Gen.,  0.375E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.386E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.386E+03
+ >> Starting Main Loop of GA 2076
+      >>    1 Pareto Designs until   0 Gen.,  0.317E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.357E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.357E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  11) :  0.3856E+03
+      >> Best Design for  1 : (  24   1) :  0.3574E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  385.649   0.000
-      >> Theta =    1.062   1.067
- >> Theta      =    1.062   1.067
- >> Deviation  =     0.15935E-01
- >> Likelihood =     0.38565E+03 with Error =     0.22035E-09
+      >> Best Design =  357.425   0.000
+      >> Theta =    1.139   1.108
+ >> Theta      =    1.139   1.108
+ >> Deviation  =     0.14257E-01
+ >> Likelihood =     0.35743E+03 with Error =     0.19063E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.30678E-12 among    90 pts
+      >> RMSE on All Sample Points    =    0.74809E-13 among    90 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1523,23 +1965,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0050361 @   1.000   0.000
+      >> EI   max =    0.0012995 @   0.960   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.2925954522E-02
+      >> RMSE on 2D Function =     0.1230252102E-02
  
            >> # of Modes in Fid-1 =  90   0   0   0   0   0  90
            >> # of Modes (sum)    =  90   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat   95
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [      7501      8750 ] for Processor  6
+           >> [      8751     10000 ] for Processor  7
+           >> [      6251      7500 ] for Processor  5
+           >> [      5001      6250 ] for Processor  4
+           >> [         1      1250 ] for Processor  0
+           >> [      2501      3750 ] for Processor  2
+           >> [      3751      5000 ] for Processor  3
+           >> [      1251      2500 ] for Processor  1
+ 
+ >>Loc diff is  5.907300074994348E-003  for candidate           1  at iteration
+          18
+ 
+ 
+ >>Loc diff is  4.831136738683905E-003  for candidate           2  at iteration
+          18
+ 
+ 
+ >>Loc diff is  4.022594539385416E-003  for candidate           3  at iteration
+          18
+ 
+ 
+ >>Loc diff is  3.683513340765610E-003  for candidate           4  at iteration
+          18
+ 
+ 
+ >>Loc diff is  3.367020205555071E-003  for candidate           5  at iteration
+          18
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1555,7 +2023,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =    95
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 91, 94 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1583,24 +2051,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2017
-      >>    1 Pareto Designs until   0 Gen.,  0.377E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.421E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.421E+03
+ >> Starting Main Loop of GA 2077
+      >>    1 Pareto Designs until   0 Gen.,  0.369E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.388E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.388E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  20) :  0.4206E+03
+      >> Best Design for  1 : (  24  21) :  0.3881E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  420.578   0.000
-      >> Theta =    1.078   1.082
- >> Theta      =    1.078   1.082
- >> Deviation  =     0.14741E-01
- >> Likelihood =     0.42058E+03 with Error =     0.37661E-09
+      >> Best Design =  388.081   0.000
+      >> Theta =    1.111   1.113
+ >> Theta      =    1.111   1.113
+ >> Deviation  =     0.14177E-01
+ >> Likelihood =     0.38808E+03 with Error =     0.36967E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.86688E-12 among    95 pts
+      >> RMSE on All Sample Points    =    0.99889E-13 among    95 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1608,23 +2076,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048344 @   0.000   1.000
+      >> EI   max =    0.0011295 @   0.960   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1976031333E-02
+      >> RMSE on 2D Function =     0.1248792747E-02
  
            >> # of Modes in Fid-1 =  95   0   0   0   0   0  95
            >> # of Modes (sum)    =  95   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  100
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      5001      6250 ] for Processor  4
+ 
+ >>Loc diff is  3.691934105093053E-003  for candidate           1  at iteration
+          19
+ 
+ 
+ >>Loc diff is  3.267685100937778E-003  for candidate           2  at iteration
+          19
+ 
+ 
+ >>Loc diff is  2.979938256700621E-003  for candidate           3  at iteration
+          19
+ 
+ 
+ >>Loc diff is  2.973606565333242E-003  for candidate           4  at iteration
+          19
+ 
+ 
+ >>Loc diff is  2.896134056875665E-003  for candidate           5  at iteration
+          19
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1640,7 +2134,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   100
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 91, 94 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1668,24 +2162,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2018
-      >>    1 Pareto Designs until   0 Gen.,  0.327E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.450E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.450E+03
+ >> Starting Main Loop of GA 2078
+      >>    1 Pareto Designs until   0 Gen.,  0.356E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.415E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.415E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   1) :  0.4500E+03
+      >> Best Design for  1 : (  24  20) :  0.4154E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  450.001   0.000
-      >> Theta =    1.081   1.086
- >> Theta      =    1.081   1.086
- >> Deviation  =     0.14089E-01
- >> Likelihood =     0.45000E+03 with Error =     0.36795E-09
+      >> Best Design =  415.422   0.000
+      >> Theta =    1.119   1.108
+ >> Theta      =    1.119   1.108
+ >> Deviation  =     0.13495E-01
+ >> Likelihood =     0.41542E+03 with Error =     0.52438E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.13064E-11 among   100 pts
+      >> RMSE on All Sample Points    =    0.91610E-13 among   100 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1693,23 +2187,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0046625 @   0.000   1.000
+      >> EI   max =    0.0008089 @   0.040   0.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1878070183E-02
+      >> RMSE on 2D Function =     0.1137899500E-02
  
            >> # of Modes in Fid-1 = 100   0   0   0   0   0 100
            >> # of Modes (sum)    = 100   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  105
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+           >> [      1251      2500 ] for Processor  1
+           >> [      5001      6250 ] for Processor  4
+ 
+ >>Loc diff is  1.383449527168179E-002  for candidate           1  at iteration
+          20
+ 
+ 
+ >>Loc diff is  3.392449725534596E-003  for candidate           2  at iteration
+          20
+ 
+ 
+ >>Loc diff is  3.278622207793624E-003  for candidate           3  at iteration
+          20
+ 
+ 
+ >>Loc diff is  2.720819615068981E-003  for candidate           4  at iteration
+          20
+ 
+ 
+ >>Loc diff is  2.716283267839792E-003  for candidate           5  at iteration
+          20
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1725,7 +2245,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   105
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 91, 94 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1753,24 +2273,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2019
-      >>    1 Pareto Designs until   0 Gen.,  0.400E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.478E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.478E+03
+ >> Starting Main Loop of GA 2079
+      >>    1 Pareto Designs until   0 Gen.,  0.358E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.446E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.446E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23   6) :  0.4785E+03
+      >> Best Design for  1 : (  24   4) :  0.4465E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  478.499   0.000
-      >> Theta =    1.082   1.084
- >> Theta      =    1.082   1.084
- >> Deviation  =     0.13763E-01
- >> Likelihood =     0.47850E+03 with Error =     0.57560E-09
+      >> Best Design =  446.463   0.000
+      >> Theta =    1.101   1.110
+ >> Theta      =    1.101   1.110
+ >> Deviation  =     0.13389E-01
+ >> Likelihood =     0.44646E+03 with Error =     0.89825E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.11297E-11 among   105 pts
+      >> RMSE on All Sample Points    =    0.13133E-12 among   105 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1778,23 +2298,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0048891 @   0.000   1.000
+      >> EI   max =    0.0007924 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1766029784E-02
+      >> RMSE on 2D Function =     0.1035837823E-02
  
            >> # of Modes in Fid-1 = 105   0   0   0   0   0 105
            >> # of Modes (sum)    = 105   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  110
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  2.898558314905320E-003  for candidate           1  at iteration
+          21
+ 
+ 
+ >>Loc diff is  2.349805884427902E-003  for candidate           2  at iteration
+          21
+ 
+ 
+ >>Loc diff is  2.315132493540872E-003  for candidate           3  at iteration
+          21
+ 
+ 
+ >>Loc diff is  2.259332327993135E-003  for candidate           4  at iteration
+          21
+ 
+ 
+ >>Loc diff is  2.080858337418168E-003  for candidate           5  at iteration
+          21
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1810,7 +2356,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   110
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 91, 94 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1838,24 +2384,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2020
-      >>    1 Pareto Designs until   0 Gen.,  0.435E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.506E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.506E+03
+ >> Starting Main Loop of GA 2080
+      >>    1 Pareto Designs until   0 Gen.,  0.328E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.476E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.476E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  21) :  0.5063E+03
+      >> Best Design for  1 : (  24  20) :  0.4762E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  506.263   0.000
-      >> Theta =    1.094   1.091
- >> Theta      =    1.094   1.091
- >> Deviation  =     0.13024E-01
- >> Likelihood =     0.50626E+03 with Error =     0.61529E-09
+      >> Best Design =  476.230   0.000
+      >> Theta =    1.095   1.111
+ >> Theta      =    1.095   1.111
+ >> Deviation  =     0.13007E-01
+ >> Likelihood =     0.47623E+03 with Error =     0.62704E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.13918E-11 among   110 pts
+      >> RMSE on All Sample Points    =    0.13331E-12 among   110 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1863,23 +2409,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0041605 @   0.000   1.000
+      >> EI   max =    0.0007105 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1530274191E-02
+      >> RMSE on 2D Function =     0.9319357333E-03
  
            >> # of Modes in Fid-1 = 110   0   0   0   0   0 110
            >> # of Modes (sum)    = 110   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  115
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      3751      5000 ] for Processor  3
+           >> [      8751     10000 ] for Processor  7
+           >> [      5001      6250 ] for Processor  4
+ 
+ >>Loc diff is  3.220249126382635E-003  for candidate           1  at iteration
+          22
+ 
+ 
+ >>Loc diff is  2.739872334959093E-003  for candidate           2  at iteration
+          22
+ 
+ 
+ >>Loc diff is  2.197575889288289E-003  for candidate           3  at iteration
+          22
+ 
+ 
+ >>Loc diff is  2.177145826561089E-003  for candidate           4  at iteration
+          22
+ 
+ 
+ >>Loc diff is  1.992200450023962E-003  for candidate           5  at iteration
+          22
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1895,7 +2467,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   115
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples ( 91, 94 ) =  0.48E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1923,24 +2495,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2021
-      >>    1 Pareto Designs until   0 Gen.,  0.502E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.537E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.537E+03
+ >> Starting Main Loop of GA 2081
+      >>    1 Pareto Designs until   0 Gen.,  0.418E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.506E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.506E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  14) :  0.5369E+03
+      >> Best Design for  1 : (  24  24) :  0.5059E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  536.887   0.000
-      >> Theta =    1.081   1.096
- >> Theta      =    1.081   1.096
- >> Deviation  =     0.12816E-01
- >> Likelihood =     0.53689E+03 with Error =     0.70987E-09
+      >> Best Design =  505.940   0.000
+      >> Theta =    1.103   1.101
+ >> Theta      =    1.103   1.101
+ >> Deviation  =     0.12572E-01
+ >> Likelihood =     0.50594E+03 with Error =     0.71310E-10
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.13398E-11 among   115 pts
+      >> RMSE on All Sample Points    =    0.13179E-12 among   115 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -1948,23 +2520,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0029960 @   1.000   0.000
+      >> EI   max =    0.0006807 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1467260688E-02
+      >> RMSE on 2D Function =     0.8982071214E-03
  
            >> # of Modes in Fid-1 = 115   0   0   0   0   0 115
            >> # of Modes (sum)    = 115   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  120
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+ 
+ >>Loc diff is  1.294607326361508E-002  for candidate           1  at iteration
+          23
+ 
+ 
+ >>Loc diff is  9.053679147467797E-003  for candidate           2  at iteration
+          23
+ 
+ 
+ >>Loc diff is  5.065941974716992E-003  for candidate           3  at iteration
+          23
+ 
+ 
+ >>Loc diff is  4.546940156701096E-003  for candidate           4  at iteration
+          23
+ 
+ 
+ >>Loc diff is  3.545753716737599E-003  for candidate           5  at iteration
+          23
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -1980,7 +2578,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   120
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (117,118 ) =  0.47E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2008,24 +2606,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2022
-      >>    1 Pareto Designs until   0 Gen.,  0.537E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.566E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.566E+03
+ >> Starting Main Loop of GA 2082
+      >>    1 Pareto Designs until   0 Gen.,  0.528E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.538E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.538E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   3) :  0.5659E+03
+      >> Best Design for  1 : (  24   6) :  0.5379E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  565.929   0.000
-      >> Theta =    1.096   1.094
- >> Theta      =    1.096   1.094
- >> Deviation  =     0.12524E-01
- >> Likelihood =     0.56593E+03 with Error =     0.92835E-09
+      >> Best Design =  537.896   0.000
+      >> Theta =    1.112   1.107
+ >> Theta      =    1.112   1.107
+ >> Deviation  =     0.12188E-01
+ >> Likelihood =     0.53790E+03 with Error =     0.12690E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.15063E-11 among   120 pts
+      >> RMSE on All Sample Points    =    0.19192E-12 among   120 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2033,23 +2631,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0029520 @   1.000   0.000
+      >> EI   max =    0.0006323 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1136039504E-02
+      >> RMSE on 2D Function =     0.8167310208E-03
  
            >> # of Modes in Fid-1 = 120   0   0   0   0   0 120
            >> # of Modes (sum)    = 120   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  125
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      5001      6250 ] for Processor  4
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      2501      3750 ] for Processor  2
+           >> [      8751     10000 ] for Processor  7
+           >> [      3751      5000 ] for Processor  3
+ 
+ >>Loc diff is  3.348859418354277E-003  for candidate           1  at iteration
+          24
+ 
+ 
+ >>Loc diff is  2.616943733517979E-003  for candidate           2  at iteration
+          24
+ 
+ 
+ >>Loc diff is  2.427136085192128E-003  for candidate           3  at iteration
+          24
+ 
+ 
+ >>Loc diff is  2.091535350959406E-003  for candidate           4  at iteration
+          24
+ 
+ 
+ >>Loc diff is  2.039797721403086E-003  for candidate           5  at iteration
+          24
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -2065,7 +2689,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   125
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (117,118 ) =  0.47E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2093,24 +2717,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2023
-      >>    1 Pareto Designs until   0 Gen.,  0.559E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.597E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.597E+03
+ >> Starting Main Loop of GA 2083
+      >>    1 Pareto Designs until   0 Gen.,  0.499E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.569E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.569E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   3) :  0.5970E+03
+      >> Best Design for  1 : (  24   4) :  0.5687E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  596.986   0.000
-      >> Theta =    1.118   1.087
- >> Theta      =    1.118   1.087
- >> Deviation  =     0.11867E-01
- >> Likelihood =     0.59699E+03 with Error =     0.14297E-08
+      >> Best Design =  568.717   0.000
+      >> Theta =    1.114   1.109
+ >> Theta      =    1.114   1.109
+ >> Deviation  =     0.11765E-01
+ >> Likelihood =     0.56872E+03 with Error =     0.13413E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.26835E-11 among   125 pts
+      >> RMSE on All Sample Points    =    0.25645E-12 among   125 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2118,23 +2742,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0025458 @   0.000   1.000
+      >> EI   max =    0.0006683 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1095493899E-02
+      >> RMSE on 2D Function =     0.5838440548E-03
  
            >> # of Modes in Fid-1 = 125   0   0   0   0   0 125
            >> # of Modes (sum)    = 125   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  130
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      8751     10000 ] for Processor  7
+ 
+ >>Loc diff is  2.116084794943157E-003  for candidate           1  at iteration
+          25
+ 
+ 
+ >>Loc diff is  1.645054524121947E-003  for candidate           2  at iteration
+          25
+ 
+ 
+ >>Loc diff is  1.603145080077029E-003  for candidate           3  at iteration
+          25
+ 
+ 
+ >>Loc diff is  1.546777322287640E-003  for candidate           4  at iteration
+          25
+ 
+ 
+ >>Loc diff is  1.360269206864995E-003  for candidate           5  at iteration
+          25
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -2150,7 +2800,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   130
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (126,127 ) =  0.45E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2178,24 +2828,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2024
-      >>    1 Pareto Designs until   0 Gen.,  0.493E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.629E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.629E+03
+ >> Starting Main Loop of GA 2084
+      >>    1 Pareto Designs until   0 Gen.,  0.484E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.603E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.603E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24   5) :  0.6293E+03
+      >> Best Design for  1 : (  24   1) :  0.6033E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  629.309   0.000
-      >> Theta =    1.093   1.098
- >> Theta      =    1.093   1.098
- >> Deviation  =     0.11848E-01
- >> Likelihood =     0.62931E+03 with Error =     0.13187E-08
+      >> Best Design =  603.350   0.000
+      >> Theta =    1.105   1.110
+ >> Theta      =    1.105   1.110
+ >> Deviation  =     0.11542E-01
+ >> Likelihood =     0.60335E+03 with Error =     0.21682E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.36177E-11 among   130 pts
+      >> RMSE on All Sample Points    =    0.20031E-12 among   130 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2203,23 +2853,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0025844 @   1.000   0.000
+      >> EI   max =    0.0006368 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.1026433362E-02
+      >> RMSE on 2D Function =     0.5584177920E-03
  
            >> # of Modes in Fid-1 = 130   0   0   0   0   0 130
            >> # of Modes (sum)    = 130   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  135
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      3751      5000 ] for Processor  3
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      6251      7500 ] for Processor  5
+           >> [      5001      6250 ] for Processor  4
+           >> [      8751     10000 ] for Processor  7
+ 
+ >>Loc diff is  1.896004004233065E-003  for candidate           1  at iteration
+          26
+ 
+ 
+ >>Loc diff is  1.704020727851252E-003  for candidate           2  at iteration
+          26
+ 
+ 
+ >>Loc diff is  1.352445295062343E-003  for candidate           3  at iteration
+          26
+ 
+ 
+ >>Loc diff is  1.293517639445546E-003  for candidate           4  at iteration
+          26
+ 
+ 
+ >>Loc diff is  1.274966112791681E-003  for candidate           5  at iteration
+          26
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -2235,7 +2911,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   135
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (126,127 ) =  0.45E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2263,24 +2939,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2025
-      >>    1 Pareto Designs until   0 Gen.,  0.538E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.664E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.664E+03
+ >> Starting Main Loop of GA 2085
+      >>    1 Pareto Designs until   0 Gen.,  0.550E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.636E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.636E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  23  22) :  0.6636E+03
+      >> Best Design for  1 : (  24  18) :  0.6364E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  663.576   0.000
-      >> Theta =    1.084   1.109
- >> Theta      =    1.084   1.109
- >> Deviation  =     0.11475E-01
- >> Likelihood =     0.66358E+03 with Error =     0.14849E-08
+      >> Best Design =  636.375   0.000
+      >> Theta =    1.100   1.110
+ >> Theta      =    1.100   1.110
+ >> Deviation  =     0.11273E-01
+ >> Likelihood =     0.63637E+03 with Error =     0.24102E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.44383E-11 among   135 pts
+      >> RMSE on All Sample Points    =    0.19385E-12 among   135 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2288,23 +2964,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0026657 @   1.000   0.000
+      >> EI   max =    0.0006244 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9778628836E-03
+      >> RMSE on 2D Function =     0.4996872426E-03
  
            >> # of Modes in Fid-1 = 135   0   0   0   0   0 135
            >> # of Modes (sum)    = 135   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  140
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      6251      7500 ] for Processor  5
+           >> [      8751     10000 ] for Processor  7
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      7501      8750 ] for Processor  6
+ 
+ >>Loc diff is  1.361711758608719E-003  for candidate           1  at iteration
+          27
+ 
+ 
+ >>Loc diff is  1.156150266365341E-003  for candidate           2  at iteration
+          27
+ 
+ 
+ >>Loc diff is  1.150691398235759E-003  for candidate           3  at iteration
+          27
+ 
+ 
+ >>Loc diff is  1.119056584084288E-003  for candidate           4  at iteration
+          27
+ 
+ 
+ >>Loc diff is  1.079446131820705E-003  for candidate           5  at iteration
+          27
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -2320,7 +3022,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   140
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (126,127 ) =  0.45E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2348,24 +3050,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2026
-      >>    1 Pareto Designs until   0 Gen.,  0.655E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.698E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.698E+03
+ >> Starting Main Loop of GA 2086
+      >>    1 Pareto Designs until   0 Gen.,  0.564E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.669E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.669E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  10) :  0.6977E+03
+      >> Best Design for  1 : (  24  18) :  0.6686E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  697.721   0.000
-      >> Theta =    1.083   1.109
- >> Theta      =    1.083   1.109
- >> Deviation  =     0.11119E-01
- >> Likelihood =     0.69772E+03 with Error =     0.15529E-08
+      >> Best Design =  668.606   0.000
+      >> Theta =    1.094   1.114
+ >> Theta      =    1.094   1.114
+ >> Deviation  =     0.10976E-01
+ >> Likelihood =     0.66861E+03 with Error =     0.24008E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.79436E-11 among   140 pts
+      >> RMSE on All Sample Points    =    0.40382E-12 among   140 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2373,23 +3075,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0026087 @   1.000   0.000
+      >> EI   max =    0.0005997 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9388789661E-03
+      >> RMSE on 2D Function =     0.4731238178E-03
  
            >> # of Modes in Fid-1 = 140   0   0   0   0   0 140
            >> # of Modes (sum)    = 140   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  145
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      8751     10000 ] for Processor  7
+ 
+ >>Loc diff is  1.510928933494332E-003  for candidate           1  at iteration
+          28
+ 
+ 
+ >>Loc diff is  1.238792904868391E-003  for candidate           2  at iteration
+          28
+ 
+ 
+ >>Loc diff is  1.106586402766035E-003  for candidate           3  at iteration
+          28
+ 
+ 
+ >>Loc diff is  1.070882795422418E-003  for candidate           4  at iteration
+          28
+ 
+ 
+ >>Loc diff is  9.552543695601212E-004  for candidate           5  at iteration
+          28
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -2405,7 +3133,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   145
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (141,143 ) =  0.37E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2433,24 +3161,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2027
-      >>    1 Pareto Designs until   0 Gen.,  0.598E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.733E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.733E+03
+ >> Starting Main Loop of GA 2087
+      >>    1 Pareto Designs until   0 Gen.,  0.663E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.702E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.702E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  12) :  0.7333E+03
+      >> Best Design for  1 : (  24   7) :  0.7022E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  733.290   0.000
-      >> Theta =    1.080   1.109
- >> Theta      =    1.080   1.109
- >> Deviation  =     0.10844E-01
- >> Likelihood =     0.73329E+03 with Error =     0.15911E-08
+      >> Best Design =  702.247   0.000
+      >> Theta =    1.106   1.110
+ >> Theta      =    1.106   1.110
+ >> Deviation  =     0.10616E-01
+ >> Likelihood =     0.70225E+03 with Error =     0.24977E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.18120E-11 among   145 pts
+      >> RMSE on All Sample Points    =    0.19270E-12 among   145 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2458,23 +3186,49 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0024878 @   1.000   0.000
+      >> EI   max =    0.0005262 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.9189795467E-03
+      >> RMSE on 2D Function =     0.3748334261E-03
  
            >> # of Modes in Fid-1 = 145   0   0   0   0   0 145
            >> # of Modes (sum)    = 145   0   0   0   0   0
       >> Output to tecsample/kriging.dat
- >> Initial Sample Points by Sobol Sequence
  
-TEST13
-  I8_SOBOL computes the next element of a Sobol sequence.
+ >> Best design: Sample point   1 Fct value   0.1111111
+    with X value   0.0000000   0.0000000
  
-  In this test, we get a few samples at high dimension.
-  We only print the first and last 2 entries of each
-  sample.
-      >> Output to sample.dat  150
+ >> Make "dak" Database for metamodel
+ >> [MIR is being used as local surrogate]
+      >> Number of test candidates       10000
+           >> [         1      1250 ] for Processor  0
+           >> [      1251      2500 ] for Processor  1
+           >> [      2501      3750 ] for Processor  2
+           >> [      7501      8750 ] for Processor  6
+           >> [      3751      5000 ] for Processor  3
+           >> [      5001      6250 ] for Processor  4
+           >> [      6251      7500 ] for Processor  5
+           >> [      8751     10000 ] for Processor  7
+ 
+ >>Loc diff is  2.329877203190223E-003  for candidate           1  at iteration
+          29
+ 
+ 
+ >>Loc diff is  1.188705529893752E-003  for candidate           2  at iteration
+          29
+ 
+ 
+ >>Loc diff is  1.088228703068683E-003  for candidate           3  at iteration
+          29
+ 
+ 
+ >>Loc diff is  9.745182858779677E-004  for candidate           4  at iteration
+          29
+ 
+ 
+ >>Loc diff is  9.245363527569106E-004  for candidate           5  at iteration
+          29
+ 
  >> Reading KrigSet.inp
       >> # of Optimizing Functions =    1
       >> # of Constraint Functions =    0
@@ -2490,7 +3244,7 @@ TEST13
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =   150
-      >> Min. Dist. between Fidelity-1 Samples (  2, 85 ) =  0.11E-01
+      >> Min. Dist. between Fidelity-1 Samples (141,143 ) =  0.37E-01
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2518,24 +3272,24 @@ TEST13
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA 2028
-      >>    1 Pareto Designs until   0 Gen.,  0.764E+03
-      >>    1 Pareto Designs until  12 Gen.,  0.768E+03
-      >>    1 Pareto Designs until  24 Gen.,  0.768E+03
+ >> Starting Main Loop of GA 2088
+      >>    1 Pareto Designs until   0 Gen.,  0.557E+03
+      >>    1 Pareto Designs until  12 Gen.,  0.737E+03
+      >>    1 Pareto Designs until  24 Gen.,  0.738E+03
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  13) :  0.7677E+03
+      >> Best Design for  1 : (  24  24) :  0.7383E+03
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  767.722   0.000
-      >> Theta =    1.082   1.107
- >> Theta      =    1.082   1.107
- >> Deviation  =     0.10499E-01
- >> Likelihood =     0.76772E+03 with Error =     0.18071E-08
+      >> Best Design =  738.267   0.000
+      >> Theta =    1.102   1.109
+ >> Theta      =    1.102   1.109
+ >> Deviation  =     0.10411E-01
+ >> Likelihood =     0.73827E+03 with Error =     0.41699E-09
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.71321E-11 among   150 pts
+      >> RMSE on All Sample Points    =    0.30708E-12 among   150 pts
  
  >> Best design: Sample point   1 Fct value   0.1111111
     with X value   0.0000000   0.0000000
@@ -2543,10 +3297,10 @@ TEST13
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =    0.0024823 @   1.000   0.000
+      >> EI   max =    0.0005119 @   1.000   1.000
       >> Yhat min =    0.1111111 @   0.000   0.000
  
-      >> RMSE on 2D Function =     0.8748395162E-03
+      >> RMSE on 2D Function =     0.3581883540E-03
  
            >> # of Modes in Fid-1 = 150   0   0   0   0   0 150
            >> # of Modes (sum)    = 150   0   0   0   0   0
@@ -2557,7 +3311,8 @@ TEST13
  ---------------------------------------------------------
    Timer Name                       Time(sec.)  % of Total
  ---------------------------------------------------------
-   Post process                       37.444        46.72
+   Post process                       62.314         6.79
+   Dyn Training Pt                   801.007        87.28
  ---------------------------------------------------------
-            Total Time =    80.145 seconds
+            Total Time =   917.775 seconds
  ---------------------------------------------------------
