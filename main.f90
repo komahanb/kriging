@@ -302,24 +302,57 @@ program Kriging
                           lenc=lenc+2
                        end if
 
-
-
                        if (hstat.eq.5) then
+
                           filename(lenc+1:lenc+4)='FGHv'
                           lenc=lenc+4
+
                        else if (hstat.eq.3) then 
+
                           filename(lenc+1:lenc+3)='FGH'
                           lenc=lenc+3    
+
                        else if (hstat.eq.1) then
+
                           filename(lenc+1:lenc+2)='FG'
                           lenc=lenc+2 
+
                        else if (hstat.eq.0) then
+
                           filename(lenc+1:lenc+1)='F'
                           lenc=lenc+1 
+
                        else
                           print *, 'Wrong value in hstat'
                           call stop_all
                        end if
+
+                       if (randomflag.eq.2) then
+
+                          filename(lenc+1:lenc+1)='2'
+                          lenc=lenc+1 
+
+                       else if (randomflag.eq.3) then
+
+                          filename(lenc+1:lenc+1)='3'
+                          lenc=lenc+1 
+
+                       else  if (randomflag.eq.4) then
+
+                          filename(lenc+1:lenc+1)='4'
+                          lenc=lenc+1 
+
+                       else if (randomflag.eq.5) then
+
+                          filename(lenc+1:lenc+1)='5'
+                          lenc=lenc+1 
+
+                       else if (randomflag.eq.6) then
+
+                          filename(lenc+1:lenc+1)='6'
+                          lenc=lenc+1 
+                       end if
+
 
                        if (dynamics.eq.1) then
                           if (randomtestl.eq.1) filename(lenc+1:lenc+6)='dutdyn'
