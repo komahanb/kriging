@@ -400,6 +400,8 @@ subroutine Post_RMSE
                                 write(*,'(6x,a,e20.10)') '>> RMSE on 2D Function = ',diff
                                 write(*,*)
                                 write(93,'(i4,4e15.8)') nhs,diff,maxerror,diffloc,distloc
+                                rmsemat(runnum,loopcounter,1)=nhs
+                                rmsemat(runnum,loopcounter,2)=diff
                              end if
 
 !!$            xin(1)=0.25

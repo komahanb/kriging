@@ -117,7 +117,11 @@
                  write(*,'(6x,a,e20.10)') '>> RMSE compared to Analytical function = ',fsumglb
                  write(*,*)
                  write(93,'(i8,4e15.8)') nhs,fsumglb,maxerrorglb,diffloc,distloc
+                 rmsemat(runnum,loopcounter,1)=nhs
+                 rmsemat(runnum,loopcounter,2)=fsumglb
               end if
+
+
               if(Cmode(:10).eq.'Post_ANOVA')then
                  call ANOVA(ifac,ndim,ANL)
               end if

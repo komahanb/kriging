@@ -1,6 +1,7 @@
       Module dimKrig
       implicit none
 
+      integer::loopcounter,runnum
 ! mpi parallel
       integer :: id_proc, num_proc,OUUflag
 
@@ -91,5 +92,9 @@
                  hfun,hvec
       double precision, allocatable, dimension(:,:,:,:) &
               :: hfunc,hvect
+
+      ! Ensemble
+      double precision,allocatable,dimension(:,:,:)::rmsemat
+      character*60 :: outfile
 
       End Module dimKrig

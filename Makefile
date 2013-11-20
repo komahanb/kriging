@@ -39,7 +39,7 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
 	matrixR.o petitR.o \
         search_krig.o meta.o diff.o output_des.o \
         correct.o LUroutines.o\
-        higher.o variance.o\
+        higher.o variance.o rmsebound.o \
         indirect.o trust.o trustool.o \
         rank.o vrange.o nieder.o \
         update.o DynamicPointSelection.o\
