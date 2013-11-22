@@ -176,7 +176,7 @@
 
               else if (randomflag.eq.6) then
 
-                 write(filenum,*)'>> Initial Sample Points by Sobol Sequence'
+                 write(filenum,*)'>> Initial Sample Points by Faure Sequence'
                  call get_seed(nseed)
                  call faure_real(nseed,ndim,nhs-nhstmp,sample(:,1:nhs-nhstmp))
 !                print*,sample(:,1:nhs-nhstmp)

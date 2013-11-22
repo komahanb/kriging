@@ -89,7 +89,7 @@ implicit none
 integer,intent(in):: length
 real*8,intent(in) :: array(length)
 real*8,intent(in)::ks
-real*8,intent(out):: bnd(2)
+real*8,intent(out):: bnd(3)
 
 real*8::avg,std
 real*8::low,up,mid
@@ -107,7 +107,7 @@ call find_std(array,length,std)
 bnd(1)=avg
 bnd(2)=dble(ks)*std
 
-!!$bnd(3)=up
+bnd(3)=bnd(2)/dlog(10.0)
 
 return
 end subroutine make_bound
@@ -143,7 +143,7 @@ subroutine  matrix_process(nruns)
 
   real*8::vec(nruns)
   real*8::nrows
-  real*8::bnd(2)
+  real*8::bnd(3)
   integer::i,j,k,nruns
 
   nrows=loopcounter
@@ -157,7 +157,7 @@ subroutine  matrix_process(nruns)
   do i=1,nrows !nrows
      vec=rmsemat(1:nruns,i,2)
      call make_bound(nruns,vec,1.0,bnd)
-     write(23,'(i8,2e15.8)')int(rmsemat(1,i,1)),bnd(1),bnd(2)
+     write(23,'(i8,3e15.8)')int(rmsemat(1,i,1)),bnd(1),bnd(2),bnd(3)
   end do
   close(23)
 
