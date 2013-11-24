@@ -78,11 +78,9 @@ program Kriging
 !!$           dynamics=0
 !!$        end if     ! 0: not dynamic  1: dynamic 
 
-        do randomflag=1,6
+        do ctest=2,3
 
-           ctest=1
-
-           if (ctest.eq.1) then
+           if (ctest.eq.2) then
 
               dynamics=0
 
@@ -93,19 +91,20 @@ program Kriging
               !5=Sobol
               !6=Faure
 
-!              randomflag=1
+              randomflag=1
 
            end if
 
-           if (ctest.eq.2) then
+           if (ctest.eq.1) then
               dynamics=1
               lhsdyn=.true.
-!              randomflag=1
+              randomflag=1
            end if
+
            if (ctest.eq.3) then
               dynamics=1
               lhsdyn=.false. !mirdyn is true
- !             randomflag=1
+              randomflag=1
            end if
 
            ! ---------------------------------------------------------------------------
@@ -130,7 +129,7 @@ program Kriging
 
               do nstattmp=0,2                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
 
-                 nruns=1
+                 nruns=10
 
                  !                    if (nruns.gt.1) then
                  if (id_proc.eq.0) allocate(rmsemat(nruns,1000,2))
