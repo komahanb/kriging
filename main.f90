@@ -78,10 +78,11 @@ program Kriging
 !!$           dynamics=0
 !!$        end if     ! 0: not dynamic  1: dynamic 
 
-        do ctest=2,3
+        do randomflag=1,6
 
+           ctest=1
 
-           if (ctest.eq.2) then
+           if (ctest.eq.1) then
 
               dynamics=0
 
@@ -92,18 +93,19 @@ program Kriging
               !5=Sobol
               !6=Faure
 
-              randomflag=1
+!              randomflag=1
 
            end if
-           if (ctest.eq.1) then
+
+           if (ctest.eq.2) then
               dynamics=1
               lhsdyn=.true.
-              randomflag=1
+!              randomflag=1
            end if
            if (ctest.eq.3) then
               dynamics=1
               lhsdyn=.false. !mirdyn is true
-              randomflag=1
+ !             randomflag=1
            end if
 
            ! ---------------------------------------------------------------------------
@@ -114,7 +116,6 @@ program Kriging
 !!$         read(10,*) (xavg(i),i=1,ndim)
 !!$         read(10,*) (xstd(i),i=1,ndim) 
 !!$         close(10)
-  print*,"prograjksdhs"
 
            do fuct=1,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
@@ -129,7 +130,7 @@ program Kriging
 
               do nstattmp=0,2                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
 
-                 nruns=10
+                 nruns=1
 
                  !                    if (nruns.gt.1) then
                  if (id_proc.eq.0) allocate(rmsemat(nruns,1000,2))
