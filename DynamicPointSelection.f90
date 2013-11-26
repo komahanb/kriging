@@ -416,7 +416,7 @@ subroutine DynamicPointSelection
 !     if (iterDel.eq.1) then
 !        distcomp=1.5*distmean
 !     else
-     distcomp=distmean !0.618 ! 
+     distcomp=2.0d0*0.6180d0*distmean !0.618 ! 
 !     end if
 
      diffloc=0.0

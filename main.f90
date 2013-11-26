@@ -78,7 +78,7 @@ program Kriging
 !!$           dynamics=0
 !!$        end if     ! 0: not dynamic  1: dynamic 
 
-        do ctest=2,3
+        do ctest=3,3
 
            if (ctest.eq.2) then
 
@@ -127,9 +127,9 @@ program Kriging
 
               evlfnc=1  ! CFD case exact evaluation for MC needed or not
 
-              do nstattmp=0,2                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
+              do nstattmp=0,0                ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
 
-                 nruns=10
+                 nruns=1
 
                  !                    if (nruns.gt.1) then
                  if (id_proc.eq.0) allocate(rmsemat(nruns,1000,2))
@@ -142,7 +142,7 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 150
+                       maxsamplewant= 25
                        nptstoaddpercyc=5!160
 
                     else if (nstattmp.eq.1) then

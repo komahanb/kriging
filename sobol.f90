@@ -37,14 +37,6 @@ subroutine sobol_real(seed,dim_max,npts,rmat)
   integer ( kind = 8 ) seed_out
 !  integer ( kind = 8 ) test
 
-  write ( *, '(a)' ) ' '
-  write ( *, '(a)' ) 'TEST13'
-  write ( *, '(a)' ) '  I8_SOBOL computes the next element of a Sobol sequence.'
-  write ( *, '(a)' ) ' '
-  write ( *, '(a)' ) '  In this test, we get a few samples at high dimension.'
-  write ( *, '(a)' ) '  We only print the first and last 2 entries of each'
-  write ( *, '(a)' ) '  sample.'
-
 !  do test = 1, test_num
 
     dim_num = dim_max
