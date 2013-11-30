@@ -287,7 +287,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
      
-     NTOEX=5000 !*NDIM
+     NTOEX=1000 !*NDIM
 
 !      NTOEX=int((1000*num_proc)/ndim)
 
@@ -416,7 +416,7 @@ subroutine DynamicPointSelection
 !     if (iterDel.eq.1) then
 !        distcomp=1.5*distmean
 !     else
-     distcomp=2.0d0*0.6180d0*distmean !0.618 ! 
+     distcomp=distmean !0.618 ! 
 !     end if
 
      diffloc=0.0

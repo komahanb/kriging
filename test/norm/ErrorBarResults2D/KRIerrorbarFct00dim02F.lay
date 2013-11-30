@@ -932,7 +932,7 @@ $!GLOBALLINEPLOT
       }
     }
 $!LINEMAP  [1]
-  NAME = 'PCE - F - LHS'
+  NAME = 'KRIG - F - LHS'
   ASSIGN
     {
     ZONE = 1
@@ -941,8 +941,8 @@ $!LINEMAP  [1]
     }
   LINES
     {
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.8
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -961,9 +961,8 @@ $!LINEMAP  [1]
     VAR = 5
     SHOW = YES
     BARTYPE = DOWN
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    SIZE = 2
+    COLOR = CUSTOM1
+    SIZE = 1
     }
   INDICES
     {
@@ -973,7 +972,7 @@ $!LINEMAP  [1]
       }
     }
 $!LINEMAP  [2]
-  NAME = 'PCE - F - DYN'
+  NAME = 'KRIG - F - DYN'
   ASSIGN
     {
     ZONE = 2
@@ -983,7 +982,7 @@ $!LINEMAP  [2]
   LINES
     {
     COLOR = BLACK
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1003,8 +1002,7 @@ $!LINEMAP  [2]
     SHOW = YES
     BARTYPE = DOWN
     COLOR = BLACK
-    LINETHICKNESS = 0.4
-    SIZE = 2
+    SIZE = 1
     }
   INDICES
     {
@@ -1014,7 +1012,7 @@ $!LINEMAP  [2]
       }
     }
 $!LINEMAP  [3]
-  NAME = 'PCE - F - LHS'
+  NAME = 'KRIG - F - LHS'
   ASSIGN
     {
     ZONE = 1
@@ -1023,8 +1021,8 @@ $!LINEMAP  [3]
     }
   LINES
     {
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.8
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1043,9 +1041,8 @@ $!LINEMAP  [3]
     VAR = 6
     SHOW = YES
     BARTYPE = UP
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    SIZE = 2
+    COLOR = CUSTOM1
+    SIZE = 1
     }
   INDICES
     {
@@ -1055,7 +1052,7 @@ $!LINEMAP  [3]
       }
     }
 $!LINEMAP  [4]
-  NAME = 'PCE - F - DYN'
+  NAME = 'KRIG - F - DYN'
   ASSIGN
     {
     ZONE = 2
@@ -1065,7 +1062,7 @@ $!LINEMAP  [4]
   LINES
     {
     COLOR = BLACK
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1085,8 +1082,7 @@ $!LINEMAP  [4]
     SHOW = YES
     BARTYPE = UP
     COLOR = BLACK
-    LINETHICKNESS = 0.4
-    SIZE = 2
+    SIZE = 1
     }
   INDICES
     {

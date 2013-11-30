@@ -1,11 +1,9 @@
 #!MC 1120
 # Created by Tecplot 360 build 11.3.29.563
-$!VarSet |LFDSFN1| = '"KRIGerrornormdim02fct02F"'
+$!VarSet |LFDSFN1| = '"KRIGerrornormdim02fct00F" "KRIGerrornormdim02fct00F2" "KRIGerrornormdim02fct00F3" "KRIGerrornormdim02fct00F4" "KRIGerrornormdim02fct00F5" "KRIGerrornormdim02fct00F6" "KRIGerrornormdim02fct00Fmirdyn"'
 $!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5"'
-$!VarSet |LFDSFN2| = '"KRIGerrornormdim02fct02F2" "KRIGerrornormdim02fct02F3" "KRIGerrornormdim02fct02F4" "KRIGerrornormdim02fct02F5" "KRIGerrornormdim02fct02F6"'
+$!VarSet |LFDSFN2| = '"AVKRerrornormdim02fct00F"'
 $!VarSet |LFDSVL2| = '"V1" "V2" "V3" "V4" "V5"'
-$!VarSet |LFDSFN3| = '"../KRIGerrornormdim02fct02Fmirdyn"'
-$!VarSet |LFDSVL3| = '"V1" "V2" "V3" "V4" "V5"'
 $!SETSTYLEBASE FACTORY
 $!GLOBALLINKING 
   LINKCOLORMAPS = YES
@@ -890,6 +888,7 @@ $!READDATASET  '|LFDSFN1|'
   INITIALPLOTTYPE = XYLINE
   INCLUDETEXT = NO
   INCLUDEGEOM = NO
+  RESETSTYLE = NO
   ASSIGNSTRANDIDS = YES
   VARLOADMODE = BYNAME
   VARNAMELIST = '|LFDSVL1|'
@@ -906,17 +905,6 @@ $!READDATASET  '|LFDSFN2|'
   VARNAMELIST = '|LFDSVL2|'
 $!REMOVEVAR |LFDSVL2|
 $!REMOVEVAR |LFDSFN2|
-$!READDATASET  '|LFDSFN3|'
-  INITIALPLOTTYPE = XYLINE
-  INCLUDETEXT = NO
-  INCLUDEGEOM = NO
-  READDATAOPTION = APPEND
-  RESETSTYLE = NO
-  ASSIGNSTRANDIDS = YES
-  VARLOADMODE = BYNAME
-  VARNAMELIST = '|LFDSVL3|'
-$!REMOVEVAR |LFDSVL3|
-$!REMOVEVAR |LFDSFN3|
 $!FRAMELAYOUT 
   SHOWHEADER = NO
   HEADERCOLOR = RED
@@ -933,7 +921,7 @@ $!THREEDAXIS
 $!PLOTTYPE  = XYLINE
 $!FRAMENAME  = 'Frame 001'
 $!DELETELINEMAPS 
-$!ACTIVELINEMAPS  =  [1,3,5,7]
+$!ACTIVELINEMAPS  =  [1-4,7]
 $!GLOBALLINEPLOT 
   DATALABELS
     {
@@ -961,125 +949,7 @@ $!LINEMAP  [1]
   NAME = 'LHS'
   ASSIGN
     {
-    ZONE = 1
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = BLACK
-    LINEPATTERN = DOTTED
-    LINETHICKNESS = 0.4
-    }
-  SYMBOLS
-    {
-    SYMBOLSHAPE
-      {
-      GEOMSHAPE = CIRCLE
-      }
-    COLOR = BLACK
-    FILLCOLOR = CUSTOM2
-    SIZE = 1.5
-    }
-  BARCHARTS
-    {
-    COLOR = GREEN
-    FILLCOLOR = GREEN
-    }
-  ERRORBARS
-    {
-    COLOR = GREEN
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      SKIP = 3
-      }
-    }
-$!LINEMAP  [2]
-  NAME = 'Nieder'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = BLACK
-    LINEPATTERN = DOTTED
-    }
-  SYMBOLS
-    {
-    SYMBOLSHAPE
-      {
-      GEOMSHAPE = DEL
-      }
-    COLOR = BLACK
-    FILLCOLOR = CUSTOM2
-    SIZE = 1.5
-    }
-  BARCHARTS
-    {
-    COLOR = BLUE
-    FILLCOLOR = BLUE
-    }
-  ERRORBARS
-    {
-    COLOR = BLUE
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      SKIP = 3
-      }
-    }
-$!LINEMAP  [3]
-  NAME = 'Halton'
-  ASSIGN
-    {
-    ZONE = 3
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    }
-  SYMBOLS
-    {
-    SYMBOLSHAPE
-      {
-      GEOMSHAPE = DIAMOND
-      }
-    COLOR = CUSTOM2
-    FILLCOLOR = CUSTOM2
-    SIZE = 1.5
-    }
-  BARCHARTS
-    {
-    COLOR = CYAN
-    FILLCOLOR = CYAN
-    }
-  ERRORBARS
-    {
-    COLOR = CYAN
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      SKIP = 3
-      }
-    }
-$!LINEMAP  [4]
-  NAME = 'Hammersley'
-  ASSIGN
-    {
-    ZONE = 4
+    ZONE = 8
     XAXISVAR = 1
     YAXISVAR = 2
     }
@@ -1094,90 +964,8 @@ $!LINEMAP  [4]
       GEOMSHAPE = RTRI
       }
     COLOR = BLACK
+    FILLMODE = USESPECIFICCOLOR
     FILLCOLOR = CUSTOM2
-    SIZE = 1.5
-    }
-  BARCHARTS
-    {
-    COLOR = YELLOW
-    FILLCOLOR = YELLOW
-    }
-  ERRORBARS
-    {
-    COLOR = YELLOW
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      SKIP = 3
-      }
-    }
-$!LINEMAP  [5]
-  NAME = 'Sobol'
-  ASSIGN
-    {
-    ZONE = 5
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    }
-  SYMBOLS
-    {
-    SYMBOLSHAPE
-      {
-      GEOMSHAPE = LTRI
-      }
-    COLOR = CUSTOM2
-    FILLCOLOR = CUSTOM2
-    SIZE = 1.5
-    }
-  BARCHARTS
-    {
-    COLOR = PURPLE
-    FILLCOLOR = PURPLE
-    }
-  ERRORBARS
-    {
-    COLOR = PURPLE
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      SKIP = 3
-      }
-    }
-$!LINEMAP  [6]
-  NAME = 'Faure'
-  ASSIGN
-    {
-    ZONE = 6
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = BLACK
-    LINEPATTERN = DOTTED
-    }
-  SYMBOLS
-    {
-    SYMBOLSHAPE
-      {
-      ISASCII = YES
-      ASCIISHAPE
-        {
-        ASCIICHAR = '\F'
-        }
-      }
-    COLOR = BLACK
-    FILLCOLOR = CUSTOM2
-    SIZE = 1.5
     }
   BARCHARTS
     {
@@ -1188,12 +976,155 @@ $!LINEMAP  [6]
     {
     COLOR = RED
     }
-  INDICES
+$!LINEMAP  [2]
+  NAME = 'Sobol'
+  ASSIGN
     {
-    IRANGE
+    ZONE = 5
+    XAXISVAR = 1
+    YAXISVAR = 2
+    }
+  LINES
+    {
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.2
+    }
+  SYMBOLS
+    {
+    SYMBOLSHAPE
       {
-      SKIP = 3
+      GEOMSHAPE = CIRCLE
       }
+    COLOR = CUSTOM1
+    FILLCOLOR = CUSTOM2
+    }
+  BARCHARTS
+    {
+    COLOR = YELLOW
+    FILLCOLOR = YELLOW
+    }
+  ERRORBARS
+    {
+    COLOR = YELLOW
+    }
+$!LINEMAP  [3]
+  NAME = 'Faure'
+  ASSIGN
+    {
+    ZONE = 6
+    XAXISVAR = 1
+    YAXISVAR = 2
+    }
+  LINES
+    {
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.2
+    }
+  SYMBOLS
+    {
+    SYMBOLSHAPE
+      {
+      GEOMSHAPE = DEL
+      }
+    COLOR = CUSTOM1
+    FILLCOLOR = CUSTOM2
+    }
+  BARCHARTS
+    {
+    COLOR = PURPLE
+    FILLCOLOR = PURPLE
+    }
+  ERRORBARS
+    {
+    COLOR = PURPLE
+    }
+$!LINEMAP  [4]
+  NAME = 'Halton'
+  ASSIGN
+    {
+    ZONE = 3
+    XAXISVAR = 1
+    YAXISVAR = 2
+    }
+  LINES
+    {
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.2
+    }
+  SYMBOLS
+    {
+    COLOR = CUSTOM1
+    FILLCOLOR = BLUE
+    }
+  BARCHARTS
+    {
+    COLOR = BLUE
+    FILLCOLOR = BLUE
+    }
+  ERRORBARS
+    {
+    COLOR = BLUE
+    }
+$!LINEMAP  [5]
+  NAME = 'Niederreiter'
+  ASSIGN
+    {
+    ZONE = 2
+    XAXISVAR = 1
+    YAXISVAR = 2
+    }
+  LINES
+    {
+    COLOR = CUSTOM1
+    }
+  SYMBOLS
+    {
+    SHOW = NO
+    SYMBOLSHAPE
+      {
+      GEOMSHAPE = CIRCLE
+      }
+    COLOR = CUSTOM24
+    FILLCOLOR = GREEN
+    }
+  BARCHARTS
+    {
+    COLOR = GREEN
+    FILLCOLOR = GREEN
+    }
+  ERRORBARS
+    {
+    COLOR = GREEN
+    }
+$!LINEMAP  [6]
+  NAME = 'Hammersley'
+  ASSIGN
+    {
+    ZONE = 4
+    XAXISVAR = 1
+    YAXISVAR = 2
+    }
+  LINES
+    {
+    COLOR = CUSTOM1
+    }
+  SYMBOLS
+    {
+    SYMBOLSHAPE
+      {
+      GEOMSHAPE = DEL
+      }
+    COLOR = CUSTOM1
+    FILLCOLOR = CYAN
+    }
+  BARCHARTS
+    {
+    COLOR = CYAN
+    FILLCOLOR = CYAN
+    }
+  ERRORBARS
+    {
+    COLOR = CYAN
     }
 $!LINEMAP  [7]
   NAME = 'Dynamic'
@@ -1206,14 +1137,13 @@ $!LINEMAP  [7]
   LINES
     {
     COLOR = BLACK
-    LINEPATTERN = DOTTED
     LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
     COLOR = BLACK
+    FILLMODE = USESPECIFICCOLOR
     FILLCOLOR = CUSTOM2
-    SIZE = 1.5
     }
   BARCHARTS
     {
@@ -1224,21 +1154,15 @@ $!LINEMAP  [7]
     {
     COLOR = RED
     }
-  INDICES
-    {
-    IRANGE
-      {
-      SKIP = 3
-      }
-    }
 $!XYLINEAXIS 
   DEPXTOYRATIO = 1
   VIEWPORTPOSITION
     {
-    X1 = 13.609
+    X1 = 11.837
+    Y1 = 9.1534
     Y2 = 95.528
     }
-  VIEWPORTTOPSNAPTARGET = 95.5284090909
+  VIEWPORTTOPSNAPTARGET = 95.528
 $!XYLINEAXIS 
   XDETAIL 1
     {
@@ -1246,6 +1170,14 @@ $!XYLINEAXIS
     RANGEMAX = 150
     AUTOGRID = NO
     GRSPACING = 25
+    TICKLABEL
+      {
+      TEXTSHAPE
+        {
+        FONT = COURIERBOLD
+        HEIGHT = 4
+        }
+      }
     TITLE
       {
       TITLEMODE = USETEXT
@@ -1261,9 +1193,17 @@ $!XYLINEAXIS
   YDETAIL 1
     {
     COORDSCALE = LOG
-    RANGEMIN = 0.00010000000000000000479
-    RANGEMAX = 3.7008642581700001983
-    GRSPACING = 0.5
+    RANGEMIN = 0.0010000000000000000208
+    RANGEMAX = 100
+    GRSPACING = 20
+    TICKLABEL
+      {
+      TEXTSHAPE
+        {
+        FONT = COURIERBOLD
+        HEIGHT = 4
+        }
+      }
     TITLE
       {
       TITLEMODE = USETEXT
@@ -1273,6 +1213,7 @@ $!XYLINEAXIS
         FONT = COURIERBOLD
         HEIGHT = 4.6
         }
+      OFFSET = 8.5
       }
     }
 $!LINEPLOTLAYERS 

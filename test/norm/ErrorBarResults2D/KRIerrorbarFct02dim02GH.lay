@@ -945,7 +945,7 @@ $!GLOBALLINEPLOT
       }
     }
 $!LINEMAP  [1]
-  NAME = 'PCE - FG - LHS'
+  NAME = 'KRIG - FG - LHS'
   ASSIGN
     {
     ZONE = 1
@@ -955,9 +955,9 @@ $!LINEMAP  [1]
     }
   LINES
     {
-    COLOR = CUSTOM2
+    COLOR = CUSTOM1
     LINEPATTERN = DASHDOT
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -976,19 +976,11 @@ $!LINEMAP  [1]
     VAR = 5
     SHOW = YES
     BARTYPE = DOWN
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    COLOR = CUSTOM1
+    SIZE = 1
     }
 $!LINEMAP  [2]
-  NAME = 'PCE - FG - DYN'
+  NAME = 'KRIG - FG - DYN'
   ASSIGN
     {
     ZONE = 2
@@ -1000,7 +992,7 @@ $!LINEMAP  [2]
     {
     COLOR = BLACK
     LINEPATTERN = DASHDOT
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1020,18 +1012,10 @@ $!LINEMAP  [2]
     SHOW = YES
     BARTYPE = DOWN
     COLOR = BLACK
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    SIZE = 1
     }
 $!LINEMAP  [3]
-  NAME = 'PCE - FGH - LHS'
+  NAME = 'KRIG - FGH - LHS'
   ASSIGN
     {
     ZONE = 3
@@ -1041,8 +1025,8 @@ $!LINEMAP  [3]
     }
   LINES
     {
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.8
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1061,19 +1045,11 @@ $!LINEMAP  [3]
     VAR = 5
     SHOW = YES
     BARTYPE = DOWN
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    COLOR = CUSTOM1
+    SIZE = 1
     }
 $!LINEMAP  [4]
-  NAME = 'PCE - FGH - DYN'
+  NAME = 'KRIG - FGH - DYN'
   ASSIGN
     {
     ZONE = 4
@@ -1084,7 +1060,7 @@ $!LINEMAP  [4]
   LINES
     {
     COLOR = BLACK
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1104,18 +1080,10 @@ $!LINEMAP  [4]
     SHOW = YES
     BARTYPE = DOWN
     COLOR = BLACK
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    SIZE = 1
     }
 $!LINEMAP  [5]
-  NAME = 'PCE - FG - LHS'
+  NAME = 'KRIG - FG - LHS'
   ASSIGN
     {
     ZONE = 1
@@ -1125,9 +1093,9 @@ $!LINEMAP  [5]
     }
   LINES
     {
-    COLOR = CUSTOM2
+    COLOR = CUSTOM1
     LINEPATTERN = DASHDOT
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1146,19 +1114,11 @@ $!LINEMAP  [5]
     VAR = 6
     SHOW = YES
     BARTYPE = UP
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    COLOR = CUSTOM1
+    SIZE = 1
     }
 $!LINEMAP  [6]
-  NAME = 'PCE - FG - DYN'
+  NAME = 'KRIG - FG - DYN'
   ASSIGN
     {
     ZONE = 2
@@ -1170,7 +1130,7 @@ $!LINEMAP  [6]
     {
     COLOR = BLACK
     LINEPATTERN = DASHDOT
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1190,18 +1150,10 @@ $!LINEMAP  [6]
     SHOW = YES
     BARTYPE = UP
     COLOR = BLACK
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    SIZE = 1
     }
 $!LINEMAP  [7]
-  NAME = 'PCE - FGH - LHS'
+  NAME = 'KRIG - FGH - LHS'
   ASSIGN
     {
     ZONE = 3
@@ -1211,8 +1163,8 @@ $!LINEMAP  [7]
     }
   LINES
     {
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.8
+    COLOR = CUSTOM1
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1231,19 +1183,11 @@ $!LINEMAP  [7]
     VAR = 6
     SHOW = YES
     BARTYPE = UP
-    COLOR = CUSTOM2
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    COLOR = CUSTOM1
+    SIZE = 1
     }
 $!LINEMAP  [8]
-  NAME = 'PCE - FGH - DYN'
+  NAME = 'KRIG - FGH - DYN'
   ASSIGN
     {
     ZONE = 4
@@ -1254,7 +1198,7 @@ $!LINEMAP  [8]
   LINES
     {
     COLOR = BLACK
-    LINETHICKNESS = 0.8
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -1274,15 +1218,7 @@ $!LINEMAP  [8]
     SHOW = YES
     BARTYPE = UP
     COLOR = BLACK
-    LINETHICKNESS = 0.4
-    SIZE = 2
-    }
-  INDICES
-    {
-    IRANGE
-      {
-      MAX = -2
-      }
+    SIZE = 1
     }
 $!XYLINEAXIS 
   DEPXTOYRATIO = 1

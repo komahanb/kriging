@@ -1,9 +1,9 @@
 #!MC 1120
 # Created by Tecplot 360 build 11.3.29.563
-$!VarSet |LFDSFN1| = '"AVKRerrornormdim02fct00F"'
-$!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5" "V6" "V7" "V8"'
-$!VarSet |LFDSFN2| = '"AVKRerrornormdim02fct00Fmirdyn"'
-$!VarSet |LFDSVL2| = '"V1" "V2" "V3" "V4" "V5" "V6" "V7" "V8"'
+$!VarSet |LFDSFN1| = '"AVKRerrornormdim02fct02Fmirdyn100"'
+$!VarSet |LFDSVL1| = '"V1" "V2" "V3" "V4" "V5"'
+$!VarSet |LFDSFN2| = '"AVKRerrornormdim02fct02Fmirdyn1000" "AVKRerrornormdim02fct02Fmirdyn10000"'
+$!VarSet |LFDSVL2| = '"V1" "V2" "V3" "V4" "V5"'
 $!SETSTYLEBASE FACTORY
 $!GLOBALLINKING 
   LINKCOLORMAPS = YES
@@ -920,7 +920,7 @@ $!THREEDAXIS
 $!PLOTTYPE  = XYLINE
 $!FRAMENAME  = 'Frame 001'
 $!DELETELINEMAPS 
-$!ACTIVELINEMAPS  =  [1,8-9,16]
+$!ACTIVELINEMAPS  =  [1-3]
 $!GLOBALLINEPLOT 
   DATALABELS
     {
@@ -928,13 +928,23 @@ $!GLOBALLINEPLOT
     }
   LEGEND
     {
+    SHOW = YES
+    TEXTSHAPE
+      {
+      FONT = COURIERBOLD
+      }
+    BOX
+      {
+      BOXTYPE = NONE
+      }
     XYPOS
       {
-      X = 95
+      X = 100
+      Y = 100
       }
     }
 $!LINEMAP  [1]
-  NAME = 'Mean'
+  NAME = 'N<sub>test</sub>=10^2'
   ASSIGN
     {
     ZONE = 1
@@ -943,8 +953,10 @@ $!LINEMAP  [1]
     }
   LINES
     {
-    COLOR = RED
-    LINETHICKNESS = 0.8
+    COLOR = BLACK
+    LINEPATTERN = DASHED
+    PATTERNLENGTH = 0.5
+    LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
@@ -958,302 +970,48 @@ $!LINEMAP  [1]
     }
   ERRORBARS
     {
-    VAR = 6
-    SHOW = YES
-    BARTYPE = UP
     COLOR = RED
     }
 $!LINEMAP  [2]
-  NAME = 'Low'
+  NAME = 'N<sub>test</sub>=10^3'
   ASSIGN
     {
-    ZONE = 1
+    ZONE = 2
     XAXISVAR = 1
-    YAXISVAR = 3
+    YAXISVAR = 2
     }
   LINES
     {
-    COLOR = GREEN
+    COLOR = CUSTOM1
     LINETHICKNESS = 0.4
     }
   SYMBOLS
     {
-    COLOR = GREEN
-    FILLCOLOR = GREEN
+    COLOR = BLUE
+    FILLCOLOR = BLUE
     }
   BARCHARTS
     {
-    COLOR = GREEN
-    FILLCOLOR = GREEN
+    COLOR = BLUE
+    FILLCOLOR = BLUE
     }
   ERRORBARS
     {
-    VAR = 4
-    COLOR = GREEN
+    COLOR = BLUE
     }
 $!LINEMAP  [3]
-  NAME = 'Up'
+  NAME = 'N<sub>test</sub>=10^4'
   ASSIGN
     {
-    ZONE = 1
+    ZONE = 3
     XAXISVAR = 1
-    YAXISVAR = 4
-    }
-  LINES
-    {
-    COLOR = BLUE
-    LINETHICKNESS = 0.4
-    }
-  SYMBOLS
-    {
-    COLOR = BLUE
-    FILLCOLOR = BLUE
-    }
-  BARCHARTS
-    {
-    COLOR = BLUE
-    FILLCOLOR = BLUE
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = BLUE
-    }
-$!LINEMAP  [4]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 1
-    XAXISVAR = 1
-    YAXISVAR = 5
-    }
-  LINES
-    {
-    COLOR = CYAN
-    }
-  SYMBOLS
-    {
-    COLOR = CYAN
-    FILLCOLOR = CYAN
-    }
-  BARCHARTS
-    {
-    COLOR = CYAN
-    FILLCOLOR = CYAN
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = CYAN
-    }
-$!LINEMAP  [5]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 1
-    XAXISVAR = 1
-    YAXISVAR = 6
+    YAXISVAR = 2
     }
   LINES
     {
     COLOR = BLACK
-    }
-  SYMBOLS
-    {
-    COLOR = YELLOW
-    FILLCOLOR = YELLOW
-    }
-  BARCHARTS
-    {
-    COLOR = YELLOW
-    FILLCOLOR = YELLOW
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = YELLOW
-    }
-$!LINEMAP  [6]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 1
-    XAXISVAR = 1
-    YAXISVAR = 7
-    }
-  LINES
-    {
-    COLOR = PURPLE
-    }
-  SYMBOLS
-    {
-    COLOR = PURPLE
-    FILLCOLOR = PURPLE
-    }
-  BARCHARTS
-    {
-    COLOR = PURPLE
-    FILLCOLOR = PURPLE
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = PURPLE
-    }
-$!LINEMAP  [7]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 1
-    XAXISVAR = 1
-    YAXISVAR = 8
-    }
-  LINES
-    {
-    COLOR = RED
-    }
-  SYMBOLS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  BARCHARTS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = RED
-    }
-$!LINEMAP  [8]
-  NAME = 'Mean'
-  ASSIGN
-    {
-    ZONE = 1
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = RED
-    LINETHICKNESS = 0.8
-    }
-  SYMBOLS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  BARCHARTS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  ERRORBARS
-    {
-    VAR = 5
-    SHOW = YES
-    BARTYPE = DOWN
-    COLOR = RED
-    }
-$!LINEMAP  [9]
-  NAME = 'Mean'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = CUSTOM30
-    LINETHICKNESS = 0.8
-    }
-  SYMBOLS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  BARCHARTS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  ERRORBARS
-    {
-    VAR = 6
-    SHOW = YES
-    BARTYPE = UP
-    COLOR = CUSTOM30
-    }
-$!LINEMAP  [10]
-  NAME = 'Low'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 3
-    }
-  LINES
-    {
-    COLOR = GREEN
+    LINEPATTERN = DASHDOT
     LINETHICKNESS = 0.4
-    }
-  SYMBOLS
-    {
-    COLOR = GREEN
-    FILLCOLOR = GREEN
-    }
-  BARCHARTS
-    {
-    COLOR = GREEN
-    FILLCOLOR = GREEN
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = GREEN
-    }
-$!LINEMAP  [11]
-  NAME = 'Up'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 4
-    }
-  LINES
-    {
-    COLOR = BLUE
-    LINETHICKNESS = 0.4
-    }
-  SYMBOLS
-    {
-    COLOR = BLUE
-    FILLCOLOR = BLUE
-    }
-  BARCHARTS
-    {
-    COLOR = BLUE
-    FILLCOLOR = BLUE
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = BLUE
-    }
-$!LINEMAP  [12]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 5
-    }
-  LINES
-    {
-    COLOR = CYAN
     }
   SYMBOLS
     {
@@ -1267,137 +1025,68 @@ $!LINEMAP  [12]
     }
   ERRORBARS
     {
-    VAR = 4
     COLOR = CYAN
-    }
-$!LINEMAP  [13]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 6
-    }
-  LINES
-    {
-    COLOR = BLACK
-    }
-  SYMBOLS
-    {
-    COLOR = YELLOW
-    FILLCOLOR = YELLOW
-    }
-  BARCHARTS
-    {
-    COLOR = YELLOW
-    FILLCOLOR = YELLOW
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = YELLOW
-    }
-$!LINEMAP  [14]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 7
-    }
-  LINES
-    {
-    COLOR = PURPLE
-    }
-  SYMBOLS
-    {
-    COLOR = PURPLE
-    FILLCOLOR = PURPLE
-    }
-  BARCHARTS
-    {
-    COLOR = PURPLE
-    FILLCOLOR = PURPLE
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = PURPLE
-    }
-$!LINEMAP  [15]
-  NAME = '&DV&'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 8
-    }
-  LINES
-    {
-    COLOR = RED
-    }
-  SYMBOLS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  BARCHARTS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  ERRORBARS
-    {
-    VAR = 4
-    COLOR = RED
-    }
-$!LINEMAP  [16]
-  NAME = 'Mean'
-  ASSIGN
-    {
-    ZONE = 2
-    XAXISVAR = 1
-    YAXISVAR = 2
-    }
-  LINES
-    {
-    COLOR = CUSTOM30
-    LINETHICKNESS = 0.8
-    }
-  SYMBOLS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  BARCHARTS
-    {
-    COLOR = RED
-    FILLCOLOR = RED
-    }
-  ERRORBARS
-    {
-    VAR = 5
-    SHOW = YES
-    BARTYPE = DOWN
-    COLOR = CUSTOM30
     }
 $!XYLINEAXIS 
   DEPXTOYRATIO = 1
+  VIEWPORTPOSITION
+    {
+    X1 = 12.241
+    Y1 = 8.4432
+    X2 = 96.858
+    Y2 = 96.381
+    }
+  VIEWPORTTOPSNAPTARGET = 96.3806818182
 $!XYLINEAXIS 
   XDETAIL 1
     {
-    RANGEMIN = 1.7718595730027557611
-    RANGEMAX = 76.778859573002790739
-    GRSPACING = 10
+    RANGEMIN = 0
+    RANGEMAX = 100
+    GRSPACING = 20
+    TICKLABEL
+      {
+      TEXTSHAPE
+        {
+        FONT = COURIERBOLD
+        HEIGHT = 4
+        }
+      }
+    TITLE
+      {
+      TITLEMODE = USETEXT
+      TEXT = 'Number of Training Points'
+      TEXTSHAPE
+        {
+        FONT = COURIERBOLD
+        HEIGHT = 4.6
+        }
+      }
     }
 $!XYLINEAXIS 
   YDETAIL 1
     {
     COORDSCALE = LOG
-    RANGEMIN = 0.0010000000000000000208
-    RANGEMAX = 100
-    GRSPACING = 20
+    RANGEMIN = 0.00050000000000000001041
+    RANGEMAX = 1
+    GRSPACING = 0.2
+    TICKLABEL
+      {
+      TEXTSHAPE
+        {
+        FONT = COURIERBOLD
+        HEIGHT = 4
+        }
+      }
+    TITLE
+      {
+      TITLEMODE = USETEXT
+      TEXT = 'RMSE'
+      TEXTSHAPE
+        {
+        FONT = COURIERBOLD
+        HEIGHT = 4.6
+        }
+      OFFSET = 9
+      }
     }
-$!LINEPLOTLAYERS 
-  SHOWERRORBARS = YES
 $!SETSTYLEBASE CONFIG
