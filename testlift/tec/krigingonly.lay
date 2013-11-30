@@ -1,12 +1,12 @@
 #!MC 1120
 # Created by Tecplot 360 build 11.3.29.563
-$!VarSet |LFDSFN1| = '"tecex10.dat"'
+$!VarSet |LFDSFN1| = '"tecex20.dat"'
 $!VarSet |LFDSVL1| = '"x" "y" "f"'
-$!VarSet |LFDSFN2| = '"teckrig10.dat"'
+$!VarSet |LFDSFN2| = '"teckrig20.dat"'
 $!VarSet |LFDSVL2| = '"x" "y" "f"'
-$!VarSet |LFDSFN3| = '"tecsamp10.dat"'
+$!VarSet |LFDSFN3| = '"tecsamp20.dat"'
 $!VarSet |LFDSVL3| = '"x" "y" "f"'
-$!VarSet |LFDSFN4| = '"tecsampl10.dat"'
+$!VarSet |LFDSFN4| = '"tecsampl20.dat"'
 $!VarSet |LFDSVL4| = '"x" "y" "f"'
 $!SETSTYLEBASE FACTORY
 $!GLOBALLINKING 

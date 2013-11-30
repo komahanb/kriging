@@ -192,8 +192,8 @@ subroutine Post_RMSE
 
                  if (readfromdatabase.eq.1) then  
                     write(*,*) '>>  Reading from the existing database'
-                    if (fct.LE.10) then
-                       write(Cexac, '(a,i1,a)')'tecex10.dat' !!! CHANGED FROM K TO FCT
+                    if (fct.LE.20) then
+                       write(Cexac, '(a,i1,a)')'tecex20.dat' !!! CHANGED FROM K TO FCT
                        open(15,file='tec/'//Cexac,form='formatted',status='old')
                        read(15,*)
                        read(15,*)
@@ -212,7 +212,6 @@ subroutine Post_RMSE
 
                     do 210 i=1,imax
                        do 220 j=1,jmax
-
 
 
 
@@ -255,7 +254,7 @@ subroutine Post_RMSE
                              TEC2(i,j,3) = yhat
                              TEC2(i,j,4) = RMSE
                              TEC2(i,j,5) = EI
-                             if (fct.le.10) then                              
+                             if (fct.le.20) then                              
                                 f=  TEC2(i,j,6)
                                 diff = diff + (f-yhat)**2
                                 if (abs(f-yhat).gt.maxerror) maxerror=abs(f-yhat)
@@ -348,13 +347,13 @@ subroutine Post_RMSE
                                    TEC2(i,j,4) = RMSE
                                    TEC2(i,j,5) = EI
                                    ! if (readfromdatabase.eq.0) then
-                                   if (fct.le.10) then 
+                                   if (fct.lt.20) then 
                                       call evalfunc(xin,ndim,fct,0,0,f,df,d2f,v)
                                       TEC2(i,j,6) = f
                                       diff = diff + (f-yhat)**2
                                       if (abs(f-yhat).gt.maxerror) maxerror=abs(f-yhat)
                                    end if
-                                   if (fct.ge.10) then
+                                   if (fct.ge.20) then
                                       TEC2(i,j,1) = TEC2(i,j,1) * 180.0 / 4.0 /atan(1.0)   !RADINS TO degree
                                       f=TEC2(i,j,6)
                                       diff = diff + (f-yhat)**2
@@ -378,11 +377,6 @@ subroutine Post_RMSE
 
 
                              end if
-
-
-
-
-
 
 
 

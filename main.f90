@@ -39,7 +39,7 @@ program Kriging
 
      ! Low fidelity data
 
-     nls=0      ! number of low-fidelity samples!0
+     nls=60      ! number of low-fidelity samples!0
      lstat=0     ! 0: f only  1: f+g  3: f+g+h   
      ifid=0     ! fidelity level of function!2
 
@@ -55,7 +55,7 @@ program Kriging
 
      ! CFD solve input data
 
-     fctindx=0        !0 for drag, 4 for lift
+     fctindx=4        !0 for drag, 4 for lift
      InitialMach=0.5d0
      FinalMach=1.5d0
      InitialAOA=0.0d0  !degrees
@@ -120,7 +120,7 @@ program Kriging
 
               if (fuct.eq.2) fct=0
               if (fuct.eq.1) fct=2
-              if (fuct.eq.3) fct=3
+              if (fuct.eq.3) fct=20
 
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test function number",fct
@@ -142,8 +142,8 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 105
-                       nptstoaddpercyc=5!160
+                       maxsamplewant= 15
+                       nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
 

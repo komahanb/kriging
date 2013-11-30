@@ -18,6 +18,7 @@ subroutine DynamicPointSelection
   double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000),phi,invphi
   character*60::export
 
+  double precision::diffloc2
 
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
 
@@ -419,6 +420,17 @@ subroutine DynamicPointSelection
      distcomp=distmean !0.618 ! 
 !     end if
 
+     
+     diffloctmp=0.0d0
+     diffloc2=0.0d0
+     do k=1,NTOEX
+        diffloctmp=maxftoex(k)-minftoex(k)
+        diffloc2=diffloc2+diffloctmp
+     end do
+     diffloc2=diffloc2/dble(ntoex)
+     diffloc2=sqrt(diffloc2)
+
+
      diffloc=0.0
      
      do ii=1,nptstoaddpercyc
@@ -524,7 +536,6 @@ subroutine DynamicPointSelection
 
      end do !! ii loop
 
-
 !!$  
 !!$  if(kp.eq.0) then
 !!$     nptstoaddpercyc=kpnonzeroiter
@@ -537,6 +548,7 @@ subroutine DynamicPointSelection
 !!$  end if
 !!$
 
+     diffloc=diffloc2
 
 
      ! Add successful test candidates to sample points 
