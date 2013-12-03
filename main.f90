@@ -19,7 +19,7 @@ program Kriging
 
   ! Dimension of problem
 
-  ndim=2
+  ndim=3
   ndimt=ndim
 
   randomini=1      
@@ -121,8 +121,8 @@ program Kriging
            do fuct=2,2 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
               if (fuct.eq.1) fct=0
-              if (fuct.eq.3) fct=2
-              if (fuct.eq.2) fct=3
+              if (fuct.eq.2) fct=2
+              if (fuct.eq.3) fct=3
 
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test function number",fct
@@ -144,8 +144,8 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 155
-                       nptstoaddpercyc=5 !160
+                       maxsamplewant= 5050
+                       nptstoaddpercyc=50 !160
 
                     else if (nstattmp.eq.1) then
 
@@ -167,7 +167,7 @@ program Kriging
 
                     counter=0
 
-                    do nsamples=5,5 !2*NDIM+1,2*NDIM+1!40,40!101,101!2*NDIM+1,2*NDIM+1!5,75,5!50,50!50,500,50!500,500!3,47,4 !Makes this many nhs samples per cycle
+                    do nsamples=50,50 !2*NDIM+1,2*NDIM+1!40,40!101,101!2*NDIM+1,2*NDIM+1!5,75,5!50,50!50,500,50!500,500!3,47,4 !Makes this many nhs samples per cycle
                        counter=counter+1
 
                        nhs=nsamples

@@ -287,7 +287,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
      
-     NTOEX=25000 !*NDIM
+     NTOEX=27000 !*NDIM
 
 !      NTOEX=int((1000*num_proc)/ndim)
 
@@ -782,7 +782,6 @@ end subroutine DynamicPointSelection
         end if
 
      end if ! end of CFD 
-
      
      if(ndimt.gt.2) then ! use 25% of the existing data points
 
@@ -793,7 +792,7 @@ end subroutine DynamicPointSelection
         else
            ncp=50
         end if
-!        print *,'NCP:',ncp
+        !        print *,'NCP:',ncp
         tAYLORORDER=5
      end if
 

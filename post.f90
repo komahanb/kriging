@@ -26,7 +26,7 @@ subroutine Post_Process
      ifac = int( exp(log(2.d6)/dble(ndim)))
      if(ifac.le.2)ifac = 2
      if (ndim.eq.5) ifac=10 !10^5
-!     if (ndim.eq.9)  ifac = 4 !4^9 2,48,882
+     if (ndim.eq.3)  ifac = 30 !4^9 2,48,882
 
   else if(Cmode(:10).eq.'Post_ANOVA')then
      ifac = int( exp(log(1.d6)/dble(ndim)))
