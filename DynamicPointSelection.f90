@@ -287,7 +287,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
      
-     NTOEX=10000 !*NDIM
+     NTOEX=25000 !*NDIM
 
 !      NTOEX=int((1000*num_proc)/ndim)
 
@@ -338,7 +338,7 @@ subroutine DynamicPointSelection
         sigv=0.d0
         sigg=0.d0
 
-
+        
         CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0), BETA, GAMM, IERR)
         if (ierr.ne.0) stop'MIR BETA gamma error'
         CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
@@ -444,9 +444,10 @@ subroutine DynamicPointSelection
               !! 2. The next training point should be atleast distcomp away from the closest existing sample
               !! 3. RMSE should be greater than RMSE mean of Kriging
               !! 4. SIGMA should be greater than SIGMA mean of MIR 
-
-              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp.and. RMSE(k).ge.RMSEmean) then !.and. SIGMA(k).ge.SIGMAmean 
+!
+              if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp) then !.and. SIGMA(k).ge.SIGMAmean .and. RMSE(k).ge.RMSEmean
 !                 print*,RMSE(k),RMSEmean
+         !     if (RMSE(k).ge.RMSEmean) then
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if
@@ -474,7 +475,7 @@ subroutine DynamicPointSelection
               npass=npass+1 ! one successful candidate
               
               write(filenum,*)
-              write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL
+              write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL,kp
               write(filenum,*)
 
            end if
@@ -484,6 +485,7 @@ subroutine DynamicPointSelection
 
         ! Trick to not consider this point again
         maxftoex(kp)=minftoex(kp)
+        RMSE(kp)=-10000.0
 
         ! Update other minimum distances
         do k=1,NTOEX
@@ -584,7 +586,9 @@ subroutine DynamicPointSelection
 
 end subroutine DynamicPointSelection
 ! call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
+
     subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
+      use dimKrig,only:ndimt
       implicit none
       integer,INTENT(IN)::fct,ndim,nhs
       INTEGER,INTENT(OUT)::NCP,TAYLORORDER
@@ -779,8 +783,21 @@ end subroutine DynamicPointSelection
 
      end if ! end of CFD 
 
+     
+     if(ndimt.gt.2) then ! use 25% of the existing data points
 
+        !NCP= ceiling(0.25*dble(nhs))
 
+        if (Nhs.lt.50) then
+           NCP=nhs
+        else
+           ncp=50
+        end if
+!        print *,'NCP:',ncp
+        tAYLORORDER=5
+     end if
+
+     return
    end subroutine mirtunableparams
 subroutine knn(SC,sample,knnptr,ndim,nhs,NCP)
   ! Subroutine to find NCP closest neighbours from array sample to point SC

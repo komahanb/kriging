@@ -121,8 +121,8 @@ program Kriging
            do fuct=2,2 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
               if (fuct.eq.1) fct=0
-              if (fuct.eq.2) fct=2
-              if (fuct.eq.3) fct=3
+              if (fuct.eq.3) fct=2
+              if (fuct.eq.2) fct=3
 
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test function number",fct
