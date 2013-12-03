@@ -43,7 +43,7 @@
       integer :: lmax,tdim
       integer :: ndebug,iran,newflag,mEI,mLC
       integer :: nsize,kreg,kord,kreg_orig,iscf
-      double precision :: devi,devmin,devmax,diffloc,distloc
+      double precision :: devi,devmin,devmax,diffloc,distloc,diffloc2
       double precision :: llfd_best
       integer, allocatable, dimension(:,:) :: mreg,iRij
       double precision, allocatable, dimension(:) &

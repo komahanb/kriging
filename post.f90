@@ -393,7 +393,7 @@ subroutine Post_RMSE
                                 write(*,*)
                                 write(*,'(6x,a,e20.10)') '>> RMSE on 2D Function = ',diff
                                 write(*,*)
-                                write(93,'(i4,4e15.8)') nhs,diff,maxerror,diffloc,distloc
+                                write(93,'(i4,4e15.8)') nhs,diff,maxerror,diffloc,diffloc2
                                 rmsemat(runnum,loopcounter,1)=nhs
                                 rmsemat(runnum,loopcounter,2)=diff
                              end if

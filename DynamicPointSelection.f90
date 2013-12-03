@@ -18,7 +18,6 @@ subroutine DynamicPointSelection
   double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000),phi,invphi
   character*60::export
 
-  double precision::diffloc2
 
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
 
@@ -288,7 +287,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
      
-     NTOEX=1000 !*NDIM
+     NTOEX=10000 !*NDIM
 
 !      NTOEX=int((1000*num_proc)/ndim)
 
@@ -424,15 +423,12 @@ subroutine DynamicPointSelection
      diffloctmp=0.0d0
      diffloc2=0.0d0
      do k=1,NTOEX
-        diffloctmp=maxftoex(k)-minftoex(k)
+        diffloctmp=(maxftoex(k)-minftoex(k))**2
         diffloc2=diffloc2+diffloctmp
      end do
      diffloc2=diffloc2/dble(ntoex)
      diffloc2=sqrt(diffloc2)
-
-
-     diffloc=0.0
-     
+      
      do ii=1,nptstoaddpercyc
 
         npass=0
@@ -548,7 +544,7 @@ subroutine DynamicPointSelection
 !!$  end if
 !!$
 
-     diffloc=diffloc2
+!     diffloc=diffloc2 ! trick to write the mean diff instead of maxdiff
 
 
      ! Add successful test candidates to sample points 
@@ -780,8 +776,6 @@ end subroutine DynamicPointSelection
            NCP=20
            tAYLORORDER=5
         end if
-
-
 
      end if ! end of CFD 
 

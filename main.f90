@@ -22,7 +22,9 @@ program Kriging
   ndim=2
   ndimt=ndim
 
-  randomini=1      ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
+  randomini=1      
+  
+  ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
   mainprog =.true.
   filenum=6
@@ -39,7 +41,7 @@ program Kriging
 
      ! Low fidelity data
 
-     nls=60      ! number of low-fidelity samples!0
+     nls=0      ! number of low-fidelity samples!0
      lstat=0     ! 0: f only  1: f+g  3: f+g+h   
      ifid=0     ! fidelity level of function!2
 
@@ -116,11 +118,11 @@ program Kriging
 !!$         read(10,*) (xstd(i),i=1,ndim) 
 !!$         close(10)
 
-           do fuct=3,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
+           do fuct=2,2 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
-              if (fuct.eq.2) fct=0
-              if (fuct.eq.1) fct=2
-              if (fuct.eq.3) fct=20
+              if (fuct.eq.1) fct=0
+              if (fuct.eq.2) fct=2
+              if (fuct.eq.3) fct=3
 
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test function number",fct
@@ -142,7 +144,7 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 15
+                       maxsamplewant= 155
                        nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
@@ -401,7 +403,7 @@ program Kriging
                              end if
 
                              open(unit=93,file='norm/'//filename)!,position='append')
-                             if (counter.eq.1) write(93,*) 'Nhs','    L2diff','          Maxdiff','       Dutchdiff' 
+                             if (counter.eq.1) write(93,*) 'Nhs','    L2diff','          Maxdiff','       MaxLocDiff' ,'   MeanLocDiff'
 
                           else if (Casemode.eq.1) then
 
@@ -641,7 +643,7 @@ program Kriging
 !!$                    end do
 !!$                 end do
 
-                 call matrix_process(nruns)
+                 if(nruns.gt.1) call matrix_process(nruns)
 
                  deallocate(rmsemat)
               end if

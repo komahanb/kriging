@@ -116,7 +116,7 @@
                  write(*,*)
                  write(*,'(6x,a,e20.10)') '>> RMSE compared to Analytical function = ',fsumglb
                  write(*,*)
-                 write(93,'(i8,4e15.8)') nhs,fsumglb,maxerrorglb,diffloc,distloc
+                 write(93,'(i8,4e15.8)') nhs,fsumglb,maxerrorglb,diffloc,diffloc2
                  rmsemat(runnum,loopcounter,1)=nhs
                  rmsemat(runnum,loopcounter,2)=fsumglb
               end if
