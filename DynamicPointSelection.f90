@@ -25,14 +25,14 @@ subroutine DynamicPointSelection
 
   call find_Optimal
   call read_all_krig
-  
+
   if (lhsdyn) then
 
      if (id_proc.eq.0) then
 
         write(filenum,*) '>> [Picking points dynamically for LHS]'        
         call get_seed(nseed)
-!        call nieder(nseed,ndim,nptstoaddpercyc,Dtoex)
+        !        call nieder(nseed,ndim,nptstoaddpercyc,Dtoex)
         call latin_random(ndim,nptstoaddpercyc,nseed,Dtoex) 
         !   end if
 
@@ -45,7 +45,7 @@ subroutine DynamicPointSelection
               Dad(:,ii)=Dtoex(:,ii)
               call evalfunc(Dtoex(:,ii),ndim,fct,0,hstatad(ii),f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
            end if
-!           print*, DTOEX(:,ii),f(ii)
+           !           print*, DTOEX(:,ii),f(ii)
         end do !! ii loop
         ! Add successful test candidates to sample points 
         if(nstyle.eq.0)then
@@ -73,7 +73,7 @@ subroutine DynamicPointSelection
         end if !nstyle
 
      end if
-     
+
      call MPI_Barrier(MPI_COMM_WORLD,ierr)
      call deallocate_all_krig
 
@@ -206,11 +206,11 @@ subroutine DynamicPointSelection
 
 
 
-!+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-                             !PARALLEL REGION
+     !PARALLEL REGION
 
-!+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
@@ -223,7 +223,7 @@ subroutine DynamicPointSelection
      ! Figure out locations of test candidates (randomly). Calculate local Dutch intrapolations and compare to Kriging values
 
      call combination(ndim+Dutchorderg,ndim,NCP)
-!     NTOEX=(30-ndim)*NCP
+     !     NTOEX=(30-ndim)*NCP
 
      NTOEX=5000*NDIM
 
@@ -286,20 +286,20 @@ subroutine DynamicPointSelection
      if(id_proc.eq.0)  write(filenum,*) '>> [MIR is being used as local surrogate]'
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
-     
+
      NTOEX=27000 !*NDIM
 
-!      NTOEX=int((1000*num_proc)/ndim)
+     !      NTOEX=int((1000*num_proc)/ndim)
 
-!     NTOEX=1000
+     !     NTOEX=1000
 
-!     print*,taylororder
+     !     print*,taylororder
 
      if(id_proc.eq.0)  write(filenum,*) '     >> Number of test candidates',NTOEX
      if (id_proc.eq.0) then
         call get_seed(nseed)
         call latin_random(ndim,NTOEX,nseed,Dtoex) 
-!        call hammersley_real(ndim,NTOEX,DTOEX)
+        !        call hammersley_real(ndim,NTOEX,DTOEX)
         !        write(export, '(a,i3.3,a)')'testcand.dat'
         !        open(10,file='./KrigSamples/'//export,form='formatted',status='unknown')
         !        read(10,*)(Dtoex(:,i),i=1,NToex)
@@ -338,7 +338,7 @@ subroutine DynamicPointSelection
         sigv=0.d0
         sigg=0.d0
 
-        
+
         CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0), BETA, GAMM, IERR)
         if (ierr.ne.0) stop'MIR BETA gamma error'
         CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
@@ -349,7 +349,7 @@ subroutine DynamicPointSelection
 
         call meta_call(1,mode,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
 
-!        print *, k,ftoextry(2,k),ftoextry(1,k)
+        !        print *, k,ftoextry(2,k),ftoextry(1,k)
 
      end do
   end if ! randomtestl
@@ -365,17 +365,17 @@ subroutine DynamicPointSelection
      call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
      if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
   end do
-!print *, ftoextry(1,1:NTOEX), ftoextry(2,1:NTOEX)
-!+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  !print *, ftoextry(1,1:NTOEX), ftoextry(2,1:NTOEX)
+  !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-                             !END PARALLEL REGION
+  !END PARALLEL REGION
 
-!+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
   if (id_proc.eq.0) then
-     
+
      do k =1,NTOEX
         minftoex(k)=ftoextry(1,k)
         maxftoex(k)=ftoextry(1,k)
@@ -413,13 +413,13 @@ subroutine DynamicPointSelection
 
      ! Pick test candidate with largest difference in values, but above distcomp distance to nearest neighbours
 
-!     if (iterDel.eq.1) then
-!        distcomp=1.5*distmean
-!     else
+     !     if (iterDel.eq.1) then
+     !        distcomp=1.5*distmean
+     !     else
      distcomp=distmean !0.618 ! 
-!     end if
+     !     end if
 
-     
+
      diffloctmp=0.0d0
      diffloc2=0.0d0
      do k=1,NTOEX
@@ -428,7 +428,7 @@ subroutine DynamicPointSelection
      end do
      diffloc2=diffloc2/dble(ntoex)
      diffloc2=sqrt(diffloc2)
-      
+
      do ii=1,nptstoaddpercyc
 
         npass=0
@@ -444,10 +444,10 @@ subroutine DynamicPointSelection
               !! 2. The next training point should be atleast distcomp away from the closest existing sample
               !! 3. RMSE should be greater than RMSE mean of Kriging
               !! 4. SIGMA should be greater than SIGMA mean of MIR 
-!
+              !
               if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp) then !.and. SIGMA(k).ge.SIGMAmean .and. RMSE(k).ge.RMSEmean
-!                 print*,RMSE(k),RMSEmean
-         !     if (RMSE(k).ge.RMSEmean) then
+                 !                 print*,RMSE(k),RMSEmean
+                 !     if (RMSE(k).ge.RMSEmean) then
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if
@@ -471,9 +471,9 @@ subroutine DynamicPointSelection
 !!$           end do
 
            else 
-              
+
               npass=npass+1 ! one successful candidate
-              
+
               write(filenum,*)
               write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL,kp
               write(filenum,*)
@@ -501,7 +501,7 @@ subroutine DynamicPointSelection
            end if
         end do
 
-     !   call stop_all
+        !   call stop_all
 
         hstatad(ii)=hstat
         if (selectedevaluation.eq.1) then
@@ -546,7 +546,7 @@ subroutine DynamicPointSelection
 !!$  end if
 !!$
 
-!     diffloc=diffloc2 ! trick to write the mean diff instead of maxdiff
+     !     diffloc=diffloc2 ! trick to write the mean diff instead of maxdiff
 
 
      ! Add successful test candidates to sample points 
@@ -587,282 +587,282 @@ subroutine DynamicPointSelection
 end subroutine DynamicPointSelection
 ! call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
 
-    subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
-      use dimKrig,only:ndimt
-      implicit none
-      integer,INTENT(IN)::fct,ndim,nhs
-      INTEGER,INTENT(OUT)::NCP,TAYLORORDER
-      
-      !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-      !                 EXP
-      !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-      if (Fct.eq.4) then
-         if (nhs.le.11)  then  
-           NCP=nhs     
-           Taylororder=3!nhs!2!2!INT(NHS/4)
+subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
+  use dimKrig,only:ndimt
+  implicit none
+  integer,INTENT(IN)::fct,ndim,nhs
+  INTEGER,INTENT(OUT)::NCP,TAYLORORDER
 
-        else if (nhs.gt.11 .and. nhs.le.15)  then  
-           NCP=10
-           Taylororder=5!ncp
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  !                 EXP
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  if (Fct.eq.4) then
+     if (nhs.le.11)  then  
+        NCP=nhs     
+        Taylororder=3!nhs!2!2!INT(NHS/4)
 
-        else  if (nhs.gt.15 .and. nhs.le.25)  then  
-           NCP=15
-           Taylororder=5!ncp
-           
-        else  if (nhs.gt.25 .and. nhs.le.35)  then  
-           NCP=20
-           Taylororder=5!ncp
-           
-        else if (nhs.gt.35 .and. nhs.le.100)  then  
-           NCP=20!20+3*ndim
-           Taylororder=5
-       ! else if (nhs.gt.70 .and. nhs.le.100)  then  
-       !   NCP=30!50+0.1*nhs
-       !    Taylororder=17       
-        else
-           NCP=20!+5*ndim
-           tAYLORORDER=5
-        end if
+     else if (nhs.gt.11 .and. nhs.le.15)  then  
+        NCP=10
+        Taylororder=5!ncp
 
-     end if
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!    
-!                COS
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-     if (Fct.eq.1) then
-        if (nhs.le.11)  then  
-           NCP=nhs
-           Taylororder=ncp!2!2!INT(NHS/4)
-        else if (nhs.gt.11 .and. nhs.le.15)  then  
-           NCP=10
-           Taylororder=5!ncp
+     else  if (nhs.gt.15 .and. nhs.le.25)  then  
+        NCP=15
+        Taylororder=5!ncp
 
-        else if (nhs.gt.15 .and. nhs.le.25)  then  
-           NCP=15
-           Taylororder=5!ncp
+     else  if (nhs.gt.25 .and. nhs.le.35)  then  
+        NCP=20
+        Taylororder=5!ncp
 
-        else if (nhs.gt.25 .and. nhs.le.35)  then  
-           NCP=20
-           Taylororder=5!ncp
-
-        else if (nhs.gt.35 .and. nhs.le.70)  then  
-           NCP=20!50+0.1*nhs
-           Taylororder=5
-        else if (nhs.gt.70 .and. nhs.le.100)  then  
-           NCP=20!50+0.1*nhs
-           Taylororder=5       
-        else
-           NCP=20
-           tAYLORORDER=5
-        end if
-
-     end if
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-!               RUNGE
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!     
-     if (fct.eq.2) then
-        if (nhs.le.20)  then  
-           NCP=nhs
-           Taylororder=5!nhs!2!2!INT(NHS/4)
-
-           !   else if (nhs.gt.11 .and. nhs.le.15)  then  
-           !      NCP=nhs
-           !      Taylororder=7!ncp
-           !      
-           !   else if (nhs.gt.15 .and. nhs.le.25)  then  
-           !      NCP=nhs
-           !      Taylororder=13!ncp
-           !      
-           !   else if (nhs.gt.25 .and. nhs.le.35)  then  
-           !      NCP=nhs
-           !      Taylororder=17!ncp
-           !      
-           !   else if (nhs.gt.35 .and. nhs.le.70)  then  
-           !      NCP=30!50+0.1*nhs
-           !      Taylororder=17
-        else  if (nhs.gt.20 .and. nhs.le.100)  then  
-           NCP=20!50+0.1*nhs
-           Taylororder=5       
-        else
-           NCP=20
-           tAYLORORDER=5
-        end if
-
-     end if
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-!           ROSENBROCK    
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-     if (Fct.eq.6) then
-        if (nhs.le.11)  then  
-           NCP=5
-           Taylororder=ncp!2!2!INT(NHS/4)
-        else if (nhs.gt.11 .and. nhs.le.15)  then  
-           NCP=10
-           Taylororder=5!ncp
-
-        else if (nhs.gt.15 .and. nhs.le.25)  then  
-           NCP=15
-           Taylororder=5!ncp
-
-        else if (nhs.gt.25 .and. nhs.le.35)  then  
-           NCP=25
-           Taylororder=5!ncp
-
-        else if (nhs.gt.35 .and. nhs.le.70)  then  
-           NCP=35!50+0.1*nhs
-           Taylororder=5
-        else if (nhs.gt.70 .and. nhs.le.100)  then  
-           NCP=50!50+0.1*nhs
-           Taylororder=5       
-        else
-           NCP=70
-           tAYLORORDER=5
-        end if
-
-     end if
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-!                      CFD   
-!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-     if (fct.eq.20) then
-        if (nhs.le.10)  then  
-           NCP=nhs
-           Taylororder=nhs!nhs!2!2!INT(NHS/4)
-        else if (nhs.gt.10 .and. nhs.le.15)  then  
-           NCP=nhs
-           Taylororder=10!ncp
-           
-        else  if (nhs.gt.15 .and. nhs.le.25)  then  
-           NCP=nhs
-           Taylororder=10!ncp
-           
-        else  if (nhs.gt.25 .and. nhs.le.35)  then  
-           NCP=nhs
-           Taylororder=7!ncp
-           
-        else if (nhs.gt.35 .and. nhs.le.45)  then  
-           NCP=30
-           Taylororder=7
-           
-        else if (nhs.gt.45 .and. nhs.le.100)  then  
-           NCP=30!50+0.1*nhs
-           Taylororder=7
-        else
-           NCP=35
-           Taylororder=7
-           
-        end if
-
-
+     else if (nhs.gt.35 .and. nhs.le.100)  then  
+        NCP=20!20+3*ndim
+        Taylororder=5
+        ! else if (nhs.gt.70 .and. nhs.le.100)  then  
+        !   NCP=30!50+0.1*nhs
+        !    Taylororder=17       
      else
-
-
-        if (nhs.le.11)  then  
-           NCP=nhs
-           Taylororder=ncp!2!2!INT(NHS/4)
-        else if (nhs.gt.11 .and. nhs.le.15)  then  
-           NCP=10
-           Taylororder=5!ncp
-
-        else if (nhs.gt.15 .and. nhs.le.25)  then  
-           NCP=15
-           Taylororder=5!ncp
-
-        else if (nhs.gt.25 .and. nhs.le.35)  then  
-           NCP=20
-           Taylororder=5!ncp
-
-        else if (nhs.gt.35 .and. nhs.le.70)  then  
-           NCP=20!50+0.1*nhs
-           Taylororder=5
-        else if (nhs.gt.70 .and. nhs.le.100)  then  
-           NCP=20!50+0.1*nhs
-           Taylororder=5       
-        else
-           NCP=20
-           tAYLORORDER=5
-        end if
-
-     end if ! end of CFD 
-     
-     if(ndimt.gt.2) then ! use 25% of the existing data points
-
-        !NCP= ceiling(0.25*dble(nhs))
-
-        if (Nhs.lt.50) then
-           NCP=nhs
-        else
-           ncp=50
-        end if
-        !        print *,'NCP:',ncp
+        NCP=20!+5*ndim
         tAYLORORDER=5
      end if
 
-     return
-   end subroutine mirtunableparams
+  end if
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!    
+  !                COS
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  if (Fct.eq.1) then
+     if (nhs.le.11)  then  
+        NCP=nhs
+        Taylororder=ncp!2!2!INT(NHS/4)
+     else if (nhs.gt.11 .and. nhs.le.15)  then  
+        NCP=10
+        Taylororder=5!ncp
+
+     else if (nhs.gt.15 .and. nhs.le.25)  then  
+        NCP=15
+        Taylororder=5!ncp
+
+     else if (nhs.gt.25 .and. nhs.le.35)  then  
+        NCP=20
+        Taylororder=5!ncp
+
+     else if (nhs.gt.35 .and. nhs.le.70)  then  
+        NCP=20!50+0.1*nhs
+        Taylororder=5
+     else if (nhs.gt.70 .and. nhs.le.100)  then  
+        NCP=20!50+0.1*nhs
+        Taylororder=5       
+     else
+        NCP=20
+        tAYLORORDER=5
+     end if
+
+  end if
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  !               RUNGE
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!     
+  if (fct.eq.2) then
+     if (nhs.le.20)  then  
+        NCP=nhs
+        Taylororder=5!nhs!2!2!INT(NHS/4)
+
+        !   else if (nhs.gt.11 .and. nhs.le.15)  then  
+        !      NCP=nhs
+        !      Taylororder=7!ncp
+        !      
+        !   else if (nhs.gt.15 .and. nhs.le.25)  then  
+        !      NCP=nhs
+        !      Taylororder=13!ncp
+        !      
+        !   else if (nhs.gt.25 .and. nhs.le.35)  then  
+        !      NCP=nhs
+        !      Taylororder=17!ncp
+        !      
+        !   else if (nhs.gt.35 .and. nhs.le.70)  then  
+        !      NCP=30!50+0.1*nhs
+        !      Taylororder=17
+     else  if (nhs.gt.20 .and. nhs.le.100)  then  
+        NCP=20!50+0.1*nhs
+        Taylororder=5       
+     else
+        NCP=20
+        tAYLORORDER=5
+     end if
+
+  end if
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  !           ROSENBROCK    
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  if (Fct.eq.6) then
+     if (nhs.le.11)  then  
+        NCP=5
+        Taylororder=ncp!2!2!INT(NHS/4)
+     else if (nhs.gt.11 .and. nhs.le.15)  then  
+        NCP=10
+        Taylororder=5!ncp
+
+     else if (nhs.gt.15 .and. nhs.le.25)  then  
+        NCP=15
+        Taylororder=5!ncp
+
+     else if (nhs.gt.25 .and. nhs.le.35)  then  
+        NCP=25
+        Taylororder=5!ncp
+
+     else if (nhs.gt.35 .and. nhs.le.70)  then  
+        NCP=35!50+0.1*nhs
+        Taylororder=5
+     else if (nhs.gt.70 .and. nhs.le.100)  then  
+        NCP=50!50+0.1*nhs
+        Taylororder=5       
+     else
+        NCP=70
+        tAYLORORDER=5
+     end if
+
+  end if
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  !                      CFD   
+  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+  if (fct.eq.20) then
+     if (nhs.le.10)  then  
+        NCP=nhs
+        Taylororder=nhs!nhs!2!2!INT(NHS/4)
+     else if (nhs.gt.10 .and. nhs.le.15)  then  
+        NCP=nhs
+        Taylororder=10!ncp
+
+     else  if (nhs.gt.15 .and. nhs.le.25)  then  
+        NCP=nhs
+        Taylororder=10!ncp
+
+     else  if (nhs.gt.25 .and. nhs.le.35)  then  
+        NCP=nhs
+        Taylororder=7!ncp
+
+     else if (nhs.gt.35 .and. nhs.le.45)  then  
+        NCP=30
+        Taylororder=7
+
+     else if (nhs.gt.45 .and. nhs.le.100)  then  
+        NCP=30!50+0.1*nhs
+        Taylororder=7
+     else
+        NCP=35
+        Taylororder=7
+
+     end if
+
+
+  else
+
+
+     if (nhs.le.11)  then  
+        NCP=nhs
+        Taylororder=ncp!2!2!INT(NHS/4)
+     else if (nhs.gt.11 .and. nhs.le.15)  then  
+        NCP=10
+        Taylororder=5!ncp
+
+     else if (nhs.gt.15 .and. nhs.le.25)  then  
+        NCP=15
+        Taylororder=5!ncp
+
+     else if (nhs.gt.25 .and. nhs.le.35)  then  
+        NCP=20
+        Taylororder=5!ncp
+
+     else if (nhs.gt.35 .and. nhs.le.70)  then  
+        NCP=20!50+0.1*nhs
+        Taylororder=5
+     else if (nhs.gt.70 .and. nhs.le.100)  then  
+        NCP=20!50+0.1*nhs
+        Taylororder=5       
+     else
+        NCP=20
+        tAYLORORDER=5
+     end if
+
+  end if ! end of CFD 
+
+  if(ndimt.gt.2) then ! use 25% of the existing data points
+
+     !NCP= ceiling(0.25*dble(nhs))
+
+     if (Nhs.lt.50) then
+        NCP=nhs
+     else
+        ncp=50
+     end if
+     !        print *,'NCP:',ncp
+     tAYLORORDER=5
+  end if
+
+  return
+end subroutine mirtunableparams
 subroutine knn(SC,sample,knnptr,ndim,nhs,NCP)
   ! Subroutine to find NCP closest neighbours from array sample to point SC
-implicit none
-integer :: ndim,nhs,NCP,j,k,knnptr(NCP)
-real*8 ::SC(ndim),sample(nhs,ndim),norm2(nhs),sn
+  implicit none
+  integer :: ndim,nhs,NCP,j,k,knnptr(NCP)
+  real*8 ::SC(ndim),sample(nhs,ndim),norm2(nhs),sn
 
-! Calculate all distances
-do j=1,nhs
-  norm2(j)=0.0
-  do k=1,ndim
-     norm2(j)=norm2(j)+(sample(j,k)-SC(k))**2
-  end do
-end do
-
-! Find NCP closest neighbours
-
-do k=1,NCP
-  sn=10000000000.0
+  ! Calculate all distances
   do j=1,nhs
-     if (norm2(j).lt.sn) then
-        sn=norm2(j)
-        knnptr(k)=j
-     end if
+     norm2(j)=0.0
+     do k=1,ndim
+        norm2(j)=norm2(j)+(sample(j,k)-SC(k))**2
+     end do
   end do
-  norm2(knnptr(k))=10000000000.0
-end do
+
+  ! Find NCP closest neighbours
+
+  do k=1,NCP
+     sn=10000000000.0
+     do j=1,nhs
+        if (norm2(j).lt.sn) then
+           sn=norm2(j)
+           knnptr(k)=j
+        end if
+     end do
+     norm2(knnptr(k))=10000000000.0
+  end do
 
 end subroutine knn
 
 
 subroutine fixcolindelaunay(triangle_num,triangle_coor_num,ndim,triangle_coor,triangle_node)
   ! Subroutine to check whether delaunay triangles are colinear 
-implicit none
-integer :: triangle_num,triangle_coor_num,ndim,triangle_node(ndim+1,triangle_num),ii,jj,kk,info,ipvt(ndim),Toremove(100000),Numtoremove
-real*8 :: triangle_coor(ndim,triangle_coor_num),x0(ndim),Css(ndim,ndim)
+  implicit none
+  integer :: triangle_num,triangle_coor_num,ndim,triangle_node(ndim+1,triangle_num),ii,jj,kk,info,ipvt(ndim),Toremove(100000),Numtoremove
+  real*8 :: triangle_coor(ndim,triangle_coor_num),x0(ndim),Css(ndim,ndim)
 
 
-Numtoremove=0
-do ii=1,triangle_num
+  Numtoremove=0
+  do ii=1,triangle_num
 
-  x0(1:ndim)=triangle_coor(1:ndim,triangle_node(1,ii))
+     x0(1:ndim)=triangle_coor(1:ndim,triangle_node(1,ii))
 
-  Css(:,:)=0.0
-  do jj=2,ndim+1
-     do kk=1,ndim
-        Css(kk,jj-1)=triangle_coor(kk,triangle_node(jj,ii))-x0(kk)
+     Css(:,:)=0.0
+     do jj=2,ndim+1
+        do kk=1,ndim
+           Css(kk,jj-1)=triangle_coor(kk,triangle_node(jj,ii))-x0(kk)
+        end do
      end do
+
+     call dgefa(Css,ndim,ndim,ipvt,info)
+
+     if (info.ne.0) then
+        ! Flag triangle
+        Numtoremove=Numtoremove+1
+        Toremove(Numtoremove)=ii
+     end if
+
   end do
 
-  call dgefa(Css,ndim,ndim,ipvt,info)
-
-  if (info.ne.0) then
-     ! Flag triangle
-     Numtoremove=Numtoremove+1
-     Toremove(Numtoremove)=ii
-  end if
-
-end do
-
-! Remove flagged triangles from list
-do ii=1,Numtoremove
-  triangle_node(:,Toremove(ii):triangle_num-1)=triangle_node(:,Toremove(ii)+1:triangle_num)
-  triangle_num=triangle_num-1
-  Toremove(ii+1:Numtoremove)=Toremove(ii+1:Numtoremove)-1
-end do
+  ! Remove flagged triangles from list
+  do ii=1,Numtoremove
+     triangle_node(:,Toremove(ii):triangle_num-1)=triangle_node(:,Toremove(ii)+1:triangle_num)
+     triangle_num=triangle_num-1
+     Toremove(ii+1:Numtoremove)=Toremove(ii+1:Numtoremove)-1
+  end do
 
 end subroutine fixcolindelaunay
 
@@ -871,7 +871,7 @@ end subroutine fixcolindelaunay
 
 
 subroutine triangulation_order3_plot ( file_name, node_num, node_xy, &
-  triangle_num, triangle_node, node_show, triangle_show )
+     triangle_num, triangle_node, node_show, triangle_show )
 
   !*****************************************************************************80
   !
@@ -923,253 +923,178 @@ subroutine triangulation_order3_plot ( file_name, node_num, node_xy, &
   !    depicting the nodes.  Currently set to 5.  3 is pretty small, and 1 is
   !    barely visible.
   !
-implicit none
+  implicit none
 
-integer   ( kind = 4 ) node_num
-integer   ( kind = 4 ) triangle_num
+  integer   ( kind = 4 ) node_num
+  integer   ( kind = 4 ) triangle_num
 
-real      ( kind = 8 ) ave_x
-real      ( kind = 8 ) ave_y
-character ( len = 40 ) date_time
-integer   ( kind = 4 ), parameter :: circle_size = 5
-integer   ( kind = 4 ) delta
-integer   ( kind = 4 ) e
-character ( len = * ) file_name
-integer   ( kind = 4 ) file_unit
-integer   ( kind = 4 ) i
-integer   ( kind = 4 ) i4_wrap
-integer   ( kind = 4 ) ios
-integer   ( kind = 4 ) node
-integer   ( kind = 4 ) node_show
-real      ( kind = 8 ) node_xy(2,node_num)
-character ( len = 40 ) string
-integer   ( kind = 4 ) triangle
-integer   ( kind = 4 ) triangle_node(3,triangle_num)
-integer   ( kind = 4 ) triangle_show
-real      ( kind = 8 ) x_max
-real      ( kind = 8 ) x_min
-integer   ( kind = 4 ) x_ps
-integer   ( kind = 4 ) :: x_ps_max = 576
-integer   ( kind = 4 ) :: x_ps_max_clip = 594
-integer   ( kind = 4 ) :: x_ps_min = 36
-integer   ( kind = 4 ) :: x_ps_min_clip = 18
-real      ( kind = 8 ) x_scale
-real      ( kind = 8 ) y_max
-real      ( kind = 8 ) y_min
-integer   ( kind = 4 ) y_ps
-integer   ( kind = 4 ) :: y_ps_max = 666
-integer   ( kind = 4 ) :: y_ps_max_clip = 684
-integer   ( kind = 4 ) :: y_ps_min = 126
-integer   ( kind = 4 ) :: y_ps_min_clip = 108
-real      ( kind = 8 ) y_scale
-!
-!  We need to do some figuring here, so that we can determine
-!  the range of the data, and hence the height and width
-!  of the piece of paper.
-!
-x_max = maxval ( node_xy(1,1:node_num) )
-x_min = minval ( node_xy(1,1:node_num) )
-x_scale = x_max - x_min
+  real      ( kind = 8 ) ave_x
+  real      ( kind = 8 ) ave_y
+  character ( len = 40 ) date_time
+  integer   ( kind = 4 ), parameter :: circle_size = 5
+  integer   ( kind = 4 ) delta
+  integer   ( kind = 4 ) e
+  character ( len = * ) file_name
+  integer   ( kind = 4 ) file_unit
+  integer   ( kind = 4 ) i
+  integer   ( kind = 4 ) i4_wrap
+  integer   ( kind = 4 ) ios
+  integer   ( kind = 4 ) node
+  integer   ( kind = 4 ) node_show
+  real      ( kind = 8 ) node_xy(2,node_num)
+  character ( len = 40 ) string
+  integer   ( kind = 4 ) triangle
+  integer   ( kind = 4 ) triangle_node(3,triangle_num)
+  integer   ( kind = 4 ) triangle_show
+  real      ( kind = 8 ) x_max
+  real      ( kind = 8 ) x_min
+  integer   ( kind = 4 ) x_ps
+  integer   ( kind = 4 ) :: x_ps_max = 576
+  integer   ( kind = 4 ) :: x_ps_max_clip = 594
+  integer   ( kind = 4 ) :: x_ps_min = 36
+  integer   ( kind = 4 ) :: x_ps_min_clip = 18
+  real      ( kind = 8 ) x_scale
+  real      ( kind = 8 ) y_max
+  real      ( kind = 8 ) y_min
+  integer   ( kind = 4 ) y_ps
+  integer   ( kind = 4 ) :: y_ps_max = 666
+  integer   ( kind = 4 ) :: y_ps_max_clip = 684
+  integer   ( kind = 4 ) :: y_ps_min = 126
+  integer   ( kind = 4 ) :: y_ps_min_clip = 108
+  real      ( kind = 8 ) y_scale
+  !
+  !  We need to do some figuring here, so that we can determine
+  !  the range of the data, and hence the height and width
+  !  of the piece of paper.
+  !
+  x_max = maxval ( node_xy(1,1:node_num) )
+  x_min = minval ( node_xy(1,1:node_num) )
+  x_scale = x_max - x_min
 
-x_max = x_max + 0.05D+00 * x_scale
-x_min = x_min - 0.05D+00 * x_scale
-x_scale = x_max - x_min
+  x_max = x_max + 0.05D+00 * x_scale
+  x_min = x_min - 0.05D+00 * x_scale
+  x_scale = x_max - x_min
 
-y_max = maxval ( node_xy(2,1:node_num) )
-y_min = minval ( node_xy(2,1:node_num) )
-y_scale = y_max - y_min
+  y_max = maxval ( node_xy(2,1:node_num) )
+  y_min = minval ( node_xy(2,1:node_num) )
+  y_scale = y_max - y_min
 
-y_max = y_max + 0.05D+00 * y_scale
-y_min = y_min - 0.05D+00 * y_scale
-y_scale = y_max - y_min
+  y_max = y_max + 0.05D+00 * y_scale
+  y_min = y_min - 0.05D+00 * y_scale
+  y_scale = y_max - y_min
 
-if ( x_scale < y_scale ) then
+  if ( x_scale < y_scale ) then
 
-  delta = nint ( real ( x_ps_max - x_ps_min, kind = 8 ) &
-       * ( y_scale - x_scale ) / ( 2.0D+00 * y_scale ) )
+     delta = nint ( real ( x_ps_max - x_ps_min, kind = 8 ) &
+          * ( y_scale - x_scale ) / ( 2.0D+00 * y_scale ) )
 
-  x_ps_max = x_ps_max - delta
-  x_ps_min = x_ps_min + delta
+     x_ps_max = x_ps_max - delta
+     x_ps_min = x_ps_min + delta
 
-  x_ps_max_clip = x_ps_max_clip - delta
-  x_ps_min_clip = x_ps_min_clip + delta
+     x_ps_max_clip = x_ps_max_clip - delta
+     x_ps_min_clip = x_ps_min_clip + delta
 
-  x_scale = y_scale
+     x_scale = y_scale
 
-else if ( y_scale < x_scale ) then
+  else if ( y_scale < x_scale ) then
 
-  delta = nint ( real ( y_ps_max - y_ps_min, kind = 8 ) &
-       * ( x_scale - y_scale ) / ( 2.0D+00 * x_scale ) )
+     delta = nint ( real ( y_ps_max - y_ps_min, kind = 8 ) &
+          * ( x_scale - y_scale ) / ( 2.0D+00 * x_scale ) )
 
-  y_ps_max      = y_ps_max - delta
-  y_ps_min      = y_ps_min + delta
+     y_ps_max      = y_ps_max - delta
+     y_ps_min      = y_ps_min + delta
 
-  y_ps_max_clip = y_ps_max_clip - delta
-  y_ps_min_clip = y_ps_min_clip + delta
+     y_ps_max_clip = y_ps_max_clip - delta
+     y_ps_min_clip = y_ps_min_clip + delta
 
-  y_scale = x_scale
+     y_scale = x_scale
 
-end if
+  end if
 
-file_unit=99
+  file_unit=99
 
-open ( unit = file_unit, file = file_name, status = 'replace', &
-    iostat = ios )
+  open ( unit = file_unit, file = file_name, status = 'replace', &
+       iostat = ios )
 
-if ( ios /= 0 ) then
-  write ( *, '(a)' ) ' '
-  write ( *, '(a)' ) 'TRIANGULATION_ORDER3_PLOT - Fatal error!'
-  write ( *, '(a)' ) '  Can not open output file "', trim ( file_name ), '".'
-  return
-end if
+  if ( ios /= 0 ) then
+     write ( *, '(a)' ) ' '
+     write ( *, '(a)' ) 'TRIANGULATION_ORDER3_PLOT - Fatal error!'
+     write ( *, '(a)' ) '  Can not open output file "', trim ( file_name ), '".'
+     return
+  end if
 
-write ( file_unit, '(a)' ) '%!PS-Adobe-3.0 EPSF-3.0'
-write ( file_unit, '(a)' ) '%%Creator: triangulation_order3_plot.f90'
-write ( file_unit, '(a)' ) '%%Title: ' // trim ( file_name )
-write ( file_unit, '(a)' ) '%%CreationDate: ' // trim ( date_time )
-write ( file_unit, '(a)' ) '%%Pages: 1'
-write ( file_unit, '(a,i3,2x,i3,2x,i3,2x,i3)' ) '%%BoundingBox: ', &
-    x_ps_min, y_ps_min, x_ps_max, y_ps_max
-write ( file_unit, '(a)' ) '%%Document-Fonts: Times-Roman'
-write ( file_unit, '(a)' ) '%%LanguageLevel: 1'
-write ( file_unit, '(a)' ) '%%EndComments'
-write ( file_unit, '(a)' ) '%%BeginProlog'
-write ( file_unit, '(a)' ) '/inch {72 mul} def'
-write ( file_unit, '(a)' ) '%%EndProlog'
-write ( file_unit, '(a)' ) '%%Page: 1 1'
-write ( file_unit, '(a)' ) 'save'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  Set the RGB line color to very light gray.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '0.900  0.900  0.900 setrgbcolor'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  Draw a gray border around the page.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) 'newpath'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_min, y_ps_min, ' moveto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_max, y_ps_min, ' lineto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_max, y_ps_max, ' lineto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_min, y_ps_max, ' lineto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_min, y_ps_min, ' lineto'
-write ( file_unit, '(a)' ) 'stroke'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  Set the RGB color to black.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '0.000  0.000  0.000 setrgbcolor'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  Set the font and its size.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '/Times-Roman findfont'
-write ( file_unit, '(a)' ) '0.50 inch scalefont'
-write ( file_unit, '(a)' ) 'setfont'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  Print a title.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  210  702  moveto'
-write ( file_unit, '(a)' ) '%  (Triangulation)  show'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  Define a clipping polygon.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) 'newpath'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
-    x_ps_min_clip, y_ps_min_clip, ' moveto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
-    x_ps_max_clip, y_ps_min_clip, ' lineto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
-    x_ps_max_clip, y_ps_max_clip, ' lineto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
-    x_ps_min_clip, y_ps_max_clip, ' lineto'
-write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
-    x_ps_min_clip, y_ps_min_clip, ' lineto'
-write ( file_unit, '(a)' ) 'clip newpath'
-!
-!  Draw the nodes.
-!
-if ( 1 <= node_show ) then
+  write ( file_unit, '(a)' ) '%!PS-Adobe-3.0 EPSF-3.0'
+  write ( file_unit, '(a)' ) '%%Creator: triangulation_order3_plot.f90'
+  write ( file_unit, '(a)' ) '%%Title: ' // trim ( file_name )
+  write ( file_unit, '(a)' ) '%%CreationDate: ' // trim ( date_time )
+  write ( file_unit, '(a)' ) '%%Pages: 1'
+  write ( file_unit, '(a,i3,2x,i3,2x,i3,2x,i3)' ) '%%BoundingBox: ', &
+       x_ps_min, y_ps_min, x_ps_max, y_ps_max
+  write ( file_unit, '(a)' ) '%%Document-Fonts: Times-Roman'
+  write ( file_unit, '(a)' ) '%%LanguageLevel: 1'
+  write ( file_unit, '(a)' ) '%%EndComments'
+  write ( file_unit, '(a)' ) '%%BeginProlog'
+  write ( file_unit, '(a)' ) '/inch {72 mul} def'
+  write ( file_unit, '(a)' ) '%%EndProlog'
+  write ( file_unit, '(a)' ) '%%Page: 1 1'
+  write ( file_unit, '(a)' ) 'save'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Draw filled dots at the nodes.'
+  write ( file_unit, '(a)' ) '%  Set the RGB line color to very light gray.'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Set the RGB color to blue.'
+  write ( file_unit, '(a)' ) '0.900  0.900  0.900 setrgbcolor'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '0.000  0.150  0.750 setrgbcolor'
+  write ( file_unit, '(a)' ) '%  Draw a gray border around the page.'
   write ( file_unit, '(a)' ) '%'
-
-  do node = 1, node_num
-
-     x_ps = int ( &
-          ( ( x_max - node_xy(1,node)         ) * real ( x_ps_min, kind = 8 )   &
-          + (         node_xy(1,node) - x_min ) * real ( x_ps_max, kind = 8 ) ) &
-          / ( x_max                   - x_min ) )
-
-     y_ps = int ( &
-          ( ( y_max - node_xy(2,node)         ) * real ( y_ps_min, kind = 8 )   &
-          + (         node_xy(2,node) - y_min ) * real ( y_ps_max, kind = 8 ) ) &
-          / ( y_max                   - y_min ) )
-
-     write ( file_unit, '(a,i4,2x,i4,2x,i4,2x,a)' ) 'newpath ', x_ps, y_ps, &
-          circle_size, '0 360 arc closepath fill'
-
-  end do
-
-end if
-!
-!  Label the nodes.
-!
-if ( 2 <= node_show ) then
-
+  write ( file_unit, '(a)' ) 'newpath'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_min, y_ps_min, ' moveto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_max, y_ps_min, ' lineto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_max, y_ps_max, ' lineto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_min, y_ps_max, ' lineto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', x_ps_min, y_ps_min, ' lineto'
+  write ( file_unit, '(a)' ) 'stroke'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Label the nodes:'
+  write ( file_unit, '(a)' ) '%  Set the RGB color to black.'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Set the RGB color to darker blue.'
+  write ( file_unit, '(a)' ) '0.000  0.000  0.000 setrgbcolor'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '0.000  0.250  0.850 setrgbcolor'
+  write ( file_unit, '(a)' ) '%  Set the font and its size.'
+  write ( file_unit, '(a)' ) '%'
   write ( file_unit, '(a)' ) '/Times-Roman findfont'
-  write ( file_unit, '(a)' ) '0.20 inch scalefont'
+  write ( file_unit, '(a)' ) '0.50 inch scalefont'
   write ( file_unit, '(a)' ) 'setfont'
   write ( file_unit, '(a)' ) '%'
-
-  do node = 1, node_num
-
-     x_ps = int ( &
-          ( ( x_max - node_xy(1,node)         ) * real ( x_ps_min, kind = 8 )   &
-          + (       + node_xy(1,node) - x_min ) * real ( x_ps_max, kind = 8 ) ) &
-          / ( x_max                   - x_min ) )
-
-     y_ps = int ( &
-          ( ( y_max - node_xy(2,node)         ) * real ( y_ps_min, kind = 8 )   &
-          + (         node_xy(2,node) - y_min ) * real ( y_ps_max, kind = 8 ) ) &
-          / ( y_max                   - y_min ) )
-
-     write ( string, '(i4)' ) node
-     string = adjustl ( string )
-
-     write ( file_unit, '(i4,2x,i4,a)' ) x_ps, y_ps+5, &
-          ' moveto (' // trim ( string ) // ') show'
-
-  end do
-
-end if
-!
-!  Draw the triangles.
-!
-if ( 1 <= triangle_show ) then
+  write ( file_unit, '(a)' ) '%  Print a title.'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Set the RGB color to red.'
+  write ( file_unit, '(a)' ) '%  210  702  moveto'
+  write ( file_unit, '(a)' ) '%  (Triangulation)  show'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '0.900  0.200  0.100 setrgbcolor'
+  write ( file_unit, '(a)' ) '%  Define a clipping polygon.'
   write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Draw the triangles.'
-  write ( file_unit, '(a)' ) '%'
+  write ( file_unit, '(a)' ) 'newpath'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
+       x_ps_min_clip, y_ps_min_clip, ' moveto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
+       x_ps_max_clip, y_ps_min_clip, ' lineto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
+       x_ps_max_clip, y_ps_max_clip, ' lineto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
+       x_ps_min_clip, y_ps_max_clip, ' lineto'
+  write ( file_unit, '(a,i3,2x,i3,2x,a)' ) '  ', &
+       x_ps_min_clip, y_ps_min_clip, ' lineto'
+  write ( file_unit, '(a)' ) 'clip newpath'
+  !
+  !  Draw the nodes.
+  !
+  if ( 1 <= node_show ) then
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Draw filled dots at the nodes.'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Set the RGB color to blue.'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '0.000  0.150  0.750 setrgbcolor'
+     write ( file_unit, '(a)' ) '%'
 
-  do triangle = 1, triangle_num
-
-     write ( file_unit, '(a)' ) 'newpath'
-
-     do i = 1, 4
-
-        e = i4_wrap ( i, 1, 3 )
-
-        node = triangle_node(e,triangle)
+     do node = 1, node_num
 
         x_ps = int ( &
              ( ( x_max - node_xy(1,node)         ) * real ( x_ps_min, kind = 8 )   &
@@ -1181,82 +1106,157 @@ if ( 1 <= triangle_show ) then
              + (         node_xy(2,node) - y_min ) * real ( y_ps_max, kind = 8 ) ) &
              / ( y_max                   - y_min ) )
 
-        if ( i == 1 ) then
-           write ( file_unit, '(i3,2x,i3,2x,a)' ) x_ps, y_ps, ' moveto'
-        else
-           write ( file_unit, '(i3,2x,i3,2x,a)' ) x_ps, y_ps, ' lineto'
-        end if
+        write ( file_unit, '(a,i4,2x,i4,2x,i4,2x,a)' ) 'newpath ', x_ps, y_ps, &
+             circle_size, '0 360 arc closepath fill'
 
      end do
 
-     write ( file_unit, '(a)' ) 'stroke'
+  end if
+  !
+  !  Label the nodes.
+  !
+  if ( 2 <= node_show ) then
 
-  end do
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Label the nodes:'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Set the RGB color to darker blue.'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '0.000  0.250  0.850 setrgbcolor'
+     write ( file_unit, '(a)' ) '/Times-Roman findfont'
+     write ( file_unit, '(a)' ) '0.20 inch scalefont'
+     write ( file_unit, '(a)' ) 'setfont'
+     write ( file_unit, '(a)' ) '%'
 
-end if
-!
-!  Label the triangles.
-!
-if ( 2 <= triangle_show ) then
+     do node = 1, node_num
 
-  write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Label the triangles:'
-  write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '%  Set the RGB color to darker red.'
-  write ( file_unit, '(a)' ) '%'
-  write ( file_unit, '(a)' ) '0.950  0.250  0.150 setrgbcolor'
-  write ( file_unit, '(a)' ) '/Times-Roman findfont'
-  write ( file_unit, '(a)' ) '0.20 inch scalefont'
-  write ( file_unit, '(a)' ) 'setfont'
-  write ( file_unit, '(a)' ) '%'
+        x_ps = int ( &
+             ( ( x_max - node_xy(1,node)         ) * real ( x_ps_min, kind = 8 )   &
+             + (       + node_xy(1,node) - x_min ) * real ( x_ps_max, kind = 8 ) ) &
+             / ( x_max                   - x_min ) )
 
-  do triangle = 1, triangle_num
+        y_ps = int ( &
+             ( ( y_max - node_xy(2,node)         ) * real ( y_ps_min, kind = 8 )   &
+             + (         node_xy(2,node) - y_min ) * real ( y_ps_max, kind = 8 ) ) &
+             / ( y_max                   - y_min ) )
 
-     ave_x = 0.0D+00
-     ave_y = 0.0D+00
+        write ( string, '(i4)' ) node
+        string = adjustl ( string )
 
-     do i = 1, 3
-
-        node = triangle_node(i,triangle)
-
-        ave_x = ave_x + node_xy(1,node)
-        ave_y = ave_y + node_xy(2,node)
+        write ( file_unit, '(i4,2x,i4,a)' ) x_ps, y_ps+5, &
+             ' moveto (' // trim ( string ) // ') show'
 
      end do
 
-     ave_x = ave_x / 3.0D+00
-     ave_y = ave_y / 3.0D+00
+  end if
+  !
+  !  Draw the triangles.
+  !
+  if ( 1 <= triangle_show ) then
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Set the RGB color to red.'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '0.900  0.200  0.100 setrgbcolor'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Draw the triangles.'
+     write ( file_unit, '(a)' ) '%'
 
-     x_ps = int ( &
-          ( ( x_max - ave_x         ) * real ( x_ps_min, kind = 8 )   &
-          + (       + ave_x - x_min ) * real ( x_ps_max, kind = 8 ) ) &
-          / ( x_max         - x_min ) )
+     do triangle = 1, triangle_num
 
-     y_ps = int ( &
-          ( ( y_max - ave_y         ) * real ( y_ps_min, kind = 8 )   &
-          + (         ave_y - y_min ) * real ( y_ps_max, kind = 8 ) ) &
-          / ( y_max         - y_min ) )
+        write ( file_unit, '(a)' ) 'newpath'
 
-     write ( string, '(i4)' ) triangle
-     string = adjustl ( string )
+        do i = 1, 4
 
-     write ( file_unit, '(i4,2x,i4,a)' ) x_ps, y_ps, ' moveto (' &
-          // trim ( string ) // ') show'
+           e = i4_wrap ( i, 1, 3 )
 
-  end do
+           node = triangle_node(e,triangle)
 
-end if
+           x_ps = int ( &
+                ( ( x_max - node_xy(1,node)         ) * real ( x_ps_min, kind = 8 )   &
+                + (         node_xy(1,node) - x_min ) * real ( x_ps_max, kind = 8 ) ) &
+                / ( x_max                   - x_min ) )
 
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) 'restore  showpage'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%  End of page.'
-write ( file_unit, '(a)' ) '%'
-write ( file_unit, '(a)' ) '%%Trailer'
-write ( file_unit, '(a)' ) '%%EOF'
-close ( unit = file_unit )
+           y_ps = int ( &
+                ( ( y_max - node_xy(2,node)         ) * real ( y_ps_min, kind = 8 )   &
+                + (         node_xy(2,node) - y_min ) * real ( y_ps_max, kind = 8 ) ) &
+                / ( y_max                   - y_min ) )
 
-return
+           if ( i == 1 ) then
+              write ( file_unit, '(i3,2x,i3,2x,a)' ) x_ps, y_ps, ' moveto'
+           else
+              write ( file_unit, '(i3,2x,i3,2x,a)' ) x_ps, y_ps, ' lineto'
+           end if
+
+        end do
+
+        write ( file_unit, '(a)' ) 'stroke'
+
+     end do
+
+  end if
+  !
+  !  Label the triangles.
+  !
+  if ( 2 <= triangle_show ) then
+
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Label the triangles:'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '%  Set the RGB color to darker red.'
+     write ( file_unit, '(a)' ) '%'
+     write ( file_unit, '(a)' ) '0.950  0.250  0.150 setrgbcolor'
+     write ( file_unit, '(a)' ) '/Times-Roman findfont'
+     write ( file_unit, '(a)' ) '0.20 inch scalefont'
+     write ( file_unit, '(a)' ) 'setfont'
+     write ( file_unit, '(a)' ) '%'
+
+     do triangle = 1, triangle_num
+
+        ave_x = 0.0D+00
+        ave_y = 0.0D+00
+
+        do i = 1, 3
+
+           node = triangle_node(i,triangle)
+
+           ave_x = ave_x + node_xy(1,node)
+           ave_y = ave_y + node_xy(2,node)
+
+        end do
+
+        ave_x = ave_x / 3.0D+00
+        ave_y = ave_y / 3.0D+00
+
+        x_ps = int ( &
+             ( ( x_max - ave_x         ) * real ( x_ps_min, kind = 8 )   &
+             + (       + ave_x - x_min ) * real ( x_ps_max, kind = 8 ) ) &
+             / ( x_max         - x_min ) )
+
+        y_ps = int ( &
+             ( ( y_max - ave_y         ) * real ( y_ps_min, kind = 8 )   &
+             + (         ave_y - y_min ) * real ( y_ps_max, kind = 8 ) ) &
+             / ( y_max         - y_min ) )
+
+        write ( string, '(i4)' ) triangle
+        string = adjustl ( string )
+
+        write ( file_unit, '(i4,2x,i4,a)' ) x_ps, y_ps, ' moveto (' &
+             // trim ( string ) // ') show'
+
+     end do
+
+  end if
+
+  write ( file_unit, '(a)' ) '%'
+  write ( file_unit, '(a)' ) 'restore  showpage'
+  write ( file_unit, '(a)' ) '%'
+  write ( file_unit, '(a)' ) '%  End of page.'
+  write ( file_unit, '(a)' ) '%'
+  write ( file_unit, '(a)' ) '%%Trailer'
+  write ( file_unit, '(a)' ) '%%EOF'
+  close ( unit = file_unit )
+
+  return
 end subroutine triangulation_order3_plot
 
 
@@ -1306,22 +1306,22 @@ function i4_wrap ( ival, ilo, ihi )
   !
   !    Output, integer I4_WRAP, a "wrapped" version of IVAL.
   !
-integer i4_modp
-integer i4_wrap
-integer ihi
-integer ilo
-integer ival
-integer wide
+  integer i4_modp
+  integer i4_wrap
+  integer ihi
+  integer ilo
+  integer ival
+  integer wide
 
-wide = ihi + 1 - ilo
+  wide = ihi + 1 - ilo
 
-if ( wide == 0 ) then
-  i4_wrap = ilo
-else
-  i4_wrap = ilo + i4_modp ( ival-ilo, wide )
-end if
+  if ( wide == 0 ) then
+     i4_wrap = ilo
+  else
+     i4_wrap = ilo + i4_modp ( ival-ilo, wide )
+  end if
 
-return
+  return
 end function i4_wrap
 
 function i4_modp ( i, j )
@@ -1375,23 +1375,23 @@ function i4_modp ( i, j )
   !    Output, integer I4_MODP, the nonnegative remainder when I is
   !    divided by J.
   !
-integer i
-integer i4_modp
-integer j
+  integer i
+  integer i4_modp
+  integer j
 
-if ( j == 0 ) then
-  write ( *, '(a)' ) ' '
-  write ( *, '(a)' ) 'I4_MODP - Fatal error!'
-  write ( *, '(a,i6)' ) '  I4_MODP ( I, J ) called with J = ', j
-  stop
-end if
+  if ( j == 0 ) then
+     write ( *, '(a)' ) ' '
+     write ( *, '(a)' ) 'I4_MODP - Fatal error!'
+     write ( *, '(a,i6)' ) '  I4_MODP ( I, J ) called with J = ', j
+     stop
+  end if
 
-i4_modp = mod ( i, j )
+  i4_modp = mod ( i, j )
 
-if ( i4_modp < 0 ) then
-  i4_modp = i4_modp + abs ( j )
-end if
+  if ( i4_modp < 0 ) then
+     i4_modp = i4_modp + abs ( j )
+  end if
 
-return
+  return
 end function i4_modp
 
