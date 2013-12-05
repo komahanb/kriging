@@ -287,7 +287,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 
-     NTOEX=27000 !*NDIM
+     NTOEX=2601 !*NDIM
 
      !      NTOEX=int((1000*num_proc)/ndim)
 

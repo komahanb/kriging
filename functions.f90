@@ -43,7 +43,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      call omp_set_num_threads(omp_get_max_threads())
      call Eulersolve(xtmp,ndimt,ifid,f,dftmp,d2ftmp,flag,v,fctindx)
 
-     CALL chdir('../') !Comment when using fine mesh
+    CALL chdir('../') !Comment when using fine mesh
 
      ! Meant for optimizations
 
