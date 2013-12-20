@@ -19,7 +19,7 @@ program Kriging
 
   ! Dimension of problem
 
-  ndim=5
+  ndim=2
   ndimt=ndim
 
   randomini=1      
@@ -80,7 +80,9 @@ program Kriging
 !!$           dynamics=0
 !!$        end if     ! 0: not dynamic  1: dynamic 
 
-        do ctest=2,2
+
+        do ctest=3,3
+
 
            if (ctest.eq.2) then
 
@@ -121,7 +123,9 @@ program Kriging
            do fuct=1,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
               if (fuct.eq.1) fct=0
-              if (fuct.eq.2) fct=2
+
+              if (fuct.eq.2) fct=0
+
               if (fuct.eq.3) fct=3
 
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
@@ -144,8 +148,8 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 2005
-                       nptstoaddpercyc=250 !160
+                       maxsamplewant= 25
+                       nptstoaddpercyc=2 !160
 
                     else if (nstattmp.eq.1) then
 

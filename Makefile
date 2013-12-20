@@ -39,7 +39,7 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
 	matrixR.o petitR.o \
         search_krig.o meta.o diff.o output_des.o \
         correct.o LUroutines.o\
-        higher.o variance.o rmsebound.o \
+        higher.o variance.o\
         indirect.o trust.o trustool.o \
         rank.o vrange.o nieder.o \
         update.o DynamicPointSelection.o\
@@ -50,7 +50,7 @@ SRCS =  dimKrig.o main.o functions.o Timer.o\
         scf_df.o scf_df_df.o scf_df_df_db.o \
         scf_db.o scf_db_db.o scf_db_db_df.o \
 	scf_db_df.o scf_df_db.o scf_df_df_db_db.o \
-	hammersley.o sobol.o faure.o
+	hammersley.o sobol.o faure.o rmsebound.o
 
 OBJS =  ${SRCS:.$(SUF)=.o}
 
