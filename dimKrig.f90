@@ -97,4 +97,6 @@
       double precision,allocatable,dimension(:,:,:)::rmsemat
       character*60 :: outfile
 
+      integer::fcnt,fgcnt,fghcnt
+
       End Module dimKrig

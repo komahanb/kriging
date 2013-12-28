@@ -237,7 +237,7 @@ end subroutine evalfunc
 
 
 subroutine calcf(x,DIM,fct,f)
-  use dimKrig, only: fctindx, DAT,mainprog
+  use dimKrig, only: fctindx, DAT,mainprog,fcnt
   implicit none
 
   integer :: DIM,fct,k
@@ -249,6 +249,8 @@ subroutine calcf(x,DIM,fct,f)
   real*8::comp_sigma1_max,comp_sigma2_max,comp_sigma3_max
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
   
+  fcnt=fcnt+1
+
   if (fct.eq.0) then
      f=0.0
      do k=1,DIM
@@ -783,7 +785,7 @@ end subroutine calcf
 
   
 subroutine calcdf(x,DIM,fct,df)
-  use dimKrig, only: fctindx,DAT,mainprog
+  use dimKrig, only: fctindx,DAT,mainprog,fgcnt
   implicit none
   integer :: DIM,fct,k
   real*8 :: x(DIM),df(DIM),fac,A,omeg
@@ -795,6 +797,7 @@ subroutine calcdf(x,DIM,fct,df)
   real*8::comp_sigma1_max,comp_sigma2_max,comp_sigma3_max
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
 
+  fgcnt=fgcnt+1
 
   if (fct.eq.0) then
 
@@ -1379,7 +1382,7 @@ subroutine calcdf(x,DIM,fct,df)
 end subroutine calcdf
 
 subroutine calcd2f(x,DIM,fct,d2f)
-  use dimKrig, only: fctindx,DAT,mainprog
+  use dimKrig, only: fctindx,DAT,mainprog,fghcnt
   implicit none
   integer :: DIM,fct,j,k
   real*8 :: x(DIM),d2f(DIM,DIM),fac,A,omeg,P,rho,Fs,sigmay
@@ -1388,6 +1391,8 @@ subroutine calcd2f(x,DIM,fct,d2f)
   real*8::comp_sigma1_max,comp_sigma2_max,comp_sigma3_max
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
   real*8:: tau_allow,M,V,B,D
+
+  fghcnt=fghcnt+1
 
   if (fct.eq.0) then
 
