@@ -225,7 +225,9 @@ subroutine DynamicPointSelection
      call combination(ndim+Dutchorderg,ndim,NCP)
      !     NTOEX=(30-ndim)*NCP
 
-     NTOEX=5000*NDIM
+     NTOEX=10201
+
+!     NTOEX=5000*NDIM
 
      if (id_proc.eq.0) then
         call get_seed(nseed)
@@ -287,7 +289,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 
-     NTOEX=2601 !*NDIM
+     NTOEX=10201 !*NDIM
 
      !      NTOEX=int((1000*num_proc)/ndim)
 
@@ -422,12 +424,21 @@ subroutine DynamicPointSelection
 
      diffloctmp=0.0d0
      diffloc2=0.0d0
+     difflocmax=0.0d0
+
      do k=1,NTOEX
+
         diffloctmp=(maxftoex(k)-minftoex(k))**2
         diffloc2=diffloc2+diffloctmp
+        difflocmax=max(difflocmax,sqrt(diffloctmp)) ! Calculating the max difference between the surrogates
      end do
+
+     ! Calculating the mean difference between the surrogates
+     
      diffloc2=diffloc2/dble(ntoex)
      diffloc2=sqrt(diffloc2)
+
+     
 
      do ii=1,nptstoaddpercyc
 
@@ -753,36 +764,28 @@ subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 
 
   else
+!!$
+     if (nhs.le.25)  then  
 
-
-     if (nhs.le.11)  then  
         NCP=nhs
-        Taylororder=ncp!2!2!INT(NHS/4)
-     else if (nhs.gt.11 .and. nhs.le.15)  then  
-        NCP=10
-        Taylororder=5!ncp
-
-     else if (nhs.gt.15 .and. nhs.le.25)  then  
-        NCP=15
-        Taylororder=5!ncp
+        Taylororder=5 !2!2!INT(NHS/4)
 
      else if (nhs.gt.25 .and. nhs.le.35)  then  
-        NCP=20
+        NCP=25
         Taylororder=5!ncp
 
      else if (nhs.gt.35 .and. nhs.le.70)  then  
-        NCP=20!50+0.1*nhs
+        NCP=25!50+0.1*nhs
         Taylororder=5
      else if (nhs.gt.70 .and. nhs.le.100)  then  
-        NCP=20!50+0.1*nhs
+        NCP=25!50+0.1*nhs
         Taylororder=5       
      else
-        NCP=20
+        NCP=25
         tAYLORORDER=5
      end if
 
   end if ! end of CFD 
-
   if(ndimt.gt.2) then ! use 25% of the existing data points
 
      !NCP= ceiling(0.25*dble(nhs))
