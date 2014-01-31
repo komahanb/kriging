@@ -1,8 +1,9 @@
-0.0218166156 0.755  ! Center Location (1.25deg,0.1deg)
-0.00174532925 0.01  ! Standard Deviation
-0                   ! Target Design Variable was 4
-1		    ! Target Function
-3000		    ! # of MonteCarlo Simulation
-30                  ! # of Decomposition, Bounds for Histogram
-0		    !read MC Samples
-1		    !Evaluate exact function during MC or not (0 or 1)
+3.490658500000000E-002 0.750000000000000        ! Center Location (2deg,0.5deg)
+8.726646260000000E-003 5.000000000000000E-002   ! Standard Deviation
+0                 ! Target Design Variable was 4
+1                 ! Target Function
+3000		  ! # of MonteCarlo Simulation
+30                ! # of Decomposition, Bounds for Histogram
+0		  ! Read old MC Samples (no 0 or yes 1)
+0		  ! Evaluate exact function during MC or not (no 0 or yes 1)	
+1		  ! Expensive (no=0,yes=1)

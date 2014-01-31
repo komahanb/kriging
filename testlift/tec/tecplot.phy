@@ -1,7 +1,7 @@
 #!PHY 700
 850 705 3.7808807733619766e+01 3.7894736842105260e+01 401
+/home/komahan/Surrogates/kriging/testlift/tec/both.lay
+/home/komahan/Surrogates/kriging/testlift/tec/krigingonly.lay
 /home/komahan/kriging/testlift/tec/krigingonly.lay
 /home/komahan/JournalRuns/kriging/testlift/tec/krigingonly.lay
 /home/komahan/Dropbox/Thesis/Program/kriging/testlift/tec/krigingonly.lay
-/home/komahan/Dropbox/Thesis/Program/kriging/testlift/tec/both.lay
-/home/komahan/Dropbox/Thesis/Program/kriging/testcfd/tec/both.lay

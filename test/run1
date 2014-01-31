@@ -1,4 +1,0 @@
-cd ..
-mpif90 -openmp -r8 -O4 test.f90 krigingestimate.a Eulersolve.a libmir.a -L usr/local/lib -lgsl -lgslcblas -lm
-cd -
-mpiexec -np 8 ../a.out |tee screen

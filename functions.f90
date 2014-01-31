@@ -1,8 +1,5 @@
-
-!===============================
-
 subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
-  use dimKrig, only: DS,fctindx,reusesamples,ndimt,xavgt,xstdt
+  use dimKrig, only: DS,fctindx,reusesamples,ndimt,xavgt,xstdt,fcnt,fgcnt,fghcnt
   use omp_lib
   implicit none
 
@@ -24,7 +21,7 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
   end do
 
 
-  if (fct.lt.20) then
+  if (fct.lt.20) then !Analytic functions
 
      call calcf(xtmp,ndimt,fct,f)
      if (flag.ge.1) call calcdf(xtmp,ndimt,fct,dftmp)   
@@ -36,16 +33,26 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         d2ftmp(:,:)=0.1*d2ftmp(:,:)
      end if
 
-  else if (fct.eq.20) then
+  else if (fct.eq.20) then ! CFD
 
-     CALL chdir('lowfid') ! Comment when using fine mesh
+     !CALL chdir('lowfid') ! Comment when using fine mesh
+     
+     if(flag.eq.0) fcnt=fcnt+1
+     if(flag.eq.1) fgcnt=fgcnt+1
+     if(flag.eq.2) fghcnt=fghcnt+1
 
      call omp_set_num_threads(omp_get_max_threads())
+
      call Eulersolve(xtmp,ndimt,ifid,f,dftmp,d2ftmp,flag,v,fctindx)
 
-    CALL chdir('../') !Comment when using fine mesh
+     !CALL chdir('../') !Comment when using fine mesh
+     
 
-     ! Meant for optimizations
+     !=================================
+
+     ! Rest are meant for OUU
+
+     !=================================
 
   else if (fct.eq.21) then ! Two bar truss 
 
@@ -59,18 +66,9 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
-
-     !     if (fctindx.eq.0) then ! what is the worst objective function 
-
-     !       call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
-
-     !   else
+     !What is the max possible weight? (objective function) or max tendency towards constraint violation?
 
      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
-
-     !  end if
-
-     !     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
   else if (fct.eq.22) then !CFD
 
@@ -83,8 +81,6 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         write(*,*) 'Error in function call, optimization does not support gradient evalution'
         stop
      end if
-
-     !     print*,'before optimize',fctindx,fct,xtmp,ndimt,low(1:ndimt-dim),up(1:ndimt-dim)
 
      call omp_set_num_threads(omp_get_max_threads())
 
@@ -110,14 +106,9 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
         stop
      end if
 
-
-     !    if (fctindx.eq.0) then ! what is the worst objective function 
-
+     !What is the max possible weight? (objective function) or max tendency towards constraint violation?
+     
      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
-
-     !        call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
-
-     !   end if
 
 
   else
@@ -126,7 +117,6 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      stop
 
   end if
-
 
 
   df(1:DIM)=dftmp(ndimt-DIM+1:ndimt)
@@ -248,7 +238,7 @@ subroutine calcf(x,DIM,fct,f)
   real*8::tensile_sigma1_max,tensile_sigma2_max,tensile_sigma3_max
   real*8::comp_sigma1_max,comp_sigma2_max,comp_sigma3_max
   real*8::max_u_disp,max_v_disp,theta,pu,pv,u,sigma(dim)
-  
+
   fcnt=fcnt+1
 
   if (fct.eq.0) then
@@ -290,8 +280,10 @@ subroutine calcf(x,DIM,fct,f)
         f=f+x(k)
      end do
      f=cos(f)+0.01*cos(100.0*f)
+
+
   else if (fct.eq.6) then
-!     if (dim.ne.3) stop'Wrong dimension'
+     !     if (dim.ne.3) stop'Wrong dimension'
 
      pi=4.0*atan(1.0)
 
@@ -328,8 +320,8 @@ subroutine calcf(x,DIM,fct,f)
      if (fctindx.eq.0) then
         !---- OBJECTIVE FUNCTION
         f = rho*x(1)*L+rho*x(2)*sqrt(L**2+x(3)**2)
-!        print*,x,f
-!stop
+        !        print*,x,f
+        !stop
      else if (fctindx.eq.1) then
         !---- INEQUALITY CONSTRAINTS
         f = p*Fs*sqrt(L**2+x(3)**2) / (x(2)*x(3)*sigmay) - 1.0
@@ -356,7 +348,7 @@ subroutine calcf(x,DIM,fct,f)
      f=f+5.0
   else if (fct.eq.9) then ! Tubular column
 
-!     if (dim.ne.3) stop'Wrong dimension'
+     !     if (dim.ne.3) stop'Wrong dimension'
 
      !Thanks: Arora Section 3.7
 
@@ -425,7 +417,7 @@ subroutine calcf(x,DIM,fct,f)
 
 
   else if (fct.eq.10) then ! Cantilever beam 
-!     if (dim.ne.2) stop'Wrong dimension'
+     !     if (dim.ne.2) stop'Wrong dimension'
 
      ! Thanks: Section 3.8 Arora 
      if (mainprog) then
@@ -492,7 +484,7 @@ subroutine calcf(x,DIM,fct,f)
   else if (fct.eq.11) then ! Three bar truss 
 
 
-!     if (dim.ne.3) stop'wrong dim for this problem'
+     !     if (dim.ne.3) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
@@ -640,7 +632,7 @@ subroutine calcf(x,DIM,fct,f)
 
   else if (fct.eq.12) then ! Threebar 6d problem
 
-!     if (dim.ne.6) stop'wrong dim for this problem'
+     !     if (dim.ne.6) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 
@@ -713,77 +705,77 @@ subroutine calcf(x,DIM,fct,f)
 
      end if
 
- else if (fct.eq.13) then ! Cantilever beam 4d problem
+  else if (fct.eq.13) then ! Cantilever beam 4d problem
 
-       ! Thanks: Section 3.8 Arora 
-       !  if (dim.ne.2) stop'Wrong dimension'
-       
-       
-       if (mainprog) then
-
-          sigma_allow= 10.0d6 !N/m2
-          tau_allow= 2.0d6 !N/m2     
-          Fs=1.0
-
-       else
-          
-          sigma_allow=dat(1)
-          tau_allow=dat(2)
-          Fs=dat(3)
-
-       end if
-
-       !define R,T
-       
-       B=x(1)
-       D=x(2)
-       M=x(3)
-       V=x(4)
-
-       !     L=x(3)
-
-       if (fctindx.eq.0) then
-
-          !---- OBJECTIVE FUNCTION
-          f = B*D
-
-       else if (fctindx.eq.1) then
-
-          !---- INEQUALITY CONSTRAINTS
-          !bending stress constraint
-
-          f=6.0*M*Fs/(B*D**2*sigma_allow) -1.0
-
-       else if (fctindx.eq.2) then
-
-          ! Inequality constraint 2
-          ! Shear Stress constraint
-
-          f=3.0*V*Fs/(2.0*B*D*tau_allow) -1.0
-
-       else if (fctindx.eq.3) then
+     ! Thanks: Section 3.8 Arora 
+     !  if (dim.ne.2) stop'Wrong dimension'
 
 
-          f=D*Fs/(2.0*B) -1.0
+     if (mainprog) then
 
-       else 
+        sigma_allow= 10.0d6 !N/m2
+        tau_allow= 2.0d6 !N/m2     
+        Fs=1.0
 
-          print*, 'Wrong function index for this test case',fctindx
-          stop
-       end if
+     else
+
+        sigma_allow=dat(1)
+        tau_allow=dat(2)
+        Fs=dat(3)
+
+     end if
+
+     !define R,T
+
+     B=x(1)
+     D=x(2)
+     M=x(3)
+     V=x(4)
+
+     !     L=x(3)
+
+     if (fctindx.eq.0) then
+
+        !---- OBJECTIVE FUNCTION
+        f = B*D
+
+     else if (fctindx.eq.1) then
+
+        !---- INEQUALITY CONSTRAINTS
+        !bending stress constraint
+
+        f=6.0*M*Fs/(B*D**2*sigma_allow) -1.0
+
+     else if (fctindx.eq.2) then
+
+        ! Inequality constraint 2
+        ! Shear Stress constraint
+
+        f=3.0*V*Fs/(2.0*B*D*tau_allow) -1.0
+
+     else if (fctindx.eq.3) then
 
 
-   
-else
-   print*,fct
-   stop'Wrong Fn Number'
-   
-end if
+        f=D*Fs/(2.0*B) -1.0
 
-return
+     else 
+
+        print*, 'Wrong function index for this test case',fctindx
+        stop
+     end if
+
+
+
+  else
+     print*,fct
+     stop'Wrong Fn Number'
+
+  end if
+
+  return
 end subroutine calcf
 
-  
+
 subroutine calcdf(x,DIM,fct,df)
   use dimKrig, only: fctindx,DAT,mainprog,fgcnt
   implicit none
@@ -1490,7 +1482,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
      end do
 
   else if (fct.eq.6) then
-!     if (dim.ne.3) stop'Wrong dimension'
+     !     if (dim.ne.3) stop'Wrong dimension'
 
      pi=4.0*atan(1.0)
 
@@ -1579,7 +1571,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
      end do
   else if (fct.eq.9) then
 
-!     if (dim.ne.3) stop'Wrong dimension'
+     !     if (dim.ne.3) stop'Wrong dimension'
 
      !Thanks: Arora Section 3.7
 
@@ -1692,7 +1684,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
      end if
 
   else if (fct.eq.10) then !cantilever beam
-!     if (dim.ne.2) stop'Wrong dimension'
+     !     if (dim.ne.2) stop'Wrong dimension'
 
      ! Thanks: Section 3.8 Arora 
      if (mainprog) then
@@ -1790,7 +1782,7 @@ subroutine calcd2f(x,DIM,fct,d2f)
 
   else if (fct.eq.11) then
 
-!     if (dim.ne.3) stop'wrong dim for this problem'
+     !     if (dim.ne.3) stop'wrong dim for this problem'
 
      pi=4.0*atan(1.0)
 

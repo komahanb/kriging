@@ -1,4 +1,0 @@
-kriging
-=======
-
-Kriging

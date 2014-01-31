@@ -19,11 +19,11 @@ program Kriging
 
   ! Dimension of problem
 
-  ndim=5
+  ndim=2
   ndimt=ndim
 
   randomini=1      
-  
+
   ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
   mainprog =.true.
@@ -35,10 +35,6 @@ program Kriging
      ! 1: latin hypercube with Dutchintrapolation 
      ! 2: latin hypercube with Multivariate Interpolation and Regression (MIR)
 
-     !     maxsamplewant= 90 !
-
-     !     nptstoaddpercyc=100
-
      ! Low fidelity data
 
      nls=0      ! number of low-fidelity samples!0
@@ -47,13 +43,13 @@ program Kriging
 
      ! Dynamic sample point location parameters
 
-     diffconv=1.e-6      ! 
+     diffconv=1.e-6 ! Target agreement between local and global surrogate
 
      selectedevaluation=0 ! 0: not selected 1: selected 
 
      filenum=6 ! 6 for screen
 
-     NMCS=0
+     NMCS=0 !dummy here.. set in MC.inp
 
      ! CFD solve input data
 
@@ -62,53 +58,47 @@ program Kriging
      FinalMach=1.5d0
      InitialAOA=0.0d0  !degrees
      FinalAOA=5.0d0    !degrees      
+
      ! ---------------------------------------------------------------------------
-     ! General parameter
+     ! General parameters
      ! ---------------------------------------------------------------------------
 
-     do  Casemode= 0,0      ! 0: Calculate RMS  1: Output Statistics  2: Optimize using EI
+     do  Casemode= 0,0      ! 0: Calculate RMSE  1: Output Statistics  2: Optimize using EI
+
         reusesamples=0   ! 0: no  1: yes 
+
         Dutchorderg=2    ! Order of Interpolation for Dutch Intrapolation (1 or 2)
 
         ! How to get MC samples
         readMCsamples=0     ! 0: Make random samples   1: Read from file MCsamp.dat
 
-!!$
-!!$        if (randomtestl.ne.0) then
-!!$           dynamics=1
-!!$        else 
-!!$           dynamics=0
-!!$        end if     ! 0: not dynamic  1: dynamic 
 
 
         do ctest=3,3
 
-
-           if (ctest.eq.2) then
+           if (ctest.eq.1) then
 
               dynamics=0
 
-              !1=LHS,
-              !2=Nieder
-              !3=Halton
-              !4=Hammersley
-              !5=Sobol
-              !6=Faure
+              randomflag=1              !1=LHS,         !2=Nieder           !3=Halton           !4=Hammersley           !5=Sobol           !6=Faure
 
-              randomflag=1
 
-           end if
+           else  if (ctest.eq.2) then
 
-           if (ctest.eq.1) then
               dynamics=1
               lhsdyn=.true.
               randomflag=1
-           end if
 
-           if (ctest.eq.3) then
+           else  if (ctest.eq.3) then
+
               dynamics=1
               lhsdyn=.false. !mirdyn is true
               randomflag=1
+
+           else 
+
+              stop'wrong ctest value'
+
            end if
 
            ! ---------------------------------------------------------------------------
@@ -120,12 +110,10 @@ program Kriging
 !!$         read(10,*) (xstd(i),i=1,ndim) 
 !!$         close(10)
 
-           do fuct=1,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
+           do fuct=3,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
               if (fuct.eq.1) fct=0
-
-              if (fuct.eq.2) fct=0
-
+              if (fuct.eq.2) fct=2
               if (fuct.eq.3) fct=3
 
               if (id_proc.eq.0) write(filenum,'(4x,a,i8)')">> Test case number",ctest
@@ -137,10 +125,8 @@ program Kriging
 
                  nruns=1
 
-                 !                    if (nruns.gt.1) then
+
                  if (id_proc.eq.0) allocate(rmsemat(nruns,1000,2))
-                 ! 1000 data points , RMSE only, mean +sd, 
-                 !                   end if
 
                  runnum=0
                  do jjj=1,nruns
@@ -148,8 +134,8 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 25
-                       nptstoaddpercyc=2 !160
+                       maxsamplewant= 15
+                       nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
 
@@ -171,7 +157,8 @@ program Kriging
 
                     counter=0
 
-                    do nsamples=5,5 !2*NDIM+1,2*NDIM+1!40,40!101,101!2*NDIM+1,2*NDIM+1!5,75,5!50,50!50,500,50!500,500!3,47,4 !Makes this many nhs samples per cycle
+                    do nsamples=2*NDIM+1,2*NDIM+1  !Makes this many nhs samples initially..
+
                        counter=counter+1
 
                        nhs=nsamples
@@ -472,8 +459,8 @@ program Kriging
                              if (hstat.eq.1) write(94,'(a131)') 'Nhs      RealAVG        RealVAR         KrigAVG         KrigVAR        ErrorAVG       ErrorVAR      MM1AVG         MM1VAR          LinAVG           LinVAR'
                              if (hstat.eq.3) write(94,'(a196)') 'Nhs      RealAVG        RealVAR         KrigAVG         KrigVAR        ErrorAVG       ErrorVAR   MM1AVG         MM1VAR          LinAVG           LinVAR          MM2AVG         MM2VAR          QuadAVG        QuadVAR'
 
-                             
-                             
+
+
                           end if
 
                           outfile(:)=filename(:)
@@ -632,14 +619,14 @@ program Kriging
                     end if
 
                     if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
-                    
+
                     call MPI_Barrier(MPI_COMM_WORLD,ierr)
 
-                 !stop
+                    !stop
 
-              end do !trial number
-              
-              if (id_proc.eq.0) then
+                 end do !trial number
+
+                 if (id_proc.eq.0) then
 !!$
 !!$                 do i=1,nruns
 !!$                    do j=1,loopcounter
@@ -647,20 +634,20 @@ program Kriging
 !!$                    end do
 !!$                 end do
 
-                 if(nruns.gt.1) call matrix_process(nruns)
+                    if(nruns.gt.1) call matrix_process(nruns)
 
-                 deallocate(rmsemat)
-              end if
+                    deallocate(rmsemat)
+                 end if
 
-           end do ! F or G loop
+              end do ! F or G loop
 
-        end do ! Function number loop
+           end do ! Function number loop
 
-     end do ! test case loop
-     
-  end do !casemode loop
+        end do ! test case loop
 
-end do !random testl DI or MIR loop
+     end do !casemode loop
+
+  end do !random testl DI or MIR loop
 
 !!$
 !!$if (id_proc.eq.0) then
@@ -671,11 +658,12 @@ end do !random testl DI or MIR loop
   call stop_all
 
 end program Kriging
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
+!======================================================
 
 subroutine i_to_s(intval,s)
+
+  !integer to string routine
 
   integer idig,intval,ipos,ival,i
   character ( len = * ) s
@@ -707,3 +695,4 @@ subroutine i_to_s(intval,s)
   return
 end subroutine i_to_s
 
+!======================================================

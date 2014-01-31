@@ -34,7 +34,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   mainprog=.false.
 
-  DAT=DATIN
+  DAT=DATIN ! DATA used in functions.f90
 
   probtype(1:ndim)=probtypeIN(1:ndim)
 
@@ -64,6 +64,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   fctindx=fctindxin
 
   !print *,ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout
+
   randomini=1      ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
   randomtestl=2   
@@ -110,11 +111,9 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   else 
      dynamics=0
   end if
-!	dynamics =0
 
   ! ---------------------------------------------------------------------------
 
-  !        do
   fct=fctin
 
   randomflag=1
@@ -258,8 +257,6 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      end if
 
      maxsample=maxsamplewant
-
-
 
      if (id_proc.eq.0.and.dynamics.ne.0) call Make_Sample 
 
@@ -563,20 +560,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   if (id_proc.eq.0) then
      if (Casemode.eq.0) close(93)
-     !           if (Casemode.eq.1) close(94)
   end if
-
-  !              if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
-
-  !       end do ! F or G loop
-  !        end do ! Function number loop
-
-  !     end do !casemode loop
-
-
-  !        end do !random testl
-
-
   
   fmeanout=fmean
   fvarout=fvar
@@ -614,7 +598,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   return
 end subroutine Krigingestimate
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!==================================================
 
 subroutine i_to_s(intval,s)
 
@@ -648,3 +632,4 @@ subroutine i_to_s(intval,s)
   return
 end subroutine i_to_s
 
+!==================================================

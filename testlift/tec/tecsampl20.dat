@@ -3,4 +3,4 @@ VARIABLES = "x" "y" "f"
 ZONE T="lsample", I=    1, J=    1, K=    1, F=BLOCK
      2.50000000
      1.00000000
-     0.22128658
+     0.84147098

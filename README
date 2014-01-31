@@ -1,0 +1,23 @@
+================================================
+Kriging code for multidimensional interpolation
+================================================
+
+Main Author     : Wataru Yamazaki
+
+Modified Version: Komahan Boopathy, 
+	 	  University of Dayton, OH
+		  http://komahanboopathy.com
+		  komahan.cool@gmail.com
+
+Date		  : 1/31/2014
+==================================================
+
+Main program can be executed within folders test/ or testdrag/ testlift/ as the case might be. The important .f90 files of interest will be:
+
+main.f90    --> input parameters and settings (driver program)
+monaco.f90  --> statistics and derivatives for UQ/OUU
+post.f90    --> post processing on the surrogate (RMSE and other tecplot output coding)
+DynamicPointSelection.f90 --> Dynamic training point selection based on local surrogate models	
+functions.f90 --> contains test functions, the user can add more.
+
+Subroutine version can be evoked my running ./makelibrary in the main folder that creates krigingestimate.a for Optimization Under Uncertainty.

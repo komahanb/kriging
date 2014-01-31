@@ -56,12 +56,6 @@ subroutine Post_Process
      call Post_Higher(ifac)
   end if
 
-
-
-  ! if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
-
-
-
   call deallocate_all_krig
 end subroutine Post_Process
 !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -144,6 +138,8 @@ subroutine Post_RMSE
            integer :: Taylororder, IERR,iii,jjj
            double precision :: BETA, GAMM
            character*60 :: export
+
+
            imax=ifac
            !imax=41
            jmax=ifac
@@ -154,7 +150,6 @@ subroutine Post_RMSE
            else
               readfromdatabase=0 ! 0=call evalfunc, 1= read from tecex10.dat
            end if
-
 
 
            if(     Cmode(:7).eq.'Post_1D')then
@@ -204,16 +199,8 @@ subroutine Post_RMSE
                        close(15)                            
                     end if
 
-                    !PRINT *, TEC2(2,I,J)
-
-                    !PRINT *, TEC2
-                    !STOP
-
-
                     do 210 i=1,imax
                        do 220 j=1,jmax
-
-
 
                           xin(1) = dble(i-1)/dble(imax-1)
                           if(ndim.eq.2) xin(2) = dble(j-1)/dble(jmax-1)
@@ -286,32 +273,17 @@ subroutine Post_RMSE
 
 
 
-
-
                        else !calling exacfunc
-
-
-
-
 
 
                           do 110 i=1,imax
                              do 120 j=1,jmax
 
-!!$                 xin(1) = 4.0*dble(i-1)/dble(imax-1)-1.5
-!!$                 if(ndim.eq.2) xin(2) = 4.0*dble(j-1)/dble(imax-1)-1.5
                                 xin(1) = dble(i-1)/dble(imax-1)
                                 if(ndim.eq.2) xin(2) = dble(j-1)/dble(jmax-1)
 
-!!$                 if (xin(1).gt.1.0 .or. xin(2).gt.1.0 .or. xin(1).lt.0.0 .or. xin(2).lt.0.0)then
-!!$                    call meta_call(2,1,xin,yhat,yhatprime,RMSE,EI)
-!!$                 else
-!!$                    call meta_call(1,1,xin,yhat,yhatprime,RMSE,EI)
-!!$                 end if
                                 call meta_call(k,1,xin,yhat,yhatprime,RMSE,EI)
 
-                                !print *, yhat
-                                !stop
                                 if(rmse.lt.0.d0)negr = negr + 1
 
                                 if(EI.ge.EImax)then
@@ -377,9 +349,6 @@ subroutine Post_RMSE
 
 
                              end if
-
-
-
 
 
 
@@ -618,4 +587,4 @@ subroutine Post_RMSE
 
 
                      end subroutine Post_1or2D
-                     
+

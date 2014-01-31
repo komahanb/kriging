@@ -15,13 +15,10 @@ subroutine DynamicPointSelection
   double precision, DIMENSION(200) :: SIGV
   double precision, DIMENSION(200) :: SIGG
   integer :: Taylororder, IERR, NCPG,idec,is,ie,id,point,kpc,nptstoaddpercyctmp,  nptstoaddpercycorig
-  double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000),phi,invphi
+  double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000)
   character*60::export
-
-
-  integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
-
   integer::npass
+  integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
 
   call find_Optimal
   call read_all_krig
@@ -32,26 +29,25 @@ subroutine DynamicPointSelection
 
         write(filenum,*) '>> [Picking points dynamically for LHS]'        
         call get_seed(nseed)
-        !        call nieder(nseed,ndim,nptstoaddpercyc,Dtoex)
         call latin_random(ndim,nptstoaddpercyc,nseed,Dtoex) 
-        !   end if
-
-        !     call MPI_Barrier(MPI_COMM_WORLD,ierr)
-        !    call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
 
         do ii=1,nptstoaddpercyc
+
            hstatad(ii)=hstat
            if(nstyle.eq.0) then
               Dad(:,ii)=Dtoex(:,ii)
               call evalfunc(Dtoex(:,ii),ndim,fct,0,hstatad(ii),f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
            end if
-           !           print*, DTOEX(:,ii),f(ii)
+
         end do !! ii loop
+
         ! Add successful test candidates to sample points 
+
         if(nstyle.eq.0)then
+
            open(10,file='sample.dat',form='formatted',status='unknown')
-           !$$ write(10,'(3i8)')ndim,nhs+nls+nptstoaddpercyc,3
            write(10,'(3i8)')ndim,nhs+nls+nptstoaddpercyc,2
+
            do i=1,nhs+nls
               if (info(i)(3:6).ne.'FGHv') then
                  write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),j=1,nCOK)
@@ -59,6 +55,7 @@ subroutine DynamicPointSelection
                  write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
               end if
            end do
+
            do ii=1,nptstoaddpercyc
               if (hstatad(ii).le.3) then
                  !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
@@ -68,30 +65,30 @@ subroutine DynamicPointSelection
                  write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
               end if
            end do
+
            close(10)
 
-        end if !nstyle
+        end if ! nstyle
 
-     end if
-
+     end if ! master
+     
      call MPI_Barrier(MPI_COMM_WORLD,ierr)
      call deallocate_all_krig
 
      return ! returns the routine
-  end if
 
-  phi=(1+sqrt(5.0d0))/2.0d0 !1.618
-  invphi=1.0d0/phi
+  end if    ! lhydyn
 
-  if (randomtestl.eq.0) then
+  if (randomtestl.eq.0) then ! Delaunay triangulation
+
      if(id_proc.eq.0) then !master thread alone
 
         ! Make grid via Delaunay triangulation       
+
         triangle_coor_num=nhs
         do ii=1,nhs
            triangle_coor(1:ndim,ii)=sample(ii,1:ndim)
         end do
-
 
         open(unit=44,file='qdelaunayin')
         write(44,*) ndim
@@ -116,6 +113,7 @@ subroutine DynamicPointSelection
         if (ndim.eq.2) call triangulation_order3_plot('triangulation_plot.eps',triangle_coor_num,triangle_coor,triangle_num,triangle_node,2,2)
 
         ! Figure out locations of test candidates (midpoints of Delaunay sides and centres of Delaunay triangles),  Calculate local Dutch intrapolations and compare to Kriging values
+
         NCP=ndim+1
         NTOEX=0
         do ii=1,triangle_num
@@ -200,19 +198,11 @@ subroutine DynamicPointSelection
 
      end if ! master thread only
 
-
-
-
-
-
-
      !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-     !PARALLEL REGION
+     !PARALLEL REGION Worksharing
 
      !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
 
 
   else if (randomtestl.eq.1) then
@@ -223,11 +213,12 @@ subroutine DynamicPointSelection
      ! Figure out locations of test candidates (randomly). Calculate local Dutch intrapolations and compare to Kriging values
 
      call combination(ndim+Dutchorderg,ndim,NCP)
-     !     NTOEX=(30-ndim)*NCP
+     
+     !NTOEX=(30-ndim)*NCP
 
-     NTOEX=10201
+!     NTOEX=10201
 
-!     NTOEX=5000*NDIM
+     NTOEX=5000*NDIM
 
      if (id_proc.eq.0) then
         call get_seed(nseed)
@@ -250,6 +241,7 @@ subroutine DynamicPointSelection
         ! if(id_proc.eq.2)   print *, Dtoex(:,k), id_proc
 
         ! Still need to make sure points are not collinear in higher dimensions!
+
         call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
 
         do j=0,NCP-1  
@@ -283,7 +275,7 @@ subroutine DynamicPointSelection
      end do ! loop over NTOEX test candidates
 
 
-  else if (randomtestl.eq.2) then     
+  else if (randomtestl.eq.2) then     ! MIR as local surrogate
 
      if(id_proc.eq.0)  write(filenum,*) '>> [MIR is being used as local surrogate]'
 
@@ -291,24 +283,26 @@ subroutine DynamicPointSelection
 
      NTOEX=10201 !*NDIM
 
-     !      NTOEX=int((1000*num_proc)/ndim)
-
-     !     NTOEX=1000
-
-     !     print*,taylororder
+     if (NTOEX.gt.25000) NTOEX=25000
 
      if(id_proc.eq.0)  write(filenum,*) '     >> Number of test candidates',NTOEX
+
      if (id_proc.eq.0) then
+
         call get_seed(nseed)
         call latin_random(ndim,NTOEX,nseed,Dtoex) 
+
         !        call hammersley_real(ndim,NTOEX,DTOEX)
+
         !        write(export, '(a,i3.3,a)')'testcand.dat'
         !        open(10,file='./KrigSamples/'//export,form='formatted',status='unknown')
         !        read(10,*)(Dtoex(:,i),i=1,NToex)
         !        close(10)
+
      end if
 
-     ! Information sharing by master with slaves        
+     ! Information sharing by master with slaves       
+ 
      call MPI_Barrier(MPI_COMM_WORLD,ierr)           
      call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
      idec = dble(NTOEX)/dble(num_proc)
@@ -319,8 +313,8 @@ subroutine DynamicPointSelection
 
      do k=is,ie !Main loop for test candidates
 
-        !if(id_proc.eq.2)   print *, Dtoex(:,k), id_proc
         ! Still need to make sure points are not collinear in higher dimensions!
+
         call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
 
         NCPG=0
@@ -351,8 +345,6 @@ subroutine DynamicPointSelection
 
         call meta_call(1,mode,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
 
-        !        print *, k,ftoextry(2,k),ftoextry(1,k)
-
      end do
   end if ! randomtestl
 
@@ -367,6 +359,7 @@ subroutine DynamicPointSelection
      call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
      if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
   end do
+
   !print *, ftoextry(1,1:NTOEX), ftoextry(2,1:NTOEX)
   !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -374,7 +367,11 @@ subroutine DynamicPointSelection
 
   !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+  !========================================================
 
+  ! Post processing only
+
+  !========================================================
 
   if (id_proc.eq.0) then
 
@@ -389,6 +386,7 @@ subroutine DynamicPointSelection
      end do
 
      ! Figure out distance to closest real sample point and the mean of all these distances
+
      distmean=0.0
      RMSEmean=0.0
      if(randomtestl.eq.2)  SIGMAmean=0.0
@@ -411,16 +409,14 @@ subroutine DynamicPointSelection
 
      distmean=distmean/real(NTOEX)
      RMSEmean=RMSEmean/real(NTOEX)
-     if(randomtestl.eq.2)   SIGMAmean=SIGMAmean/real(NTOEX)
+     if(randomtestl.eq.2)   SIGMAmean=SIGMAmean/real(NTOEX)! because only MIR has error bounds with it
 
      ! Pick test candidate with largest difference in values, but above distcomp distance to nearest neighbours
 
-     !     if (iterDel.eq.1) then
-     !        distcomp=1.5*distmean
-     !     else
-     distcomp=1.0d0*distmean !0.618 ! 
-     !     end if
+     distcomp=1.1d0*distmean
 
+
+     !initialize values
 
      diffloctmp=0.0d0
      diffloc2=0.0d0
@@ -431,24 +427,35 @@ subroutine DynamicPointSelection
         diffloctmp=(maxftoex(k)-minftoex(k))**2
         diffloc2=diffloc2+diffloctmp
         difflocmax=max(difflocmax,sqrt(diffloctmp)) ! Calculating the max difference between the surrogates
+
      end do
 
      ! Calculating the mean difference between the surrogates
      
      diffloc2=diffloc2/dble(ntoex)
      diffloc2=sqrt(diffloc2)
-
+ 
      
+     !=======================================================
+     
+     ! Selection
+     
+     !=======================================================
+     
+          
+     diffloc=0.0 ! initialize
 
-     do ii=1,nptstoaddpercyc
+     do ii=1,nptstoaddpercyc ! loop over all the number of points to be selected
 
         npass=0
         do while (npass.ne.1)
+
            kp=0
 
            diffloctmp=0.0d0
 
            do k=1,NTOEX
+
               !! Successful Training point passes the follwing tests:
 
               !! 1. The local difference between the local and global surrogate should > 
@@ -457,8 +464,6 @@ subroutine DynamicPointSelection
               !! 4. SIGMA should be greater than SIGMA mean of MIR 
               !
               if ((maxftoex(k)-minftoex(k)).gt.diffloctmp .and. dist(k).ge.distcomp) then !.and. SIGMA(k).ge.SIGMAmean .and. RMSE(k).ge.RMSEmean
-                 !                 print*,RMSE(k),RMSEmean
-                 !     if (RMSE(k).ge.RMSEmean) then
                  diffloctmp=maxftoex(k)-minftoex(k)
                  kp=k
               end if
@@ -486,7 +491,7 @@ subroutine DynamicPointSelection
               npass=npass+1 ! one successful candidate
 
               write(filenum,*)
-              write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL,kp
+              write(filenum,*) '>>Loc diff is',diffloctmp,' for candidate',ii,' at iteration',iterDEL, 'test cand ', kp
               write(filenum,*)
 
            end if
@@ -495,8 +500,9 @@ subroutine DynamicPointSelection
 
 
         ! Trick to not consider this point again
+
         maxftoex(kp)=minftoex(kp)
-        RMSE(kp)=-10000.0
+        RMSE(kp)=0.0d0  !handy when Kriging MSE is used as the dynamic criterion, unused elsewhere
 
         ! Update other minimum distances
         do k=1,NTOEX
@@ -537,30 +543,26 @@ subroutine DynamicPointSelection
 
         end if !selected evaluation
 
-        ! Evaluate desired quantities
+
+        !=====================================================
+
+        ! Evaluate the real function
+
+        !=====================================================
+
         if(nstyle.eq.0) then
            Dad(:,ii)=Dtoex(:,kp)
            call evalfunc(Dtoex(:,kp),ndim,fct,0,hstatad(ii),f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
         end if
 
      end do !! ii loop
-
-!!$  
-!!$  if(kp.eq.0) then
-!!$     nptstoaddpercyc=kpnonzeroiter
-!!$     print *,kp, ii,nptstoaddpercyc,  kpnonzeroiter
-!!$  else
-!!$
-!!$     open(110,file='npoints.dat',form='formatted',status='unknown')
-!!$     read(110,*) nptstoaddpercyc
-!!$     close(110)
-!!$  end if
-!!$
-
-     !     diffloc=diffloc2 ! trick to write the mean diff instead of maxdiff
-
-
+    
+     !============================================================
+     
      ! Add successful test candidates to sample points 
+
+     !============================================================
+
      if(nstyle.eq.0)then
         open(10,file='sample.dat',form='formatted',status='unknown')
         !$$ write(10,'(3i8)')ndim,nhs+nls+nptstoaddpercyc,3
@@ -596,144 +598,143 @@ subroutine DynamicPointSelection
 102 format(i1,10000e20.10)
 
 end subroutine DynamicPointSelection
-! call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
+
 
 subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
   use dimKrig,only:ndimt
   implicit none
   integer,INTENT(IN)::fct,ndim,nhs
   INTEGER,INTENT(OUT)::NCP,TAYLORORDER
+!!$
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+!!$  !                 EXP
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+!!$  if (Fct.eq.4) then
+!!$     if (nhs.le.11)  then  
+!!$        NCP=nhs     
+!!$        Taylororder=3!nhs!2!2!INT(NHS/4)
+!!$
+!!$     else if (nhs.gt.11 .and. nhs.le.15)  then  
+!!$        NCP=10
+!!$        Taylororder=5!ncp
+!!$
+!!$     else  if (nhs.gt.15 .and. nhs.le.25)  then  
+!!$        NCP=15
+!!$        Taylororder=5!ncp
+!!$
+!!$     else  if (nhs.gt.25 .and. nhs.le.35)  then  
+!!$        NCP=20
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.35 .and. nhs.le.100)  then  
+!!$        NCP=20!20+3*ndim
+!!$        Taylororder=5
+!!$        ! else if (nhs.gt.70 .and. nhs.le.100)  then  
+!!$        !   NCP=30!50+0.1*nhs
+!!$        !    Taylororder=17       
+!!$     else
+!!$        NCP=20!+5*ndim
+!!$        tAYLORORDER=5
+!!$     end if
+!!$
+!!$  end if
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!    
+!!$  !                COS
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+!!$  if (Fct.eq.1) then
+!!$     if (nhs.le.11)  then  
+!!$        NCP=nhs
+!!$        Taylororder=ncp!2!2!INT(NHS/4)
+!!$     else if (nhs.gt.11 .and. nhs.le.15)  then  
+!!$        NCP=10
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.15 .and. nhs.le.25)  then  
+!!$        NCP=15
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.25 .and. nhs.le.35)  then  
+!!$        NCP=20
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.35 .and. nhs.le.70)  then  
+!!$        NCP=20!50+0.1*nhs
+!!$        Taylororder=5
+!!$     else if (nhs.gt.70 .and. nhs.le.100)  then  
+!!$        NCP=20!50+0.1*nhs
+!!$        Taylororder=5       
+!!$     else
+!!$        NCP=20
+!!$        tAYLORORDER=5
+!!$     end if
+!!$
+!!$  end if
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+!!$  !               RUNGE
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!     
+!!$  if (fct.eq.2) then
+!!$     if (nhs.le.20)  then  
+!!$        NCP=nhs
+!!$        Taylororder=5!nhs!2!2!INT(NHS/4)
+!!$
+!!$        !   else if (nhs.gt.11 .and. nhs.le.15)  then  
+!!$        !      NCP=nhs
+!!$        !      Taylororder=7!ncp
+!!$        !      
+!!$        !   else if (nhs.gt.15 .and. nhs.le.25)  then  
+!!$        !      NCP=nhs
+!!$        !      Taylororder=13!ncp
+!!$        !      
+!!$        !   else if (nhs.gt.25 .and. nhs.le.35)  then  
+!!$        !      NCP=nhs
+!!$        !      Taylororder=17!ncp
+!!$        !      
+!!$        !   else if (nhs.gt.35 .and. nhs.le.70)  then  
+!!$        !      NCP=30!50+0.1*nhs
+!!$        !      Taylororder=17
+!!$     else  if (nhs.gt.20 .and. nhs.le.100)  then  
+!!$        NCP=20!50+0.1*nhs
+!!$        Taylororder=5       
+!!$     else
+!!$        NCP=20
+!!$        tAYLORORDER=5
+!!$     end if
+!!$
+!!$  end if
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+!!$  !           ROSENBROCK    
+!!$  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
+!!$  if (Fct.eq.6) then
+!!$     if (nhs.le.11)  then  
+!!$        NCP=5
+!!$        Taylororder=ncp!2!2!INT(NHS/4)
+!!$     else if (nhs.gt.11 .and. nhs.le.15)  then  
+!!$        NCP=10
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.15 .and. nhs.le.25)  then  
+!!$        NCP=15
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.25 .and. nhs.le.35)  then  
+!!$        NCP=25
+!!$        Taylororder=5!ncp
+!!$
+!!$     else if (nhs.gt.35 .and. nhs.le.70)  then  
+!!$        NCP=35!50+0.1*nhs
+!!$        Taylororder=5
+!!$     else if (nhs.gt.70 .and. nhs.le.100)  then  
+!!$        NCP=50!50+0.1*nhs
+!!$        Taylororder=5       
+!!$     else
+!!$        NCP=70
+!!$        tAYLORORDER=5
+!!$     end if
+!!$
+!!$  end if
 
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  !                 EXP
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  if (Fct.eq.4) then
-     if (nhs.le.11)  then  
-        NCP=nhs     
-        Taylororder=3!nhs!2!2!INT(NHS/4)
+  if (fct.eq.20) then    ! CFD
 
-     else if (nhs.gt.11 .and. nhs.le.15)  then  
-        NCP=10
-        Taylororder=5!ncp
-
-     else  if (nhs.gt.15 .and. nhs.le.25)  then  
-        NCP=15
-        Taylororder=5!ncp
-
-     else  if (nhs.gt.25 .and. nhs.le.35)  then  
-        NCP=20
-        Taylororder=5!ncp
-
-     else if (nhs.gt.35 .and. nhs.le.100)  then  
-        NCP=20!20+3*ndim
-        Taylororder=5
-        ! else if (nhs.gt.70 .and. nhs.le.100)  then  
-        !   NCP=30!50+0.1*nhs
-        !    Taylororder=17       
-     else
-        NCP=20!+5*ndim
-        tAYLORORDER=5
-     end if
-
-  end if
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!    
-  !                COS
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  if (Fct.eq.1) then
-     if (nhs.le.11)  then  
-        NCP=nhs
-        Taylororder=ncp!2!2!INT(NHS/4)
-     else if (nhs.gt.11 .and. nhs.le.15)  then  
-        NCP=10
-        Taylororder=5!ncp
-
-     else if (nhs.gt.15 .and. nhs.le.25)  then  
-        NCP=15
-        Taylororder=5!ncp
-
-     else if (nhs.gt.25 .and. nhs.le.35)  then  
-        NCP=20
-        Taylororder=5!ncp
-
-     else if (nhs.gt.35 .and. nhs.le.70)  then  
-        NCP=20!50+0.1*nhs
-        Taylororder=5
-     else if (nhs.gt.70 .and. nhs.le.100)  then  
-        NCP=20!50+0.1*nhs
-        Taylororder=5       
-     else
-        NCP=20
-        tAYLORORDER=5
-     end if
-
-  end if
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  !               RUNGE
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!     
-  if (fct.eq.2) then
-     if (nhs.le.20)  then  
-        NCP=nhs
-        Taylororder=5!nhs!2!2!INT(NHS/4)
-
-        !   else if (nhs.gt.11 .and. nhs.le.15)  then  
-        !      NCP=nhs
-        !      Taylororder=7!ncp
-        !      
-        !   else if (nhs.gt.15 .and. nhs.le.25)  then  
-        !      NCP=nhs
-        !      Taylororder=13!ncp
-        !      
-        !   else if (nhs.gt.25 .and. nhs.le.35)  then  
-        !      NCP=nhs
-        !      Taylororder=17!ncp
-        !      
-        !   else if (nhs.gt.35 .and. nhs.le.70)  then  
-        !      NCP=30!50+0.1*nhs
-        !      Taylororder=17
-     else  if (nhs.gt.20 .and. nhs.le.100)  then  
-        NCP=20!50+0.1*nhs
-        Taylororder=5       
-     else
-        NCP=20
-        tAYLORORDER=5
-     end if
-
-  end if
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  !           ROSENBROCK    
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  if (Fct.eq.6) then
-     if (nhs.le.11)  then  
-        NCP=5
-        Taylororder=ncp!2!2!INT(NHS/4)
-     else if (nhs.gt.11 .and. nhs.le.15)  then  
-        NCP=10
-        Taylororder=5!ncp
-
-     else if (nhs.gt.15 .and. nhs.le.25)  then  
-        NCP=15
-        Taylororder=5!ncp
-
-     else if (nhs.gt.25 .and. nhs.le.35)  then  
-        NCP=25
-        Taylororder=5!ncp
-
-     else if (nhs.gt.35 .and. nhs.le.70)  then  
-        NCP=35!50+0.1*nhs
-        Taylororder=5
-     else if (nhs.gt.70 .and. nhs.le.100)  then  
-        NCP=50!50+0.1*nhs
-        Taylororder=5       
-     else
-        NCP=70
-        tAYLORORDER=5
-     end if
-
-  end if
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  !                      CFD   
-  !%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%!
-  if (fct.eq.20) then
      if (nhs.le.10)  then  
         NCP=nhs
         Taylororder=nhs!nhs!2!2!INT(NHS/4)
@@ -763,8 +764,9 @@ subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
      end if
 
 
-  else
-!!$
+  else  ! other test functions
+
+
      if (nhs.le.25)  then  
 
         NCP=nhs
@@ -784,23 +786,31 @@ subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
         NCP=25
         tAYLORORDER=5
      end if
-
+     
   end if ! end of CFD 
-  if(ndimt.gt.2) then ! use 25% of the existing data points
 
+  ! Higher dimensional test functions
+  
+  if(ndimt.gt.2) then
+     
      !NCP= ceiling(0.25*dble(nhs))
+     ! use 25% of the existing data points?
 
      if (Nhs.lt.50) then
         NCP=nhs
      else
         ncp=50
      end if
-     !        print *,'NCP:',ncp
-     tAYLORORDER=5
-  end if
 
+     TAYLORORDER=7
+
+  end if
+  
   return
 end subroutine mirtunableparams
+
+!==========================================================
+
 subroutine knn(SC,sample,knnptr,ndim,nhs,NCP)
   ! Subroutine to find NCP closest neighbours from array sample to point SC
   implicit none
@@ -830,6 +840,7 @@ subroutine knn(SC,sample,knnptr,ndim,nhs,NCP)
 
 end subroutine knn
 
+!===========================================================
 
 subroutine fixcolindelaunay(triangle_num,triangle_coor_num,ndim,triangle_coor,triangle_node)
   ! Subroutine to check whether delaunay triangles are colinear 

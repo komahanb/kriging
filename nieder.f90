@@ -36,7 +36,7 @@ subroutine nieder(seed,dim_max,npts,rmat)
 
 !  do dim_num = 1, dim_max
 
-  seed = 40
+  seed = 40 ! can change the seed
     
 !!     call get_seed(seed)
 

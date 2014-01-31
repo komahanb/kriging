@@ -165,35 +165,11 @@ subroutine MonteCarlo
 
      end if
 
-     ! Initially it was inside 
-     ! Comment out?
-
-     !    MNCX(1,1)=0.75
-     !    print*,MNCX(1,1)
      do j = 1, NMCS
         do k=1,ndim
            MNCx(k,j) = (MNCx(k,j)-DS(1,k))/(DS(2,k)-DS(1,k))
-           !           print *, MNCX(k,j)
         end do
      end do
-
-
-!!$
-!!$     average(:)=0.0d0
-!!$     ! Map samples to PC space
-!!$     do j=1,NMCS
-!!$!        do k=1,ndim
-!!$           !         MNCx(k,j) =(MNCx(k,j)-DS(1,k))/(DS(2,k)-DS(1,k))
-!!$!                           print *,DS(1,k),(DS(2,k)-DS(1,k))
-!!$ !       end do
-!!$        !stop
-!!$        average(:)=average(:)+ MNCx(:,j)
-!!$     end do
-!!$     average(:)=dble(average(:))/dble(NMCS)
-!!$     print *, average
-!!$     print *,'AVG:',xavg
-!!$     print*,'STD:',xstd
-!!$     stop
 
   end if !id_proc.eq.0
 
@@ -245,8 +221,6 @@ subroutine MonteCarlo
 
         !call meta_call(1,0,x,yhat,yhatprime,RMSE,EI)
         call meta_call(1,2,x,yhat,yhatprime,RMSE,EI)
-!        print*,x,yhat
-    !    stop
 
         !              call evalfunc(x,ndim,fct,0,1,freal,df,d2f,v)
         !!              print *, 'x:',x!,'Kr:',yhat,'Ex:',freal ,id_proc 
@@ -281,7 +255,6 @@ subroutine MonteCarlo
 
      end do! main loop for MonteCarlo (i)     
 
-
      ! Information Sharing
      do id=0,num_proc-1
         is   = idec*id + 1
@@ -309,9 +282,6 @@ subroutine MonteCarlo
         fmeanprime(i) = MCmprimeglb(i) / dble(ictglb)
         fvarprime(i) = 2.0 * MCdprimeglb(i) / dble(ictglb) - 2.0 * fmean * fmeanprime(i)
      end do
-
-!!$           fvarprime(:) = fvarprime(:)/(2.0*sqrt(fvar))
-
 
      ! Histogram
 
@@ -482,13 +452,13 @@ subroutine MonteCarlo
               ! Real function evaluation
 
               if (evlfnc.eq.1) then
-!                 MNCX(1,i)=0.98479075038254
+
                  call evalfunc(MNCx(:,i),ndim,fct,0,0,freal,df,d2f,v) 
 !                 print*,MNCx(:,i)*(DS(2,1)-DS(1,1))+DS(1,1),freal
 
- !                call evalfunc(MNCx(:,i),ndim,6,0,0,freal,df,d2f,v) 
-  !               print*,MNCx(:,i),freal
-   !              stop
+!                call evalfunc(MNCx(:,i),ndim,6,0,0,freal,df,d2f,v) 
+!               print*,MNCx(:,i),freal
+!              stop
                  write(10,*) (MNCx(kk,i),kk=1,ndim),freal 
 
               else
