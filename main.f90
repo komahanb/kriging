@@ -1,4 +1,6 @@
-subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,initpts,ncyc,nptsin,statin,probtypeIN,flagin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+subroutine Krigingestimate(ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin,trainingdataptsin,testptin,fmeanout)
+
+!!subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,initpts,ncyc,nptsin,statin,probtypeIN,flagin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
   use dimKrig
   use timer_mod
@@ -17,12 +19,43 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   integer:: nsamples,counter,numberpointstudy
   integer,parameter::timing=1 !other number if timing results not needed
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
-  real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
+  real*8,intent(in)::DATIN ! constants and other values for objective function/constraints
   integer ::fuct
-  integer,intent(in)::initpts,ncyc,flagin(20)
+  integer::initpts,ncyc
   integer::probtypeIN(20)
 
-  real*8::dftmp(ndimt),ftmp
+  real*8::dftmp(ndimint),ftmp
+
+  real*8,intent(in)::trainingdataptsin(ndimint,nptsin),testptin(ndimint)
+
+!  print*,ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin
+  
+!  print*,shape(trainingdataptsin(:,:)),shape(testptin(:))
+
+!stop
+
+
+
+ ! print*,"Testing data"
+  xi=testptin ! used in monaco
+ ! print*,xi
+
+ ! print*,''
+ ! print*,''
+
+  !print*,"Training data"
+  do i =1,nptsin
+
+     trainingdatapts(:,i)=trainingdataptsin(:,i)
+ !    print*,i, trainingdatapts(:,i)
+ !    print*,i, trainingdataptsin(:,i),i,i
+
+  end do
+
+ !print*,''
+ !print*,''
+
+ !store training data and
 
 
   ! Settings	
@@ -36,32 +69,19 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   DAT=DATIN ! DATA used in functions.f90
 
-  probtype(1:ndim)=probtypeIN(1:ndim)
+!  probtype(1:ndim)=probtypeIN(1:ndim)
 
-  filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
+  filenum=  int(DAT(1)) ! 6 for screen, any other number for fort.x
 
-  xavgt(1:ndimt)=xavgin(1:ndimt)
+!  xavgt(1:ndimt)=xavgin(1:ndimt)
 
-  do i=1,ndimt
-     if (probtype(i).eq.1) then
-        xstdt(i)=xstdin(i)
-     else if (probtype(i).eq.2) then
-        xstdt(i)=xavgin(i)*xstdin(i)
-     else
-        stop"Wrong problem type"
-     end if
-  end do
-
-  xavg(1:nDIM)=xavgt(ndimt-nDIM+1:ndimt)
-  xstd(1:nDIM)=xstdt(ndimt-nDIM+1:ndimt)
-
-!!$
+ !!$
 !!$  print*,"xavg:"
 !!$  print*,xavg(1:ndimt)
 !!$  print*,"xstd:"
 !!$  print*,xstd(1:ndimt)
 
-  fctindx=fctindxin
+  fctindx=0
 
   !print *,ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,nptsin,statin,fmeanout,fvarout,fmeanprimeout,fvarprimeout
 
@@ -157,73 +177,74 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      nhs=nsamples
 
      ! Get standard deviation in function space
+!!$
+!!$     if (Casemode.eq.1) then
+!!$        if (readMcsamples.eq.1) then
+!!$
+!!$           if (fct.eq.20) then
+!!$              open(10,file='MC.inp',form='formatted',status='unknown')
+!!$              read(10,*) !(xavg(i),i=1,ndim)
+!!$              read(10,*) !(xstd(i),i=1,ndim)     
+!!$              read(10,*)
+!!$              read(10,*)
+!!$              read(10,*)
+!!$              read(10,*) !NMCS!,ndimtmp
+!!$              read(10,*) evlfnc
+!!$              close(10)
+!!$
+!!$           else 
+!!$
+!!$              open(10,file='MCsamp.dat',form='formatted',status='unknown')
+!!$              read(10,*) !NMCS,ndimtmp
+!!$              if (ndimtmp.ne.ndim) STOP 'Dimension does not match in MCsamp.dat!'
+!!$              read(10,*) !(xavg(i),i=1,ndim)
+!!$              read(10,*) !(xstd(i),i=1,ndim) 
+!!$              read(10,*)		  
+!!$              read(10,*)
+!!$              read(10,*)
+!!$              read(10,*) !NMCS!,ndimtmp
+!!$              read(10,*) evlfnc        
+!!$              close(10)
+!!$           end if
+!!$
+!!$        else if (readMcsamples.eq.0) then
+!!$
+!!$           open(10,file='MC.inp',form='formatted',status='unknown')
+!!$           read(10,*) !(xavg(i),i=1,ndim)
+!!$           read(10,*) !(xstd(i),i=1,ndim) 
+!!$           read(10,*)		  
+!!$           read(10,*)
+!!$           read(10,*)
+!!$           read(10,*) !NMCS!,ndimtmp
+!!$           read(10,*) evlfnc  
+!!$           close(10)
+!!$
+!!$        end if
+!!$     end if ! casemode
 
-     if (Casemode.eq.1) then
-        if (readMcsamples.eq.1) then
+    ! Domain size in function space
 
-           if (fct.eq.20) then
-              open(10,file='MC.inp',form='formatted',status='unknown')
-              read(10,*) !(xavg(i),i=1,ndim)
-              read(10,*) !(xstd(i),i=1,ndim)     
-              read(10,*)
-              read(10,*)
-              read(10,*)
-              read(10,*) !NMCS!,ndimtmp
-              read(10,*) evlfnc
-              close(10)
-
-           else 
-
-              open(10,file='MCsamp.dat',form='formatted',status='unknown')
-              read(10,*) !NMCS,ndimtmp
-              if (ndimtmp.ne.ndim) STOP 'Dimension does not match in MCsamp.dat!'
-              read(10,*) !(xavg(i),i=1,ndim)
-              read(10,*) !(xstd(i),i=1,ndim) 
-              read(10,*)		  
-              read(10,*)
-              read(10,*)
-              read(10,*) !NMCS!,ndimtmp
-              read(10,*) evlfnc        
-              close(10)
-           end if
-
-        else if (readMcsamples.eq.0) then
-
-           open(10,file='MC.inp',form='formatted',status='unknown')
-           read(10,*) !(xavg(i),i=1,ndim)
-           read(10,*) !(xstd(i),i=1,ndim) 
-           read(10,*)		  
-           read(10,*)
-           read(10,*)
-           read(10,*) !NMCS!,ndimtmp
-           read(10,*) evlfnc  
-           close(10)
-
-        end if
-     end if ! casemode
-
-     ! Domain size in function space
      do i=1,ndim
-        if (Casemode.eq.1) then
-           DS(1,i)=xavg(i)-3.0*xstd(i)
-           DS(2,i)=xavg(i)+3.0*xstd(i)
-        else
-           if (fct.eq.4) then
-              DS(1,i)=-5.12
-              DS(2,i)=5.12
-           else if (fct.eq.6) then
-              DS(1,i)=0.0d0
-              DS(2,i)=5.0d0
-           else if (fct.ge.10) then
+!        if (Casemode.eq.1) then
+!          DS(1,i)=xavg(i)-2.0*xstd(i)
+!          DS(2,i)=xavg(i)+2.0*xstd(i)
+!        else
+!           if (fct.eq.4) then
+!              DS(1,i)=-5.12
+!              DS(2,i)=5.12
+!           else if (fct.eq.6) then
+!              DS(1,i)=0.0d0
+!              DS(2,i)=5.0d0
+!           else if (fct.ge.10) then
               !               DS(1,i)=-2.0*0.01
               !               DS(2,i)=2.0*0.01
-              if (i.eq.1) then
-                 DS(1,i)=InitialAOA*4.0d0*atan(1.0)/180.0   ! in radian
-                 DS(2,i)=FinalAOA*4.0d0*atan(1.0)/180.0   ! in radian
-              else
-                 DS(1,i)=InitialMach !initial mach number
-                 DS(2,i)=FinalMach    !final mach number
-              end if
+!              if (i.eq.1) then
+!                 DS(1,i)=InitialAOA*4.0d0*atan(1.0)/180.0   ! in radian
+!                 DS(2,i)=FinalAOA*4.0d0*atan(1.0)/180.0   ! in radian
+!              else
+!                 DS(1,i)=InitialMach !initial mach number
+!                 DS(2,i)=FinalMach    !final mach number
+!              end if
 !!$                 if (i.eq.1) then
 !!$                    DS(1,i)=-3.517039000000000E-002
 !!$                    DS(2,i)=4.062709000000000E-002
@@ -231,11 +252,11 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 !!$                    DS(1,i)=-4.033711600000000E-002
 !!$                    DS(2,i)=3.797685900000000E-002
 !!$                 end if
-           else
+!           else
               DS(1,i)=-2.0
               DS(2,i)=2.0
-           end if
-        end if
+!           end if
+!        end if
      end do
 
      nstyle=0    				! With Function(0) or Separately(1)
@@ -562,31 +583,9 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      if (Casemode.eq.0) close(93)
   end if
   
-  fmeanout=fmean
-  fvarout=fvar
+  fmeanout=cverror
+!  fvarout=fvar
   
-  if (OUUflag.eq.1) then
-
-     if (id_proc.eq.0) then
-
-        call epigrads(fct,fctindx,ndim,ndimt,xavgt,xstdt,ftmp,dftmp)
-
-        do j=1,ndimt-ndim
-           fmeanprimeout(j)=dftmp(j)
-           fvarprimeout(j)=0.0     !ftmp*dftmp(j)
-        end do
-
-     end if
-
-  end if
-
-  call MPI_Barrier(MPI_COMM_WORLD,ierr)
-  call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-  call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-
-  fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
-  fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
-
   if (id_proc.eq.0) then
      write(filenum,*)
      write(filenum,*)'>> Program call is successful'

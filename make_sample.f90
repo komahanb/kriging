@@ -141,11 +141,23 @@
               
               if (randomflag.eq.1) then
 
-                 write(filenum,*)'>> Initial Sample Points by Latin Hypercube'
-                 sample(:,1)=0.5
-                 call get_seed(nseed)
-                 call latin_random(ndim,nhs-1-nhstmp,nseed,sample(:,2:nhs-nhstmp))       
+                 write(filenum,*)'>> Using points supplied by the user'
+!                 sample(:,1)=0.5
+!                 call get_seed(nseed)
+!                call latin_random(ndim,nhs-1-nhstmp,nseed,sample(:,2:nhs-nhstmp))       
+!                 print*,nhs,nhstmp
+!                 print*,sample(:,1:nhs-nhstmp)
+                 
+                 do i =1,nhs-nhstmp
+                    sample(:,i)=trainingdatapts(:,i)
+!                    trainingdatapts(i,:)=trainingdataptsin(:,i)
+!                    print*,"Inside kriging:"
+!                        print*,i,  sample(:,i)
+!                        print*,''
+                 end do
 
+               
+!                 print*,sample(:,1:nhs-nhstmp)
               else if (randomflag.eq.2) then
 
                  write(filenum,*)'>> Initial Sample Points by NIEDER Sequence'
