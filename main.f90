@@ -22,7 +22,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   integer,intent(in)::initpts,ncyc,flagin(20)
   integer::probtypeIN(20)
 
-  real*8::dftmp(ndimt),ftmp
+  real*8::dftmp(ndimint),ftmp
 
 
   ! Settings	

@@ -34,8 +34,8 @@
 !     We suppress both code-supplied stopping tests because the
 !        user is providing his own stopping criteria.
 
-        factr=0.0d0
-        pgtol=0.0d0
+        factr=1.d+3
+        pgtol=gtol
 
 !     We specify the number m of limited memory corrections stored.  
         
