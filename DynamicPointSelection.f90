@@ -281,7 +281,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 
-     NTOEX=10201 !*NDIM
+     NTOEX=101*101 !*NDIM
 
      if (NTOEX.gt.25000) NTOEX=25000
 
@@ -291,6 +291,8 @@ subroutine DynamicPointSelection
 
         call get_seed(nseed)
         call latin_random(ndim,NTOEX,nseed,Dtoex) 
+
+!        call halton_real(ndim,NTOEX,Dtoex)
 
         !        call hammersley_real(ndim,NTOEX,DTOEX)
 
@@ -335,8 +337,30 @@ subroutine DynamicPointSelection
         sigg=0.d0
 
 
-        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0), BETA, GAMM, IERR)
-        if (ierr.ne.0) stop'MIR BETA gamma error'
+!        if (k.eq.is)  CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0), BETA, GAMM, IERR)
+        
+        beta=0.5d0
+
+        if (fct.eq.0) then
+
+           gamm=1.0d0
+
+        else if (fct.eq.2) then
+
+           gamm=10.0d0
+
+        else if (fct.eq.3) then
+
+           gamm=0.5d0
+
+        else
+
+           gamm=5
+
+        end if
+
+        !        if (ierr.ne.0) stop'MIR BETA gamma error'
+
         CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
         if (ierr.ne.0) stop'MIR evaluate error'
 
@@ -344,7 +368,7 @@ subroutine DynamicPointSelection
         mode=1 ! return function, RMSE, EI
 
         call meta_call(1,mode,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
-
+!print*,  ftoextry(1,k),ftoextry(2,k)
      end do
   end if ! randomtestl
 
@@ -601,7 +625,7 @@ end subroutine DynamicPointSelection
 
 
 subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
-  use dimKrig,only:ndimt
+  use dimKrig,only:ndimt,hstat
   implicit none
   integer,INTENT(IN)::fct,ndim,nhs
   INTEGER,INTENT(OUT)::NCP,TAYLORORDER
@@ -732,62 +756,53 @@ subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 !!$     end if
 !!$
 !!$  end if
-
-  if (fct.eq.20) then    ! CFD
-
-     if (nhs.le.10)  then  
-        NCP=nhs
-        Taylororder=nhs!nhs!2!2!INT(NHS/4)
-     else if (nhs.gt.10 .and. nhs.le.15)  then  
-        NCP=nhs
-        Taylororder=10!ncp
-
-     else  if (nhs.gt.15 .and. nhs.le.25)  then  
-        NCP=nhs
-        Taylororder=10!ncp
-
-     else  if (nhs.gt.25 .and. nhs.le.35)  then  
-        NCP=nhs
-        Taylororder=7!ncp
-
-     else if (nhs.gt.35 .and. nhs.le.45)  then  
-        NCP=30
-        Taylororder=7
-
-     else if (nhs.gt.45 .and. nhs.le.100)  then  
-        NCP=30!50+0.1*nhs
-        Taylororder=7
-     else
-        NCP=35
-        Taylororder=7
-
-     end if
-
-
-  else  ! other test functions
+!!$
+!!$  if (fct.eq.20) then    ! CFD
+!!$
+!!$     if (nhs.le.10)  then  
+!!$        NCP=nhs
+!!$        Taylororder=nhs!nhs!2!2!INT(NHS/4)
+!!$     else if (nhs.gt.10 .and. nhs.le.15)  then  
+!!$        NCP=nhs
+!!$        Taylororder=10!ncp
+!!$
+!!$     else  if (nhs.gt.15 .and. nhs.le.25)  then  
+!!$        NCP=nhs
+!!$        Taylororder=10!ncp
+!!$
+!!$     else  if (nhs.gt.25 .and. nhs.le.35)  then  
+!!$        NCP=nhs
+!!$        Taylororder=7!ncp
+!!$
+!!$     else if (nhs.gt.35 .and. nhs.le.45)  then  
+!!$        NCP=30
+!!$        Taylororder=7
+!!$
+!!$     else if (nhs.gt.45 .and. nhs.le.100)  then  
+!!$        NCP=30!50+0.1*nhs
+!!$        Taylororder=7
+!!$     else
+!!$        NCP=35
+!!$        Taylororder=7
+!!$
+!!$     end if
 
 
-     if (nhs.le.25)  then  
+ ! else  ! other test functions
 
-        NCP=nhs
-        Taylororder=5 !2!2!INT(NHS/4)
+  
+  if (nhs.le.50)  then  
 
-     else if (nhs.gt.25 .and. nhs.le.35)  then  
-        NCP=25
-        Taylororder=5!ncp
+     NCP=nhs
 
-     else if (nhs.gt.35 .and. nhs.le.70)  then  
-        NCP=25!50+0.1*nhs
-        Taylororder=5
-     else if (nhs.gt.70 .and. nhs.le.100)  then  
-        NCP=25!50+0.1*nhs
-        Taylororder=5       
-     else
-        NCP=25
-        tAYLORORDER=5
-     end if
-     
-  end if ! end of CFD 
+  else
+
+     NCP=50
+     !    tAYLORORDER=5
+  end if
+ 
+
+!  end if ! end of CFD 
 
   ! Higher dimensional test functions
   
@@ -802,10 +817,20 @@ subroutine mirtunableparams(fct,ndim,nhs,ncp,taylororder)
         ncp=50
      end if
 
-     TAYLORORDER=7
-
   end if
   
+  ! Recommended Taylor order of expansion by Qiqi Wang
+
+  if (hstat.eq.0) then
+
+     Taylororder=NCP
+
+  else
+
+     Taylororder=NCP+ndim*NCP
+
+  end if
+
   return
 end subroutine mirtunableparams
 

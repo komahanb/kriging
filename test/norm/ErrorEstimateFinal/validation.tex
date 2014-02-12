@@ -1,0 +1,134 @@
+\documentclass{report}
+%\graphicspath{{./figures/}}
+\usepackage{amsfonts,caption}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{color}
+\newcommand{\comment}[1]{\colorbox{yellow}{#1}}
+\graphicspath{{./figures/}}
+\usepackage{amsmath, amssymb, graphics, setspace,mathtools}
+\usepackage{float}
+\usepackage[superscript]{cite}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\renewcommand\floatpagefraction{0.99}
+\renewcommand\topfraction{0.99}
+\renewcommand\bottomfraction{0.99}
+\renewcommand\textfraction{0.0}
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+\usepackage{bm}
+
+\newcommand{\kmat}{\bm{[k]}}
+\newcommand{\K}{\bm{[K]}}
+\newcommand{\bpsi}{\bm{\psi}}
+\newcommand{\x}{\bm{x}}
+\newcommand{\q}{\bm{q}}
+\newcommand{\bnabla}{\bm{\nabla}}
+\newcommand{\J}{\cal{J}}
+\newcommand{\D}{\cal{D}}
+\newcommand{\W}{{W}}
+%\newcommand{\F}{F_s}
+\newcommand{\F}{}
+\newcommand{\A}{\cal{A}}
+\newcommand{\N}{\cal{N}}
+%\newcommand{\d}{\bm{d}}
+
+% bold face symbols
+
+\newcommand{\e}{\bm{\tau}}
+\newcommand{\n}{\bm{\eta}}
+\newcommand{\z}{\bm{\xi}}
+\renewcommand{\c}{\bm{c}}
+
+% non bold face symbols
+
+\newcommand{\es}{{\tau}}
+\newcommand{\ns}{{\eta}}
+\newcommand{\zs}{\xi}
+\newcommand{\mus}{\mu^*}
+
+%\newcommand{\vars}{\sigma^{2*}}
+\newcommand{\vars}{\vartheta^*}
+%\newcommand{\vars}{\var^*}
+
+
+%Usage: \mc{number of columns spanned}{major column heading}
+\newcommand{\mc}[2]{\multicolumn{#1}{c}{#2}}
+\usepackage{multirow}
+%Usage: \btable{table specs}{caption}{reference label}
+\newcommand{\btable}[3]{
+\begin{table}[htbp]
+\begin{center}
+\caption{#2\label{#3}}
+\begin{tabular}{#1}}
+\newcommand{\etable}{\end{tabular}
+\end{center}
+\end{table}}
+
+% Define commands 
+\newcommand{\half}{\ensuremath{\dfrac{1}{2}}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand{\etal}[0]{{\em et al.}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pf}[2]{\frac{d #1}{d #2}}
+\newcommand{\pdt}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\pft}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\pdtno}[2]{\frac{\partial^2 #1}{\partial #2}}
+\newcommand{\pdd}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\pff}[3]{\frac{d^2 #1}{d #2 d #3}}
+\newcommand{\beg}{\begin{gather}}
+\newcommand{\eeg}{\end{gather}}
+\newcommand{\bes}{\begin{split}}
+\newcommand{\ees}{\end{split}}
+\newcommand{\var}{\vartheta}
+\newcommand{\g}{\bm{g}}
+\renewcommand{\d}{\bm{d}}
+
+% Aleatory and  epistemic vars
+
+%\newcommand{\da}{\bm{d}_\alpha}
+%\newcommand{\db}{\bm{d}_\beta}
+\usepackage[section]{placeins} % places floats within the section
+%http://biostat.mc.vanderbilt.edu/wiki/pub/Main/StatReport/summary.pdf
+%\title{Robust Design Optimization Using Response Surfaces}
+\title{Robust Optimizations of Structural and Aerodynamic Designs}
+%\title{Robust Optimization of Aerospace Designs}
+%\title{Robust Optimization with Mixed Uncertainties Using Kriging and Polynomial Chaos}
+\author{
+  \href{http://komahanboopathy.com/}{Komahan Boopathy} \thanks{Master's Candidate,~{Dept. of Mechanical and Aerospace Eng.},~\email{komahan.cool@gmail.com}, Student Member AIAA}\\
+   {\normalsize \itshape {University of Dayton}, Ohio, 45469, USA}\\
+   \and
+   \href{http://academic.udayton.edu/markusrumpfkeil/}{Markus P. Rumpfkeil} \thanks{Assistant Professor, Dept. of Mechanical and Aerospace Eng.,~\email{Markus.Rumpfkeil@udayton.edu}, Senior Member AIAA} \\
+   {\normalsize \itshape University of Dayton, Ohio, 45469, USA}\\
+ }
+\begin{document}
+
+\maketitle
+
+\setlength\abovedisplayskip{0pt}
+\setlength\belowdisplayskip{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%   ABSTRACT  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[h!]
+\centering
+\begin{minipage}[b]{0.32\linewidth}
+\includegraphics[width=1.0\textwidth]{exponential1.eps} \caption{Exponential}
+\end{minipage}
+\begin{minipage}[b]{0.32\linewidth}
+\includegraphics[width=1.0\textwidth]{runge10.eps} \caption{Runge}
+\end{minipage}
+\begin{minipage}[b]{0.32\linewidth}
+\includegraphics[width=1.0\textwidth]{rosen.eps} \caption{Rosenbrock}
+\end{minipage}
+\end{figure}
+MAD=Maximum Absolute Discrepancy\\
+MAE=Maximum Absolute Error $(L_\infty norm)$
+
+\end{document}

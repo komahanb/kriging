@@ -15,7 +15,7 @@ subroutine Post_Process
      if (fct.eq.20) then
         ifac = 51 ! I have database of only  51*51 for CFD
      else
-        ifac=101
+        ifac=101 !101
      end if
 
   else if(Cmode(:9).eq.'Post_RMSE')then
