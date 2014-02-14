@@ -9,6 +9,8 @@ subroutine DynamicPointSelection
   double precision :: triangle_coor(ndim,100000),Dtoextmp(ndim),Dtoex(ndim,100000),dist(100000),minftoex(100000),maxftoex(100000),distmean,ftoextry(2,100000),derivdummy(ndim)
   double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:1000),Dgdibtmp(ndim,0:1000),fdibtmp(0:1000),gdibtmp(ndim,0:1000),hdibtmp(ndim,ndim,0:1000),diffloctmp,difflocmin,difflocavg, SIGMAmean,distcomp
 
+integer, dimension(ndim) :: itp
+
   double precision, dimension(nptstoaddpercyc) :: f
   double precision, dimension(ndim,nptstoaddpercyc) :: df,Dad,v
   double precision, dimension(ndim,ndim,nptstoaddpercyc) :: d2f
@@ -289,10 +291,15 @@ subroutine DynamicPointSelection
 
      if (id_proc.eq.0) then
 
-        call get_seed(nseed)
-        call latin_random(ndim,NTOEX,nseed,Dtoex) 
+!        call get_seed(nseed)
+!        call latin_random(ndim,NTOEX,nseed,Dtoex) 
+
+
+
 
 !        call halton_real(ndim,NTOEX,Dtoex)
+
+        call meshpoints(DTOEX)
 
         !        call hammersley_real(ndim,NTOEX,DTOEX)
 
@@ -316,6 +323,8 @@ subroutine DynamicPointSelection
      do k=is,ie !Main loop for test candidates
 
         ! Still need to make sure points are not collinear in higher dimensions!
+
+!        call make_cartesian_higherD(k,ndim,101,itp,Dtoex(:,k))
 
         call knn(Dtoex(:,k),sample,knnptr,ndim,nhs,NCP)
 
@@ -368,8 +377,11 @@ subroutine DynamicPointSelection
         mode=1 ! return function, RMSE, EI
 
         call meta_call(1,mode,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
-!print*,  ftoextry(1,k),ftoextry(2,k)
+!print*,  ftoextry(1,k),ftoextry(2,k),id_proc
+!        discdist(k)=abs(ftoextry(1,k)-ftoextry(2,k)) !D
+        discdist(k)=ftoextry(1,k)
      end do
+
   end if ! randomtestl
 
 
@@ -381,8 +393,25 @@ subroutine DynamicPointSelection
      call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
      call MPI_BCAST(ftoextry(2,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
      call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
+     call MPI_BCAST(discdist(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
      if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
   end do
+!  print*,nhs,maxsamplewant
+  
+  if (nhs.eq.maxsamplewant-5) then
+     nhs=nhs-5
+     Cmode='Post_2D'
+     !  call post_process
+     call Post_1or2D(101)
+     print*,"written successfully"
+     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+     stop
+  end if
+
+ 
+
+!if (nhs+5.eq.maxsamplewant) stop
+
 
   !print *, ftoextry(1,1:NTOEX), ftoextry(2,1:NTOEX)
   !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -437,7 +466,7 @@ subroutine DynamicPointSelection
 
      ! Pick test candidate with largest difference in values, but above distcomp distance to nearest neighbours
 
-     distcomp=1.1d0*distmean
+     distcomp=1.2d0*distmean
 
 
      !initialize values
@@ -1434,3 +1463,28 @@ function i4_modp ( i, j )
   return
 end function i4_modp
 
+!++++++++++++++++++++++++++
+
+subroutine meshpoints(Dtoex)
+implicit none
+
+real*8::Dtoex(2,10201)
+integer::k
+integer::ndim
+integer::itp(2)
+
+
+ndim=2
+
+do k=1,10201
+
+   call make_cartesian_higherD(k,ndim,101,itp,Dtoex(:,k))
+
+ !  print*,Dtoex(:,k)
+
+end do
+
+
+!stop
+
+end subroutine meshpoints

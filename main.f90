@@ -110,7 +110,7 @@ program Kriging
 !!$         read(10,*) (xstd(i),i=1,ndim) 
 !!$         close(10)
            
-           do fuct=1,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
+           do fuct=3,3 !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
               if (fuct.eq.1) fct=0
               if (fuct.eq.2) fct=2
@@ -134,7 +134,7 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 155
+                       maxsamplewant=30
                        nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
@@ -546,7 +546,7 @@ program Kriging
 
                              else if(Cmode(:5).eq.'Post_')then
                                 if (id_proc.eq.0) call TimerStart('Post process')
-                                call Post_Process
+!                                call Post_Process
                                 if (id_proc.eq.0) call TimerStop('Post process')
 
                              else if(Cmode(:5).eq.'Rank ')then

@@ -1,4 +1,4 @@
 cd ..
 make
 cd -
-mpiexec -np 16 ../kriging |tee screen
+mpiexec -np 8 ../kriging |tee screen

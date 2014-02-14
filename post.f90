@@ -138,8 +138,8 @@ subroutine Post_RMSE
            integer :: Taylororder, IERR,iii,jjj
            double precision :: BETA, GAMM
            character*60 :: export
-
-
+           real*8::errordist(ifac,ifac)
+           integer::indx
            imax=ifac
            !imax=41
            jmax=ifac
@@ -243,6 +243,7 @@ subroutine Post_RMSE
                              TEC2(i,j,5) = EI
                              if (fct.le.20) then                              
                                 f=  TEC2(i,j,6)
+                               
                                 diff = diff + (f-yhat)**2
                                 if (abs(f-yhat).gt.maxerror) maxerror=abs(f-yhat)
                              end if
@@ -275,9 +276,10 @@ subroutine Post_RMSE
 
                        else !calling exacfunc
 
-
+                          indx=0
                           do 110 i=1,imax
                              do 120 j=1,jmax
+                                indx=indx+1
 
                                 xin(1) = dble(i-1)/dble(imax-1)
                                 if(ndim.eq.2) xin(2) = dble(j-1)/dble(jmax-1)
@@ -322,6 +324,9 @@ subroutine Post_RMSE
                                    if (fct.lt.20) then 
                                       call evalfunc(xin,ndim,fct,0,0,f,df,d2f,v)
                                       TEC2(i,j,6) = f
+                                      errordist(i,j)= yhat      !abs(yhat-f)
+                                      TEC2(i,j,4) = errordist(i,j)
+                                      TEC2(i,j,5) = discdist(indx)
                                       diff = diff + (f-yhat)**2
                                       if (abs(f-yhat).gt.maxerror) maxerror=abs(f-yhat)
                                    end if
@@ -551,6 +556,8 @@ subroutine Post_RMSE
                                 write(10,*)((TEC2(i,j,4),i=1,imax),j=1,jmax)
                                 write(10,*)((TEC2(i,j,5),i=1,imax),j=1,jmax)
                                 close(10)
+
+print*,"hereralkfjldsakjfla;sjf;lj"
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 !!Comment  this  cell out if reading samples from tecex10.dat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 !!MAke sure you read the exact values above from this file instead of callinf exactfunction calls !!!!!!!!

@@ -103,6 +103,7 @@ Module dimKrig
   integer::loopcounter,runnum
   double precision,allocatable,dimension(:,:,:)::rmsemat
   character*60 :: outfile
+  real*8::discdist(10201)
 
   ! Function evaluation counters
 
