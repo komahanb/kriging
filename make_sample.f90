@@ -3,7 +3,7 @@
         implicit none
         common/global/counter
         integer :: nseed,mode,counter,nhstmp
-        integer :: i,j,k
+        integer :: i,j,k,ii
         double precision :: f,ran,prd,factor
         double precision, allocatable, dimension(:)   :: x,df,hv,v,ftmp
         double precision, allocatable, dimension(:,:)   :: xtmp,dftmp,hvtmp,vtmp
@@ -18,6 +18,7 @@
         logical :: pointinbox
      
         allocate(sample(ndim,nhs))
+!        allocate(Datasample(ndim,nhs))
         allocate(sampl(ndim,nls))
         allocate(x(ndim))
         allocate(df(ndim))
@@ -150,6 +151,8 @@
                  
                  do i =1,nhs-nhstmp
                     sample(:,i)=trainingdatapts(:,i)
+
+
 !                    trainingdatapts(i,:)=trainingdataptsin(:,i)
 !                    print*,"Inside kriging:"
 !                        print*,i,  sample(:,i)
@@ -225,15 +228,22 @@
            end do
 
            do i=1,nhs-nhstmp+nls
-              
-              if(i.le.nhs-nhstmp)then
-                 x(:) = sample(:,i)
-                 call evalfunc(x,ndim,fct,0,hstat,f,df,d2f,v)
-              else
-                 x(:) = sampl(:,i-nhs-nhstmp)   
-                 !ifid=2
-                 call evalfunc(x,ndim,fct,ifid,lstat,f,df,d2f,v)
-              end if          
+
+              open(unit=14,file='Training.csv',form='formatted')
+              do ii=1,300
+                 read(14,*)sample(1,ii),sample(2,ii),sample(3,ii),sample(4,ii),f           
+              end do
+              close(14)
+
+!!$
+!!$              if(i.le.nhs-nhstmp)then
+!!$                 x(:) = sample(:,i)
+!!$                 call evalfunc(x,ndim,fct,0,hstat,f,df,d2f,v)
+!!$              else
+!!$                 x(:) = sampl(:,i-nhs-nhstmp)   
+!!$                 !ifid=2
+!!$                 call evalfunc(x,ndim,fct,ifid,lstat,f,df,d2f,v)
+!!$              end if          
 
               if(nstyle.eq.0)then ! with func
                  if (i.le.nhs) then ! high-fid

@@ -1,4 +1,4 @@
-subroutine Krigingestimate(ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin,fmeanout)
+subroutine Krigingestimate(ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin,trainingdataptsin,testptin,fmeanout)
 
 !!subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,initpts,ncyc,nptsin,statin,probtypeIN,flagin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
@@ -19,12 +19,43 @@ subroutine Krigingestimate(ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin
   integer:: nsamples,counter,numberpointstudy
   integer,parameter::timing=1 !other number if timing results not needed
   double precision :: Initialmach, Finalmach, InitialAOA,FinalAOA
-!  real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
+  real*8,intent(in)::DATIN ! constants and other values for objective function/constraints
   integer ::fuct
-  integer,intent(in)::initpts,ncyc
+  integer::initpts,ncyc
   integer::probtypeIN(20)
 
-  real*8::dftmp(ndimt),ftmp
+  real*8::dftmp(ndimint),ftmp
+
+  real*8,intent(in)::trainingdataptsin(ndimint,nptsin),testptin(ndimint)
+
+!  print*,ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin
+  
+!  print*,shape(trainingdataptsin(:,:)),shape(testptin(:))
+
+!stop
+
+
+
+ ! print*,"Testing data"
+  xi=testptin ! used in monaco
+ ! print*,xi
+
+ ! print*,''
+ ! print*,''
+
+  !print*,"Training data"
+  do i =1,nptsin
+
+     trainingdatapts(:,i)=trainingdataptsin(:,i)
+ !    print*,i, trainingdatapts(:,i)
+ !    print*,i, trainingdataptsin(:,i),i,i
+
+  end do
+
+ !print*,''
+ !print*,''
+
+ !store training data and
 
 
   ! Settings	
@@ -36,7 +67,7 @@ subroutine Krigingestimate(ndimin,ndimint,fctin,DATIN,initpts,ncyc,nptsin,statin
 
   mainprog=.false.
 
- ! DAT=DATIN ! DATA used in functions.f90
+  DAT=DATIN ! DATA used in functions.f90
 
 !  probtype(1:ndim)=probtypeIN(1:ndim)
 

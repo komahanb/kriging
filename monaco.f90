@@ -50,16 +50,17 @@ subroutine MonteCarlo
      write(filenum,*)
      write(filenum,*)
 
-     write(filenum,'(1x,a,2e15.5)')'>> Evaluating Real Fn at  :', xi
-     call evalfunc(xi,ndim,fct,0,1,freal,df,d2f,v)
-     write(filenum,'(1x,a,e15.5)')'>> Real     Value f(xi)   :', freal
+!    write(filenum,'(1x,a,2e15.5)')'>> Evaluating Real Fn at  :', xi
+!     call evalfunc(xi,ndim,fct,0,1,freal,df,d2f,v)
+!     write(filenum,'(1x,a,e15.5)')'>> Real     Value f(xi)   :', freal
 
-     write(filenum,*)
-     write(filenum,*)
+ !    write(filenum,*)
+ !    write(filenum,*)
      
-     cverror=abs(yhat-freal)
+     !cverror=abs(yhat-freal)
+     cverror=yhat
      
-     write(filenum,'(1x,a,e15.5)')'>> CV Error       :', cverror
+  !   write(filenum,'(1x,a,e15.5)')'>> CV Error       :', cverror
      
      write(filenum,*)
 

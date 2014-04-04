@@ -108,6 +108,6 @@ Module dimKrig
 
   integer::fcnt,fgcnt,fghcnt
 
-  real*8::xi(2),cverror,trainingdatapts(2,1000)
+  real*8::xi(4),cverror,trainingdatapts(4,1000)
 
 End Module dimKrig
