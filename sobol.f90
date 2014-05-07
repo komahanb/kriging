@@ -22,8 +22,8 @@ subroutine sobol_real(seed,dim_max,npts,rmat)
 !
   implicit none
 
-  integer ( kind = 4 ), intent(in) :: dim_max
-  integer ( kind = 4 ), intent(in) :: npts
+  integer ( kind = 8 ), intent(in) :: dim_max
+  integer ( kind = 8 ), intent(in) :: npts
   real    ( kind = 8 ),intent(out) :: rmat(dim_max,npts)
 
   integer ( kind = 8 ), parameter :: test_num = 3
@@ -1260,13 +1260,13 @@ subroutine i8_sobol_generate ( m, n, skip, r )
 !
   implicit none
 
-  integer ( kind = 4 ) m
-  integer ( kind = 4 ) n
+  integer ( kind = 8 ) m
+  integer ( kind = 8 ) n
 
-  integer ( kind = 4 ) j
+  integer ( kind = 8 ) j
   real ( kind = 8 ), dimension ( m, n ) :: r
   integer ( kind = 8 ) seed
-  integer ( kind = 4 ) skip
+  integer ( kind = 8 ) skip
 
   seed = skip
 

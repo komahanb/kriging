@@ -321,7 +321,6 @@ subroutine Post_RMSE
                                    ! if (readfromdatabase.eq.0) then
                                    if (fct.lt.20) then 
                                       call evalfunc(xin,ndim,fct,0,0,f,df,d2f,v)
-!                                      print*,xin,f,yhat
                                       TEC2(i,j,6) = f
                                       diff = diff + (f-yhat)**2
                                       if (abs(f-yhat).gt.maxerror) maxerror=abs(f-yhat)
@@ -541,45 +540,30 @@ subroutine Post_RMSE
                                    write(11,'(9999f15.8)') fvis(1,1)
                                    close(11)
                                 end if
-                                
-                                open(10,file='./tec/'//Ckrig,form='formatted',status='unknown')   
-                                write(10,'(a)')'variables = "x" "y" "f" "rmse" "EI" "Exact"'
-                                write(10,*)'zone i=',imax,' j=',jmax,' datapacking=point'
-                                do i=1,imax
-                                   do j=1,jmax
-                                      write(10,*)TEC2(i,j,1),TEC2(i,j,2),TEC2(i,j,3),TEC2(i,j,4),TEC2(i,j,5),TEC2(i,j,6)
-                                   end do
-                                end do
-!!$                                write(10,*)((TEC2(i,j,1),i=1,imax),j=1,jmax)
-!!$                                write(10,*)((TEC2(i,j,2),i=1,imax),j=1,jmax)
-!!$                                write(10,*)((TEC2(i,j,3),i=1,imax),j=1,jmax)
-!!$                                write(10,*)((TEC2(i,j,4),i=1,imax),j=1,jmax)
-!!$                                write(10,*)((TEC2(i,j,5),i=1,imax),j=1,jmax)
-                                close(10)
 
+                                open(10,file='./tec/'//Ckrig,form='formatted',status='unknown')
+                                write(10,'(a)')'TITLE = " "'
+                                write(10,'(a)')'VARIABLES = "x" "y" "f" "rmse" "EI"'
+                                write(10,'(3(a,i5),a)')'ZONE T="Kriging", I=',imax,', J=',jmax,', K=',1,', F=BLOCK'
+                                write(10,*)((TEC2(i,j,1),i=1,imax),j=1,jmax)
+                                write(10,*)((TEC2(i,j,2),i=1,imax),j=1,jmax)
+                                write(10,*)((TEC2(i,j,3),i=1,imax),j=1,jmax)
+                                write(10,*)((TEC2(i,j,4),i=1,imax),j=1,jmax)
+                                write(10,*)((TEC2(i,j,5),i=1,imax),j=1,jmax)
+                                close(10)
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 !!Comment  this  cell out if reading samples from tecex10.dat!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 !!MAke sure you read the exact values above from this file instead of callinf exactfunction calls !!!!!!!!
                                 if (readfromdatabase.eq.0) then
                                    ! write(*,*)'writing exact function values to tecex**.dat'
-                                   if (fct.le.20) then
+                                   if (fct.le.10) then
                                       open(10,file='./tec/'//Cexac,form='formatted',status='unknown')
-                                      write(10,*)'variables= "x","y","f"'
-                                      write(10,*)'zone i=',imax,' j=',jmax,' datapacking=point'
-                                      
-                                      do i=1,imax
-                                         do j=1,jmax
-                                            write(10,*)TEC2(i,j,1),TEC2(i,j,2),TEC2(i,j,6)
-                                         end do
-                                      end do
-
-!!$
-!!$                                      write(10,*)((TEC2(i,j,1),i=1,imax),j=1,jmax)
-!!$                                      write(10,*)((TEC2(i,j,2),i=1,imax),j=1,jmax)
-!!$                                      write(10,*)((TEC2(i,j,6),i=1,imax),j=1,jmax)
-!!$
-
-
+                                      write(10,'(a)')'TITLE = " "'
+                                      write(10,'(a)')'VARIABLES = "x" "y" "f"'
+                                      write(10,'(3(a,i5),a)')'ZONE T="Exact", I=',imax,', J=',jmax,', K=',1,', F=BLOCK'
+                                      write(10,*)((TEC2(i,j,1),i=1,imax),j=1,jmax)
+                                      write(10,*)((TEC2(i,j,2),i=1,imax),j=1,jmax)
+                                      write(10,*)((TEC2(i,j,6),i=1,imax),j=1,jmax)
                                       close(10)
                                    end if
                                 end if

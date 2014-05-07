@@ -9,8 +9,10 @@ Module dimKrig
   ! problem set
 
   character(len=20) :: Cmode
-  integer :: nOPT,nCON,fct,hstat,lstat,nstyle,iterDEL,randomini,randomtestl,dynamics,ifid,reusesamples,maxsample,maxsamplewant
-  integer :: nKRI,nDCK,nICK,nDMF,nCOK,nVFM,nptstoaddpercyc,Dutchorderg,readMCsamples,selectedevaluation,evlfnc
+  integer :: nOPT,nCON,fct,hstat,lstat,nstyle,iterDEL,randomini,&
+       randomtestl,dynamics,ifid,reusesamples,maxsample,maxsamplewant
+  integer :: nKRI,nDCK,nICK,nDMF,nCOK,nVFM,nptstoaddpercyc,Dutchorderg,&
+       readMCsamples,selectedevaluation,evlfnc
   integer :: nMXS,nMXG,nMXH,nMXV,ndiffloc,NMCS,fctindx,filenum,ctr
   integer, dimension(10)            :: nfOPT,nfCON
   integer, dimension(10)            :: nfKRI,nfDCK,nfICK,nfDMF,nfCOK,nfVFM

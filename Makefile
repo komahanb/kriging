@@ -19,7 +19,7 @@ F90	= mpif90
 F77	= mpif77
 
 #FFLAGS  = -mp -convert big_endian -fpconstant -zero -c
-FFLAGS  = -g -m64 -fopenmp  #-r8 -O4 -openmp 
+FFLAGS  = -g -m64 -fopenmp
 
 #LIBS    = -L/usr/local/lib -L/Softwareinstall/gsl-1.15/.libs/lgsl -L/Softwareinstall/gsl-1.15/.libs/lgslcblas -lm #-L/Softwareinstall/gsl-1.15/.libs/lmir
 LFLAGS =  -L$(GSL_prefix)/lib -lgsl -lgslcblas -lm

@@ -2,3 +2,6 @@
 (2) functions.f90 : commented out random number stuff, corrected threebar truss coding and removed threebarcost.o, commented eulersolve
 (3) rmsebound.o has some issues real*8 to integer and d0 suffixes are changed
 (4) Removed Eulersolve.a from the Makefile and added openmp flag to makefile
+(5) Runtime glibc in post.f90 fixed sampl(:,1:ndim) explicit when combined with xvis(1:ndim,cnt), .ge.10 changed to .ge.20, tecplot output changed to point type
+(6) gatool real to real*8 fixed in 8 occurances
+(7) i8_sobol integer precision fix

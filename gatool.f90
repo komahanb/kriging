@@ -930,10 +930,10 @@
 
       subroutine INV_MAT_2D(A,AINV,det)
       implicit none
-      real, dimension(2,2), intent(in)  :: A
-      real, dimension(2,2), intent(out) :: AINV
-      real,                 intent(out) :: det
-      real :: a11,a21,a12,a22
+      real*8, dimension(2,2), intent(in)  :: A
+      real*8, dimension(2,2), intent(out) :: AINV
+      real*8,                 intent(out) :: det
+      real*8 :: a11,a21,a12,a22
 
       a11 = A(1,1)
       a21 = A(2,1)
@@ -952,10 +952,10 @@
 !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       subroutine INV_MAT_3D(A,AINV,det)
       implicit none
-      real, dimension(3,3), intent(in)  :: A
-      real, dimension(3,3), intent(out) :: AINV
-      real,                 intent(out) :: det
-      real :: a11,a21,a31,a12,a22,a32,a13,a23,a33
+      real*8, dimension(3,3), intent(in)  :: A
+      real*8, dimension(3,3), intent(out) :: AINV
+      real*8,                 intent(out) :: det
+      real*8 :: a11,a21,a31,a12,a22,a32,a13,a23,a33
 
       a11 = A(1,1)
       a21 = A(2,1)

@@ -19,7 +19,7 @@ F90	= mpif90
 F77	= mpif77
 
 #FFLAGS  = -mp -convert big_endian -fpconstant -zero -c
-FFLAGS  = -g -m64 #-r8 -O4 -openmp 
+FFLAGS  = -g -m64 -fopenmp
 
 #LIBS    = -L/usr/local/lib -L/Softwareinstall/gsl-1.15/.libs/lgsl -L/Softwareinstall/gsl-1.15/.libs/lgslcblas -lm #-L/Softwareinstall/gsl-1.15/.libs/lmir
 LFLAGS =  -L$(GSL_prefix)/lib -lgsl -lgslcblas -lm
@@ -32,7 +32,7 @@ LIBS = -ldl -lstdc++
 	fi
 
 SRCS =  dimKrig.o Timer.o main.o functions.o \
-        latin.o mpi.o threebarcost.o\
+        latin.o mpi.o optimize.o \
         read_set.o Dutch.o Dutchgeninterp.o\
         read_sample.o check_sample.o \
         make_krig.o reduce_data.o tool.o eva_sample.o \
@@ -56,8 +56,8 @@ OBJS =  ${SRCS:.$(SUF)=.o}
 
 all:  $(TARGET)
 
-$(TARGET): $(OBJS) Eulersolve.a libmir.a tapenade.a
-	$(F90) $(FFLAGS) -o $(TARGET) $(OBJS) Eulersolve.a libmir.a tapenade.a $(LFLAGS) -Wl,-rpath=.
+$(TARGET): $(OBJS) libmir.a tapenade.a
+	$(F90) $(FFLAGS) -o $(TARGET) $(OBJS) libmir.a tapenade.a $(LFLAGS) -Wl,-rpath=.
 	@echo " ----------- ${TARGET} created ----------- "
 .$(SUF90).o:
 	$(F90) $(FFLAGS) -c $<
