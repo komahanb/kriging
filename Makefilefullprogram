@@ -19,7 +19,7 @@ F90	= mpif90
 F77	= mpif77
 
 #FFLAGS  = -mp -convert big_endian -fpconstant -zero -c
-FFLAGS  = -r8 -O4 -openmp 
+FFLAGS  = -g -m64 #-r8 -O4 -openmp 
 
 #LIBS    = -L/usr/local/lib -L/Softwareinstall/gsl-1.15/.libs/lgsl -L/Softwareinstall/gsl-1.15/.libs/lgslcblas -lm #-L/Softwareinstall/gsl-1.15/.libs/lmir
 LFLAGS =  -L$(GSL_prefix)/lib -lgsl -lgslcblas -lm
@@ -31,7 +31,7 @@ LIBS = -ldl -lstdc++
 	$(MAKE) $< \
 	fi
 
-SRCS =  dimKrig.o main.o functions.o Timer.o\
+SRCS =  dimKrig.o Timer.o main.o functions.o \
         latin.o mpi.o threebarcost.o\
         read_set.o Dutch.o Dutchgeninterp.o\
         read_sample.o check_sample.o \

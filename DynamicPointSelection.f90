@@ -4,18 +4,28 @@ subroutine DynamicPointSelection
   include 'mpif.h'
 
   common/global/counter
-  integer :: counter,i,ii,j,jj,jjj,k,kk,kp,l,NTOEX,NTOEXtmp,triangle_node(ndim+1,100000),triangle_num,triangle_coor_num,NCP,node,knnptr(20000),orderextmp(0:20000),Dutchorder(100000),nseed,hstatad(nptstoaddpercyc)
+  integer :: counter,i,ii,j,jj,jjj,k,kk,kp,l,NTOEX,NTOEXtmp,&
+       triangle_node(ndim+1,100000),triangle_num,triangle_coor_num,&
+       NCP,node,knnptr(20000),orderextmp(0:20000),&
+       Dutchorder(100000),nseed,hstatad(nptstoaddpercyc)
   integer :: mode
-  double precision :: triangle_coor(ndim,100000),Dtoextmp(ndim),Dtoex(ndim,100000),dist(100000),minftoex(100000),maxftoex(100000),distmean,ftoextry(2,100000),derivdummy(ndim)
-  double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:1000),Dgdibtmp(ndim,0:1000),fdibtmp(0:1000),gdibtmp(ndim,0:1000),hdibtmp(ndim,ndim,0:1000),diffloctmp,difflocmin,difflocavg, SIGMAmean,distcomp
+  double precision :: triangle_coor(ndim,100000),Dtoextmp(ndim),&
+       Dtoex(ndim,100000),dist(100000),minftoex(100000),&
+       maxftoex(100000),distmean,ftoextry(2,100000),derivdummy(ndim)
+  double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:1000),&
+  Dgdibtmp(ndim,0:1000),fdibtmp(0:1000),gdibtmp(ndim,0:1000),&
+  hdibtmp(ndim,ndim,0:1000),diffloctmp,difflocmin,difflocavg,&
+  SIGMAmean,distcomp
 
   double precision, dimension(nptstoaddpercyc) :: f
   double precision, dimension(ndim,nptstoaddpercyc) :: df,Dad,v
   double precision, dimension(ndim,ndim,nptstoaddpercyc) :: d2f
   double precision, DIMENSION(200) :: SIGV
   double precision, DIMENSION(200) :: SIGG
-  integer :: Taylororder, IERR, NCPG,idec,is,ie,id,point,kpc,nptstoaddpercyctmp,  nptstoaddpercycorig
-  double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000)
+  integer :: Taylororder, IERR, NCPG,idec,is,ie,id,point,&
+       kpc,nptstoaddpercyctmp,  nptstoaddpercycorig
+  double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,&
+       RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000)
   character*60::export
   integer::npass
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
@@ -36,7 +46,8 @@ subroutine DynamicPointSelection
            hstatad(ii)=hstat
            if(nstyle.eq.0) then
               Dad(:,ii)=Dtoex(:,ii)
-              call evalfunc(Dtoex(:,ii),ndim,fct,0,hstatad(ii),f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
+              call evalfunc(Dtoex(:,ii),ndim,fct,0,hstatad(ii),&
+                   f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
            end if
 
         end do !! ii loop
@@ -50,19 +61,28 @@ subroutine DynamicPointSelection
 
            do i=1,nhs+nls
               if (info(i)(3:6).ne.'FGHv') then
-                 write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),j=1,nCOK)
+                 write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),&
+                      j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),&
+                      (((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),j=1,nCOK)
               else
-                 write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
+                 write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),&
+                      j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),&
+                      ((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),&
+                      ((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
               end if
            end do
 
            do ii=1,nptstoaddpercyc
               if (hstatad(ii).le.3) then
                  !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
-                 write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
+                 write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),&
+                      f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),&
+                      j=1,ndim),k=1,ndim)
               else
                  !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
-                 write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
+                 write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),&
+                      f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),&
+                      (d2f(k,1,ii),k=1,ndim)
               end if
            end do
 
@@ -110,7 +130,8 @@ subroutine DynamicPointSelection
 
         call fixcolindelaunay(triangle_num,triangle_coor_num,ndim,triangle_coor,triangle_node)
 
-        if (ndim.eq.2) call triangulation_order3_plot('triangulation_plot.eps',triangle_coor_num,triangle_coor,triangle_num,triangle_node,2,2)
+        if (ndim.eq.2) call triangulation_order3_plot('triangulation_plot.eps',&
+             triangle_coor_num,triangle_coor,triangle_num,triangle_node,2,2)
 
         ! Figure out locations of test candidates (midpoints of Delaunay sides and centres of Delaunay triangles),  Calculate local Dutch intrapolations and compare to Kriging values
 
@@ -128,7 +149,8 @@ subroutine DynamicPointSelection
               if (kp.gt.ndim+1) kp=1
 
               do jj=1,ndim             
-                 Dtoextmp(jj)=(triangle_coor(jj,triangle_node(kk,ii))+triangle_coor(jj,triangle_node(kp,ii)))/2.0
+                 Dtoextmp(jj)=(triangle_coor(jj,triangle_node(kk,ii))&
+                      +triangle_coor(jj,triangle_node(kp,ii)))/2.0
               end do
 
               ! Don't consider doubles
@@ -149,7 +171,8 @@ subroutine DynamicPointSelection
            do jj=1,ndim
               Dtoex(jj,NTOEX)=0.0
               do kk=1,ndim+1
-                 Dtoex(jj,NTOEX)=Dtoex(jj,NTOEX)+triangle_coor(jj,triangle_node(kk,ii))
+                 Dtoex(jj,NTOEX)=Dtoex(jj,NTOEX)&
+                      +triangle_coor(jj,triangle_node(kk,ii))
               end do
               Dtoex(jj,NTOEX)=Dtoex(jj,NTOEX)/real(ndim+1)
            end do
@@ -173,7 +196,9 @@ subroutine DynamicPointSelection
 
            Dutchorder(NTOEXtmp:NTOEX)=1
 
-           call Dutch(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,Dutchorder(NTOEXtmp:NTOEX),Dtoex(:,NTOEXtmp:NTOEX),ftoextry(1,NTOEXtmp:NTOEX),NCP,ndim,NTOEX-NTOEXtmp+1)
+           call Dutch(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,&
+                Dutchorder(NTOEXtmp:NTOEX),Dtoex(:,NTOEXtmp:NTOEX),&
+                ftoextry(1,NTOEXtmp:NTOEX),NCP,ndim,NTOEX-NTOEXtmp+1)
 
            do k=NTOEXtmp,NTOEX
 
@@ -263,7 +288,8 @@ subroutine DynamicPointSelection
 
         !call DutchRBF(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,Dutchorder(k),Dtoex(:,k),ftoextry(1,k),NCP,ndim,1)
 
-        call Dutchgeninterp(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,Dutchorder(k),Dtoex(:,k),ftoextry(1,k),NCP,ndim,1)
+        call Dutchgeninterp(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,&
+             Dutchorder(k),Dtoex(:,k),ftoextry(1,k),NCP,ndim,1)
 
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
@@ -335,9 +361,15 @@ subroutine DynamicPointSelection
         sigg=0.d0
 
 
-        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0), BETA, GAMM, IERR)
+        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1),&
+             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1),&
+             gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
+             BETA, GAMM, IERR)
         if (ierr.ne.0) stop'MIR BETA gamma error'
-        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP, Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
+        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
+             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
+             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
+             BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
         if (ierr.ne.0) stop'MIR evaluate error'
 
         !mode=0 ! return function value only
@@ -354,10 +386,14 @@ subroutine DynamicPointSelection
      is   = idec*id + 1
      ie   = idec*(id+1)
      if(id.eq.num_proc-1)ie = NTOEX
-     call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(ftoextry(2,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
-     if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
+     call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+          id,MPI_COMM_WORLD,ierr)
+     call MPI_BCAST(ftoextry(2,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+          id,MPI_COMM_WORLD,ierr)
+     call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+          id,MPI_COMM_WORLD,ierr)
+     if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),&
+          ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
   end do
 
   !print *, ftoextry(1,1:NTOEX), ftoextry(2,1:NTOEX)
@@ -552,7 +588,8 @@ subroutine DynamicPointSelection
 
         if(nstyle.eq.0) then
            Dad(:,ii)=Dtoex(:,kp)
-           call evalfunc(Dtoex(:,kp),ndim,fct,0,hstatad(ii),f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
+           call evalfunc(Dtoex(:,kp),ndim,fct,0,hstatad(ii),&
+                f(ii),df(:,ii),d2f(:,:,ii),v(:,ii))
         end if
 
      end do !! ii loop
@@ -569,18 +606,28 @@ subroutine DynamicPointSelection
         write(10,'(3i8)')ndim,nhs+nls+nptstoaddpercyc,2
         do i=1,nhs+nls
            if (info(i)(3:6).ne.'FGHv') then
-              write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),j=1,nCOK)
+              write(10,101) info(i),(sample(i,j),j=1,ndim),&
+                   (func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),&
+                   j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),&
+                   j=1,nCOK)
            else
-              write(10,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
+              write(10,101) info(i),(sample(i,j),j=1,ndim),&
+                   (func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),&
+                   j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),&
+                   ((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
            end if
         end do
         do ii=1,nptstoaddpercyc
            if (hstatad(ii).le.3) then
               !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
-              write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),j=1,ndim),k=1,ndim)
+              write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),&
+                   f(ii),0.d0,(df(j,ii),j=1,ndim),((d2f(k,j,ii),&
+                   j=1,ndim),k=1,ndim)
            else
               !$$ write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
-              write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim),(d2f(k,1,ii),k=1,ndim)
+              write(10,102) hstatad(ii),(Dad(j,ii),j=1,ndim),&
+                   f(ii),0.d0,(df(j,ii),j=1,ndim),(v(j,ii),j=1,ndim)&
+                   ,(d2f(k,1,ii),k=1,ndim)
            end if
         end do
         close(10)
@@ -845,7 +892,9 @@ end subroutine knn
 subroutine fixcolindelaunay(triangle_num,triangle_coor_num,ndim,triangle_coor,triangle_node)
   ! Subroutine to check whether delaunay triangles are colinear 
   implicit none
-  integer :: triangle_num,triangle_coor_num,ndim,triangle_node(ndim+1,triangle_num),ii,jj,kk,info,ipvt(ndim),Toremove(100000),Numtoremove
+  integer :: triangle_num,triangle_coor_num,ndim,&
+       triangle_node(ndim+1,triangle_num),ii,jj,kk,info,&
+       ipvt(ndim),Toremove(100000),Numtoremove
   real*8 :: triangle_coor(ndim,triangle_coor_num),x0(ndim),Css(ndim,ndim)
 
 

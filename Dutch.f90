@@ -2,10 +2,14 @@
 
     implicit none
 
-    integer :: ii,jj,jjj,kk,j,dim2,DIMDI,DIM,info,ipvt(1+DIM+DIMDI),ipvt2(1+DIM+DIM**2+DIMDI),NTOEX,orderex(0:DIMDI-1),Dutchorder(NTOEX)
-    real*8 :: Ddib(DIM,0:DIMDI-1),fdib(0:DIMDI-1),gdib(DIM,0:DIMDI-1),hdib(DIM,DIM,0:DIMDI-1),COOR(DIM)
+    integer :: ii,jj,jjj,kk,j,dim2,DIMDI,DIM,&
+         info,ipvt(1+DIM+DIMDI),ipvt2(1+DIM+DIM**2+DIMDI),&
+         NTOEX,orderex(0:DIMDI-1),Dutchorder(NTOEX)
+    real*8 :: Ddib(DIM,0:DIMDI-1),fdib(0:DIMDI-1),gdib(DIM,0:DIMDI-1),&
+         hdib(DIM,DIM,0:DIMDI-1),COOR(DIM)
     real*8 :: Dtoex(DIM,NTOEX),ftoex(NTOEX),fac1,fac2,fac3
-    real*8 :: MTayl(0:DIMDI-1),term(DIM),Css(DIM,DIM),alpha(DIM),x0(DIM),alpha0
+    real*8 :: MTayl(0:DIMDI-1),term(DIM),&
+         Css(DIM,DIM),alpha(DIM),x0(DIM),alpha0
 
     logical :: calclin,calcquad
 

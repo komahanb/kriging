@@ -78,7 +78,8 @@
 
            do while (nhstmp.lt.2*maxsamplewant)
 
-              read(97,100,end=19) Cstat,(x(j),j=1,ndim),f,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)
+              read(97,100,end=19) Cstat,(x(j),j=1,ndim),f,(df(j),j=1,ndim),&
+                   ((d2f(k,j),j=1,ndim),k=1,ndim)
               pointinbox=.true.
               do j=1,ndim
                  if (x(j).gt.DS(2,j) .or. x(j).lt.DS(1,j)) pointinbox=.false.
@@ -113,7 +114,9 @@
            ! Make sure to do at least one cycle of adaption
            maxsample=max(maxsamplewant,nhstmp+nptstoaddpercyc)
 
-           write (filenum,'(a,i3,a,i3,a,i3)') 'Could reuse',nhstmp,' samples and still need',maxsample-nhstmp,' samples for function',fctindx
+           write (filenum,'(a,i3,a,i3,a,i3)') 'Could reuse',nhstmp,&
+                ' samples and still need',maxsample-nhstmp,&
+                ' samples for function',fctindx
 
         end if
 
@@ -208,8 +211,13 @@
            end if
 
            do i=1,nhstmp
-              if (hstat.le.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),((d2ftmp(k,j,i),j=1,ndim),k=1,ndim)  
-              if (hstat.gt.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),((d2ftmp(k,j,i),j=1,ndim),k=1,ndim),(vtmp(j,i),j=1,ndim),(d2ftmp(k,1,i),k=1,ndim)  
+              if (hstat.le.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),&
+                   ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),&
+                   ((d2ftmp(k,j,i),j=1,ndim),k=1,ndim)  
+              if (hstat.gt.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),&
+                   ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),&
+                   ((d2ftmp(k,j,i),j=1,ndim),k=1,ndim),(vtmp(j,i),j=1,ndim),&
+                   (d2ftmp(k,1,i),k=1,ndim)  
            end do
 
            do i=1,nhs-nhstmp+nls
@@ -227,13 +235,17 @@
                  if (i.le.nhs) then ! high-fid
                     !$$ if (hstat.le.3) write(10,100) Cstat,(x(j),j=1,ndim),f,f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
                     !$$ if (hstat.gt.3) write(10,100) Cstat,(x(j),j=1,ndim),f,f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
-                    if (hstat.le.3) write(10,100) Cstat,(x(j),j=1,ndim),f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
-                    if (hstat.gt.3) write(10,100) Cstat,(x(j),j=1,ndim),f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
+                    if (hstat.le.3) write(10,100) Cstat,(x(j),j=1,ndim),&
+                         f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
+                    if (hstat.gt.3) write(10,100) Cstat,(x(j),j=1,ndim),&
+                         f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
                  else ! low-fid
                     !$$ if (lstat.le.3) write(10,100) Cstatl,(x(j),j=1,ndim),f,f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
                     !$$ if (lstat.gt.3) write(10,100) Cstatl,(x(j),j=1,ndim),f,f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
-                    if (lstat.le.3) write(10,100) Cstatl,(x(j),j=1,ndim),f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
-                    if (lstat.gt.3) write(10,100) Cstatl,(x(j),j=1,ndim),f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
+                    if (lstat.le.3) write(10,100) Cstatl,(x(j),j=1,ndim),&
+                         f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
+                    if (lstat.gt.3) write(10,100) Cstatl,(x(j),j=1,ndim),&
+                         f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
                  end if
               else
                  if(i.ge.1.and.i.le.9)then
@@ -260,8 +272,11 @@
            end if
 
            do i=1,nhs
-              if (hstat.le.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),((d2ftmp(k,j,i),j=1,ndim),k=1,ndim)  
-              if (hstat.gt.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),((d2ftmp(k,j,i),j=1,ndim),k=1,ndim),(vtmp(j,i),j=1,ndim),(d2ftmp(k,1,i),k=1,ndim)  
+              if (hstat.le.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),&
+                   ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),((d2ftmp(k,j,i),j=1,ndim),k=1,ndim)  
+              if (hstat.gt.3) write(10,100) Cstattmp(i),(xtmp(j,i),j=1,ndim),&
+                   ftmp(i),0.d0,(dftmp(j,i),j=1,ndim),((d2ftmp(k,j,i),j=1,ndim),k=1,ndim)&
+                   ,(vtmp(j,i),j=1,ndim),(d2ftmp(k,1,i),k=1,ndim)  
            end do
 
         end if  ! nhstmp.lt.nhs ?

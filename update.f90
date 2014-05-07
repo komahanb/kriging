@@ -17,16 +17,23 @@
 
         if(id_proc.eq.0)then
 
-          write(filenum,'(1x,2(a,i5),a)')'>> Update from',zsample,' to',zsample+1, ' sample points'
+          write(filenum,'(1x,2(a,i5),a)')'>> Update from',zsample,&
+               ' to',zsample+1, ' sample points'
           open(11,file='sample.dat',form='formatted',status='unknown')
           write(11,'(3i6)')ndim,zsample+1,nfunc
 
           do i=1,zsample
 
              if (info(i)(3:6).ne.'FGHv') then
-                write(11,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),k=1,ndim),j=1,nCOK)
+                write(11,101) info(i),(sample(i,j),j=1,ndim),&
+                     (func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),&
+                     j=1,nCOK),(((hfunc(i,nfCOK(j),k,l),l=1,ndim),&
+                     k=1,ndim),j=1,nCOK)
              else
-                write(11,101) info(i),(sample(i,j),j=1,ndim),(func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
+                write(11,101) info(i),(sample(i,j),j=1,ndim),&
+                     (func(i,j),j=1,nfunc),((gfunc(i,nfCOK(j),k),k=1,ndim),&
+                     j=1,nCOK),((hvect(i,nfCOK(j),k,1),k=1,ndim),j=1,nCOK),&
+                     ((hvect(i,nfCOK(j),k,2),k=1,ndim),j=1,nCOK)
              end if
 
           end do
