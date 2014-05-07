@@ -107,7 +107,7 @@
            do k=1,ndim
              dd = dd + ( xnew(k)-design(i,k) )**2
            end do
-           dd    = dsqrt(dd)
+           dd    = sqrt(dd)
            ddmin = min(dd,ddmin)
         end do
         do i=1,nsample
@@ -115,7 +115,7 @@
            do k=1,ndim
              dd = dd + ( xnew(k)-sample(i,k) )**2
            end do
-           dd    = dsqrt(dd)
+           dd    = sqrt(dd)
            ddmin = min(dd,ddmin)
         end do
 

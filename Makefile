@@ -20,7 +20,7 @@ F77	= mpif77
 
 #FFLAGS  = -mp -convert big_endian -fpconstant -zero -c
 
-FFLAGS  = -O3 -fopenmp -fdefault-integer-8 -finit-integer=0 -ffree-line-length-10000 #-fbounds-check 
+FFLAGS  = -O3 -fopenmp  -ffree-line-length-10000 #-fbounds-check -fdefault-integer-8
 
 #LIBS    = -L/usr/local/lib -L/Softwareinstall/gsl-1.15/.libs/lgsl -L/Softwareinstall/gsl-1.15/.libs/lgslcblas -lm #-L/Softwareinstall/gsl-1.15/.libs/lmir
 LFLAGS =  -L$(GSL_prefix)/lib -lgsl -lgslcblas -lm

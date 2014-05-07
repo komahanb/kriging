@@ -11,9 +11,9 @@
         character(len=14) :: Cfile
 
         if(mEI.eq.0)then
-          dd_thres = dsqrt( dble(ndim)*((1.d-5)**2) )
+          dd_thres = sqrt( dble(ndim)*((1.d-5)**2) )
         else
-          dd_thres = dsqrt( dble(ndim)*((1.d-5)**2) )
+          dd_thres = sqrt( dble(ndim)*((1.d-5)**2) )
         end if
         EI_thres = 1.d-5
 

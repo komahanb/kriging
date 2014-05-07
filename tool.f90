@@ -809,10 +809,10 @@
 !          write(*,'(i5,99e15.5)')i,(xin(k),k=1,ndim),yexa,yhat
 !          write(*,'(i5,2e15.5)')i,yexa,yhat
 100     continue
-        verr   = dsqrt(verr)   / dble(rsample)
-        verr_r = dsqrt(verr_r) / dble(ir)
-        verr_a = dsqrt(verr_a) / dble(ia)
-        verr_l = dsqrt(verr_l) / dble(il)
+        verr   = sqrt(verr)   / dble(rsample)
+        verr_r = sqrt(verr_r) / dble(ir)
+        verr_a = sqrt(verr_a) / dble(ia)
+        verr_l = sqrt(verr_l) / dble(il)
         if(id_proc.eq.0)then
         write(filenum,'(6x,a,e15.5,a,i6,a)') &
         '>> RMSE on All Sample Points    =',verr,' among',rsample,' pts'
@@ -907,20 +907,20 @@
 200     continue
         if(id_proc.eq.0)then
           if(ig.ne.0) then
-            vg = dsqrt(vg) / dble(ig)
+            vg = sqrt(vg) / dble(ig)
             write(filenum,'(6x,a,3e15.5,a,i5,a)') &
             '>> RMSE for Grad =',vg,vgmin,vgmax,' among',ig,' data'
           end if
           if(ih.ne.0) then
-            vd = dsqrt(vd) / dble(id)
+            vd = sqrt(vd) / dble(id)
             write(filenum,'(6x,a,3e15.5,a,i5,a)') &
             '>> RMSE for DHes =',vd,vdmin,vdmax,' among',id,' data'
-            vh = dsqrt(vh) / dble(ih)
+            vh = sqrt(vh) / dble(ih)
             write(filenum,'(6x,a,3e15.5,a,i5,a)') &
             '>> RMSE for Hess =',vh,vhmin,vhmax,' among',ih,' data'
           end if
           if(iv.ne.0) then
-            vv = dsqrt(vv) / dble(iv)
+            vv = sqrt(vv) / dble(iv)
             write(filenum,'(6x,a,3e15.5,a,i5,a)') &
             '>> RMSE for HVec =',vv,vvmin,vvmax,' among',iv,' data'
           end if

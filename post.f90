@@ -98,7 +98,7 @@ subroutine Post_RMSE
            ict = ict + 1
            diff = diff + (yhat-ad(i,j,4+k))**2
 200        continue ! data loop (i,j)
-           diff = dsqrt(diff/dble(ict))
+           diff = sqrt(diff/dble(ict))
            if(id_proc.eq.0) &
                 write(*,'(6x,a,i1,a,e15.5)')'>> RMSE of Func-',k,' = ',diff
            err(k) = diff
@@ -359,7 +359,7 @@ subroutine Post_RMSE
                              write(*,'(6x,a,f12.7,a,99f8.3)') '>> Yhat min = ', Ymin,' @',(xy(i),i=1,ndim)
 
                              if(ndim.eq.2)then
-                                diff = dsqrt(diff/dble(imax*jmax))
+                                diff = sqrt(diff/dble(imax*jmax))
                                 write(*,*)
                                 write(*,'(6x,a,e20.10)') '>> RMSE on 2D Function = ',diff
                                 write(*,*)

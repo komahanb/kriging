@@ -59,7 +59,7 @@
               do k=1,ndim
                 dd = dd + (xnew(k)-sampl(i,k))**2
               end do
-              dd = dsqrt(dd)
+              dd = sqrt(dd)
 ! within region
               if(dd.le.tdx(i)*mgfac)then
                 ilist = ilist + 1
@@ -168,7 +168,7 @@
               do k=1,ndim
                 dd = dd + vdx(1,k)**2
               end do
-              dd = dsqrt(dd)
+              dd = sqrt(dd)
               if(noone.eq.1)then ! The newpt is outside of any region
                 if(dd.le.dx*mgfac)stop'why?'
                 if(Class.eq.'Very Good')then

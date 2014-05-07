@@ -94,7 +94,7 @@
         xgrd = 0.d0
         if(ngput.eq.-1)then
           do i=1,ndim
-            xgrd(1,i) = 1.d0/dsqrt(dble(ndim))
+            xgrd(1,i) = 1.d0/sqrt(dble(ndim))
           end do
         else if(ngput.eq.-2)then
           do i=1,ndim
@@ -109,7 +109,7 @@
         if(nhput.eq.-1)then
           if(nput2.ne.   1)stop'nput2 for -1'
           do i=1,ndim
-            xlhs(1,i) = 1.d0/dsqrt(dble(ndim))
+            xlhs(1,i) = 1.d0/sqrt(dble(ndim))
           end do
         else if(nhput.eq.-2)then
           if(nput2.ne.ndim)stop'nput2 for -2'
@@ -142,7 +142,7 @@
                 do k=1,ndim
                    dd = dd + (xlhs(i,k)-xlhs(j,k))**2
                 end do
-                dd = dsqrt(dd)
+                dd = sqrt(dd)
                 if(ndim.ne.1)then
                   if(dd.le.1.d-10) &
                   stop'additional pts are so close, change ilhs'

@@ -642,8 +642,8 @@ subroutine MonteCarlo
         double precision, intent(in)  :: xin,xc,st
         double precision, intent(out) :: vout
         double precision :: vtmp
-!       vout = 0.5d0 * (1.d0 + erf( (xin-xc)/(st*dsqrt(2.d0)) ))
-        call ERF_MINE1( (xin-xc)/(st*dsqrt(2.d0)), vtmp )
+!       vout = 0.5d0 * (1.d0 + erf( (xin-xc)/(st*sqrt(2.d0)) ))
+        call ERF_MINE1( (xin-xc)/(st*sqrt(2.d0)), vtmp )
         vout = 0.5d0 * (1.d0 + vtmp)
         end subroutine CDF
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -652,8 +652,8 @@ subroutine MonteCarlo
         double precision, intent(in)  :: xin,xc,st
         double precision, intent(out) :: dvout
         double precision :: dvtmp
-        call DERF_MINE( (xin-xc)/(st*dsqrt(2.d0)), dvtmp )
-        dvout = 0.5d0*dvtmp/(st*dsqrt(2.d0))
+        call DERF_MINE( (xin-xc)/(st*sqrt(2.d0)), dvtmp )
+        dvout = 0.5d0*dvtmp/(st*sqrt(2.d0))
         end subroutine DCDF
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subroutine ERF_MINE1(xin,yout)
@@ -673,7 +673,7 @@ subroutine MonteCarlo
           end do
           vsum = vsum + kai*xin/dble(2*i+1)
         end do
-        yout = vsum*2.d0/(dsqrt(3.141592653589793238d0))
+        yout = vsum*2.d0/(sqrt(3.141592653589793238d0))
 
         if(yout.gt.1.d0)write(*,'(a,2e15.5)')'*ERF>1 ',xin,yout-1.d0
         end subroutine ERF_MINE1
@@ -685,7 +685,7 @@ subroutine MonteCarlo
         double precision :: vsum
 
         vsum  = exp(-1.d0*xin**2)
-        dyout = vsum*2.d0/(dsqrt(3.141592653589793238d0))
+        dyout = vsum*2.d0/(sqrt(3.141592653589793238d0))
 
         end subroutine DERF_MINE
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -723,7 +723,7 @@ subroutine MonteCarlo
         double precision :: pi
 
         pi = 4.d0*datan(1.d0)
-        y = exp(-1.d0*(xin-xc)**2/2.d0/st/st)/dsqrt(2.d0*pi*st**2)
+        y = exp(-1.d0*(xin-xc)**2/2.d0/st/st)/sqrt(2.d0*pi*st**2)
 
         end subroutine normal_dist
 
@@ -764,7 +764,7 @@ subroutine MonteCarlo
       p_high=1-p_low
       if(p.lt.p_low) goto 201
       if(p.ge.p_low) goto 301
-201   q=dsqrt(-2*dlog(p))
+201   q=sqrt(-2*dlog(p))
       z=(((((c1*q+c2)*q+c3)*q+c4)*q+c5)*q+c6)/((((d1*q+d2)*q+d3)*q+d4)*q+1)
       goto 204
 301   if((p.ge.p_low).and.(p.le.p_high)) goto 202
@@ -774,7 +774,7 @@ subroutine MonteCarlo
       z=(((((a1*r+a2)*r+a3)*r+a4)*r+a5)*r+a6)*q/(((((b1*r+b2)*r+b3)*r+b4)*r+b5)*r+1)
       goto 204
 302   if((p.gt.p_high).and.(p.lt.1)) goto 203
-203   q=dsqrt(-2*dlog(1-p))
+203   q=sqrt(-2*dlog(1-p))
       z=-(((((c1*q+c2)*q+c3)*q+c4)*q+c5)*q+c6)/((((d1*q+d2)*q+d3)*q+d4)*q+1)
 204   dinvnorm=z
 

@@ -132,7 +132,7 @@
           do 120 k=1,ndim
             dd = dd + ( sampl(n1,k)-sampl(n2,k) )**2
 120       continue
-          dd = dsqrt(dd)
+          dd = sqrt(dd)
 
           if(d1.ge.(dd+d2))then              ! n1 swallows n2
               ici = ici + 1
@@ -246,7 +246,7 @@
              do k=1,ndim
                 dd = dd + (sampl(n1,k)-sampl(n2,k))**2
              end do
-             dd = dsqrt(dd)
+             dd = sqrt(dd)
              do 200 j=rsample+1,nall     ! additional sample loop
                if(ndeath(j).eq.0)go to 200
                if(nparent(j).ne.n1.and.nparent(j).ne.n2)go to 200
@@ -256,8 +256,8 @@
                  d1 = d1 + (sampl(n1,k)-sampl(j,k))**2
                  d2 = d2 + (sampl(n2,k)-sampl(j,k))**2
                end do
-               d1 = dsqrt(d1)
-               d2 = dsqrt(d2)
+               d1 = sqrt(d1)
+               d2 = sqrt(d2)
                if(     m1.eq.1.and.m2.eq.2)then        ! n1 swallows n2
                  if(nparent(j).eq.n2)then
                     ndeath(j) = 0
@@ -322,7 +322,7 @@
           do 320 k=1,ndim
             dd = dd + (sampl(n1,k)-sampl(n2,k))**2
 320       continue
-          dd = dsqrt(dd)
+          dd = sqrt(dd)
 
           if(n2.le.rsample)then        ! n1=additional,n2=real
             m1   = nparent(n1)
@@ -410,7 +410,7 @@
              do k=1,ndim
                 dd = dd + (sampl(n1,k)-sampl(n2,k))**2
              end do
-             dd = dsqrt(dd)
+             dd = sqrt(dd)
              do 420 j=rsample+1,nall
                 if(ndeath(j).eq.0)go to 420
                 if(nparent(j).ne.n1.and.nparent(j).ne.n2)go to 420
@@ -420,8 +420,8 @@
                    d1 = d1 + (sampl(n1,k)-sampl(j,k))**2
                    d2 = d2 + (sampl(n2,k)-sampl(j,k))**2
                 end do
-                d1 = dsqrt(d1)
-                d2 = dsqrt(d2)
+                d1 = sqrt(d1)
+                d2 = sqrt(d2)
                 if(m1.eq.3.or.m1.eq.4)then ! n1/n2(reals) are overlap
                   if(d1.le.0.d0.or.d2.le.0.d0)stop'd1,d2'
                   if(nparent(j).eq.n1)then
@@ -550,7 +550,7 @@
           vh(:,:) = hfun(n1,:,:)
           do 510 i=1,1 !ndim
             if(rnew2+ict.lt.nall+1)then
-              vdx      = tdxinit(1)/dsqrt(dble(ndim))
+              vdx      = tdxinit(1)/sqrt(dble(ndim))
 !             vdx      = 0.d0
 !             vdx(1,i) = tdxinit(1)
               d1y      = matmul(vdx,vg)
@@ -567,7 +567,7 @@
                  do k=1,ndim
                     dd = dd + (sampl(rnew2+ict,k)-sampl(j,k))**2
                  end do
-                 dd = dsqrt(dd)
+                 dd = sqrt(dd)
                  if(dd.le.tdd_thres(1))then
                     ict = ict - 1
                     go to 510
@@ -651,7 +651,7 @@
               do k=1,ndim
                  dd = dd + vdx(1,k)**2
               end do
-              dd  = dsqrt(dd)
+              dd  = sqrt(dd)
               rj  = 1.d0 / tdx(nreal)
               dj  = 1.d0 / dd
               sr  = sr  + rj

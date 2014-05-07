@@ -136,8 +136,8 @@
                    prd = prd + gfunc(i,nfCOK(j),k)**2
                 end do
                 do k=1,ndim
-                  V(k,1) = gfunc(i,nfCOK(j),k) / dsqrt(prd)
-                  V(k,1) = 1.d0 / dsqrt(dble(ndim))
+                  V(k,1) = gfunc(i,nfCOK(j),k) / sqrt(prd)
+                  V(k,1) = 1.d0 / sqrt(dble(ndim))
                 end do
                 HV = matmul(H,V)
                 do k=1,ndim

@@ -445,7 +445,7 @@
         do i=1,ndv
            det = det + xdir(i)**2
         end do
-        det = dsqrt(det)
+        det = sqrt(det)
         if(det.le.0.d0)then
           write(filenum,'(a)')'*|xdir|=0 in decide_step'
           return
@@ -595,7 +595,7 @@
           do i=1,ndv
              det = det + gini(1,i)**2
           end do
-          det = dsqrt(det)
+          det = sqrt(det)
           if(det.eq.0.d0)then
             do i=1,ndv
                xdir(i) =  1.d0
@@ -651,7 +651,7 @@
           end if
           det = det + B(i,1)**2
         end do
-        det = dsqrt(det)
+        det = sqrt(det)
         if(det.eq.0.d0)stop'det=0 @ multi-d case in gradient'
 !       B = B / det
 
@@ -679,7 +679,7 @@
              end if
           end do
         end do
-        chc = dsqrt(chc)
+        chc = sqrt(chc)
 !       if(id_proc.eq.0.and.ndebug.eq.1)then
         if(chc.gt.1.d-5)then
           write(*,'(a,e15.5)')'*Error in A*A-1 = ',chc
@@ -2227,7 +2227,7 @@
           N    = ict_sh
         end if
         radius = dble(nobj)
-        radius = dsqrt(radius) / dble(N)
+        radius = sqrt(radius) / dble(N)
         radius = (radius) ** (1.d0/dble(nobj-1))
         radini = radius
         if(nobj.eq.2)then
@@ -2309,7 +2309,7 @@
                  dd = dd + ( (f1-f2)/(    0.0001d0   ) )**2
                  end if
 630           continue
-              dd = dsqrt(dd)
+              dd = sqrt(dd)
               if(dd.ge.radius)go to 620
               sh = 1.d0 - (dd/radius)**alpha_sh
               shnc(g1,n1) = shnc(g1,n1) + sh
@@ -2341,7 +2341,7 @@
                  dd = dd + ( (f1-f2)/(    0.0001d0   ) )**2
                  end if
 730           continue
-              dd = dsqrt(dd)
+              dd = sqrt(dd)
               if(dd.ge.radius)go to 720
               sh = min( (dd/radius)**alpha_sh, 1.d0 )
               if(shnc(g1,n1).lt.shnc(g2,n2))then
@@ -2590,7 +2590,7 @@
           gg = 0.d0
           do i=1,ndv
              if(i.ne.ndv)then
-               tmp = dsqrt(xscale(i)**2+xscale(i+1)**2)
+               tmp = sqrt(xscale(i)**2+xscale(i+1)**2)
                ff = ff -10.d0*(exp(-0.2d0*tmp))
              end if
              gg = gg + (dabs(xscale(i)))**(0.8d0) &
@@ -2614,7 +2614,7 @@
           if(ff.lt.0.d0)ff = 0.d0
           if(gg.le.0.d0)stop'ZDT1'
           ynew(1) = ff
-          ynew(2) = gg*(1.d0-dsqrt(ff/gg))
+          ynew(2) = gg*(1.d0-sqrt(ff/gg))
           ynew(3) = 0.d0
 
         else if(neva.eq.-12)then
@@ -2648,7 +2648,7 @@
           if(ff.lt.0.d0)ff = 0.d0
           if(gg.le.0.d0)stop'ZDT3'
           ynew(1) = ff
-          ynew(2) = gg*(1.d0-dsqrt(ff/gg)) &
+          ynew(2) = gg*(1.d0-sqrt(ff/gg)) &
                   - (ff/gg)*sin(10.d0*pi*(ff/gg))
           ynew(3) = 0.d0
 
@@ -2672,7 +2672,7 @@
           tmp = ff/gg
           if(tmp.lt.0.d0)stop'ZDT4 ff/gg'
           ynew(1) = ff
-          ynew(2) = gg*(1.d0-dsqrt(tmp))
+          ynew(2) = gg*(1.d0-sqrt(tmp))
           ynew(3) = 0.d0
 
         else if(neva.eq.-16)then

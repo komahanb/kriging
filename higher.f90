@@ -92,7 +92,7 @@
            end if
            call MPI_ALLREDUCE(ict,ictglb,1,MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
            call MPI_ALLREDUCE(fsum,fsumglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
-           fsumglb = dsqrt(fsumglb/dble(ifac**ndim)) 
+           fsumglb = sqrt(fsumglb/dble(ifac**ndim)) 
            call MPI_ALLREDUCE(maxerror,maxerrorglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
            call MPI_ALLREDUCE(yhatmin,yhatglb,1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
            call MPI_ALLREDUCE(EImax,EIglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)

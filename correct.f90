@@ -266,8 +266,8 @@
             d2 = d2 + (xp( k)-dad(1+k,loc1))**2
             dp = dp + (xin(k)-dad(1+k,loc1))*(xp(k)-dad(1+k,loc1))
           end do  
-          d1 = dsqrt(d1)
-          d2 = dsqrt(d2)
+          d1 = sqrt(d1)
+          d2 = sqrt(d2)
           if(d1.eq.0.d0)then
             gam = 0.5d0
             yhat = gam*yadd2 + (1.d0-gam)*ymul2
@@ -284,7 +284,7 @@
             do k=1,ndim
               dd = dd + (xp( k)-dad(1+k,loc1))**2
             end do
-            dd = dsqrt(dd)
+            dd = sqrt(dd)
             if(dd.le.0.d0)stop'|xp-L1| =< 0 in local'
             call meta_estimation(0,xp,yhap,yhatprime,RMSE,EI, &
 !                               mEI,mLC,id_proc,ndim,kreg,iscf,mode_dck, &
@@ -410,9 +410,9 @@
            d2c = d2c + (x2(i)-xc(i))**2
            dc1 = dc1 + (xc(i)-x1(i))**2
         end do
-        d21 = dsqrt(d21)
-        d2c = dsqrt(d2c)
-        dc1 = dsqrt(dc1)
+        d21 = sqrt(d21)
+        d2c = sqrt(d2c)
+        dc1 = sqrt(dc1)
         yout = d2c/d21*yd1 + dc1/d21*yd2
 
         end subroutine dutch_interp

@@ -142,7 +142,7 @@
           ! tdd_thres(3) is a dist ratio per dx to eliminate addpts for overlap
           ! tdd_thres(4) is a dist ratio per dx to eliminate addpts for onemore
           do i=1,1
-            tdd_thres(i) = dsqrt( dble(ndim)*(tdd_thres(i))**2 )
+            tdd_thres(i) = sqrt( dble(ndim)*(tdd_thres(i))**2 )
           end do
         end if
 

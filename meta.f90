@@ -190,7 +190,7 @@
           UFRFU  = matmul(UFRF,U)                ! (1*k)x(k*1)
           RMSE   = devi*( 1.d0 - rRr(1,1) + UFRFU(1,1) )
           if(RMSE.gt.0)then
-             RMSE = dsqrt(RMSE)
+             RMSE = sqrt(RMSE)
           else if(RMSE.ge.eps.and.RMSE.le.0.d0)then
              RMSE = 0.d0
           else
@@ -250,7 +250,7 @@
              if(abs(d).ge.d2min)go to 100
              dd = dd + d**2
 110       continue
-          dd= dsqrt(dd)
+          dd= sqrt(dd)
           if(dd.lt.d1min)then
             d2min = d1min
             d1min = dd
@@ -305,7 +305,7 @@
           pdf = 0.d0
           cdf = 1.d0
         else
-          pdf = exp(-0.5d0*zin*zin)/dsqrt(2.d0*pi)
+          pdf = exp(-0.5d0*zin*zin)/sqrt(2.d0*pi)
           if(zin.le.0.d0)then
             cdf = 0.d0
             xst = zst
@@ -320,8 +320,8 @@
           do i=1,num-1
             x1   = xst + dble(i-1)*dx
             x2   = xst + dble(i)*dx
-            pdf1 = exp(-0.5d0*x1*x1)/dsqrt(2.d0*pi)
-            pdf2 = exp(-0.5d0*x2*x2)/dsqrt(2.d0*pi)
+            pdf1 = exp(-0.5d0*x1*x1)/sqrt(2.d0*pi)
+            pdf2 = exp(-0.5d0*x2*x2)/sqrt(2.d0*pi)
             cdf  = cdf + (pdf1+pdf2)*dx*0.5d0
           end do
           if(dabs(pdf).le.1.d-10)pdf = 0.d0

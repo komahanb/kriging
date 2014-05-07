@@ -221,7 +221,7 @@
            verr = verr + (ALU(i,j)-TMP(i,j))**2
         end do
         end do
-        verr = dsqrt(verr)
+        verr = sqrt(verr)
       end if
 
       end subroutine LU_DECOMP
@@ -299,7 +299,7 @@
          end if 
       end do
       end do
-      verr = dsqrt(verr)
+      verr = sqrt(verr)
 
       end subroutine calc_error_inversion
 !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -381,7 +381,7 @@
            verr = verr + (a(i,j)-tmp(i,j))**2
         end do
         end do
-        verr = dsqrt(verr)
+        verr = sqrt(verr)
         write(*,'(11x,a,e15.5)')'>> Error in Cholesky Decomp      = ',verr
         tmp = matmul(l,linv)
         call calc_error_inversion(n,tmp,verr)

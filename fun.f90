@@ -98,7 +98,7 @@
        do k=1,DIM
           prd = prd + df(k)**2
        end do
-       prd = dsqrt(prd)
+       prd = sqrt(prd)
 
        if (prd.gt.1.e-5) then ! Gradient not zero
 
@@ -122,7 +122,7 @@
           do k=1,DIM
               prd = prd + v(k)**2
           end do
-          prd = dsqrt(prd)
+          prd = sqrt(prd)
 
           do k=1,DIM
              v(k) = v(k)/prd

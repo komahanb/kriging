@@ -89,7 +89,7 @@
         do i=1,ndv
            dd = dd + x(i)**2
         end do
-        dd = dsqrt(dd)
+        dd = sqrt(dd)
       end subroutine calc_polar
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       subroutine lhs_polar(mdv,msample,DV)

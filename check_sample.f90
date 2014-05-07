@@ -20,7 +20,7 @@
                 do k=1,ndim
                    dd = dd + (sample(i,k)-sample(j,k))**2
                 end do
-                dd = dsqrt(dd)
+                dd = sqrt(dd)
                 if(dd.lt.dl)then
                  il = i
                  jl = j

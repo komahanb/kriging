@@ -52,7 +52,7 @@ do i =1,length
 std=std+(array(i)-mean)**2
 end do
 
-std = dsqrt(std/dble(length-1))
+std = sqrt(std/dble(length-1))
 
 stdout=std
 

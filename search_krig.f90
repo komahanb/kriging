@@ -491,7 +491,7 @@
             verr = verr + (yexa-yhat)**2
 !           write(*,'(i5,2e15.5)')j,yexa,yhat
 900       continue
-          verr = dsqrt(verr)/dble(ict)
+          verr = sqrt(verr)/dble(ict)
           write(filenum,'(6x,a,e15.5,a,i6,a)') &
           '>> RMSE with dak = ',verr,' among',ict,' pts'
         end do

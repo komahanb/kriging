@@ -80,7 +80,7 @@
             do k=1,ndim
                dd = dd + (sampl(i,k)-sampl(j,k))**2
             end do
-            dd = dsqrt(dd)
+            dd = sqrt(dd)
             if(dd.le.eps)then
               iflg(i) = 1
             end if
