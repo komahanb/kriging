@@ -201,14 +201,14 @@ subroutine DynamicPointSelection
 
            call Dutch(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,&
                 Dutchorder(NTOEXtmp:NTOEX),Dtoex(:,NTOEXtmp:NTOEX),&
-                ftoextry(1,NTOEXtmp:NTOEX),NCP,ndim,NTOEX-NTOEXtmp+1)
+                ftoextry(2,NTOEXtmp:NTOEX),NCP,ndim,NTOEX-NTOEXtmp+1)
 
            do k=NTOEXtmp,NTOEX
 
-              call meta_call(1,0,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
+              call meta_call(1,0,Dtoex(:,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
 
-              minftoex(k)=ftoextry(1,k)
-              maxftoex(k)=ftoextry(1,k)
+              minftoex(k)=ftoextry(2,k)
+              maxftoex(k)=ftoextry(2,k)
               do j=2,2
                  if (ftoextry(j,k).gt.maxftoex(k)) then
                     maxftoex(k)=ftoextry(j,k)
@@ -289,15 +289,15 @@ subroutine DynamicPointSelection
 
         Dutchorder(k)=Dutchorderg
 
-        !call DutchRBF(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,Dutchorder(k),Dtoex(:,k),ftoextry(1,k),NCP,ndim,1)
+        !call DutchRBF(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,Dutchorder(k),Dtoex(:,k),ftoextry(2,k),NCP,ndim,1)
 
         call Dutchgeninterp(Ddibtmp,fdibtmp,gdibtmp,hdibtmp,orderextmp,&
-             Dutchorder(k),Dtoex(:,k),ftoextry(1,k),NCP,ndim,1)
+             Dutchorder(k),Dtoex(:,k),ftoextry(2,k),NCP,ndim,1)
 
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
 
-        call meta_call(1,mode,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
+        call meta_call(1,mode,Dtoex(:,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
         !call evalfunc(Dtoex(:,k),ndim,fct,0,0,f(1),df(:,1),d2f(:,:,1),v(:,1))
 
 
@@ -372,18 +372,22 @@ subroutine DynamicPointSelection
 !        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
 !             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
 !             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
-!             BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
+!             BETA, GAMM, Taylororder, 1, ftoextry(2,k), SIGMA(k), IERR)
 !        if (ierr.ne.0) stop'MIR evaluate error'
         
-        call  rbf_weight( ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4,fdibtmp(0:NCP-1), RBF_W)
+!        call getR0(NCP, Ddibtmp(1:ndim,0:NCP-1),r0)
+        
+        call  rbf_weight(ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4,fdibtmp(0:NCP-1), RBF_W)
 
-        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4, RBF_w, 1, Dtoex(1:ndim,k), ftoextry(1,k))
+        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4, RBF_w, 1, Dtoex(1:ndim,k), ftoextry(2,k))
 
 !        call interp_nd ( m, nd, xd, r0, phi, w, ni, xi, fi )
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
 
-        call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
+        call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
+
+!        print*,ftoextry(2,k),ftoextry(1,k)
 
      end do
   end if ! randomtestl
@@ -394,9 +398,9 @@ subroutine DynamicPointSelection
      is   = idec*id + 1
      ie   = idec*(id+1)
      if(id.eq.num_proc-1)ie = NTOEX
-     call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
-          id,MPI_COMM_WORLD,ierr)
      call MPI_BCAST(ftoextry(2,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+          id,MPI_COMM_WORLD,ierr)
+     call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
           id,MPI_COMM_WORLD,ierr)
      call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
           id,MPI_COMM_WORLD,ierr)
@@ -404,7 +408,7 @@ subroutine DynamicPointSelection
           ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
   end do
 
-  !print *, ftoextry(1,1:NTOEX), ftoextry(2,1:NTOEX)
+  !print *, ftoextry(2,1:NTOEX), ftoextry(1,1:NTOEX)
   !+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   !END PARALLEL REGION
@@ -420,12 +424,12 @@ subroutine DynamicPointSelection
   if (id_proc.eq.0) then
 
      do k =1,NTOEX
-        minftoex(k)=ftoextry(1,k)
-        maxftoex(k)=ftoextry(1,k)
-        if (ftoextry(2,k).gt.maxftoex(k)) then
-           maxftoex(k)=ftoextry(2,k)
+        minftoex(k)=ftoextry(2,k)
+        maxftoex(k)=ftoextry(2,k)
+        if (ftoextry(1,k).gt.maxftoex(k)) then
+           maxftoex(k)=ftoextry(1,k)
         else 
-           minftoex(k)=ftoextry(2,k)
+           minftoex(k)=ftoextry(1,k)
         end if
      end do
 
