@@ -5,33 +5,36 @@ subroutine DynamicPointSelection
 
   common/global/counter
   integer :: counter,i,ii,j,jj,jjj,k,kk,kp,l,NTOEX,NTOEXtmp,&
-       triangle_node(ndim+1,100000),triangle_num,triangle_coor_num,&
+       triangle_node(ndim+1,50000),triangle_num,triangle_coor_num,&
        NCP,node,knnptr(20000),orderextmp(0:20000),&
-       Dutchorder(100000),nseed,hstatad(nptstoaddpercyc)
+       Dutchorder(50000),nseed,hstatad(nptstoaddpercyc)
   integer :: mode
-  double precision :: triangle_coor(ndim,100000),Dtoextmp(ndim),&
-       Dtoex(ndim,100000),dist(100000),minftoex(100000),&
-       maxftoex(100000),distmean,ftoextry(2,100000),derivdummy(ndim)
-  double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:100000),&
-       Dgdibtmp(ndim,0:100000),fdibtmp(0:100000),gdibtmp(ndim,0:100000),&
-       hdibtmp(ndim,ndim,0:100000),diffloctmp,difflocmin,difflocavg,&
+
+  double precision :: triangle_coor(ndim,50000),Dtoextmp(ndim),&
+       Dtoex(ndim,50000),dist(50000),minftoex(50000),&
+       maxftoex(50000),distmean,ftoextry(5,50000),derivdummy(ndim)
+
+  double precision :: diff2,RMSE(50000),RMSEmean,EI,Ddibtmp(ndim,0:50000),&
+       Dgdibtmp(ndim,0:50000),fdibtmp(0:50000),gdibtmp(ndim,0:50000),&
+       hdibtmp(ndim,ndim,0:50000),diffloctmp,difflocmin,difflocavg,&
        SIGMAmean,distcomp
 
   double precision, dimension(nptstoaddpercyc) :: f
   double precision, dimension(ndim,nptstoaddpercyc) :: df,Dad,v
   double precision, dimension(ndim,ndim,nptstoaddpercyc) :: d2f
+
   double precision, DIMENSION(200) :: SIGV
   double precision, DIMENSION(200) :: SIGG
 
   integer :: Taylororder, IERR, NCPG,idec,is,ie,id,point,&
        kpc,nptstoaddpercyctmp,  nptstoaddpercycorig
-  double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,&
-       RMSEmeanloc,minftoexloc(100000),maxftoexloc(100000)
+  double precision :: BETA, GAMM, SIGMA(50000),distmeanloc,&
+       RMSEmeanloc,minftoexloc(50000),maxftoexloc(50000)
 
   character*60::export
   integer::npass
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
-  double precision::RBF_W(100000),r0
+  double precision::RBF_W(50000),r0
   external phi1,phi2,phi3,phi4
 
   call find_Optimal
@@ -255,7 +258,7 @@ subroutine DynamicPointSelection
      end if
 
      call MPI_Barrier(MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
+     call MPI_BCAST(Dtoex(:,:),50000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
 
      !Information sharing by master with slaves
      idec = dble(NTOEX)/dble(num_proc)
@@ -334,7 +337,7 @@ subroutine DynamicPointSelection
      ! Information sharing by master with slaves       
 
      call MPI_Barrier(MPI_COMM_WORLD,ierr)           
-     call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
+     call MPI_BCAST(Dtoex(:,:),50000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
      idec = dble(NTOEX)/dble(num_proc)
      is   = idec*id_proc + 1
      ie   = idec*(id_proc+1)
