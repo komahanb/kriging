@@ -1,6 +1,6 @@
  >> Number of Processors =   8
     >> Test case number       3
-    >> Test function number       3
+    >> Test function number       0
  >> Initial Sample Points by Latin Hypercube
       >> Output to sample.dat    5
  >> Reading KrigSet.inp
@@ -18,10 +18,10 @@
       >> # of Fidelity Levels   =     1
       >> Fidelity Level :  1
            >> # of Samples(F     )    =     5
-      >> Min. Dist. between Fidelity-1 Samples (  1,  3 ) =  0.19E+00
+      >> Min. Dist. between Fidelity-1 Samples (  1,  5 ) =  0.55E-01
 
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
+ >> Best design: Sample point   4 Fct value   0.3501167
+    with X value   0.4784766   0.2591512
 
  >> Reduce Sample Points for Function  1
            >> # of Modes in Fid-1 =   5   0   0   0   0   0   5
@@ -46,250 +46,112 @@
       >> Use old uniform mutation
  >> Make Initial Population by LHS
  >> Calling evaluation in GA
- >> Starting Main Loop of GA23292
-      >>    1 Pareto Designs until   0 Gen., -0.260E+02
-      >>    1 Pareto Designs until  12 Gen., -0.256E+02
-      >>    1 Pareto Designs until  24 Gen., -0.256E+02
+ >> Starting Main Loop of GA23315
+      >>    1 Pareto Designs until   0 Gen.,  0.460E+01
+      >>    1 Pareto Designs until  12 Gen.,  0.469E+01
+      >>    1 Pareto Designs until  24 Gen.,  0.469E+01
  >> Finishing Main Loop of GA
  >> Output Results....
-      >> Best Design for  1 : (  24  15) : -0.2562E+02
+      >> Best Design for  1 : (  24  10) :  0.4686E+01
       >> # of Function Evaluations for New Ones  =      600
       >> # of Function Evaluations for Gradient  =        0
       >> # of Function Evaluations for 1D Search =        0
       >> # of Function Evaluations in Total      =      600
-      >> Best Design =  -25.623   0.000
-      >> Theta =    0.010   0.752
- >> Theta      =    0.010   0.752
- >> Deviation  =     0.13502E+06
- >> Likelihood =    -0.25623E+02 with Error =     0.47896E-13
+      >> Best Design =    4.686   0.000
+      >> Theta =   10.000   0.414
+ >> Theta      =   10.000   0.414
+ >> Deviation  =     0.31736E+00
+ >> Likelihood =     0.46863E+01 with Error =     0.18291E-13
  >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.14431E-09 among     5 pts
+      >> RMSE on All Sample Points    =    0.17914E-12 among     5 pts
 
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
+ >> Best design: Sample point   4 Fct value   0.3501167
+    with X value   0.4784766   0.2591512
+
+ >> Make "dak" Database for metamodel
+ >> Search_by_GA2_Local 
+      >> Search around Optimal, [   -0.10000E+01 :    0.10000E+01 ]
+ *mdv   != ndv in paramGAEI.inp                 
+ *mdat  != ndat in paramGAEI.inp                 
+ >> Reading Parameter from paramGAEI.inp
+      >> # of Population       =    64
+      >> # of Generation       =    99
+      >> # of Design Variables =     2
+      >> # of Objectives       =     2
+      >> Set of Objectives     :   Max Min
+      >> New Sample Points Search on Metamodel
+ >> Check Again the Parameters Setting
+      >> Use new sharing function (index-based)
+      >> Use old fitness function (1/rank)
+      >> Use blended crossover
+           >> Probability of directional crossover =    0.100   0.100
+           >> Probability of neighborhood cultivation =    0.500   0.500
+      >> Gradient-based evolution per 10 generations
+      >> Use old uniform mutation
+ >> Make Initial Population by LHS
+ >> Calling evaluation in GA
+ >> Starting Main Loop of GA23316
+      >>    1 Pareto Designs until   0 Gen.,  0.694E-01  0.612E+00
+           >> Gradient-Based Evolution for  10 Generation
+           >> Average Improvement Ratio        =  0.219E-01
+      >>  129 Pareto Designs until  10 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  20 Generation
+           >> Average Improvement Ratio        =  0.691E-02
+      >>  330 Pareto Designs until  20 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  30 Generation
+           >> Average Improvement Ratio        =  0.497E-02
+      >>  532 Pareto Designs until  30 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  40 Generation
+           >> Average Improvement Ratio        =  0.138E-02
+      >>  706 Pareto Designs until  40 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  50 Generation
+           >> Average Improvement Ratio        =  0.115E-02
+      >>  864 Pareto Designs until  50 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  60 Generation
+           >> Average Improvement Ratio        =  0.409E-03
+      >> 1031 Pareto Designs until  60 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  70 Generation
+           >> Average Improvement Ratio        =  0.508E-03
+      >> 1181 Pareto Designs until  70 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  80 Generation
+           >> Average Improvement Ratio        =  0.357E-03
+      >> 1336 Pareto Designs until  80 Gen.,  0.765E-01  0.349E+00
+           >> Gradient-Based Evolution for  90 Generation
+           >> Average Improvement Ratio        =  0.198E-02
+      >> 1489 Pareto Designs until  90 Gen.,  0.765E-01  0.349E+00
+ >> Finishing Main Loop of GA
+ >> Output Results....
+      >> Best Design for  1 : (  12  30) :  0.7653E-01  0.5316E+00
+      >> Best Design for  2 : (  20  38) :  0.9433E-02  0.3489E+00
+      >> # of Function Evaluations for New Ones  =     5824
+      >> # of Function Evaluations for Gradient  =     1152
+      >> # of Function Evaluations for 1D Search =     3549
+      >> # of Function Evaluations in Total      =    10525
+      >> Best Design ( 1 ) =    0.469   0.616   0.077   0.532   0.000
+      >> Best Design ( 2 ) =    0.477   0.265   0.009   0.349   0.000
+ >> New Sample Point ------   1
+      >> x       =    0.469   0.616
+      >> EI/Yhat =      0.07653054     0.53158466
+           >> Output to newsample1.dat
+ >> New Sample Point ------   2
+      >> x       =    0.477   0.265
+      >> EI/Yhat =      0.00943253     0.34894525
+           >> Output to newsample2.dat
+ >> Update from    5 to    6 sample points
+
+ >> Best design: Sample point   4 Fct value   0.3501167
+    with X value   0.4784766   0.2591512
 
  >> Make "dak" Database for metamodel
  >> PostProcess on Metamodel, ifac=       101
       >> Negative RMSE on        0 Pts
-      >> EI   max =   15.5910585 @   1.000   1.000
-      >> Yhat min =    0.7084307 @   0.000   0.490
+      >> EI   max =    0.0763539 @   0.470   0.610
+      >> Yhat min =    0.3557902 @   0.480   0.250
 
-      >> RMSE on 2D Function =     0.8996639705E+03
+      >> RMSE on 2D Function =     0.9228928178E+01
 
            >> # of Modes in Fid-1 =   5   0   0   0   0   0   5
            >> # of Modes (sum)    =   5   0   0   0   0   0
-      >> Output to tecsample/kriging.dat
-
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
-
- >> Make "dak" Database for metamodel
- >> [MIR is being used as local surrogate]
-      >> Number of test candidates       10201
-           >> [         1      1275 ] for Processor  0
-           >> [      7651      8925 ] for Processor  6
-           >> [      2551      3825 ] for Processor  2
-           >> [      6376      7650 ] for Processor  5
-           >> [      1276      2550 ] for Processor  1
-           >> [      5101      6375 ] for Processor  4
-           >> [      3826      5100 ] for Processor  3
-           >> [      8926     10201 ] for Processor  7
-
- >>Loc diff is   702.38788717755949       for candidate           1  at iteration           1 test cand         8457
-
-
- >>Loc diff is   588.45955532527410       for candidate           2  at iteration           1 test cand         4260
-
-
- >>Loc diff is   359.51648857773819       for candidate           3  at iteration           1 test cand         9169
-
-
- >>Loc diff is   323.18541831365792       for candidate           4  at iteration           1 test cand         8125
-
-
- >>Loc diff is   275.73990410243925       for candidate           5  at iteration           1 test cand         2461
-
- >> Reading KrigSet.inp
-      >> # of Optimizing Functions =    1
-      >> # of Constraint Functions =    0
-      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
-      >> # of Max Sample/G/H/Hv    =    0************
-      >> Ordinary Kriging
-      >> Use Wendland C4 SCF
-      >> Use All Hess for Direct Cokriging
-      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
-      >> Cross Correlation Relaxation Factor  =   0.9999000
- >> Reading sample.dat
-      >> # of DV, Func, Samples =     2    2   10
-      >> # of Fidelity Levels   =     1
-      >> Fidelity Level :  1
-           >> # of Samples(F     )    =    10
-      >> Min. Dist. between Fidelity-1 Samples (  1,  3 ) =  0.19E+00
-
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
-
- >> Reduce Sample Points for Function  1
-           >> # of Modes in Fid-1 =  10   0   0   0   0   0  10
-           >> # of Modes (sum)    =  10   0   0   0   0   0
- >> Size of Correlation Matrix =     10
- *mdv   != ndv in paramGALN.inp                 
- *mdat  != ndat in paramGALN.inp                 
- *meva  != neva in paramGALN.inp                 
- >> Reading Parameter from paramGALN.inp
-      >> # of Population       =    24
-      >> # of Generation       =    24
-      >> # of Design Variables =     2
-      >> # of Objectives       =     1
-      >> Set of Objectives     :   Max
-      >> Likelihood Maximization for Theta
- >> Check Again the Parameters Setting
-      >> Use new sharing function (index-based)
-      >> Use old fitness function (1/rank)
-      >> Use blended crossover
-           >> Probability of directional crossover =    0.100   0.100
-           >> Probability of neighborhood cultivation =    0.500   0.500
-      >> Use old uniform mutation
- >> Make Initial Population by LHS
- >> Calling evaluation in GA
- >> Starting Main Loop of GA23293
-      >>    1 Pareto Designs until   0 Gen., -0.683E+02
-      >>    1 Pareto Designs until  12 Gen., -0.678E+02
-      >>    1 Pareto Designs until  24 Gen., -0.678E+02
- >> Finishing Main Loop of GA
- >> Output Results....
-      >> Best Design for  1 : (  24  20) : -0.6780E+02
-      >> # of Function Evaluations for New Ones  =      600
-      >> # of Function Evaluations for Gradient  =        0
-      >> # of Function Evaluations for 1D Search =        0
-      >> # of Function Evaluations in Total      =      600
-      >> Best Design =  -67.801   0.000
-      >> Theta =    0.820   0.277
- >> Theta      =    0.820   0.277
- >> Deviation  =     0.35349E+07
- >> Likelihood =    -0.67801E+02 with Error =     0.43341E-13
- >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.62404E-09 among    10 pts
-
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
-
- >> Make "dak" Database for metamodel
- >> PostProcess on Metamodel, ifac=       101
-      >> Negative RMSE on        0 Pts
-      >> EI   max =  317.8674695 @   0.690   1.000
-      >> Yhat min = -216.6898064 @   0.700   0.860
-
-      >> RMSE on 2D Function =     0.2904628126E+03
-
-           >> # of Modes in Fid-1 =  10   0   0   0   0   0  10
-           >> # of Modes (sum)    =  10   0   0   0   0   0
-      >> Output to tecsample/kriging.dat
-
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
-
- >> Make "dak" Database for metamodel
- >> [MIR is being used as local surrogate]
-      >> Number of test candidates       10201
-           >> [         1      1275 ] for Processor  0
-           >> [      7651      8925 ] for Processor  6
-           >> [      6376      7650 ] for Processor  5
-           >> [      8926     10201 ] for Processor  7
-           >> [      5101      6375 ] for Processor  4
-           >> [      3826      5100 ] for Processor  3
-           >> [      1276      2550 ] for Processor  1
-           >> [      2551      3825 ] for Processor  2
-
- >>Loc diff is   1375.2871680010899       for candidate           1  at iteration           2 test cand         2128
-
-
- >>Loc diff is   1330.0778409298300       for candidate           2  at iteration           2 test cand         9813
-
-
- >>Loc diff is   1175.2937726822263       for candidate           3  at iteration           2 test cand         6186
-
-
- >>Loc diff is   1141.0462142409287       for candidate           4  at iteration           2 test cand        10182
-
-
- >>Loc diff is   1088.6401026061183       for candidate           5  at iteration           2 test cand         4074
-
- >> Reading KrigSet.inp
-      >> # of Optimizing Functions =    1
-      >> # of Constraint Functions =    0
-      >> # of K/DCOK/ICOK/DUM/VFM  =    0   1   0   1   1
-      >> # of Max Sample/G/H/Hv    =    0************
-      >> Ordinary Kriging
-      >> Use Wendland C4 SCF
-      >> Use All Hess for Direct Cokriging
-      >> Add epsilon on Diagonal Rij, epsilon =   0.222E-15
-      >> Cross Correlation Relaxation Factor  =   0.9999000
- >> Reading sample.dat
-      >> # of DV, Func, Samples =     2    2   15
-      >> # of Fidelity Levels   =     1
-      >> Fidelity Level :  1
-           >> # of Samples(F     )    =    15
-      >> Min. Dist. between Fidelity-1 Samples (  4, 15 ) =  0.18E+00
-
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
-
- >> Reduce Sample Points for Function  1
-           >> # of Modes in Fid-1 =  15   0   0   0   0   0  15
-           >> # of Modes (sum)    =  15   0   0   0   0   0
- >> Size of Correlation Matrix =     15
- *mdv   != ndv in paramGALN.inp                 
- *mdat  != ndat in paramGALN.inp                 
- *meva  != neva in paramGALN.inp                 
- >> Reading Parameter from paramGALN.inp
-      >> # of Population       =    24
-      >> # of Generation       =    24
-      >> # of Design Variables =     2
-      >> # of Objectives       =     1
-      >> Set of Objectives     :   Max
-      >> Likelihood Maximization for Theta
- >> Check Again the Parameters Setting
-      >> Use new sharing function (index-based)
-      >> Use old fitness function (1/rank)
-      >> Use blended crossover
-           >> Probability of directional crossover =    0.100   0.100
-           >> Probability of neighborhood cultivation =    0.500   0.500
-      >> Use old uniform mutation
- >> Make Initial Population by LHS
- >> Calling evaluation in GA
- >> Starting Main Loop of GA23294
-      >>    1 Pareto Designs until   0 Gen., -0.968E+02
-      >>    1 Pareto Designs until  12 Gen., -0.952E+02
-      >>    1 Pareto Designs until  24 Gen., -0.952E+02
- >> Finishing Main Loop of GA
- >> Output Results....
-      >> Best Design for  1 : (  24  17) : -0.9519E+02
-      >> # of Function Evaluations for New Ones  =      600
-      >> # of Function Evaluations for Gradient  =        0
-      >> # of Function Evaluations for 1D Search =        0
-      >> # of Function Evaluations in Total      =      600
-      >> Best Design =  -95.186   0.000
-      >> Theta =    0.439   0.134
- >> Theta      =    0.439   0.134
- >> Deviation  =     0.25283E+08
- >> Likelihood =    -0.95186E+02 with Error =     0.19461E-10
- >> Output to meta01.krg
-      >> RMSE on All Sample Points    =    0.73526E-08 among    15 pts
-
- >> Best design: Sample point   1 Fct value   1.0000000
-    with X value   0.5000000   0.5000000
-
- >> Make "dak" Database for metamodel
- >> PostProcess on Metamodel, ifac=       101
-      >> Negative RMSE on        0 Pts
-      >> EI   max =  121.1031428 @   0.640   0.500
-      >> Yhat min = -115.9731473 @   0.640   0.500
-
-      >> RMSE on 2D Function =     0.1306531959E+03
-
-           >> # of Modes in Fid-1 =  15   0   0   0   0   0  15
-           >> # of Modes (sum)    =  15   0   0   0   0   0
       >> Output to tecsample/kriging.dat
   
  ---------------------------------------------------------
@@ -297,8 +159,7 @@
  ---------------------------------------------------------
    Timer Name                       Time(sec.)  % of Total
  ---------------------------------------------------------
-   Post process                        2.796        25.02
-   Dyn Training Pt                     7.778        69.60
+   Post process                        0.739         4.43
  ---------------------------------------------------------
-            Total Time =    11.176 seconds
+            Total Time =    16.664 seconds
  ---------------------------------------------------------
