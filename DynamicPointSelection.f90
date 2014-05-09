@@ -13,15 +13,16 @@ subroutine DynamicPointSelection
        Dtoex(ndim,100000),dist(100000),minftoex(100000),&
        maxftoex(100000),distmean,ftoextry(2,100000),derivdummy(ndim)
   double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:100000),&
-  Dgdibtmp(ndim,0:100000),fdibtmp(0:100000),gdibtmp(ndim,0:100000),&
-  hdibtmp(ndim,ndim,0:100000),diffloctmp,difflocmin,difflocavg,&
-  SIGMAmean,distcomp
+       Dgdibtmp(ndim,0:100000),fdibtmp(0:100000),gdibtmp(ndim,0:100000),&
+       hdibtmp(ndim,ndim,0:100000),diffloctmp,difflocmin,difflocavg,&
+       SIGMAmean,distcomp
 
   double precision, dimension(nptstoaddpercyc) :: f
   double precision, dimension(ndim,nptstoaddpercyc) :: df,Dad,v
   double precision, dimension(ndim,ndim,nptstoaddpercyc) :: d2f
   double precision, DIMENSION(200) :: SIGV
   double precision, DIMENSION(200) :: SIGG
+
   integer :: Taylororder, IERR, NCPG,idec,is,ie,id,point,&
        kpc,nptstoaddpercyctmp,  nptstoaddpercycorig
   double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,&
@@ -30,7 +31,7 @@ subroutine DynamicPointSelection
   character*60::export
   integer::npass
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
-  double precision::RBF_W(100000)
+  double precision::RBF_W(100000),r0
   external phi1,phi2,phi3,phi4
 
   call find_Optimal
@@ -94,7 +95,7 @@ subroutine DynamicPointSelection
         end if ! nstyle
 
      end if ! master
-     
+
      call MPI_Barrier(MPI_COMM_WORLD,ierr)
      call deallocate_all_krig
 
@@ -241,10 +242,10 @@ subroutine DynamicPointSelection
      ! Figure out locations of test candidates (randomly). Calculate local Dutch intrapolations and compare to Kriging values
 
      call combination(ndim+Dutchorderg,ndim,NCP)
-     
+
      !NTOEX=(30-ndim)*NCP
 
-!     NTOEX=10201
+     !     NTOEX=10201
 
      NTOEX=5000*NDIM
 
@@ -331,7 +332,7 @@ subroutine DynamicPointSelection
      end if
 
      ! Information sharing by master with slaves       
- 
+
      call MPI_Barrier(MPI_COMM_WORLD,ierr)           
      call MPI_BCAST(Dtoex(:,:),100000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
      idec = dble(NTOEX)/dble(num_proc)
@@ -364,30 +365,27 @@ subroutine DynamicPointSelection
         sigg=0.d0
 
 
-!        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1),&
-!             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1),&
-!             gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
-!             BETA, GAMM, IERR)
-!        if (ierr.ne.0) stop'MIR BETA gamma error'
-!        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
-!             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
-!             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
-!             BETA, GAMM, Taylororder, 1, ftoextry(2,k), SIGMA(k), IERR)
-!        if (ierr.ne.0) stop'MIR evaluate error'
-        
-!        call getR0(NCP, Ddibtmp(1:ndim,0:NCP-1),r0)
-        
-        call  rbf_weight(ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4,fdibtmp(0:NCP-1), RBF_W)
+        !        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1),&
+        !             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1),&
+        !             gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
+        !             BETA, GAMM, IERR)
+        !        if (ierr.ne.0) stop'MIR BETA gamma error'
+        !        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
+        !             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
+        !             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
+        !             BETA, GAMM, Taylororder, 1, ftoextry(2,k), SIGMA(k), IERR)
+        !        if (ierr.ne.0) stop'MIR evaluate error'
 
-        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4, RBF_w, 1, Dtoex(1:ndim,k), ftoextry(2,k))
+        call findavg(NCP,ndim,Ddibtmp(1:ndim,0:NCP-1),r0)
+        call rbf_weight(ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), r0, phi4,fdibtmp(0:NCP-1), RBF_W)
+        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), r0, phi4, RBF_w, 1, Dtoex(1:ndim,k), ftoextry(2,k))
 
-!        call interp_nd ( m, nd, xd, r0, phi, w, ni, xi, fi )
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
 
         call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
 
-!        print*,ftoextry(2,k),ftoextry(1,k)
+        !        print*,ftoextry(2,k),ftoextry(1,k)
 
      end do
   end if ! randomtestl
@@ -479,18 +477,18 @@ subroutine DynamicPointSelection
      end do
 
      ! Calculating the mean difference between the surrogates
-     
+
      diffloc2=diffloc2/dble(ntoex)
      diffloc2=sqrt(diffloc2)
- 
-     
+
+
      !=======================================================
-     
+
      ! Selection
-     
+
      !=======================================================
-     
-          
+
+
      diffloc=0.0 ! initialize
 
      do ii=1,nptstoaddpercyc ! loop over all the number of points to be selected
@@ -605,9 +603,9 @@ subroutine DynamicPointSelection
         end if
 
      end do !! ii loop
-    
+
      !============================================================
-     
+
      ! Add successful test candidates to sample points 
 
      !============================================================
