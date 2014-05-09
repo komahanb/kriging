@@ -12,9 +12,9 @@ subroutine DynamicPointSelection
   double precision :: triangle_coor(ndim,100000),Dtoextmp(ndim),&
        Dtoex(ndim,100000),dist(100000),minftoex(100000),&
        maxftoex(100000),distmean,ftoextry(2,100000),derivdummy(ndim)
-  double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:1000),&
-  Dgdibtmp(ndim,0:1000),fdibtmp(0:1000),gdibtmp(ndim,0:1000),&
-  hdibtmp(ndim,ndim,0:1000),diffloctmp,difflocmin,difflocavg,&
+  double precision :: diff2,RMSE(100000),RMSEmean,EI,Ddibtmp(ndim,0:100000),&
+  Dgdibtmp(ndim,0:100000),fdibtmp(0:100000),gdibtmp(ndim,0:100000),&
+  hdibtmp(ndim,ndim,0:100000),diffloctmp,difflocmin,difflocavg,&
   SIGMAmean,distcomp
 
   double precision, dimension(nptstoaddpercyc) :: f
@@ -25,10 +25,13 @@ subroutine DynamicPointSelection
   integer :: Taylororder, IERR, NCPG,idec,is,ie,id,point,&
        kpc,nptstoaddpercyctmp,  nptstoaddpercycorig
   double precision :: BETA, GAMM, SIGMA(100000),distmeanloc,&
-       RMSEmeanloc,minftoexloc(10000),maxftoexloc(10000)
+       RMSEmeanloc,minftoexloc(100000),maxftoexloc(100000)
+
   character*60::export
   integer::npass
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
+  double precision::RBF_W(100000)
+  external phi1,phi2,phi3,phi4
 
   call find_Optimal
   call read_all_krig
@@ -361,21 +364,26 @@ subroutine DynamicPointSelection
         sigg=0.d0
 
 
-        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1),&
-             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1),&
-             gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
-             BETA, GAMM, IERR)
-        if (ierr.ne.0) stop'MIR BETA gamma error'
-        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
-             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
-             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
-             BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
-        if (ierr.ne.0) stop'MIR evaluate error'
+!        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1),&
+!             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1),&
+!             gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
+!             BETA, GAMM, IERR)
+!        if (ierr.ne.0) stop'MIR BETA gamma error'
+!        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
+!             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
+!             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
+!             BETA, GAMM, Taylororder, 1, ftoextry(1,k), SIGMA(k), IERR)
+!        if (ierr.ne.0) stop'MIR evaluate error'
+        
+        call  rbf_weight( ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4,fdibtmp(0:NCP-1), RBF_W)
 
+        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), 0.5d0, phi4, RBF_w, 1, Dtoex(1:ndim,k), ftoextry(1,k))
+
+!        call interp_nd ( m, nd, xd, r0, phi, w, ni, xi, fi )
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
 
-        call meta_call(1,mode,Dtoex(:,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
+        call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(2,k),derivdummy,RMSE(k),EI)
 
      end do
   end if ! randomtestl
