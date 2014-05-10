@@ -34,7 +34,7 @@ subroutine DynamicPointSelection
   character*60::export
   integer::npass
   integer,parameter::makesamples=1 			!1=Make random samples, 0=read from Kriging Samples
-  double precision::RBF_W(50000),r0
+  double precision::RBF_W(nhs),r0
   external phi1,phi2,phi3,phi4
 
   call find_Optimal
@@ -242,13 +242,7 @@ subroutine DynamicPointSelection
 
      if(id_proc.eq.0)  write(filenum,*) '>> [Dutch Intrapolation is being used as local surrogate]'
 
-     ! Figure out locations of test candidates (randomly). Calculate local Dutch intrapolations and compare to Kriging values
-
      call combination(ndim+Dutchorderg,ndim,NCP)
-
-     !NTOEX=(30-ndim)*NCP
-
-     !     NTOEX=10201
 
      NTOEX=5000*NDIM
 
@@ -269,8 +263,6 @@ subroutine DynamicPointSelection
      write(filenum,'(11x,a,2i10,a,i3)') '>> [',is,ie,' ] for Processor',id_proc           
 
      do k=is,ie !Main loop for test candidates
-
-        ! if(id_proc.eq.2)   print *, Dtoex(:,k), id_proc
 
         ! Still need to make sure points are not collinear in higher dimensions!
 
@@ -314,7 +306,7 @@ subroutine DynamicPointSelection
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 
-     NTOEX=10201 !*NDIM
+     NTOEX=101*101 !*NDIM
 
      if (NTOEX.gt.25000) NTOEX=25000
 
@@ -366,29 +358,42 @@ subroutine DynamicPointSelection
         ! Calculate the best parameters beta and gamma
         sigv=0.d0
         sigg=0.d0
+        
+        !++++++++++++++++++++++++++++++++ MIR +++++++++++++++++++++++++++
+
+        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(1:ndim,0:NCP-1),&
+             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(1:ndim,0:NCPG-1),&
+             gdibtmp(1:ndim,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
+             BETA, GAMM, IERR)
+        if (ierr.ne.0) stop'MIR BETA gamma error'
+
+!        gamm=0.0d0 ! Interpolation
 
 
-        !        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(:,0:NCP-1),&
-        !             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(:,0:NCPG-1),&
-        !             gdibtmp(:,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
-        !             BETA, GAMM, IERR)
-        !        if (ierr.ne.0) stop'MIR BETA gamma error'
-        !        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(:,k), NCP,&
-        !             Ddibtmp(:,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
-        !             Dgdibtmp(:,0:NCPG-1), gdibtmp(:,0:NCPG-1), SIGG, &
-        !             BETA, GAMM, Taylororder, 1, ftoextry(2,k), SIGMA(k), IERR)
-        !        if (ierr.ne.0) stop'MIR evaluate error'
+        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(1:ndim,k), NCP,&
+             Ddibtmp(1:ndim,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
+             Dgdibtmp(1:ndim,0:NCPG-1), gdibtmp(1:ndim,0:NCPG-1), SIGG, &
+             BETA, GAMM, Taylororder, 1, ftoextry(3,k), SIGMA(k), IERR)
+        if (ierr.ne.0) stop'MIR evaluate error'
+
+
+        !+++++++++++++++++++++++++++++++++ RBF +++++++++++++++++++++++++++
 
         call findavg(NCP,ndim,Ddibtmp(1:ndim,0:NCP-1),r0)
         call rbf_weight(ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), r0, phi4,fdibtmp(0:NCP-1), RBF_W)
-        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), r0, phi4, RBF_w, 1, Dtoex(1:ndim,k), ftoextry(2,k))
+        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), r0, phi4, RBF_w, 1,Dtoex(1:ndim,k), ftoextry(4,k))
+
+        !++++++++++++++++++++++++++ Average of two local surrogates ++++++++++++
+
+        ftoextry(2,k)=(ftoextry(3,k)+ftoextry(4,k))/dble(2)
+        
+        !+++++++++++++++++++++++++ Kriging value ++++++++++++++++++++++++++++
 
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
-
+        
         call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
-
-        !        print*,ftoextry(2,k),ftoextry(1,k)
+!        print*,k,ftoextry(4,k),ftoextry(3,k),ftoextry(1,k)
 
      end do
   end if ! randomtestl
@@ -462,7 +467,7 @@ subroutine DynamicPointSelection
 
      ! Pick test candidate with largest difference in values, but above distcomp distance to nearest neighbours
 
-     distcomp=1.1d0*distmean
+     distcomp=1.2d0*distmean
 
 
      !initialize values
