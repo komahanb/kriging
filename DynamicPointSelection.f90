@@ -300,15 +300,20 @@ subroutine DynamicPointSelection
      end do ! loop over NTOEX test candidates
 
 
-  else if (randomtestl.eq.2) then     ! MIR as local surrogate
+  else if (randomtestl.gt.1) then     ! MIR as local surrogate
 
-     if(id_proc.eq.0)  write(filenum,*) '>> [MIR is being used as local surrogate]'
+     if(id_proc.eq.0) then
+
+        if (randomtestl.eq.2) write(filenum,*) '>> [MIR is being used as local surrogate]'
+        if (randomtestl.eq.3) write(filenum,*) '>> [RBF is being used as local surrogate]'
+        if (randomtestl.eq.4) write(filenum,*) '>> [MIR and RBF are being used as local surrogate]'
+     end if
 
      call mirtunableparams(fct,ndim,nhs,ncp,taylororder)
 
      NTOEX=101*101 !*NDIM
 
-     if (NTOEX.gt.25000) NTOEX=25000
+     if (NTOEX.gt.500000) NTOEX=50000
 
      if(id_proc.eq.0)  write(filenum,*) '     >> Number of test candidates',NTOEX
 
@@ -355,66 +360,80 @@ subroutine DynamicPointSelection
            end if
         end do
 
-        ! Calculate the best parameters beta and gamma
-        sigv=0.d0
-        sigg=0.d0
-        
-        !++++++++++++++++++++++++++++++++ MIR +++++++++++++++++++++++++++
 
-!        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(1:ndim,0:NCP-1),&
-!             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(1:ndim,0:NCPG-1),&
-!             gdibtmp(1:ndim,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
-!             BETA, GAMM, IERR)
-!        if (ierr.ne.0) stop'MIR BETA gamma error'
+        if (randomtestl.eq.2.or.randomtestl.eq.4) then 
 
-        !        gamm=0.0d0 ! Interpolation
+           ! Calculate the best parameters beta and gamma
+           sigv=0.d0
+           sigg=0.d0
 
-        beta=0.5d0
 
-        if (fct.eq.0) then
+           !++++++++++++++++++++++++++++++++ MIR +++++++++++++++++++++++++++
 
-           gamm=1.0d0
+           !        CALL MIR_BETA_GAMMA(nfunc-1, ndim, NCP, Ddibtmp(1:ndim,0:NCP-1),&
+           !             fdibtmp(0:NCP-1), SIGV, NCPG , Dgdibtmp(1:ndim,0:NCPG-1),&
+           !             gdibtmp(1:ndim,0:NCPG-1), SIGG, Taylororder, 1, dble(1.0),&
+           !             BETA, GAMM, IERR)
+           !        if (ierr.ne.0) stop'MIR BETA gamma error'
 
-        else if (fct.eq.2) then
+           !        gamm=0.0d0 ! Interpolation
 
-           gamm=10.0d0
+           beta=0.5d0
 
-        else if (fct.eq.3) then
+           if (fct.eq.0) then
 
-           gamm=0.5d0
+              gamm=1.0d0
 
-        else
+           else if (fct.eq.2) then
 
-           gamm=5.0d0
+              gamm=10.0d0
+
+           else if (fct.eq.3) then
+
+              gamm=0.5d0
+
+           else
+
+              gamm=5.0d0
+
+           end if
+
+           CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(1:ndim,k), NCP,&
+                Ddibtmp(1:ndim,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
+                Dgdibtmp(1:ndim,0:NCPG-1), gdibtmp(1:ndim,0:NCPG-1), SIGG, &
+                BETA, GAMM, Taylororder, 1, ftoextry(3,k), SIGMA(k), IERR)
+           if (ierr.ne.0) stop'MIR evaluate error'
+
+           if (randomtestl.eq.2) ftoextry(2,k)=ftoextry(3,k)
+
+        else if (randomtestl.eq.3.or.randomtestl.eq.4) then !RBF
+
+           !+++++++++++++++++++++++++++++++++ RBF +++++++++++++++++++++++++++
+           
+           call findavg(NCP,ndim,Ddibtmp(1:ndim,0:NCP-1),r0)
+           call rbf_weight(ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), r0, phi4,fdibtmp(0:NCP-1), RBF_W)
+           call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), r0, phi4, RBF_w, 1,Dtoex(1:ndim,k), ftoextry(4,k))
+
+           if (randomtestl.eq.3) ftoextry(2,k)=ftoextry(4,k)
+
+        else if (randomtestl.eq.4) then
+
+           !++++++++++++++++++++++++++ Average of two local surrogates ++++++++++++
+
+           ftoextry(2,k)=(ftoextry(3,k)+ftoextry(4,k))/dble(2)
 
         end if
 
-        CALL MIR_EVALUATE(nfunc-1, ndim, 1, Dtoex(1:ndim,k), NCP,&
-             Ddibtmp(1:ndim,0:NCP-1), fdibtmp(0:NCP-1), SIGV, NCPG ,&
-             Dgdibtmp(1:ndim,0:NCPG-1), gdibtmp(1:ndim,0:NCPG-1), SIGG, &
-             BETA, GAMM, Taylororder, 1, ftoextry(3,k), SIGMA(k), IERR)
-        if (ierr.ne.0) stop'MIR evaluate error'
-
-
-        !+++++++++++++++++++++++++++++++++ RBF +++++++++++++++++++++++++++
-
-        call findavg(NCP,ndim,Ddibtmp(1:ndim,0:NCP-1),r0)
-        call rbf_weight(ndim, NCP, Ddibtmp(1:ndim,0:NCP-1), r0, phi4,fdibtmp(0:NCP-1), RBF_W)
-        call rbf_interp_nd(ndim,NCP,Ddibtmp(1:ndim,0:NCP-1), r0, phi4, RBF_w, 1,Dtoex(1:ndim,k), ftoextry(4,k))
-
-        !++++++++++++++++++++++++++ Average of two local surrogates ++++++++++++
-
-        ftoextry(2,k)=(ftoextry(3,k)+ftoextry(4,k))/dble(2)
-        
         !+++++++++++++++++++++++++ Kriging value ++++++++++++++++++++++++++++
 
         !mode=0 ! return function value only
         mode=1 ! return function, RMSE, EI
-        
-        call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
-!        print*,k,ftoextry(4,k),ftoextry(3,k),ftoextry(1,k)
 
-     end do
+        call meta_call(1,mode,Dtoex(1:ndim,k),ftoextry(1,k),derivdummy,RMSE(k),EI)
+
+     end do ! loop over test candidates
+
+     
   end if ! randomtestl
 
 

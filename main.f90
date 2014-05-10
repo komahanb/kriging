@@ -34,6 +34,9 @@ program Kriging
      ! 0: Delaunay triangulation with Dutchintrapolation 
      ! 1: latin hypercube with Dutchintrapolation 
      ! 2: latin hypercube with Multivariate Interpolation and Regression (MIR)
+     ! 3: initial LHS  + RBF 
+     ! 4: Average of RBF+MIR
+
 
      ! Low fidelity data
 
