@@ -158,49 +158,49 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
      ! Get standard deviation in function space
 
-     if (Casemode.eq.1) then
-        if (readMcsamples.eq.1) then
-
-           if (fct.eq.20) then
-              open(10,file='MC.inp',form='formatted',status='unknown')
-              read(10,*) !(xavg(i),i=1,ndim)
-              read(10,*) !(xstd(i),i=1,ndim)     
-              read(10,*)
-              read(10,*)
-              read(10,*)
-              read(10,*) !NMCS!,ndimtmp
-              read(10,*) evlfnc
-              close(10)
-
-           else 
-
-              open(10,file='MCsamp.dat',form='formatted',status='unknown')
-              read(10,*) !NMCS,ndimtmp
-              if (ndimtmp.ne.ndim) STOP 'Dimension does not match in MCsamp.dat!'
-              read(10,*) !(xavg(i),i=1,ndim)
-              read(10,*) !(xstd(i),i=1,ndim) 
-              read(10,*)		  
-              read(10,*)
-              read(10,*)
-              read(10,*) !NMCS!,ndimtmp
-              read(10,*) evlfnc        
-              close(10)
-           end if
-
-        else if (readMcsamples.eq.0) then
-
-           open(10,file='MC.inp',form='formatted',status='unknown')
-           read(10,*) !(xavg(i),i=1,ndim)
-           read(10,*) !(xstd(i),i=1,ndim) 
-           read(10,*)		  
-           read(10,*)
-           read(10,*)
-           read(10,*) !NMCS!,ndimtmp
-           read(10,*) evlfnc  
-           close(10)
-
-        end if
-     end if ! casemode
+!!$     if (Casemode.eq.1) then
+!!$        if (readMcsamples.eq.1) then
+!!$
+!!$           if (fct.eq.20) then
+!!$              open(10,file='MC.inp',form='formatted',status='unknown')
+!!$              read(10,*) !(xavg(i),i=1,ndim)
+!!$              read(10,*) !(xstd(i),i=1,ndim)     
+!!$              read(10,*)
+!!$              read(10,*)
+!!$              read(10,*)
+!!$              read(10,*) !NMCS!,ndimtmp
+!!$              read(10,*) evlfnc
+!!$              close(10)
+!!$
+!!$           else 
+!!$
+!!$              open(10,file='MCsamp.dat',form='formatted',status='unknown')
+!!$              read(10,*) !NMCS,ndimtmp
+!!$              if (ndimtmp.ne.ndim) STOP 'Dimension does not match in MCsamp.dat!'
+!!$              read(10,*) !(xavg(i),i=1,ndim)
+!!$              read(10,*) !(xstd(i),i=1,ndim) 
+!!$              read(10,*)		  
+!!$              read(10,*)
+!!$              read(10,*)
+!!$              read(10,*) !NMCS!,ndimtmp
+!!$              read(10,*) evlfnc        
+!!$              close(10)
+!!$           end if
+!!$
+!!$        else if (readMcsamples.eq.0) then
+!!$
+!!$           open(10,file='MC.inp',form='formatted',status='unknown')
+!!$           read(10,*) !(xavg(i),i=1,ndim)
+!!$           read(10,*) !(xstd(i),i=1,ndim) 
+!!$           read(10,*)		  
+!!$           read(10,*)
+!!$           read(10,*)
+!!$           read(10,*) !NMCS!,ndimtmp
+!!$           read(10,*) evlfnc  
+!!$           close(10)
+!!$
+!!$        end if
+!!$     end if ! casemode
 
      ! Domain size in function space
      do i=1,ndim

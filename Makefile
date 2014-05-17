@@ -24,8 +24,8 @@ FFLAGS  =  -g -fbacktrace -O3 -fopenmp  -ffree-line-length-10000 #-fbounds-check
 
 LIBS    = 
 
-SRCS =  dimKrig.o main.o functions.o threebarcost.o\
-        latin.o mpi.o \
+SRCS =  dimKrig.o Timer.o main.o functions.o threebarcost.o\
+        latin.o mpi.o rbf_interp_nd.o\
         read_set.o Dutch.o Dutchgeninterp.o\
         read_sample.o check_sample.o \
         make_krig.o reduce_data.o tool.o eva_sample.o \
@@ -41,8 +41,10 @@ SRCS =  dimKrig.o main.o functions.o threebarcost.o\
         dimGA.o ga.o gatool.o \
         post.o monaco.o make_sample.o \
 	hammersley.o sobol.o faure.o nieder.o \
-	halton.o
-        
+	halton.o scf.o \
+        scf_df.o scf_df_df.o scf_df_df_db.o \
+        scf_db.o scf_db_db.o scf_db_db_df.o \
+	scf_db_df.o scf_df_db.o scf_df_df_db_db.o 
 OBJS =  ${SRCS:.$(SUF)=.o}
 
 all:  $(TARGET)

@@ -31,10 +31,13 @@ subroutine MonteCarlo
   read(10,*)
   read(10,*)
   read(10,*) NMCS!,ndimtmp
+print*,nmcs
   read(10,*) !npdf
   read(10,*) !readmcsamples
   read(10,*) evlfnc
+print*,evlfnc
   read(10,*) expensive
+print*,expensive
   close(10)
 
   call find_Optimal
