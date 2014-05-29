@@ -1,4 +1,4 @@
-subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,initpts,ncyc,nptsin,statin,probtypeIN,flagin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
+subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,initpts,ncyc,nptsin,statin,flagin,fmeanout,fvarout,fmeanprimeout,fvarprimeout)
 
   use dimKrig
   use timer_mod
@@ -20,7 +20,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   real*8,intent(in)::DATIN(20) ! constants and other values for objective function/constraints
   integer ::fuct
   integer,intent(in)::initpts,ncyc,flagin(20)
-  integer::probtypeIN(20)
+  !  integer::probtypeIN(20)
 
   real*8::dftmp(ndimint),ftmp
 
@@ -36,7 +36,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   DAT=DATIN ! DATA used in functions.f90
 
-  probtype(1:ndim)=probtypeIN(1:ndim)
+  probtype(1:ndimt)=1 ! fixing it to 1
 
   filenum=  int(DAT(20)) ! 6 for screen, any other number for fort.x
 
@@ -119,7 +119,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   randomflag=1
 
   if (ndim.ne.ndimt) OUUflag=1 ! mixed uncertainties, need to  call optimization at the end
-  
+
   !0:exp 1: cos(lin sum) 2: Runge fct 3: Rosenbrock fct 4: Rastrigin 5: Lin (cos plus noise)  6: Trustdesign 7: Quadratic 8: Cubic 9: Short Column, 10:  Cantilever, 11: Three Bar ,20: CFD, 21,22: Optimization
 
   nstattmp=statin ! 0: f only  1: f+g  2: f+g+h  3: f+g+hv
@@ -205,8 +205,38 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      ! Domain size in function space
      do i=1,ndim
         if (Casemode.eq.1) then
-           DS(1,i)=xavg(i)-3.0*xstd(i)
-           DS(2,i)=xavg(i)+3.0*xstd(i)
+
+           if (fct.eq.24) then !wing optimization
+
+              if (i.eq.3) then
+
+                 ! For weight density alone (normal distribution)
+
+                 DS(1,i)=xavg(i)-3.0*xstd(i)
+                 DS(2,i)=xavg(i)+3.0*xstd(i)
+
+              else
+
+                 ! For Young's Modulus and Poisson Ratio (Uniform)
+
+                 DS(1,i)=xavg(i)-xstd(i)
+                 DS(2,i)=xavg(i)+xstd(i)
+
+
+              end if
+
+           else
+
+              DS(1,i)=xavg(i)-3.0*xstd(i)
+              DS(2,i)=xavg(i)+3.0*xstd(i)
+
+
+
+           end if
+
+           
+
+
         else
            if (fct.eq.4) then
               DS(1,i)=-5.12
@@ -490,7 +520,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
            else if(Cmode(:5).eq.'Post_')then
               if (id_proc.eq.0) call TimerStart('Post process')
-!              if (nhs.ge.maxsample)    ! Trick to avoid monte carlo during each dyncyc iteration
+              !              if (nhs.ge.maxsample)    ! Trick to avoid monte carlo during each dyncyc iteration
               call Post_Process
               if (id_proc.eq.0) call TimerStop('Post process')
 
@@ -561,10 +591,10 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   if (id_proc.eq.0) then
      if (Casemode.eq.0) close(93)
   end if
-  
+
   fmeanout=fmean
   fvarout=fvar
-  
+
   if (OUUflag.eq.1) then
 
      if (id_proc.eq.0) then

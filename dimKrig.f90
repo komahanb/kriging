@@ -4,7 +4,7 @@ Module dimKrig
   ! mpi parallel
 
   integer :: id_proc, num_proc,OUUflag
-  integer::probtype(20) ! 1=fixed interval, 2= varialbe interval as percentage(beta)
+  integer::probtype(100) ! 1=fixed interval, 2= varialbe interval as percentage(beta)
 
   ! problem set
 
@@ -18,8 +18,8 @@ Module dimKrig
   integer, dimension(10)            :: nfKRI,nfDCK,nfICK,nfDMF,nfCOK,nfVFM
   double precision fmean,fvar
   double precision, dimension(10)   :: vCON
-  double precision, dimension(2,20)   :: DS
-  double precision, dimension(20)   :: xavg,xstd,fmeanprime,fvarprime,xavgt,xstdt
+  double precision, dimension(2,100)   :: DS
+  double precision, dimension(100)   :: xavg,xstd,fmeanprime,fvarprime,xavgt,xstdt
   double precision, dimension(1000)   :: difflocar
   character(len=1), dimension(10)   :: cCON1
   character(len=7), dimension(10)   :: cCON2

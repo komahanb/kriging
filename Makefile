@@ -18,7 +18,7 @@ F90	= mpif90
 F77	= mpif77
 
 #FFLAGS  = -mp -convert big_endian -fpconstant -zero -c
-FFLAGS  =  -g -fbacktrace -O3 -fopenmp  -ffree-line-length-10000 #-fbounds-check -fdefault-integer-8
+FFLAGS  =  -O3 -fopenmp  -ffree-line-length-10000 #-fbounds-check -fdefault-integer-8
 
 #-r8 -O4 -openmp 
 

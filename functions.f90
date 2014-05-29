@@ -112,6 +112,24 @@ subroutine evalfunc(x,DIM,fct,ifid,flag,f,df,d2f,v)
      call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
 
 
+  else if (fct.eq.24) then ! Wing
+
+     gtol=1e-6
+
+     low(1:ndimt-DIM)=xtmp(1:ndimt-DIM)-xstdt(1:ndimt-DIM)
+     up(1:ndimt-DIM)=xtmp(1:ndimt-DIM)+xstdt(1:ndimt-DIM)
+
+     if (flag.ge.1) then
+        write(*,*) 'Error in function call, optimization does not support gradient evalution'
+        stop
+     end if
+
+     !What is the max possible weight? (objective function) or max tendency towards constraint violation?
+!     print*,"In: ",xtmp
+     call optimize(ndimt-DIM,xtmp,ndimt,f,dftmp,low,up,gtol,.true.,.false.,fctindx)
+
+!     print*,"out :",xtmp
+!     print*,f
   else
 
      write(*,*) 'Wrong fctindx in function call'

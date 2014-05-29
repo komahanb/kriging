@@ -22,7 +22,7 @@ subroutine MonteCarlo
   double precision :: f,muy1,muy2,sigmay1,sigmay2,fobjlin,fobjquad,Javg(3),Jvar(3),freal
   real*8::fvtemp
   character*60 :: histname
-  character*2  :: fctindxnumber
+  character*3  :: fctindxnumber
   integer :: expensive
 
   open(10,file='MC.inp',form='formatted',status='unknown')
@@ -155,7 +155,24 @@ subroutine MonteCarlo
 
         do j = 1, NMCS
            do k=1,ndim 
-              MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
+
+              if (fct.eq.24) then !wing optimization
+
+                 if (k.eq.3) then
+
+                    MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
+
+                 else
+
+                    MNCx(k,j)=xavg(k)+MNCx(k,j)*xstd(k)
+
+                 end if
+
+              else
+
+                 MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
+
+              end if
 
            end do
            write(10,*) (MNCx(kk,j),kk=1,ndim)
@@ -341,8 +358,8 @@ subroutine MonteCarlo
 
               histname(1:8)='HISTGidx'
               call i_to_s(fctindx,fctindxnumber)
-              histname(9:10)=fctindxnumber
-              histname(11:14)='.dat'
+              histname(9:11)=fctindxnumber
+              histname(12:15)='.dat'
 
               pdf = 0.d0
 
