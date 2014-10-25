@@ -87,6 +87,13 @@ subroutine Make_Sample
 
         if(id_proc.eq.0)  read(97,100,end=19) Cstat,(x(j),j=1,ndim),f,(df(j),j=1,ndim),&
              ((d2f(k,j),j=1,ndim),k=1,ndim)
+
+        call MPI_BCAST(Cstat,6,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
+        call MPI_BCAST(x,ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+        call MPI_BCAST(f,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+        call MPI_BCAST(df,ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+        call MPI_BCAST(d2f,ndim*ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+
         pointinbox=.true.
         do j=1,ndim
            if (x(j).gt.DS(2,j) .or. x(j).lt.DS(1,j)) pointinbox=.false.
@@ -131,7 +138,7 @@ subroutine Make_Sample
   if (nhstmp.lt.nhs) then
 
      if (randomini.eq.0) then
-
+        
         if(id_proc.eq.0) write(filenum,*)'>> Initial Sample Points in corners'
 
         if (randomtestl.eq.1) then
@@ -148,6 +155,7 @@ subroutine Make_Sample
 
      else if (randomini.eq.1) then
 
+        if (id_proc.eq.0) then
 
         if (randomflag.eq.1) then
 
@@ -199,22 +207,28 @@ subroutine Make_Sample
            stop
 
         end if
-
-
-        !call Latin_Hypercube(ndim,nhs-1,bound,sample(:,2:nhs))
-
+       
      end if
 
-     if (nls.gt.0) then
-        if(id_proc.eq.0)              write(filenum,*)'>> Initial Low-fidelity Sample Points by Latin Hypercube'
+     call MPI_BCAST(sample(1:ndim,1:nhs-nhstmp),ndim*(nhs-nhstmp),MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+
+     !call Latin_Hypercube(ndim,nhs-1,bound,sample(:,2:nhs))
+
+  end if !randomini 0
+     
+  if (nls.gt.0) then
+     if(id_proc.eq.0) then
+        write(filenum,*)'>> Initial Low-fidelity Sample Points by Latin Hypercube'
         call get_seed(nseed)
         call latin_random(ndim,nls,nseed,sampl)       
      end if
+     call MPI_BCAST(sampl(1:ndim,1:nls),ndim*nls,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+  end if
 
      if(nstyle.eq.0.and.id_proc.eq.0)then
-        if(id_proc.eq.0)              open(10,file='sample.dat',form='formatted',status='unknown')
+        open(10,file='sample.dat',form='formatted',status='unknown')
         !$$ write(10,'(3i8)') ndim,nhs+nls,3
-        if(id_proc.eq.0)         write(10,'(3i8)') ndim,nhs+nls,2
+        write(10,'(3i8)') ndim,nhs+nls,2
      end if
 
      do i=1,nhstmp
@@ -227,7 +241,6 @@ subroutine Make_Sample
              (d2ftmp(k,1,i),k=1,ndim)  
      end do
 
-
      idec = dble(nhs-nhstmp+nls)/dble(num_proc)
      is   = idec*id_proc + 1
      ie   = idec*(id_proc+1)
@@ -238,17 +251,17 @@ subroutine Make_Sample
         if(i.le.nhs-nhstmp)then
            x(:) = sample(:,i)
            call evalfunc(x,ndim,fct,0,hstat,fdata(i),dfdata(i,:),d2fdata(i,:,:),v)
-        write(filenum,*) "Training data #",i,"by proc",id_proc,"x: ",x(:),fdata(i)
+           write(filenum,*) "Training data #",i,"by proc",id_proc,fdata(i),x
         else
            x(:) = sampl(:,i-nhs-nhstmp)   
            !ifid=2
            call evalfunc(x,ndim,fct,ifid,lstat,fdata(i),dfdata(i,:),d2fdata(i,:,:),v)
-
-        write(filenum,*) "Training data #",i,"by proc",id_proc,"x: ",x(:),fdata(i)
+           write(filenum,*) "Training data #",i,"by proc",id_proc,fdata(i),x
         end if
 
      end do
-print*,"f: ",fdata,id_proc
+     
+     print*,"f: ",fdata,id_proc
 
 !stop
      !! Exchange data
@@ -309,14 +322,11 @@ print*,"f: ",fdata,id_proc
               else
                  write(Cfile,113)i
               end if
-
-              if(id_proc.eq.0) then
+          
                  open(10,file=Cfile,form='formatted',status='unknown')
                  write(10,101)(x(j),j=1,ndim),dble(hstat)
                  close(10)
               end if
-
-           end if
 
         end do ! training data loop
 
@@ -325,9 +335,9 @@ print*,"f: ",fdata,id_proc
         nhs=nhstmp
 
         if(nstyle.eq.0)then
-           if(id_proc.eq.0)   open(10,file='sample.dat',form='formatted',status='unknown')
+           open(10,file='sample.dat',form='formatted',status='unknown')
            !$$ write(10,'(3i8)') ndim,nhs+nls,3
-           if(id_proc.eq.0)  write(10,'(3i8)') ndim,nhs+nls,2
+           write(10,'(3i8)') ndim,nhs+nls,2
         end if
 
         do i=1,nhs

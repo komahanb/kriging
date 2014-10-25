@@ -60,7 +60,7 @@ program Kriging
      FinalAOA=5.0d0    !degrees      
 
      ! --------------------
-     ! General parameters |
+     !  General parameters |
      ! --------------------
 
      do  Casemode= 0,0      ! 0: Calculate RMSE  1: Output Statistics  2: Optimize using EI
@@ -134,7 +134,7 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 5
+                       maxsamplewant= 15
                        nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
