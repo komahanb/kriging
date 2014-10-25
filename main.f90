@@ -134,7 +134,7 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 5
+                       maxsamplewant= 25
                        nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
