@@ -22,7 +22,7 @@ program Kriging
   ndim=2
   ndimt=ndim
 
-  randomini=1      
+  randomini=1
 
   ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
@@ -59,9 +59,9 @@ program Kriging
      InitialAOA=0.0d0  !degrees
      FinalAOA=5.0d0    !degrees      
 
-     ! ---------------------------------------------------------------------------
-     ! General parameters
-     ! ---------------------------------------------------------------------------
+     ! --------------------
+     ! General parameters |
+     ! --------------------
 
      do  Casemode= 0,0      ! 0: Calculate RMSE  1: Output Statistics  2: Optimize using EI
 
@@ -280,7 +280,7 @@ program Kriging
 
                        maxsample=maxsamplewant
 
-                       if (id_proc.eq.0.and.dynamics.ne.0) call Make_Sample 
+                       if (dynamics.ne.0) call Make_Sample 
 
                        if (id_proc.eq.0) then
 
@@ -481,7 +481,7 @@ program Kriging
                        loopcounter=0
                        do while (nhs.le.maxsample .and. diffloc.gt.diffconv)
                           loopcounter=loopcounter+1
-                          if (dynamics.eq.0 .and. id_proc.eq.0) call Make_Sample 
+                          if (dynamics.eq.0) call Make_Sample 
                           call MPI_Barrier(MPI_COMM_WORLD,ierr)
                           call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
                           call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
