@@ -7,7 +7,7 @@ subroutine Make_Sample
   integer :: nseed,mode,counter,nhstmp
   integer :: i,j,k
   double precision :: f,ran,prd,factor,x(ndim)
-  double precision, allocatable, dimension(:)   :: df,hv,v,ftmp,fdata
+  double precision, allocatable, dimension(:)   ::df,hv,v,ftmp,fdata
   double precision, allocatable, dimension(:,:)   :: xtmp,dftmp,hvtmp,vtmp,dfdata
   double precision, allocatable, dimension(:,:) :: d2f
   double precision, allocatable, dimension(:,:,:) :: d2ftmp,d2fdata
@@ -266,12 +266,12 @@ subroutine Make_Sample
         if(i.le.nhs-nhstmp)then
            x(:) = sample(:,i)
            call evalfunc(x,ndim,fct,0,hstat,fdata(i),dfdata(i,:),d2fdata(i,:,:),v)
-           write(filenum,*) "Training data #",i,"by proc",id_proc,"f: ",fdata(i)
+           write(filenum,*) "Training data #",i,"by proc",id_proc,"f: ",x,fdata(i)
         else
            x(:) = sampl(:,i-nhs-nhstmp)   
            !ifid=2
            call evalfunc(x,ndim,fct,ifid,lstat,fdata(i),dfdata(i,:),d2fdata(i,:,:),v)
-           write(filenum,*) "Training data #",i,"by proc",id_proc,"f: ",fdata(i)
+           write(filenum,*) "Training data #",i,"by proc",id_proc,"f: ",x,fdata(i)
         end if
 
      end do !is,ie
@@ -304,19 +304,22 @@ subroutine Make_Sample
      df=0.0d0
      d2f=0.0d0
 
+     print*,sample,id_proc
+
         do i=1,nhs-nhstmp+nls
 
 
            f=fdata(i)
            df(:)=dfdata(i,:)
-           d2f(:,:)=d2fdata(1,:,:)
+           d2f(:,:)=d2fdata(i,:,:)
 
            if(nstyle.eq.0)then ! with func
 
 
               if (i.le.nhs) then ! high-fid
 
-                 x(:)=sample(i,:)
+                 x(:)=sample(:,i)
+!                 print*,x
 
                  !$$ if (hstat.le.3) write(10,100) Cstat,(x(j),j=1,ndim),f,f,0.d0,(df(j),j=1,ndim),((d2f(k,j),j=1,ndim),k=1,ndim)   !0.d0: everything is fine     other: point corrupted
                  !$$ if (hstat.gt.3) write(10,100) Cstat,(x(j),j=1,ndim),f,f,0.d0,(df(j),j=1,ndim),(v(j),j=1,ndim),(d2f(k,1),k=1,ndim)   !0.d0: everything is fine     other: point corrupted

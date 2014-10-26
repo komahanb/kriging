@@ -22,7 +22,7 @@ program Kriging
   ndim=2
   ndimt=ndim
 
-  randomini=1      
+  randomini=1
 
   ! How intial samples are chosen? 0: Corners of cube 1: latin hypercube. If not dynamic it should be set to 1
 
@@ -134,7 +134,7 @@ program Kriging
 
                     if (nstattmp.eq.0) then
 
-                       maxsamplewant= 25
+                       maxsamplewant= 15
                        nptstoaddpercyc=5 !160
 
                     else if (nstattmp.eq.1) then
