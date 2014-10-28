@@ -92,7 +92,7 @@ subroutine Make_Sample
         call MPI_BCAST(f,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
         call MPI_BCAST(df,ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
         call MPI_BCAST(d2f,ndim*ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-        print*,cstat,x,f,df,d2f,id_proc
+!        print*,cstat,x,f,df,d2f,id_proc
 
         pointinbox=.true.
         do j=1,ndim
@@ -276,6 +276,8 @@ subroutine Make_Sample
 
      end do !is,ie
 
+!     print*,"done and wait for others",id_proc
+
      ! Information Sharing
      do id=0,num_proc-1
         is   = idec*id + 1
@@ -304,7 +306,7 @@ subroutine Make_Sample
      df=0.0d0
      d2f=0.0d0
 
-     print*,sample,id_proc
+!     print*,sample,id_proc
 
         do i=1,nhs-nhstmp+nls
 

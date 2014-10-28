@@ -24,6 +24,9 @@ subroutine MonteCarlo
   character*60 :: histname
   character*3  :: fctindxnumber
   integer :: expensive
+  logical writeMCSamples
+
+  writeMCSamples=.false.
 
   open(10,file='MC.inp',form='formatted',status='unknown')
   read(10,*)! (xavg(i),i=1,ndim)
@@ -31,11 +34,13 @@ subroutine MonteCarlo
   read(10,*)
   read(10,*)
   read(10,*) NMCS!,ndimtmp
-  read(10,*) !npdf
-  read(10,*) !readmcsamples
+  read(10,*) npdf
+  read(10,*) readmcsamples
   read(10,*) evlfnc
   read(10,*) expensive
   close(10)
+
+  if (readmcsamples.eq.1) writeMCSamples=.true.
 
   call find_Optimal
   if(id_proc.eq.0) write(filenum,'(1x,a)')'>> MonteCarlo Simulation on Kriging Model'
@@ -77,7 +82,7 @@ subroutine MonteCarlo
 
      ntgt=0
      ftgt=1
-     npdf=30
+!     npdf=30
 
   end if
 
@@ -126,14 +131,14 @@ subroutine MonteCarlo
            close(10)
 
         else ! fct =10
-
-           open(10,file='MC.inp',form='formatted',status='unknown')
-           read(10,*)! (xavg(i),i=1,ndim)
-           read(10,*)! (xstd(i),i=1,ndim)     
-           read(10,*)
-           read(10,*)
-           read(10,*) !NMCS!,ndimtmp
-           close(10)
+!!$
+!!$           open(10,file='MC.inp',form='formatted',status='unknown')
+!!$           read(10,*)! (xavg(i),i=1,ndim)
+!!$           read(10,*)! (xstd(i),i=1,ndim)     
+!!$           read(10,*)
+!!$           read(10,*)
+!!$           read(10,*) !NMCS!,ndimtmp
+!!$           close(10)
 
            open(17,file='MCvalues.dat',form='formatted',status='unknown')
            do j=1,nmcs
@@ -147,41 +152,45 @@ subroutine MonteCarlo
 
         call get_seed(seed)
         call latin_random(ndim,NMCS,seed,MNCx)
+        
+        if (writeMCSamples) then
 
-        open(10,file='MCsamp.dat',form='formatted',status='unknown')
-        write(10,'(2i8)') NMCS,ndim
-        write(10,*) (xavg(i),i=1,ndim)
-        write(10,*) (xstd(i),i=1,ndim)
+           open(10,file='MCsamp.dat',form='formatted',status='unknown')
+           write(10,'(2i8)') NMCS,ndim
+           write(10,*) (xavg(i),i=1,ndim)
+           write(10,*) (xstd(i),i=1,ndim)
+
+        end if
 
         do j = 1, NMCS
            do k=1,ndim 
-
-              if (fct.eq.24) then !wing optimization
-
-                 if (k.eq.3) then
-
-                    MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
-
-                 else
-
-                    MNCx(k,j)=xavg(k)+MNCx(k,j)*xstd(k)
-
-                 end if
-
-              else
-
-                 MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
-
-              end if
+!!$              
+!!$              if (fct.eq.24) then !wing optimization
+!!$
+!!$                 if (k.eq.3) then
+!!$
+!!$                    MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
+!!$
+!!$                 else
+!!$
+!!$                    MNCx(k,j)=xavg(k)+MNCx(k,j)*xstd(k)
+!!$
+!!$                 end if
+!!$
+!!$              else
+!!$
+              MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
+!!$
+!!$              end if
 
            end do
-           write(10,*) (MNCx(kk,j),kk=1,ndim)
+           if (writeMCSamples) write(10,*) (MNCx(kk,j),kk=1,ndim)
         end do
-        close(10)
+        if (writeMCSamples) close(10)
 
 
      end if
-
+     
      do j = 1, NMCS
         do k=1,ndim
            MNCx(k,j) = (MNCx(k,j)-DS(1,k))/(DS(2,k)-DS(1,k))
