@@ -25,7 +25,7 @@ FFLAGS  =  -O3 -fopenmp  -ffree-line-length-10000 #-fbounds-check -fdefault-inte
 LIBS    = 
 
 SRCS =  dimKrig.o Timer.o main.o functions.o threebarcost.o\
-        latin.o mpi.o rbf_interp_nd.o\
+        latin.o rbf_interp_nd.o\
         read_set.o Dutch.o Dutchgeninterp.o\
         read_sample.o check_sample.o \
         make_krig.o reduce_data.o tool.o eva_sample.o \

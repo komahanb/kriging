@@ -3,7 +3,7 @@ Module dimKrig
 
   ! mpi parallel
 
-  integer :: id_proc, num_proc,OUUflag
+  integer :: id_proc=0, num_proc=1,OUUflag
   integer::probtype(100) ! 1=fixed interval, 2= varialbe interval as percentage(beta)
 
   ! problem set
