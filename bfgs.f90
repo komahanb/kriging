@@ -3,7 +3,7 @@
                       bound, &
                       theta,power )
       implicit none
-      include 'mpif.h'
+!      include 'mpif.h'
 ! mode= 1  : Likelihood Maximization for tdim*ndim
 ! mode= 2  : Likelihood Maximization for      ndim
 ! mode= 3  : Likelihood Maximization for      1
@@ -141,7 +141,7 @@
                     csave,lsave,isave,dsave)
 !       write(*,*)'*task = ',task(1:20)
       end if
-      call MPI_BCAST(task,50,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
+!      call MPI_BCAST(task,50,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
 
       if (task(1:2) .eq. 'FG') then
 !        the minimization routine has returned to request the
@@ -177,7 +177,7 @@
 !        1) Terminate if the total number of f and g evaluations
 !             exceeds 99.
 
-         call MPI_BCAST(isave(34),1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!         call MPI_BCAST(isave(34),1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
          if (isave(34) .ge. 999) &
             task='STOP: TOTAL NO. of f AND g EVALUATIONS EXCEEDS LIMIT'
 
@@ -189,8 +189,7 @@
             norm2=norm2+g(i)**2
          end do
          norm2=sqrt(norm2)
-         call MPI_BCAST(norm2,1,MPI_DOUBLE_PRECISION,0, &
-                        MPI_COMM_WORLD,ierr)
+!         call MPI_BCAST(norm2,1,MPI_DOUBLE_PRECISION,0, MPI_COMM_WORLD,ierr)
 
          if (norm2 .le. 1.d-10) &
             task='STOP: THE GRADIENT IS SUFFICIENTLY SMALL'
@@ -223,7 +222,7 @@
         write (*,'(6x,a,99f8.3)')'>> Final DV by BFGS =',(x(i),i=1,n)
       end if
 
-      call MPI_BCAST(x(1),n,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!      call MPI_BCAST(x(1),n,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
       if(mode.eq.1)then
         do t=1,tdim
         do i=1,ndim

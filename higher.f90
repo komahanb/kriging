@@ -1,7 +1,7 @@
         subroutine Post_Higher(ifac)
         use dimKrig
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: ifac
         integer :: i,j,k,istat,ierr
         integer :: idec,is,ie,imode,id
@@ -87,25 +87,33 @@
                  is   = idec*id + 1
                  ie   = idec*(id+1)
                  if(id.eq.num_proc-1)ie = ifac**ndim
-                 call MPI_BCAST(ANL(is),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
+!                 call MPI_BCAST(ANL(is),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
               end do
            end if
-           call MPI_ALLREDUCE(ict,ictglb,1,MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
-           call MPI_ALLREDUCE(fsum,fsumglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
+           ictglb=ict
+           !call MPI_ALLREDUCE(ict,ictglb,1,MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
+           fsumglb=fsum
+!           call MPI_ALLREDUCE(fsum,fsumglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
            fsumglb = sqrt(fsumglb/dble(ifac**ndim)) 
-           call MPI_ALLREDUCE(maxerror,maxerrorglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
-           call MPI_ALLREDUCE(yhatmin,yhatglb,1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
-           call MPI_ALLREDUCE(EImax,EIglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
+!           call MPI_ALLREDUCE(maxerror,maxerrorglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
+           maxerrorglb=maxerror
+!           call MPI_ALLREDUCE(yhatmin,yhatglb,1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
+           yhatglb=yhatmin
+ !          call MPI_ALLREDUCE(EImax,EIglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
+           EIglb=EImax
+
            idy = -1
            ide = -1
            if(yhatmin.eq.yhatglb) idy = id_proc
            if(  EImax.eq.  EIglb) ide = id_proc
-           call MPI_ALLREDUCE(idy,idyy,1,MPI_INTEGER,MPI_MAX,MPI_COMM_WORLD,ierr)
-           call MPI_ALLREDUCE(ide,idee,1,MPI_INTEGER,MPI_MAX,MPI_COMM_WORLD,ierr)
+!           call MPI_ALLREDUCE(idy,idyy,1,MPI_INTEGER,MPI_MAX,MPI_COMM_WORLD,ierr)
+           idyy=idy
+ !          call MPI_ALLREDUCE(ide,idee,1,MPI_INTEGER,MPI_MAX,MPI_COMM_WORLD,ierr)
+           idee=ide
            if(idyy.lt.0.or.idyy.ge.num_proc) stop'idyy'
            if(idee.lt.0.or.idee.ge.num_proc) stop'idee'
-           call MPI_BCAST(xy(1),ndim,MPI_DOUBLE_PRECISION,idyy,MPI_COMM_WORLD,ierr)
-           call MPI_BCAST(xe(1),ndim,MPI_DOUBLE_PRECISION,idee,MPI_COMM_WORLD,ierr)
+!           call MPI_BCAST(xy(1),ndim,MPI_DOUBLE_PRECISION,idyy,MPI_COMM_WORLD,ierr)
+ !          call MPI_BCAST(xe(1),ndim,MPI_DOUBLE_PRECISION,idee,MPI_COMM_WORLD,ierr)
 
            if(id_proc.eq.0)then
               write(*,'(1x,a,i3)')'>> Post Process for Function -',k

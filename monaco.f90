@@ -1,7 +1,7 @@
 subroutine MonteCarlo
   use dimKrig
   implicit none
-  include 'mpif.h'
+!  include 'mpif.h'
   integer :: i,j,k,ii,kk
   integer :: idec,is,ie,id
   integer :: ierr,istat,seed
@@ -47,7 +47,7 @@ subroutine MonteCarlo
      read(10,*)(xavg(i),i=1,ndim)
      read(10,*,err=11) pst,cdum,dx
      call find_st(pst,dx,st)
-     call MPI_BCAST(st,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(st,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
      go to 12
 11   continue
      !       write(*,*)pst,cdum,dx
@@ -126,14 +126,14 @@ subroutine MonteCarlo
            close(10)
 
         else ! fct =10
-
-           open(10,file='MC.inp',form='formatted',status='unknown')
-           read(10,*)! (xavg(i),i=1,ndim)
-           read(10,*)! (xstd(i),i=1,ndim)     
-           read(10,*)
-           read(10,*)
-           read(10,*) !NMCS!,ndimtmp
-           close(10)
+!!$
+!!$           open(10,file='MC.inp',form='formatted',status='unknown')
+!!$           read(10,*)! (xavg(i),i=1,ndim)
+!!$           read(10,*)! (xstd(i),i=1,ndim)     
+!!$           read(10,*)
+!!$           read(10,*)
+!!$           read(10,*) !NMCS!,ndimtmp
+!!$           close(10)
 
            open(17,file='MCvalues.dat',form='formatted',status='unknown')
            do j=1,nmcs
@@ -148,36 +148,36 @@ subroutine MonteCarlo
         call get_seed(seed)
         call latin_random(ndim,NMCS,seed,MNCx)
 
-        open(10,file='MCsamp.dat',form='formatted',status='unknown')
-        write(10,'(2i8)') NMCS,ndim
-        write(10,*) (xavg(i),i=1,ndim)
-        write(10,*) (xstd(i),i=1,ndim)
+!!$        open(10,file='MCsamp.dat',form='formatted',status='unknown')
+!!$        write(10,'(2i8)') NMCS,ndim
+!!$        write(10,*) (xavg(i),i=1,ndim)
+!!$        write(10,*) (xstd(i),i=1,ndim)
 
         do j = 1, NMCS
            do k=1,ndim 
-
-              if (fct.eq.24) then !wing optimization
-
-                 if (k.eq.3) then
-
-                    MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
-
-                 else
-
-                    MNCx(k,j)=xavg(k)+MNCx(k,j)*xstd(k)
-
-                 end if
-
-              else
+!!$
+!!$              if (fct.eq.24) then !wing optimization
+!!$
+!!$                 if (k.eq.3) then
+!!$
+!!$                    MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
+!!$
+!!$                 else
+!!$
+!!$                    MNCx(k,j)=xavg(k)+MNCx(k,j)*xstd(k)
+!!$
+!!$                 end if
+!!$
+!!$              else
 
                  MNCx(k,j)=xavg(k)+dinvnorm(MNCx(k,j))*xstd(k)
 
-              end if
+!!$              end if
 
            end do
-           write(10,*) (MNCx(kk,j),kk=1,ndim)
+ !!$          write(10,*) (MNCx(kk,j),kk=1,ndim)
         end do
-        close(10)
+ !!$       close(10)
 
 
      end if
@@ -191,10 +191,10 @@ subroutine MonteCarlo
   end if !id_proc.eq.0
 
   if(ntgt.eq.0)then
-     call MPI_BCAST(MNCx(1,1),NMCS*ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(MNCx(1,1),NMCS*ndim,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
   else
      stop
-     call MPI_BCAST(MNCx(1,1),NMCS*1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+ !    call MPI_BCAST(MNCx(1,1),NMCS*1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
   end if
 
   do k=ftgt,ftgt
@@ -277,18 +277,27 @@ subroutine MonteCarlo
         is   = idec*id + 1
         ie   = idec*(id+1)
         if(id.eq.num_proc-1)ie = NMCS
-        call MPI_BCAST(MNCf(is),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(MNCf(is),ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
      end do
-     call MPI_ALLREDUCE(ict,ictglb,1,MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
-     call MPI_ALLREDUCE(MCm,MCmglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
-     call MPI_ALLREDUCE(MCd,MCdglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
-     call MPI_ALLREDUCE(ymin,yminglb,1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
-     call MPI_ALLREDUCE(ymax,ymaxglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
+     ictglb=ict
+!     call MPI_ALLREDUCE(ict,ictglb,1,MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
+     mcmglb=mcm
+     !    call MPI_ALLREDUCE(MCm,MCmglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
+     mcdglb=mcd
+     !call MPI_ALLREDUCE(MCd,MCdglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
+     yminglb=ymin
+     !call MPI_ALLREDUCE(ymin,yminglb,1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
+     ymaxglb=ymax
+     !call MPI_ALLREDUCE(ymax,ymaxglb,1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
      do i=1,ndim
-        call MPI_ALLREDUCE(xmin(i),xminglb(i),1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
-        call MPI_ALLREDUCE(xmax(i),xmaxglb(i),1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
-        call MPI_ALLREDUCE(MCmprime(i),MCmprimeglb(i),1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
-        call MPI_ALLREDUCE(MCdprime(i),MCdprimeglb(i),1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
+        xminglb(i)=xmin(i)
+        !call MPI_ALLREDUCE(xmin(i),xminglb(i),1,MPI_DOUBLE_PRECISION,MPI_MIN,MPI_COMM_WORLD,ierr)
+        xmaxglb(i)= xmax(i)
+        !call MPI_ALLREDUCE(xmax(i),xmaxglb(i),1,MPI_DOUBLE_PRECISION,MPI_MAX,MPI_COMM_WORLD,ierr)
+        MCmprimeglb(i)=MCmprime(i)
+        !call MPI_ALLREDUCE(MCmprime(i),MCmprimeglb(i),1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
+        MCdprimeglb(i)=MCdprime(i)
+        !call MPI_ALLREDUCE(MCdprime(i),MCdprimeglb(i),1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
      end do
 
      if(ictglb.ne.NMCS)stop'ictglb.ne.NMCS'
@@ -334,7 +343,8 @@ subroutine MonteCarlo
 250        continue
 
            do i=1,npdf
-              call MPI_ALLREDUCE(HST(i,3),hglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
+              hglb=hst(i,3)
+!              call MPI_ALLREDUCE(HST(i,3),hglb,1,MPI_DOUBLE_PRECISION,MPI_SUM,MPI_COMM_WORLD,ierr)
               HSTglb(i,1) = HST(i,1)
               HSTglb(i,2) = HST(i,2)
               HSTglb(i,3) = hglb
@@ -571,7 +581,7 @@ subroutine MonteCarlo
 !!$
         end if
      end if
-     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!     call MPI_Barrier(MPI_COMM_WORLD,ierr)
      !!     end if  !readMCsamples.ne.0 ?
      
      deallocate(MNCf,MNCx) 

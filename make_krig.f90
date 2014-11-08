@@ -1,7 +1,7 @@
         subroutine Make_Krig
         use dimKrig
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer :: ierr,ip,nmv
         integer :: ifunc,igrad
         double precision :: llfd,verr
@@ -46,7 +46,7 @@
               end if
             end if
           end if
-          call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
+!          call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
           ! vrange will be updated at reduce_sample
         end if
 
@@ -320,7 +320,7 @@
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subroutine read_iran(id_proc,iran)
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in)  :: id_proc
         integer, intent(out) :: iran
         integer :: ierr
@@ -337,13 +337,13 @@
           write(10,*)iran+1
           close(10)
         end if
-        call MPI_BCAST(iran,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(iran,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
 
         end subroutine read_iran
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subroutine read_vran(id_proc,vrange)
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: id_proc
         double precision, intent(out) :: vrange
         integer :: ierr
@@ -354,7 +354,7 @@
           close(10)
           if(vrange.le.0.d0.or.vrange.ge.2.d0)vrange = 2.d0
         end if
-        call MPI_BCAST(vrange,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(vrange,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
         end subroutine read_vran
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

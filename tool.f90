@@ -249,20 +249,25 @@
         subroutine update_deviratio    ! update for all processors
         use dimKrig
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer :: l,ierr,id,idg
         double precision :: lbglb
 
-        call MPI_ALLREDUCE(llfd_best,lbglb,1,MPI_DOUBLE_PRECISION, &
-                           MPI_MAX,MPI_COMM_WORLD,ierr)
+!        call MPI_ALLREDUCE(llfd_best,lbglb,1,MPI_DOUBLE_PRECISION, &
+!                           MPI_MAX,MPI_COMM_WORLD,ierr)
+        lbglb=llfd_best
+
         id = -1
         if(lbglb.eq.llfd_best) id = id_proc
-        call MPI_ALLREDUCE(id,idg,1,MPI_INTEGER, &
-                           MPI_MAX,MPI_COMM_WORLD,ierr)
+ !       call MPI_ALLREDUCE(id,idg,1,MPI_INTEGER, &
+!                          MPI_MAX,MPI_COMM_WORLD,ierr)
+
+        idg=id
+
         if(idg.lt.0.or.idg.ge.num_proc)stop'idg for deviratio'
 
-        call MPI_BCAST(deviratio_best,lmax,MPI_DOUBLE_PRECISION,idg, &
-                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(deviratio_best,lmax,MPI_DOUBLE_PRECISION,idg, &
+!                       MPI_COMM_WORLD,ierr)
         llfd_best = lbglb
 
 !       if(id_proc.eq.0) &

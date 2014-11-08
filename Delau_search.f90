@@ -1,7 +1,7 @@
   subroutine Delau_search
     use dimKrig
     implicit none
-    include 'mpif.h'
+!    include 'mpif.h'
 
     common/global/counter
 

@@ -129,7 +129,7 @@
         use dimGA
         use dimKrig, only:filenum
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: gen
         integer, intent(out):: istop
         integer :: ierr
@@ -263,8 +263,10 @@
         end if
 
 ! stop
-        call MPI_Allreduce(ict_eva(1),ictg_eva(1),10,MPI_INTEGER, &
-                           MPI_SUM,MPI_COMM_WORLD,ierr)
+!        call MPI_Allreduce(ict_eva(1),ictg_eva(1),10,MPI_INTEGER, &
+!                           MPI_SUM,MPI_COMM_WORLD,ierr)
+        ictg_eva=ict_eva
+
         ict = ictg_eva(1)+ictg_eva(2)+ictg_eva(3)
         if(lgen1.ge.ngen_stop.and.ngen_stop.gt.0)then
            istop = 1
@@ -282,7 +284,7 @@
                STOP!!'
         end if
 
-        call MPI_BCAST(istop,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(istop,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
         end subroutine convergence_check
 
 
@@ -290,7 +292,7 @@
         use dimGA
         use dimKrig, only:filenum
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: gen
         integer, dimension(0:num_proc-1,1000)      :: ispl
         integer, dimension(0:num_proc-1)           :: ispm
@@ -315,14 +317,14 @@
 ! decomposition of npop evaluation on nodes
         if(id_proc.eq.0) &
         call spliting(npop,num_proc,ista,ispl,ispm)
-        call MPI_BCAST(ispl(0,1),num_proc*1000,MPI_INTEGER,0, &
-                       MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(ispm(0),num_proc,MPI_INTEGER,0, &
-                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ispl(0,1),num_proc*1000,MPI_INTEGER,0, &
+!                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ispm(0),num_proc,MPI_INTEGER,0, &
+!                       MPI_COMM_WORLD,ierr)
 
 ! accord of parents
-        call MPI_BCAST(parent(1,1,1),npop/2*3*ndat, &
-                       MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(parent(1,1,1),npop/2*3*ndat, &
+!                       MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
 ! gradient-based evolution
         res   = 0.d0
@@ -362,11 +364,13 @@
            if(alpha.eq.0.d0)ict_l = ict_l + 1
            rat_l = rat_l + ratio
         end do
-        call MPI_Barrier(MPI_COMM_WORLD, ierr)
-        call MPI_Allreduce(ict_l,ict_g,1,MPI_INTEGER, &
-                           MPI_SUM,MPI_COMM_WORLD,ierr)
-        call MPI_Allreduce(rat_l,rat_g,1,MPI_DOUBLE_PRECISION, &
-                           MPI_SUM,MPI_COMM_WORLD,ierr)
+!        call MPI_Barrier(MPI_COMM_WORLD, ierr)
+!       call MPI_Allreduce(ict_l,ict_g,1,MPI_INTEGER, &                           MPI_SUM,MPI_COMM_WORLD,ierr)
+       ict_g=ict_l
+!        call MPI_Allreduce(rat_l,rat_g,1,MPI_DOUBLE_PRECISION, &
+!                           MPI_SUM,MPI_COMM_WORLD,ierr)
+       rat_g=rat_l
+
         rat_g = rat_g / dble(npop)
         if(id_proc.eq.0)then
           if(ict_g.gt.npop/10)  &
@@ -381,8 +385,8 @@
           if(ispm(i).ne.0)then
             id = ispl(i,1)
             do j=1,ndat
-              call MPI_BCAST( res(id,j), ispm(i), &
-              MPI_DOUBLE_PRECISION,i,MPI_COMM_WORLD,ierr)
+       !       call MPI_BCAST( res(id,j), ispm(i), &
+       !       MPI_DOUBLE_PRECISION,i,MPI_COMM_WORLD,ierr)
             end do
 !           if(id_proc.eq.0) &
 !           write(*,'(i3,100f6.2)')i,(res(j,1),j=ista,iend)
@@ -986,11 +990,14 @@
         use dimGA
         use dimKrig, only:filenum
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer :: ierr,i,j,n1,g1,irank
 
-        call MPI_Allreduce(ict_eva(1),ictg_eva(1),10,MPI_INTEGER, &
-                           MPI_SUM,MPI_COMM_WORLD,ierr)
+ !       call MPI_Allreduce(ict_eva(1),ictg_eva(1),10,MPI_INTEGER, &
+ !                          MPI_SUM,MPI_COMM_WORLD,ierr)
+
+        ictg_eva = ict_eva
+
         if(id_proc.eq.0)then
           write(filenum,'(a)')' >> Output Results....'
           open(11,file='_alldes.dat',form='formatted',status='unknown')
@@ -1040,7 +1047,7 @@
           ictg_eva(1)+ictg_eva(2)+ictg_eva(3)
         end if
 
-        call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!        call MPI_Barrier(MPI_COMM_WORLD,ierr)
         end subroutine output
 
 
@@ -1049,7 +1056,7 @@
         use dimGA
         use dimKrig, only:filenum
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: gen
         integer, dimension((ngen+1)*npop)      :: sort
         integer, dimension((ngen+1)*npop,nobj) :: inec
@@ -1215,7 +1222,7 @@
         else
           if(id_proc.eq.0) &
           call decide_power(FM,RM,power)
-          call MPI_BCAST(power,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!          call MPI_BCAST(power,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
         end if
 
 ! probability
@@ -2050,7 +2057,7 @@
         use dimGA
         use dimKrig, only:filenum
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: gen
         double precision, dimension(0:ngen,npop) :: shnc
         integer, dimension((ngen+1)*npop,2) :: id_sh
@@ -2242,9 +2249,9 @@
 500     continue
         iter = iter + 1
         f    = ((1.d0+ri)**nobj) - 1.d0 - dble(N)*((ri)**nobj)
-        call MPI_BCAST(ri,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(f,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(iter,1,MPI_INTEGER,      0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ri,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(f,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(iter,1,MPI_INTEGER,      0,MPI_COMM_WORLD,ierr)
         if(dabs(f).lt.eps)then
           if(ri.gt.eps)then
              go to 520

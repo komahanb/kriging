@@ -1,7 +1,7 @@
 subroutine DynamicPointSelection
   use dimKrig
   implicit none
-  include 'mpif.h'
+!  include 'mpif.h'
 
   common/global/counter
   integer :: counter,i,ii,j,jj,jjj,k,kk,kp,l,NTOEX,NTOEXtmp,&
@@ -99,7 +99,7 @@ subroutine DynamicPointSelection
 
      end if ! master
 
-     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!     call MPI_Barrier(MPI_COMM_WORLD,ierr)
      call deallocate_all_krig
 
      return ! returns the routine
@@ -251,8 +251,8 @@ subroutine DynamicPointSelection
         call latin_random(ndim,NTOEX,nseed,Dtoex) 
      end if
 
-     call MPI_Barrier(MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(Dtoex(:,:),50000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
+!     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(Dtoex(:,:),50000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
 
      !Information sharing by master with slaves
      idec = dble(NTOEX)/dble(num_proc)
@@ -333,8 +333,8 @@ subroutine DynamicPointSelection
 
      ! Information sharing by master with slaves       
 
-     call MPI_Barrier(MPI_COMM_WORLD,ierr)           
-     call MPI_BCAST(Dtoex(:,:),50000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
+!     call MPI_Barrier(MPI_COMM_WORLD,ierr)           
+!     call MPI_BCAST(Dtoex(:,:),50000,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr) 
      idec = dble(NTOEX)/dble(num_proc)
      is   = idec*id_proc + 1
      ie   = idec*(id_proc+1)
@@ -442,14 +442,14 @@ subroutine DynamicPointSelection
      is   = idec*id + 1
      ie   = idec*(id+1)
      if(id.eq.num_proc-1)ie = NTOEX
-     call MPI_BCAST(ftoextry(2,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
-          id,MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
-          id,MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
-          id,MPI_COMM_WORLD,ierr)
-     if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),&
-          ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(ftoextry(2,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+!          id,MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(ftoextry(1,is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+!          id,MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(RMSE(is:ie),ie-is+1,MPI_DOUBLE_PRECISION,&
+!          id,MPI_COMM_WORLD,ierr)
+!     if(randomtestl.eq.2)   call MPI_BCAST(SIGMA(is:ie),&
+!          ie-is+1,MPI_DOUBLE_PRECISION,id,MPI_COMM_WORLD,ierr)
   end do
 
   !print *, ftoextry(2,1:NTOEX), ftoextry(1,1:NTOEX)
@@ -693,7 +693,7 @@ subroutine DynamicPointSelection
   END IF! master thread 
 
 
-  call MPI_Barrier(MPI_COMM_WORLD,ierr)!slaves wait until master arrives
+!  call MPI_Barrier(MPI_COMM_WORLD,ierr)!slaves wait until master arrives
 
   call deallocate_all_krig
 

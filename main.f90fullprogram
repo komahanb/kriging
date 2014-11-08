@@ -2,7 +2,7 @@ program Kriging
   use dimKrig
   use timer_mod
   implicit none
-  include 'mpif.h'
+!  include 'mpif.h'
   integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,NMCStmp,Casemode,mirdutchhybrid
   double precision :: diffconv
   character*60 :: filename
@@ -15,7 +15,7 @@ program Kriging
   integer::nmcstemp
   integer::ctest,fuct,nruns,jjj
 
-  call MPI_START
+!  call MPI_START
 
   ! Dimension of problem
 
@@ -467,9 +467,9 @@ program Kriging
 
                        end if ! master thread
 
-                       call MPI_Barrier(MPI_COMM_WORLD,ierr)
-                       call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-                       call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)       
+!                       call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!                       call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!                       call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)       
 
 
                        diffloc=1000.0
@@ -482,9 +482,9 @@ program Kriging
                        do while (nhs.le.maxsample .and. diffloc.gt.diffconv)
                           loopcounter=loopcounter+1
                           if (dynamics.eq.0 .and. id_proc.eq.0) call Make_Sample 
-                          call MPI_Barrier(MPI_COMM_WORLD,ierr)
-                          call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-                          call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!                          call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!                          call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!                          call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
 
 
                           iterDEL=iterDEL+1
@@ -525,7 +525,7 @@ program Kriging
                                 end if
                              end if
 
-                             call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)          
+!                             call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)          
 
                              if(Cmode(:15).eq.'Make_and_Search')then
                                 Cmode='Make_by_GA'
@@ -587,8 +587,8 @@ program Kriging
                                 call Update
                              end if
 
-                             if (i.eq.3) call MPI_BCAST(diffloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-                             if (i.eq.3) call MPI_BCAST(distloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!                             if (i.eq.3) call MPI_BCAST(diffloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!                             if (i.eq.3) call MPI_BCAST(distloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
                           end do
 
@@ -620,7 +620,7 @@ program Kriging
 
                     if (id_proc.eq.0.and.timing.eq.1) call TimerReport()
 
-                    call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!                    call MPI_Barrier(MPI_COMM_WORLD,ierr)
 
                     !stop
 

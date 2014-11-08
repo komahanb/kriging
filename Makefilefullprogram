@@ -14,9 +14,9 @@ GSL_prefix = /usr/local
 #      COMPILATION      #
 #########################
 
-FAD	= mpif90
-F90	= mpif90
-F77	= mpif77
+FAD	= gfortran
+F90	= gfortran
+F77	= gfortran
 
 #FFLAGS  = -mp -convert big_endian -fpconstant -zero -c
 

@@ -3,7 +3,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
   use dimKrig
   use timer_mod
   implicit none
-  include 'mpif.h'
+!  include 'mpif.h'
 
   integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,ndimint,Casemode,fctin,statin,nptsin
 
@@ -437,9 +437,9 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
      end if ! master thread
 
-     call MPI_Barrier(MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-     call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)       
+!     call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!     call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)       
 
 
      diffloc=1000.0
@@ -456,9 +456,9 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
         ctr=ctr+1
 
         if (dynamics.eq.0 .and. id_proc.eq.0) call Make_Sample 
-        call MPI_Barrier(MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!        call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(nhs,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(maxsample,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
 
 
         iterDEL=iterDEL+1
@@ -499,7 +499,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
               end if
            end if
 
-           call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)          
+!           call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)          
 
            if(Cmode(:15).eq.'Make_and_Search')then
               Cmode='Make_by_GA'
@@ -562,8 +562,8 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
               call Update
            end if
 
-           if (i.eq.3) call MPI_BCAST(diffloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-           if (i.eq.3) call MPI_BCAST(distloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!           if (i.eq.3) call MPI_BCAST(diffloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+ !          if (i.eq.3) call MPI_BCAST(distloc,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
         end do
 
@@ -610,9 +610,9 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
 
   end if
 
-  call MPI_Barrier(MPI_COMM_WORLD,ierr)
-  call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
-  call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!  call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!  call MPI_BCAST(fmeanprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!  call MPI_BCAST(fvarprimeout,ndimt,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
   fmeanprimeout(ndimt-ndim+1:ndimt)=fmeanprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
   fvarprimeout(ndimt-ndim+1:ndimt)=fvarprime(1:ndim)/(DS(2,1:ndim)-DS(1,1:ndim))
@@ -623,7 +623,7 @@ subroutine Krigingestimate(ndimin,ndimint,xavgin,xstdin,fctin,fctindxin,DATIN,in
      write(filenum,*) 
   end if
 
-  call MPI_Barrier(MPI_COMM_WORLD,ierr)
+!  call MPI_Barrier(MPI_COMM_WORLD,ierr)
 
   return
 end subroutine Krigingestimate

@@ -1,0 +1,14 @@
+bfgs.f90:      include 'mpif.h' -- done--
+Delau_search.f90:    include 'mpif.h' --done--
+DynamicPointSelection.f90:  include 'mpif.h' --done--
+eva_bfgs.f90:        include 'mpif.h'--done--
+ga.f90:      include 'mpif.h'--done --
+gatool.f90:        include 'mpif.h'--done--
+higher.f90:        include 'mpif.h' -- done--
+main.f90:  include 'mpif.h' ==done==
+make_krig.f90:        include 'mpif.h' ==done==
+monaco.f90:  include 'mpif.h' --done==
+mpi.f90:        include 'mpif.h' ================
+search_krig.f90:        include 'mpif.h' ==done==
+test.f90:  include 'mpif.h'xxxxxxx
+tool.f90:        include 'mpif.h' --done--

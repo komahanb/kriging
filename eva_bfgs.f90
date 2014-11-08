@@ -1,7 +1,7 @@
         subroutine eva_bfgs(mode,n,xin,f,g)
         use dimKrig
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in)                         :: mode,n
         double precision, dimension(n), intent(in)  :: xin
         double precision, intent(out)               :: f
@@ -17,11 +17,11 @@
 
         if(id_proc.eq.0) &
         call spliting(n+1,num_proc,0,ispl,ispm)
-        call MPI_BCAST(ispl(0,1),num_proc*1000,MPI_INTEGER,0, &
-                       MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(ispm(0),num_proc,MPI_INTEGER,0, &
-                       MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(xin(1),n,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ispl(0,1),num_proc*1000,MPI_INTEGER,0, &
+!                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ispm(0),num_proc,MPI_INTEGER,0, &
+!                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(xin(1),n,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
         dx = 1.d-4
         do i=1,ispm(id_proc)
@@ -109,7 +109,7 @@
            end if
         end do
 
-        call MPI_BCAST(f,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(f,1,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
         do i=0,num_proc-1
            id   = ispl(i,1)
            iall = ispm(i)
@@ -119,9 +119,9 @@
              if(abs(id).ne.1)stop'@ eva_bfgs2'
              iall = iall -1
            end if
-           if(iall.ne.0) &
-           call MPI_BCAST(g(id),iall,MPI_DOUBLE_PRECISION,i, &
-                          MPI_COMM_WORLD,ierr)
+!           if(iall.ne.0) &
+ !          call MPI_BCAST(g(id),iall,MPI_DOUBLE_PRECISION,i, &
+ !                         MPI_COMM_WORLD,ierr)
         end do
 
         do i=1,n

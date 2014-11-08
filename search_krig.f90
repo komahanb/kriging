@@ -1,7 +1,7 @@
         subroutine search_krig
         use dimKrig
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer :: ierr
         integer :: ip,nmv
         integer :: iswitch,ister
@@ -41,7 +41,7 @@
             write(filenum,'(1x,3a,2i5)') &
             '>> Strategy of Switching : ',Cmode,' by ',ip,nmv
           end if
-          call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
+!          call MPI_BCAST(Cmode,20,MPI_CHARACTER,0,MPI_COMM_WORLD,ierr)
         end if
 
 !  Pre-Process for Each Strategy

@@ -2,7 +2,7 @@ program main
 
   implicit none
 
-  include 'mpif.h'
+!  include 'mpif.h'
   integer :: ierr,i,j,imax,nstattmp,ndimtmp,NCP,lenc,ndimin,NMCin,fctindxin,Casemode
  integer :: nDIMint
   parameter (nDIMint=2)

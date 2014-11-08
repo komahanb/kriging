@@ -2,15 +2,15 @@
         subroutine MPI_START
         use dimKrig
         implicit none
-        include 'mpif.h'
+ !       include 'mpif.h'
         integer :: ierr
 
-        call MPI_Init(ierr)
-        if (ierr /= MPI_SUCCESS) then
-          stop 'MPI Initializatin error'
-        endif
-        call MPI_Comm_rank(MPI_COMM_WORLD, id_proc , ierr)
-        call MPI_Comm_size(MPI_COMM_WORLD, num_proc, ierr)
+!        call MPI_Init(ierr)
+!        if (ierr /= MPI_SUCCESS) then
+!          stop 'MPI Initializatin error'
+!        endif
+ !       call MPI_Comm_rank(MPI_COMM_WORLD, id_proc , ierr)
+ !       call MPI_Comm_size(MPI_COMM_WORLD, num_proc, ierr)
         
         if(id_proc.eq.0) &
         write(*,'(x,a,i3)')'>> Number of Processors = ',num_proc
@@ -20,10 +20,10 @@
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subroutine stop_all
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer :: ierr
-        call MPI_Barrier(MPI_COMM_WORLD,ierr)
-        call MPI_Finalize(ierr)
+ !       call MPI_Barrier(MPI_COMM_WORLD,ierr)
+ !       call MPI_Finalize(ierr)
         stop'stop all successfully'
         end subroutine stop_all
 !++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

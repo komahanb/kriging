@@ -7,7 +7,7 @@
       use dimGA
       use dimKrig, only:filenum
       implicit none
-      include 'mpif.h'
+!      include 'mpif.h'
       integer, intent(in) :: mode,i_proc,n_proc
       integer, intent(in) :: ndim,tdim,iscf,iran,idebug
       character(len=30), intent(in) :: Cfile
@@ -214,7 +214,7 @@
         subroutine evaluation(gen)
         use dimGA
         implicit none
-        include 'mpif.h'
+!        include 'mpif.h'
         integer, intent(in) :: gen
         integer :: ista,iend
         integer, dimension(0:num_proc-1,1000)      :: ispl
@@ -232,10 +232,10 @@
         if(id_proc.eq.0) &
         call spliting(npop,num_proc,ista,ispl,ispm)
 
-        call MPI_BCAST(ispl(0,1),num_proc*1000,MPI_INTEGER,0, &
-                       MPI_COMM_WORLD,ierr)
-        call MPI_BCAST(ispm(0),num_proc,MPI_INTEGER,0, &
-                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ispl(0,1),num_proc*1000,MPI_INTEGER,0, &
+!                       MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST(ispm(0),num_proc,MPI_INTEGER,0, &
+!                       MPI_COMM_WORLD,ierr)
 !       if(id_proc.eq.num_proc-1)then
 !         do i=0,num_proc-1
 !           write(*,'(a,i3,a,100i3)') &
@@ -249,8 +249,8 @@
           dv(i,:) = d(gen,i,:)
          end do
         end if
-        call MPI_BCAST( &
-        dv(1,1),npop*ndv,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
+!        call MPI_BCAST( &
+!        dv(1,1),npop*ndv,MPI_DOUBLE_PRECISION,0,MPI_COMM_WORLD,ierr)
 
 ! Evaluation
         do i=1,ispm(id_proc)
@@ -261,15 +261,15 @@
            res(id,:) = ynew(:)
           !write(*,'(2i3,99f6.2)')id_proc,id,(xnew(j),j=1,ndv),ynew(1)
         end do
-        call MPI_Barrier(MPI_COMM_WORLD, ierr)
+!        call MPI_Barrier(MPI_COMM_WORLD, ierr)
 
 ! Sharing of Results
         do i=0,num_proc-1
           if(ispm(i).ne.0)then
             id = ispl(i,1)
             do j=1,ndat-ndv
-              call MPI_BCAST( res(id,j), ispm(i), &
-              MPI_DOUBLE_PRECISION,i,MPI_COMM_WORLD,ierr)
+!              call MPI_BCAST( res(id,j), ispm(i), &
+!              MPI_DOUBLE_PRECISION,i,MPI_COMM_WORLD,ierr)
             end do 
 !           if(id_proc.eq.0) &
 !           write(*,'(i3,100f6.2)')i,(res(j,1),j=ista,iend)
@@ -286,7 +286,7 @@
 ! Update deviratio_best
         if(neva.ge.1.and.neva.le.6)then
           call update_deviratio
-          call MPI_Barrier(MPI_COMM_WORLD, ierr)
+!          call MPI_Barrier(MPI_COMM_WORLD, ierr)
         end if
 
         end subroutine evaluation
